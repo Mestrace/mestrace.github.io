@@ -1,8 +1,8 @@
 window.MillConfig = {
-  title: 'mestrace.github.io',
+  title: 'Mill',
   github: {
-    owner: 'mestrace',
-    repo: 'mestrace.github.io',
+    owner: 'graffie',
+    repo: 'mill.blog',
   },
   theme: 'basic'
 };
