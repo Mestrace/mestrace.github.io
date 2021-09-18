@@ -1,7 +1,7 @@
 import "./App.css";
 
 import React, { Component } from "react";
-import { Input, Menu, Container } from "semantic-ui-react";
+import { Input, Menu, Container, Segment } from "semantic-ui-react";
 
 import {
   BrowserRouter as Router,
@@ -15,10 +15,12 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Menu secondary>
-          <Menu.Item name="Home" as={NavlinkExact} to="/" strict={true} />
-          <Menu.Item name="About" as={NavLink} to="/about" />
-          <Menu.Item name="Dashboard" as={NavLink} to="/dashboard" />
+        <Menu fixed="top" inverted>
+          <Container>
+            <Menu.Item name="Home" as={NavlinkExact} to="/" />
+            <Menu.Item name="About" as={NavLink} to="/about" />
+            <Menu.Item name="Dashboard" as={NavLink} to="/dashboard" />
+          </Container>
         </Menu>
 
         <Switch>
@@ -45,25 +47,31 @@ function NavlinkExact(props) {
 
 function Home() {
   return (
-    <div>
-      <h2>Home</h2>
-    </div>
+    <Container text style={{ marginTop: "7em" }}>
+      <div>
+        <h2>Home</h2>
+      </div>
+    </Container>
   );
 }
 
 function About() {
   return (
-    <div>
-      <h2>About</h2>
-    </div>
+    <Container text style={{ marginTop: "7em" }}>
+      <div>
+        <h2>About</h2>
+      </div>
+    </Container>
   );
 }
 
 function Dashboard() {
   return (
-    <div>
-      <h2>Dashboard</h2>
-    </div>
+    <Container text style={{ marginTop: "7em" }}>
+      <div>
+        <h2>Dashboard</h2>
+      </div>
+    </Container>
   );
 }
 
