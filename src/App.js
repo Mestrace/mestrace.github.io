@@ -1,5 +1,3 @@
-import "./App.css";
-
 import React, { Component } from "react";
 import { Input, Menu, Container, Segment } from "semantic-ui-react";
 
