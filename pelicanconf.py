@@ -2,7 +2,7 @@ from datetime import datetime
 
 AUTHOR = "Mestrace"
 SITENAME = "mestrace.github.io"
-SITEURL = ""
+SITEURL = "https://mestrace.github.io."
 SITETITLE = "Mestrace"
 SITESUBTITLE = "Software Developer"
 SITEDESCRIPTION = "My Thoughts"
