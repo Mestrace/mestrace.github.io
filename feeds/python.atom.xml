@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>mestrace.github.io - Python</title><link href="https://mestrace.github.io/" rel="alternate"></link><link href="https://mestrace.github.io/feeds/python.atom.xml" rel="self"></link><id>https://mestrace.github.io/</id><updated>2023-02-05T00:00:00+08:00</updated><subtitle>Software Developer</subtitle><entry><title>用 Python 进行代码覆盖率检测：coverage.py 和diff-cover 的使用方法</title><link href="https://mestrace.github.io/posts/2023/Feb/05/python-coverage-diff-cover/" rel="alternate"></link><published>2023-02-05T00:00:00+08:00</published><updated>2023-02-05T00:00:00+08:00</updated><author><name>Mestrace</name></author><id>tag:mestrace.github.io,2023-02-05:/posts/2023/Feb/05/python-coverage-diff-cover/</id><summary type="html">&lt;p&gt;在重构项目时，我们经常需要确认代码测试的覆盖率。这是为了确保没有任何部分遗漏或者错误，从而使重构变得更安全 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;在重构项目时，我们经常需要确认代码测试的覆盖率。这是为了确保没有任何部分遗漏或者错误，从而使重构变得更安全。为了帮助我们实现这一目标，我们可以使用两个 Python 包来帮助我们 &lt;code&gt;coverage.py&lt;/code&gt; 和 &lt;code&gt;diff-cover&lt;/code&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;coverage.py&lt;/code&gt;是一个代码插桩工具，它能够生成测试覆盖率报告。它的官方仓库是https://github.com/nedbat/coveragepy。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;diff-cover&lt;/code&gt;则是一个比对xml格式的coverage文件的工具，它能够将当前的覆盖率与origin/main或指定的commit进行比对。更多信息请参考它的官方仓库：https://github.com/Bachmann1234/diff_cover。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果您的测试运行命令以&lt;code&gt;python&lt;/code&gt;开头，只需要将初始的&lt;code&gt;python&lt;/code&gt;替换为&lt;code&gt;coverage run&lt;/code&gt;即可。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;If your test runner command starts with “python”, just replace the initial “python” with “coverage run”.&lt;/p&gt;
+&lt;p&gt;python something.py becomes coverage run something.py&lt;/p&gt;
+&lt;p&gt;python -m amodule becomes coverage run -m amodule&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;在运行完覆盖率的脚本之后，你的项目目录中会多出一个.coverage的元数据文件。为了使结果更加直观，我们需要将其进一步解析为更有说服力的形式。&lt;/p&gt;
+&lt;p&gt;使用 &lt;code&gt;coverage report --skip-covered --precision 2 --sort Cover&lt;/code&gt; 命令，你可以在命令行窗口中看到每一个文件的覆盖率情况：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Name&lt;span class="w"&gt;                             &lt;/span&gt;Stmts&lt;span class="w"&gt;   &lt;/span&gt;Miss&lt;span class="w"&gt;   &lt;/span&gt;Cover
+-----------------------------------------------------
+admin/models.py&lt;span class="w"&gt;                      &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.00%
+admin/views.py&lt;span class="w"&gt;                       &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.00%
+api/models.py&lt;span class="w"&gt;                        &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.00%
+api/views.py&lt;span class="w"&gt;                         &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.00%
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;通过使用 &lt;code&gt;coverage html&lt;/code&gt; 命令，你还可以在项目目录中生成一个html文档站，以查看更详细的覆盖率信息，以及覆盖了哪些代码行。&lt;/p&gt;
+&lt;p align="center"&gt;
+  &lt;img src="https://mestrace.github.io/images/1/coverage_html.jpeg" /&gt;
+&lt;/p&gt;
+
+&lt;p align="center"&gt;
+  &lt;img src="https://mestrace.github.io/images/gei_li.png" /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;在对一个巨大的代码库进行修改之后，整个项目的覆盖率并不会有明显的改变，同时也很难定位关注点。为了确保我们的代码修改已经被覆盖到，我们需要提升测试用例的覆盖率，如果没有覆盖到的话，我们需要补充测试用例。有人可能说，这很简单，只需要对比目标分支和当前分支的差异，再去看对应行是否已经被测试覆盖了。幸运的是，已经有人为我们开发了一个工具diff-cover（https://pypi.org/project/diff-cover/ ）。使用coverage.py和diff-cover结合，我们可以迅速找到未被覆盖到的代码。&lt;/p&gt;
+&lt;p&gt;我们可以通过执行以下命令生成覆盖率报告：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;coverage xml -o test.xml&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;然后，我们可以使用diff-cover读取该报告：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;diff-cover test.xml --compare-branch origin/master --html-report diff-cover.html&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;其中，compare-branch参数需要指定用于与当前分支进行diff的分支，html-report参数则输出html格式的覆盖率报告。执行命令后，不仅会在命令行中输出类似如下的覆盖率信息：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;-------------
+Diff Coverage
+Diff: origin/master...HEAD, staged and unstaged changes
+-------------
+account/controllers.py (76.5%): Missing lines 246,302,310,316
+account/dao.py (90.3%): Missing lines 262,265,277
+account/views.py (0.0%): Missing lines 179,187
+-------------
+Total:   50 lines
+Missing: 9 lines
+Coverage: 82%
+-------------
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;还会生成一个包含具体代码覆盖行的html文档&lt;/p&gt;
+&lt;p align="center" width="50%" height="50%"&gt;
+  &lt;img src="https://mestrace.github.io/images/1/diff_cover_html.jpeg" /&gt;
+&lt;/p&gt;
+
+&lt;p align="center"&gt;
+  &lt;img src="https://mestrace.github.io/images/gei_li.png" /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;在使用 &lt;code&gt;coverage.py&lt;/code&gt; 进行代码测试覆盖率报告时，我们可能会遇到包含不必要文件和行的情况。例如，Django 自动生成的 &lt;code&gt;manage.py&lt;/code&gt; 文件就不需要我们关注。同样地，代码行 &lt;code&gt;raise NotImplementedError&lt;/code&gt; 也没有什么意义。因此，我们需要将它们屏蔽，以提高代码测试覆盖率报告的精度。&lt;/p&gt;
+&lt;p&gt;在运行 &lt;code&gt;coverage.py&lt;/code&gt; 时，可以使用 &lt;code&gt;omit=[pattern1,pattern2…]&lt;/code&gt; 选项忽略某些无关的文件，以及使用 &lt;code&gt;exclude_lines = [pattern1, pattern2]&lt;/code&gt; 选项忽略某些无关的行。例如，使用命令 &lt;code&gt;coverage run --omit="tests" --source='.' manage.py test --keepdb&lt;/code&gt; 可以忽略文件名包含 "tests" 的文件。&lt;/p&gt;
+&lt;p&gt;不过，每次都要手动输入 &lt;code&gt;omit&lt;/code&gt; 和 &lt;code&gt;exclude-line&lt;/code&gt; 选项非常麻烦，因此我们可以在项目根目录下配置 &lt;code&gt;.coveragerc&lt;/code&gt; 文件，一次性配置所有选项。&lt;code&gt;.coveragerc&lt;/code&gt; 文件使用 toml 格式编写，在运行 &lt;code&gt;coverage run / coverage report / coverage html&lt;/code&gt; 命令时会读取其中的值并作为参数。&lt;/p&gt;
+&lt;p&gt;以下是我在 django 项目中使用的 &lt;code&gt;.coveragerc&lt;/code&gt; 文件：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;[run]&lt;/span&gt;
+&lt;span class="na"&gt;source&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;.&lt;/span&gt;
+&lt;span class="na"&gt;omit&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;./venv/,*tests,apps.py,*manage.py,_init_.py,migrations,asgi,wsgi,*admin.py,*urls.py&lt;/span&gt;
+
+&lt;span class="k"&gt;[report]&lt;/span&gt;
+&lt;span class="na"&gt;omit&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;./venv/,*tests,apps.py,*manage.py,_init_.py,migrations,asgi,wsgi,*admin.py,*urls.py&lt;/span&gt;
+&lt;span class="na"&gt;exclude_lines&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="na"&gt;pragma&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;no cover&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="na"&gt;def _repr_&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="na"&gt;if self.debug&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="na"&gt;if settings.DEBUG&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="na"&gt;raise AssertionError&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="na"&gt;raise NotImplementedError&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="na"&gt;if 0&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="na"&gt;if _name_&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;= ._main_.:&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="na"&gt;class .*\bProtocol\)&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="na"&gt;@(abc\.)?abstractmethod&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;参考资料：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;coverage.py&lt;/code&gt; 的官方文档 https://coverage.readthedocs.io/en/7.1.0/&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;diff-cover&lt;/code&gt; 的官方文档 https://diff-cover.readthedocs.io/en/latest/README.html&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.coveragerc&lt;/code&gt; 文件来自 https://stackoverflow.com/questions/1628996/is-it-possible-exclude-test-directories-from-coverage-py-reports&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;coverage.py&lt;/code&gt; 的 Django 插件 https://pypi.org/project/django-coverage-plugin/&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Python"></category><category term="Python"></category></entry></feed>
