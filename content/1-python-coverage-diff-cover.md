@@ -33,11 +33,11 @@ api/views.py                         1      1   0.00%
 通过使用 `coverage html` 命令，你还可以在项目目录中生成一个html文档站，以查看更详细的覆盖率信息，以及覆盖了哪些代码行。
 
 <p align="center">
-  <img src="{filename}/images/1/coverage_html.jpeg" />
+  <img src="{static}/images/1/coverage_html.jpeg" />
 </p>
 
 <p align="center">
-  <img src="{filename}/images/gei_li.png" />
+  <img src="{static}/images/gei_li.png" />
 </p>
 
 
@@ -75,11 +75,11 @@ Coverage: 82%
 还会生成一个包含具体代码覆盖行的html文档
 
 <p align="center" width="50%" height="50%">
-  <img src="{filename}/images/1/diff_cover_html.jpeg" />
+  <img src="{static}/images/1/diff_cover_html.jpeg" />
 </p>
 
 <p align="center">
-  <img src="{filename}/images/gei_li.png" />
+  <img src="{static}/images/gei_li.png" />
 </p>
 
 
