@@ -1,0 +1,248 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet/less" type="text/css" href="https://mestrace.github.io/theme/stylesheet/style.less">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js" type="text/javascript"></script>
+
+    <link id="dark-theme-style" rel="stylesheet" type="text/css"
+          media="(prefers-color-scheme: dark)"
+    href="https://mestrace.github.io/theme/stylesheet/dark-theme.min.css">
+
+    <link id="pygments-dark-theme" rel="stylesheet" type="text/css"
+              media="(prefers-color-scheme: dark)"
+          href="https://mestrace.github.io/theme/pygments/monokai.min.css">
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+              media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
+          href="https://mestrace.github.io/theme/pygments/monokai.min.css">
+
+
+
+  <link rel="stylesheet" type="text/css" href="https://mestrace.github.io/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://mestrace.github.io/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://mestrace.github.io/theme/font-awesome/css/solid.css">
+
+
+
+  <!-- Chrome, Firefox OS and Opera -->
+  <meta name="theme-color" content="#333">
+  <!-- Windows Phone -->
+  <meta name="msapplication-navbutton-color" content="#333">
+  <!-- iOS Safari -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <!-- Microsoft EDGE -->
+  <meta name="msapplication-TileColor" content="#333">
+
+  <link href="https://mestrace.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="mestrace.github.io Atom">
+
+
+
+
+
+
+
+
+ 
+
+<meta name="author" content="Mestrace" />
+<meta name="description" content="Apache RocketMQ is a distributed messaging and streaming platform with low latency, high performance and reliability, trillion-level capacity and flexible scalability. RocketMQ 是一个分布式消息中间件，其具有低延迟、高性能和可靠性、万亿级容 …" />
+<meta name="keywords" content="RocketMQ, Kafka">
+
+
+  <meta property="og:site_name" content="mestrace.github.io"/>
+  <meta property="og:title" content="RocketMQ是什么"/>
+  <meta property="og:description" content="Apache RocketMQ is a distributed messaging and streaming platform with low latency, high performance and reliability, trillion-level capacity and flexible scalability. RocketMQ 是一个分布式消息中间件，其具有低延迟、高性能和可靠性、万亿级容 …"/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:url" content="https://mestrace.github.io/posts/2021/Sep/11/rocket-mq-history/"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2021-09-11 00:00:00+08:00"/>
+  <meta property="article:modified_time" content=""/>
+  <meta property="article:author" content="https://mestrace.github.io/author/mestrace.html">
+  <meta property="article:section" content="Middleware"/>
+  <meta property="article:tag" content="RocketMQ"/>
+  <meta property="article:tag" content="Kafka"/>
+  <meta property="og:image" content="https://avatars.githubusercontent.com/u/26028388?v=4">
+
+  <title>mestrace.github.io &ndash; RocketMQ是什么</title>
+
+
+</head>
+<body >
+
+<aside>
+  <div>
+    <a href="https://mestrace.github.io/">
+      <img src="https://avatars.githubusercontent.com/u/26028388?v=4" alt="Mestrace" title="Mestrace">
+    </a>
+
+    <h1>
+      <a href="https://mestrace.github.io/">Mestrace</a>
+    </h1>
+
+    <p>Software Developer</p>
+
+
+
+    <ul class="social">
+      <li>
+        <a class="sc-github"
+           href="http://github.com/Mestrace/"
+           target="_blank">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</aside>
+  <main>
+
+<nav>
+  <a href="https://mestrace.github.io/">Home</a>
+
+
+  <a href="https://mestrace.github.io/feeds/all.atom.xml">Atom</a>
+
+</nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="rocket-mq-history">RocketMQ是什么</h1>
+    <p>
+      Posted on Sat 11 September 2021 in <a href="https://mestrace.github.io/category/middleware.html">Middleware</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <blockquote>
+<p>Apache RocketMQ is a distributed messaging and streaming platform with low latency, high performance and reliability, trillion-level capacity and flexible scalability.</p>
+</blockquote>
+<p>RocketMQ 是一个分布式消息中间件，其具有低延迟、高性能和可靠性、万亿级容量、灵活的可扩展性特性。</p>
+<p><img alt="异构数据下的ETL(Extract, Transform and Load) 处理" src="https://mestrace.github.io/images/2/etl_process.png" /></p>
+<p>Kafka诞生于所谓的“大数据”时代的早期, 本质是LinkedIn为了解决在不同子系统中进行日志流同步的产物. 在设计之初就专注于对于解决ETL(Extract, transform, and load) 场景连续, 大量的消息数据的生产与消费. 作为一个通用场景的MQ系统, Kafka在大数据领域的实时计算以及日志采集领域被大规模使用. 基于Kafka, LinkedIn构建了一个以日志为中心的大规模分布式系统. 每天产生超过600亿条数据. </p>
+<p><img alt="Kafka在LinkedIn的使用场景" src="https://mestrace.github.io/images/2/linkedin_kafka_usage.png" /></p>
+<p>无疑, 基于MQ构建的数据驱动的系统给业务上带来了各种各样的便利和简化. 越来越多的开发者基于Kafka来构建各种应用. 随着时间的推移, 大量的使用也暴露了Kafka的在不同场景下的缺陷, 例如缺乏重试机制, 非严格顺序消费, 和不支持分布式事务. 因此, 阿里巴巴中间件团队针对订单, 交易和充值场景下对于MQ的使用进行了优化, 并与Apache基金会一起开源了RocketMQ. RocketMQ在淘宝的各种活动场景经历了大量的考验. 2017年, 阿里巴巴将RocketMQ开源并捐赠给Apache基金会, 由社区进行维护.</p>
+<p><img alt="Rocket MQ的历史" src="https://mestrace.github.io/images/2/kafka_history.png" /></p>
+<p>一个有意思的点: RocketMQ项目只维护核心功能，且去除了所有其他运行时依赖，核心功能最简化。每个BU的个性化需求都在RocketMQ项目之上进行深度定制。RocketMQ向其他BU提供的仅仅是Jar包，例如要定制一个Broker，那么只需要依赖rocketmq-broker这个jar包即可，可通过API进行交互，如果定制client，则依赖rocketmq-client这个jar包，对其提供的api进行再封装。</p>
+<table>
+<thead>
+<tr>
+<th>名词</th>
+<th>定义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>生产组 Producer Group</td>
+<td>标识发送同一类消息的Producer，通常发送逻辑一致。发送普通消息的时候，仅标识使用，并无特别用处。 若事务消息，如果某条发送某条消息的producer-A宕机，使得事务消息一直处于PREPARED状态并超时，则broker会回查同一个group的其 他producer，确认这条消息应该commit还是rollback。但开源版本并不支持事务消息。 注: 字节RMQ暂不支持事务.</td>
+</tr>
+<tr>
+<td>消费组 Consumer Group</td>
+<td>标识一类Consumer的集合名称，这类Consumer通常消费一类消息，且消费逻辑一致。同一个Consumer Group下的各个实例将共同消费topic的消息，起到负载均衡的作用。 消费进度以Consumer Group为粒度管理，不同Consumer Group之间消费进度彼此不受影响，即消息A被Consumer Group1消费过，也会再给Consumer Group2消费。 注： RocketMQ要求同一个Consumer Group的消费者必须要拥有相同的注册信息，即必须要监听一样的topic(并且tag也一样)。</td>
+</tr>
+<tr>
+<td>Topic</td>
+<td>标识一类消息的逻辑名字，消息的逻辑管理单位。无论消息生产还是消费，都需要指定Topic。</td>
+</tr>
+<tr>
+<td>Tag</td>
+<td>RocketMQ支持给在发送的时候给topic打tag，同一个topic的消息虽然逻辑管理是一样的。但是消费topic1的时候，如果你订阅的时候指定的是tagA，那么tagB的消息将不会投递。 注: PPE泳道不是以这种方式实现的</td>
+</tr>
+<tr>
+<td>逻辑队列 Message Queue</td>
+<td>消息物理管理单位。一个Topic将有若干个Queue。若Topic同时创建在不通的Broker，则不同的broker上都有若干Queue，消息将物理地存储落在不同Broker结点上，具有水平扩展的能力。 无论生产者还是消费者，实际的生产和消费都是针对Queue级别。例如Producer发送消息的时候，会预先选择（默认轮询）好该Topic下面的某一条Queue地发送.</td>
+</tr>
+<tr>
+<td>集群消费</td>
+<td>消费者的一种消费模式。一个Consumer Group中的各个Consumer实例分摊去消费消息，即一条消息只会投递到一个Consumer Group下面的一个实例。</td>
+</tr>
+<tr>
+<td>广播消费</td>
+<td>消费者的一种消费模式。消息将对一个Consumer Group下的各个Consumer实例都投递一遍。即即使这些 Consumer 属于同一个Consumer Group，消息也会被Consumer Group 中的每个Consumer都消费一次。 注: 字节RMQ暂不支持广播消费</td>
+</tr>
+</tbody>
+</table>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://mestrace.github.io/tag/rocketmq.html">RocketMQ</a>
+      <a href="https://mestrace.github.io/tag/kafka.html">Kafka</a>
+    </p>
+  </div>
+
+
+
+
+
+
+</article>
+
+<footer>
+<p>
+  &copy; 2023  - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/deed.en_US" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+  <span class="footer-separator">|</span>
+  Switch to the <a href="javascript:void(0)" onclick="theme.switch(`dark`)">dark</a> | <a href="javascript:void(0)" onclick="theme.switch(`light`)">light</a> | <a href="javascript:void(0)" onclick="theme.switch(`browser`)">browser</a> theme
+  <script id="dark-theme-script"
+          src="https://mestrace.github.io/theme/dark-theme/dark-theme.min.js"
+          data-enable-auto-detect-theme="True"
+          data-default-theme="light"
+          type="text/javascript">
+  </script>
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+           src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p></footer>  </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " mestrace.github.io ",
+  "url" : "https://mestrace.github.io",
+  "image": "https://avatars.githubusercontent.com/u/26028388?v=4",
+  "description": "My Thoughts"
+}
+</script><a href="http://github.com/Mestrace/" target="_blank" class="github-corner" aria-label="View source on Github">
+    <svg width="80"
+         height="80"
+         viewBox="0 0 250 250"
+         style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;"
+         aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor"
+              style="transform-origin: 130px 106px;"
+              class="octo-arm">
+        </path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor"
+              class="octo-body">
+        </path>
+    </svg>
+</a>
+
+</body>
+</html>
