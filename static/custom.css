@@ -1,0 +1,17 @@
+@font-face {
+    font-family: 'LXGW Wenkai';
+    src: url("fonts/LXGWWenkai-Regular.ttf") format("truetype"),
+        url("fonts/LXGWWenKai-Bold.ttf") format("truetype"),
+        url("fonts/LXGWWenKai-Light.ttf") format("truetype"),
+        url("fonts/LXGWWenKaiMono-Bold.ttf") format("truetype"),
+        url("fonts/LXGWWenKaiMono-Light.ttf") format("truetype"),
+        url("fonts/LXGWWenKaiMono-Regular.ttf") format("truetype");
+    font-style: normal;
+    font-weight: 900;
+    font-display: block;
+}
+
+
+article {
+    font-family: "LXGW WenKai", "Roboto" !important;
+}
