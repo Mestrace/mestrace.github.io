@@ -68,9 +68,10 @@ CC_LICENSE = {
 COPYRIGHT_YEAR = datetime.now().year
 DEFAULT_PAGINATION = 10
 
-
-# Enable i18n plugin.
-# PLUGINS = ["i18n_subsites"]
+PLUGINS = [
+    "simple_footnotes",
+    # "i18n_subsites"
+]
 # # Enable Jinja2 i18n extension used to parse translations.
 # JINJA_ENVIRONMENT = {"extensions": ["jinja2.ext.i18n"]}
 MARKDOWN = {
@@ -87,7 +88,7 @@ THEME_COLOR_ENABLE_USER_OVERRIDE = True
 
 USE_LESS = True
 
-CUSTOM_CSS = 'static/custom.css'
+CUSTOM_CSS = "static/custom.css"
 EXTRA_PATH_METADATA = {
-    'extra/custom.css': {'path': 'static/custom.css'},
+    "extra/custom.css": {"path": "static/custom.css"},
 }
