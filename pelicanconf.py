@@ -33,7 +33,7 @@ THEME = "themes/Flex"
 #          ('You can modify those links in your config file', '#'),)
 
 
-STATIC_PATHS = ["images"]
+STATIC_PATHS = ["images", "static"]
 # Uncomment following line if you want document-relative URLs when developing
 RELATIVE_URLS = True
 
@@ -86,3 +86,8 @@ THEME_COLOR_AUTO_DETECT_BROWSER_PREFERENCE = True
 THEME_COLOR_ENABLE_USER_OVERRIDE = True
 
 USE_LESS = True
+
+CUSTOM_CSS = 'static/custom.css'
+EXTRA_PATH_METADATA = {
+    'extra/custom.css': {'path': 'static/custom.css'},
+}
