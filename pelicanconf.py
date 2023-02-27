@@ -1,5 +1,10 @@
 from datetime import datetime
 
+import sys
+sys.path.append('.')
+
+import mermaid
+
 AUTHOR = "Mestrace"
 SITENAME = "mestrace.github.io"
 SITEURL = "https://mestrace.github.io."
@@ -68,10 +73,12 @@ CC_LICENSE = {
 COPYRIGHT_YEAR = datetime.now().year
 DEFAULT_PAGINATION = 10
 
+
 PLUGINS = [
     "simple_footnotes",
     # "i18n_subsites"
 ]
+
 # # Enable Jinja2 i18n extension used to parse translations.
 # JINJA_ENVIRONMENT = {"extensions": ["jinja2.ext.i18n"]}
 MARKDOWN = {
@@ -79,7 +86,9 @@ MARKDOWN = {
         "markdown.extensions.codehilite": {"css_class": "highlight"},
         "markdown.extensions.extra": {},
         "markdown.extensions.meta": {},
+        mermaid.MermaidExtension(): {},
     },
+    'output_format': 'html5',
 }
 
 
