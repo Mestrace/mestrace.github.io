@@ -6,11 +6,11 @@
 &lt;p&gt;Apache RocketMQ is a distributed messaging and streaming platform with low latency, high performance and reliability, trillion-level capacity and flexible scalability.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;RocketMQ 是一个分布式消息中间件，其具有低延迟、高性能和可靠性、万亿级容量、灵活的可扩展性特性。&lt;/p&gt;
-&lt;p&gt;&lt;img alt="异构数据下的ETL(Extract, Transform and Load) 处理" src="https://mestrace.github.io/images/2/etl_process.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="异构数据下的ETL(Extract, Transform and Load) 处理" src="https://mestrace.github.io/images/2/etl_process.png"&gt;&lt;/p&gt;
 &lt;p&gt;Kafka诞生于所谓的“大数据”时代的早期, 本质是LinkedIn为了解决在不同子系统中进行日志流同步的产物. 在设计之初就专注于对于解决ETL(Extract, transform, and load) 场景连续, 大量的消息数据的生产与消费. 作为一个通用场景的MQ系统, Kafka在大数据领域的实时计算以及日志采集领域被大规模使用. 基于Kafka, LinkedIn构建了一个以日志为中心的大规模分布式系统. 每天产生超过600亿条数据. &lt;/p&gt;
-&lt;p&gt;&lt;img alt="Kafka在LinkedIn的使用场景" src="https://mestrace.github.io/images/2/linkedin_kafka_usage.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Kafka在LinkedIn的使用场景" src="https://mestrace.github.io/images/2/linkedin_kafka_usage.png"&gt;&lt;/p&gt;
 &lt;p&gt;无疑, 基于MQ构建的数据驱动的系统给业务上带来了各种各样的便利和简化. 越来越多的开发者基于Kafka来构建各种应用. 随着时间的推移, 大量的使用也暴露了Kafka的在不同场景下的缺陷, 例如缺乏重试机制, 非严格顺序消费, 和不支持分布式事务. 因此, 阿里巴巴中间件团队针对订单, 交易和充值场景下对于MQ的使用进行了优化, 并与Apache基金会一起开源了RocketMQ. RocketMQ在淘宝的各种活动场景经历了大量的考验. 2017年, 阿里巴巴将RocketMQ开源并捐赠给Apache基金会, 由社区进行维护.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Rocket MQ的历史" src="https://mestrace.github.io/images/2/kafka_history.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Rocket MQ的历史" src="https://mestrace.github.io/images/2/kafka_history.png"&gt;&lt;/p&gt;
 &lt;p&gt;一个有意思的点: RocketMQ项目只维护核心功能，且去除了所有其他运行时依赖，核心功能最简化。每个BU的个性化需求都在RocketMQ项目之上进行深度定制。RocketMQ向其他BU提供的仅仅是Jar包，例如要定制一个Broker，那么只需要依赖rocketmq-broker这个jar包即可，可通过API进行交互，如果定制client，则依赖rocketmq-client这个jar包，对其提供的api进行再封装。&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -49,4 +49,6 @@
 &lt;td&gt;消费者的一种消费模式。消息将对一个Consumer Group下的各个Consumer实例都投递一遍。即即使这些 Consumer 属于同一个Consumer Group，消息也会被Consumer Group 中的每个Consumer都消费一次。 注: 字节RMQ暂不支持广播消费&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
-&lt;/table&gt;</content><category term="Middleware"></category><category term="RocketMQ"></category><category term="Kafka"></category></entry></feed>
+&lt;/table&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"&gt;&lt;/script&gt;
+&lt;script&gt;mermaid.initialize({startOnLoad:true});&lt;/script&gt;</content><category term="Middleware"></category><category term="RocketMQ"></category><category term="Kafka"></category></entry></feed>

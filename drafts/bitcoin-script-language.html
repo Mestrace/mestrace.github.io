@@ -54,17 +54,25 @@
 
  
 
-    <meta name="author" content="Mestrace" />
-    <meta name="description" content="My Thoughts" />
+<meta name="author" content="Mestrace" />
+<meta name="description" content="我们知道，在比特币的记账逻辑里面，一个核心的部分就是签名。“只有Alice对这笔交易进行签名，Bob才能使用这笔资金”。当我们用自然语言描述这段逻辑的时候，这听起 …" />
+<meta name="keywords" content="Blockchain">
+
+
   <meta property="og:site_name" content="mestrace.github.io"/>
-  <meta property="og:type" content="blog"/>
-  <meta property="og:title" content="mestrace.github.io"/>
-  <meta property="og:description" content="My Thoughts"/>
+  <meta property="og:title" content="比特币的脚本语言"/>
+  <meta property="og:description" content="我们知道，在比特币的记账逻辑里面，一个核心的部分就是签名。“只有Alice对这笔交易进行签名，Bob才能使用这笔资金”。当我们用自然语言描述这段逻辑的时候，这听起 …"/>
   <meta property="og:locale" content="en_US"/>
-  <meta property="og:url" content="https://mestrace.github.io"/>
+  <meta property="og:url" content="https://mestrace.github.io/drafts/bitcoin-script-language.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2023-02-26 00:00:00+08:00"/>
+  <meta property="article:modified_time" content=""/>
+  <meta property="article:author" content="https://mestrace.github.io/author/mestrace.html">
+  <meta property="article:section" content="Blockchain"/>
+  <meta property="article:tag" content="Blockchain"/>
   <meta property="og:image" content="https://avatars.githubusercontent.com/u/26028388?v=4">
 
-  <title>mestrace.github.io</title>
+  <title>mestrace.github.io &ndash; 比特币的脚本语言</title>
 
 
 </head>
@@ -106,102 +114,72 @@
 
 </nav>
 
-
-
-<article>
+<article class="single">
   <header>
-    <h2><a href="https://mestrace.github.io/posts/2023/Mar/04/2444-count-subarrays-with-fixed-bounds/#2444-count-subarrays-with-fixed-bounds">【Leetcode题解】2444. Count Subarrays With Fixed Bound</a></h2>
+      
+    <h1 id="bitcoin-script-language">比特币的脚本语言</h1>
     <p>
-      Posted on Sat 04 March 2023 in <a href="https://mestrace.github.io/category/leetcode.html">Leetcode</a>
+      Posted on Sun 26 February 2023 in <a href="https://mestrace.github.io/category/blockchain.html">Blockchain</a>
 
-          &#8226; Tagged with
-              <a href="https://mestrace.github.io/tag/leetcode.html">Leetcode</a>,              <a href="https://mestrace.github.io/tag/subarray.html">Subarray</a>
     </p>
   </header>
+
+
   <div>
-      <div><p>今天闲的无聊，找点事情做，来写一下<a href="https://leetcode.com/problems/count-subarrays-with-fixed-bounds/">2444. Count Subarrays With Fixed Bound</a>的题解。</p>
-<h1>题目</h1>
-<p>You are given an integer array <code>nums</code> and two integers <code>minK</code> and <code>maxK</code>.</p>
-<p>A <strong>fixed-bound subarray</strong> of <code>nums</code> is a subarray that satisfies the …</p></div>
-        <br>
-        <a class="btn"
-           href="https://mestrace.github.io/posts/2023/Mar/04/2444-count-subarrays-with-fixed-bounds/#2444-count-subarrays-with-fixed-bounds">
-          Continue reading
-        </a>
+    <p>我们知道，在比特币的记账逻辑里面，一个核心的部分就是签名。“只有Alice对这笔交易进行签名，Bob才能使用这笔资金”。当我们用自然语言描述这段逻辑的时候，这听起来非常简答。但是当我们需要在一个不可新的环境里，由成千上万个参与者组成的P2P网络里面，安全地实现这一笔记账的时候，这就非常复杂了。为了解决这个问题，比特币引入了一种基于堆栈的脚本语言。本文将首先简单介绍比特币交易的结构，然后通过一个例子概述一笔通常的比特币转账是如何用脚本语言实现的，并介绍一些基本语法。最后，我们会拓展到比特币脚本语言的进阶应用。</p>
+<h1>比特币的基本结构</h1>
+<div class="highlight"><pre><span></span><code>    Transaction                                    
+    +-------+-------+-----+-------+------+--------+
+    |       |Input  |Input|Output |Output|        |
+    |Version|Counter|UTXOs|Counter|UTXOs |Locktime|
+    +-------+-------+-----+-------+------+--------+
+
+    Input UTXO              Output UTXO            
+    +------+------+-------+ +------+------+---------+
+    |      |Script|Locking| |      |Script|Unlocking|
+    |Amount|Size  |Script | |Amount|Size  |Script   |
+    +------+------+-------+ +------+------+---------+
+</code></pre></div>
+
+<p>每一笔比特币交易都遵循一个特定的数据结构，其结构可以概括为以下几个部分。
+1. 版本号：标识比特币交易的版本，用于区分不同的交易格式。
+2. 输入UTXO<sup id="sf-bitcoin-script-language-1-back"><a href="#sf-bitcoin-script-language-1" class="simple-footnote" title="Unspent Transction Output 未花费交易输出">1</a></sup>列表：由多个输入组成，每个输入都引用了之前交易中的某个输出。每个输入包含一个交易哈希值和输出索引，用于标识所引用的前一笔交易输出的位置，还有一个解锁脚本（ScriptSig），用于证明该交易的控制权。
+3. 输出UTXO列表：由多个输出组成，每个输出都指定了一定数量的比特币发送给一个比特币地址。每个输出包含一个加密的脚本（ScriptPubKey），用于验证比特币的接收方是否有权花费这些比特币。
+4. 锁定时间戳：用于控制交易的有效期，可以为0或者大于0。</p>
+<p>This is some mermaid example</p>
+<div class="mermaid">
+graph TD
+A(Coffee machine <br>not working) --&gt; B{Machine has power?}
+B --&gt;|No| H(Plug in and turn on)
+B --&gt;|Yes| C{Out of beans or water?} --&gt;|Yes| G(Refill beans and water)
+C --&gt;|No| D{Filter warning?} --&gt;|Yes| I(Replace or clean filter)
+D --&gt;|No| F(Send for repair)
+</div>
+
+<div class="mermaid">
+line-chart csv
+col1,col2,=A1+B1
+a,b,=A2+B2
+d,e,=A3+B3
+,,=sum(C:C)
+</div>
+
+<hr>
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true});</script><ol class="simple-footnotes"><li id="sf-bitcoin-script-language-1">Unspent Transction Output 未花费交易输出 <a href="#sf-bitcoin-script-language-1-back" class="simple-footnote-back">↩</a></li></ol>
   </div>
-  <hr />
-</article>
-<article>
-  <header>
-    <h2><a href="https://mestrace.github.io/posts/2023/Feb/18/translate-no-to-web3/#translate-no-to-web3">[翻译]保卫自由的互联网，拒绝Web3</a></h2>
+  <div class="tag-cloud">
     <p>
-      Posted on Sat 18 February 2023 in <a href="https://mestrace.github.io/category/blockchain.html">Blockchain</a>
-
-          &#8226; Tagged with
-              <a href="https://mestrace.github.io/tag/blockchain.html">Blockchain</a>
+      <a href="https://mestrace.github.io/tag/blockchain.html">Blockchain</a>
     </p>
-  </header>
-  <div>
-      <div><blockquote>
-<p>原文标题：Keep the web free, say no to Web3</p>
-<p>原文链接：<a href="https://yesterweb.org/no-to-web3/">https://yesterweb.org/no-to-web3/</a></p>
-</blockquote>
-<p>新的想法，新的思潮，下一代互联网，Web3对每个人的意义都是独一无二的。币圈的铁杆粉丝们把这种基于区块 …</p></div>
-        <br>
-        <a class="btn"
-           href="https://mestrace.github.io/posts/2023/Feb/18/translate-no-to-web3/#translate-no-to-web3">
-          Continue reading
-        </a>
   </div>
-  <hr />
+
+
+
+
+
+
 </article>
-<article>
-  <header>
-    <h2><a href="https://mestrace.github.io/posts/2023/Feb/05/python-coverage-diff-cover/#python-coverage-diff-cover">用 Python 进行代码覆盖率检测：coverage.py 和diff-cover 的使用方法</a></h2>
-    <p>
-      Posted on Sun 05 February 2023 in <a href="https://mestrace.github.io/category/python.html">Python</a>
-
-          &#8226; Tagged with
-              <a href="https://mestrace.github.io/tag/python.html">Python</a>
-    </p>
-  </header>
-  <div>
-      <div><p>在重构项目时，我们经常需要确认代码测试的覆盖率。这是为了确保没有任何部分遗漏或者错误，从而使重构变得更安全 …</p></div>
-        <br>
-        <a class="btn"
-           href="https://mestrace.github.io/posts/2023/Feb/05/python-coverage-diff-cover/#python-coverage-diff-cover">
-          Continue reading
-        </a>
-  </div>
-  <hr />
-</article>
-<article>
-  <header>
-    <h2><a href="https://mestrace.github.io/posts/2021/Sep/11/rocket-mq-history/#rocket-mq-history">RocketMQ是什么</a></h2>
-    <p>
-      Posted on Sat 11 September 2021 in <a href="https://mestrace.github.io/category/middleware.html">Middleware</a>
-
-          &#8226; Tagged with
-              <a href="https://mestrace.github.io/tag/rocketmq.html">RocketMQ</a>,              <a href="https://mestrace.github.io/tag/kafka.html">Kafka</a>
-    </p>
-  </header>
-  <div>
-      <div><blockquote>
-<p>Apache RocketMQ is a distributed messaging and streaming platform with low latency, high performance and reliability, trillion-level capacity and flexible scalability.</p>
-</blockquote>
-<p>RocketMQ 是一个分布式消息中间件，其具有低延迟、高性能和可靠性、万亿级容 …</p></div>
-        <br>
-        <a class="btn"
-           href="https://mestrace.github.io/posts/2021/Sep/11/rocket-mq-history/#rocket-mq-history">
-          Continue reading
-        </a>
-  </div>
-</article>
-
-  <div class="pagination">
-  </div>
-
-
 
 <footer>
 <p>
