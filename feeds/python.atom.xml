@@ -92,5 +92,7 @@ Coverage: 82%
 &lt;li&gt;&lt;code&gt;.coveragerc&lt;/code&gt; 文件来自 https://stackoverflow.com/questions/1628996/is-it-possible-exclude-test-directories-from-coverage-py-reports&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;coverage.py&lt;/code&gt; 的 Django 插件 https://pypi.org/project/django-coverage-plugin/&lt;/li&gt;
 &lt;/ol&gt;
-&lt;script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"&gt;&lt;/script&gt;
-&lt;script&gt;mermaid.initialize({startOnLoad:true});&lt;/script&gt;</content><category term="Python"></category><category term="Python"></category></entry></feed>
+&lt;script type="module"&gt;
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+        &lt;/script&gt;</content><category term="Python"></category><category term="Python"></category></entry></feed>

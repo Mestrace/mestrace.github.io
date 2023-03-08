@@ -50,5 +50,7 @@
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"&gt;&lt;/script&gt;
-&lt;script&gt;mermaid.initialize({startOnLoad:true});&lt;/script&gt;</content><category term="Middleware"></category><category term="RocketMQ"></category><category term="Kafka"></category></entry></feed>
+&lt;script type="module"&gt;
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+        &lt;/script&gt;</content><category term="Middleware"></category><category term="RocketMQ"></category><category term="Kafka"></category></entry></feed>
