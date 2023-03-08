@@ -1,7 +1,8 @@
 from datetime import datetime
 
 import sys
-sys.path.append('.')
+
+sys.path.append(".")
 
 import mermaid
 
@@ -39,6 +40,13 @@ THEME = "themes/Flex"
 
 
 STATIC_PATHS = ["images", "static"]
+
+CUSTOM_CSS = "static/custom.css"
+EXTRA_PATH_METADATA = {
+    "extra/custom.css": {"path": "static/custom.css"},
+    "static/google72cb1b82695f07e2.html": {"path": "google72cb1b82695f07e2.html"},
+}
+
 # Uncomment following line if you want document-relative URLs when developing
 RELATIVE_URLS = True
 
@@ -77,6 +85,7 @@ DEFAULT_PAGINATION = 10
 PLUGINS = [
     "simple_footnotes",
     # "i18n_subsites"
+    "seo",
 ]
 
 # # Enable Jinja2 i18n extension used to parse translations.
@@ -88,7 +97,7 @@ MARKDOWN = {
         "markdown.extensions.meta": {},
         mermaid.MermaidExtension(): {},
     },
-    'output_format': 'html5',
+    "output_format": "html5",
 }
 
 
@@ -97,7 +106,9 @@ THEME_COLOR_ENABLE_USER_OVERRIDE = True
 
 USE_LESS = True
 
-CUSTOM_CSS = "static/custom.css"
-EXTRA_PATH_METADATA = {
-    "extra/custom.css": {"path": "static/custom.css"},
-}
+
+# SEO Settings
+SEO_REPORT = False  # SEO report is enabled by default
+SEO_ENHANCER = False  # SEO enhancer is disabled by default
+SEO_ENHANCER_OPEN_GRAPH = False  # Subfeature of SEO enhancer
+SEO_ENHANCER_TWITTER_CARDS = False  # Subfeature of SEO enhancer
