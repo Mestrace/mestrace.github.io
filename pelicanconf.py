@@ -128,3 +128,6 @@ SITEMAP = {
     "priorities": {"articles": 0.5, "indexes": 0.5, "pages": 0.5},
     "changefreqs": {"articles": "monthly", "indexes": "daily", "pages": "monthly"},
 }
+
+# Remove URL Hash
+DISABLE_URL_HASH = True
