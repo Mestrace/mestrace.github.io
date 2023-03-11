@@ -45,6 +45,7 @@ CUSTOM_CSS = "static/custom.css"
 EXTRA_PATH_METADATA = {
     "extra/custom.css": {"path": "static/custom.css"},
     "static/google72cb1b82695f07e2.html": {"path": "google72cb1b82695f07e2.html"},
+    "static/808470c28b824e33920b126802a692f6.txt": {"path": "808470c28b824e33920b126802a692f6.txt"}
 }
 
 favico_path = "content/static/favico"
