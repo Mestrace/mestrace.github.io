@@ -1,4 +1,4 @@
-Title: 我是如何做SEO优化的 - 持续更新中
+Title: 我是如何做SEO优化的
 Slug: myblog-seo
 Date: 2023-03-11
 Category: MISC
