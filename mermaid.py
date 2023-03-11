@@ -60,8 +60,12 @@ class MermaidPreprocessor(Preprocessor):
 
             old_line = line
 
-        new_lines.append('<script src="{}"></script>'.format(js_file))
-        new_lines.append('<script>mermaid.initialize({startOnLoad:true});</script>')
+        # new_lines.append('<script src="{}"></script>'.format(js_file))
+        # new_lines.append('<script>mermaid.initialize({startOnLoad:true});</script>')
+        new_lines.append("""<script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+        </script>""")
         # print(new_lines)
         return new_lines
 
