@@ -94,7 +94,169 @@
 &lt;script type="module"&gt;
         import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
         mermaid.initialize({ startOnLoad: true });
-        &lt;/script&gt;</content><category term="MISC"></category></entry><entry><title>【Leetcode题解】2584. Split the Array to Make Coprime Products</title><link href="https://mestrace.github.io/posts/2023/Mar/08/2584-split-the-array-to-make-coprime-products/" rel="alternate"></link><published>2023-03-08T00:00:00+08:00</published><updated>2023-03-08T00:00:00+08:00</updated><author><name>Mestrace</name></author><id>tag:mestrace.github.io,2023-03-08:/posts/2023/Mar/08/2584-split-the-array-to-make-coprime-products/</id><summary type="html">&lt;p&gt;又闲的无聊，找点事情做，来写一下&lt;a href="https://leetcode.com/problems/split-the-array-to-make-coprime-products/"&gt;2584. Split the Array to Make Coprime Products&lt;/a&gt;的题解。&lt;/p&gt;
+        &lt;/script&gt;</content><category term="MISC"></category></entry><entry><title>简单聊聊MySQL Binlog</title><link href="https://mestrace.github.io/posts/2023/Mar/09/mysql-binlog-basics/" rel="alternate"></link><published>2023-03-09T00:00:00+08:00</published><updated>2023-03-09T00:00:00+08:00</updated><author><name>Mestrace</name></author><id>tag:mestrace.github.io,2023-03-09:/posts/2023/Mar/09/mysql-binlog-basics/</id><summary type="html">&lt;p&gt;Binlog (binary log)是一组日志文件，包含了对MySQL服务器进行的数据修改和变更，并持久化到磁盘中。Binlog以事件的格式存储，包括了所有的DDL和DML语句（例如数据表Schema的创建和变更，以及数据行的变更）。此外，每个Binlog …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Binlog (binary log)是一组日志文件，包含了对MySQL服务器进行的数据修改和变更，并持久化到磁盘中。Binlog以事件的格式存储，包括了所有的DDL和DML语句（例如数据表Schema的创建和变更，以及数据行的变更）。此外，每个Binlog event还囊括了一些额外的信息，包括但不限于&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;语句执行时间&lt;/li&gt;
+&lt;li&gt;语句执行时MySQL Server的相关状态&lt;/li&gt;
+&lt;li&gt;错误码&lt;/li&gt;
+&lt;li&gt;Binlog本身的元信息（如rotate日志）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;以及其他所有能够让此Binlog event能够被准确的重放的信息。理想条件下，在两台MySQL服务器上同时执行相同的Binlog event，最终两台MySQL服务器里的数据状态一致。
+Binlog的主要作用有两个：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;MySQL集群中，对于主库的变更会通过Binlog同步到从库中。&lt;/li&gt;
+&lt;li&gt;数据恢复的场景下，可以重放Binlog以将数据恢复到最新的状态。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;本文将主要介绍Binlog的文件格式和日志事件，并简单概括相关的应用场景。&lt;/p&gt;
+&lt;h2&gt;文件格式&lt;/h2&gt;
+&lt;p&gt;这里应该有图片file&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Binlog日志主要包括两类文件构成：一个日志索引（文件后缀为&lt;code&gt;.index&lt;/code&gt;）和数个日志文件（文件后缀为&lt;code&gt;.NNNNNN&lt;/code&gt;，&lt;code&gt;N&lt;/code&gt;为一个数字）。&lt;/li&gt;
+&lt;li&gt;索引文件里包含了所有的日志文件的名称，并记录了当前活跃(Active)的日志文件（即当前最新的文件）&lt;/li&gt;
+&lt;li&gt;日志文件首先以一个魔数开头，紧接着就是一系列包含DDL和DML的binlog events事件&lt;/li&gt;
+&lt;li&gt;魔数：&lt;code&gt;0xfe 0x62 0x69 0x6e = 0xfe 'b''i''n'&lt;/code&gt; &lt;/li&gt;
+&lt;li&gt;日志文件的第一个事件总是&lt;code&gt;FORMAT_DESCRIPTION_EVENT / START_EVENT_V3&lt;/code&gt;，描述了当前日志文件的一些系统基准信息，包括Binlog的版本，MySQL Server的版本和文件创建时间。&lt;/li&gt;
+&lt;li&gt;随后的事件则根据事件类型有所不同，主要是包含了对于数据的变更信息。&lt;/li&gt;
+&lt;li&gt;最后，如果这个文件不是当前的活跃日志，则它会以一个&lt;code&gt;Rotate&lt;/code&gt;事件结束，并记录了下一个日志文件的名称。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这里应该有图片content&lt;/p&gt;
+&lt;p&gt;除了相关的管理事件以外，包含数据更新的Binlog事件通常以日志组(Group)的形式出现（如上图）。一组事件包含一个或多个Binlog事件。一个事务中所有的语句会被归属到同一个日志组。而对于其他事务无关的语句来说（如ALTER TABLE，GRANT等），每一个语句会被归属于一个独立的日志组。当需要以Binlog为基础进行数据复制或恢复时，每个组会被顺序执行，且组中的语句要么全部成功，要么全部失败。&lt;/p&gt;
+&lt;h2&gt;日志事件&lt;/h2&gt;
+&lt;p&gt;Binlog主要有三种模式。
+- 基于语句的模式(Statement-based，SBR)包含实际执行的SQL语句（如&lt;code&gt;INSERT&lt;/code&gt;、&lt;code&gt;UPDATE&lt;/code&gt;、&lt;code&gt;DELETE&lt;/code&gt;）。
+  - 缺点：不仅需要记录执行的语句，而且需要额外记录语句相关的状态信息，以保证重放的时候能够产生相同的结果。在极端情况下，一些非确定性(non-deterministic)的语句可能会产生与预期不一致的结果。
+- 基于行的模式(Row-based，RBR)包含对于每一个数据行的变更。
+  - 缺点：会产生大量的行语句，可能会引起磁盘性能问题，且恢复的时候需要更多的时间。
+- 混合模式(Mixed， MBR)主要基于语句的模式，在一些不安全（unsafe）的场景下（见[4]），会切换为基于行的模式。
+  - 在使用无法确定结果的&lt;code&gt;AUTO_INCREMENT&lt;/code&gt;，&lt;code&gt;LAST_INSERT_ID()&lt;/code&gt;或&lt;code&gt;TIMESTAMP&lt;/code&gt;时（见[5]）
+  - 当function包含UUID()
+  - 当使用储存过程的时候
+基于语句和基于行的模式的更细节的对比见参考文献[3]。&lt;/p&gt;
+&lt;p&gt;每一个事件都由事件头Header和事件体Event Data组成。
+- 一个事件头有 19 字节，依次排列为：时间戳，事件类型，服务器ID，事件长度，下一个事件的byte offset，和标识符。
+- 一个事件体由两部分组成，一个固定长度的Post-Header和一个可变长度的Payload组成。Post-Header的长度对于每一种事件来说是固定的，但是不同事件是不一样的。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;+============+==========================+
+|            |        Timestamp         |
+|            |         4 bytes          |
+|            +--------------------------+
+|            |        Type Code         |
+|            |          1 byte          |
+|            +--------------------------+
+|            |        Server ID         |
+|            |         4 bytes          |
+|   Header   +--------------------------+
+|            |       Event Length       |
+|            |         4 bytes          |
+|            +--------------------------+
+|            |      Next Position       |
+|            |         4 bytes          |
+|            +--------------------------+
+|            |          Flags           |
+|            |         2 bytes          |
++------------+--------------------------+
+|            | Fixed Part (Post-Header) |
+| Event Data +--------------------------+
+|            | Variable Part (Payload)  |
++============+==========================+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;当配置不同的Binlog模式时，储存的的Binlog事件不尽相同。
+- 一些公共的事件，如管理事件，在所有模式下都会产生。
+- Statement和Row模式下各有数种独特的事件。举个例子，ROWS_EVENT就不会出现在Statement模式下。
+- 只有在开启某些配置之后才会开启的事件，如GTID_EVENT
+几种常见的事件
+- &lt;code&gt;FORMAT_DESCRIPTION_EVENT&lt;/code&gt; / &lt;code&gt;START_EVENT_V3&lt;/code&gt;：两种日志文件的起始事件，主要是根据Binlog版本不同而使用不同的事件。主要记录了Binlog版本号，MySQL Server版本号，开始时间。在Payload中会附带每种事件枚举值所对应的Post-Header长度。
+- &lt;code&gt;ROTATE_EVENT&lt;/code&gt;：当日志文件需要切换时所记录的最后一个事件，保存了紧接着下一个日志文件名称。切换日志文件的条件：1）当前活跃的日志文件大小超过max_binlog_size，或2）执行flush logs;命令。
+- &lt;code&gt;QUERY_EVENT&lt;/code&gt;：记录了被执行的SQL语句，相关的统计/debug信息（执行时间，thread id等），和相关的状态信息（是否需要auto increment，charset，tz等）。此事件通常记录的语句为：1）事务开始时的Begin操作，2）Statement模式下的DML操作，3）Row模式下的DDL操作。
+- &lt;code&gt;DELETE_ROWS_EVENT&lt;/code&gt; / &lt;code&gt;UPDATE_ROWS_EVENT&lt;/code&gt;/ &lt;code&gt;WRITE_ROWS_EVENT&lt;/code&gt;：这三种统称为ROWS_EVENT，分别对应INSERT, UPDATE和DELETE操作，记录在Row模式下所有的DML语句。INSERT包括需要插入的所有数据；UPDATE包括修改前的值和修改后的值；DELETE操作包含被删除的主键。&lt;/p&gt;
+&lt;h2&gt;举个例子&lt;/h2&gt;
+&lt;p&gt;当前MySQL版本
+mysql Ver 14.14 Distrib 5.7.35-38, for debian-linux-gnu (x86_64) using 7.0
+Percona Server (GPL), Release '38', Revision '3692a61'
+设置binlog&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# 查看 / 变更设置 - binlog&lt;/span&gt;
+vi&lt;span class="w"&gt; &lt;/span&gt;/etc/mysql/percona-server.conf.d/mysqld.cnf
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;在mysql shell内查看binlog相关事件&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;-- 查看mysql版本&lt;/span&gt;
+&lt;span class="k"&gt;show&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;variables&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;like&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;%version%&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="c1"&gt;-- 查看当前MySQL服务的binlog相关状态&lt;/span&gt;
+&lt;span class="k"&gt;show&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;variables&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;like&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;%binlog%&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="c1"&gt;-- 查看当前所有的binlog文件列表&lt;/span&gt;
+&lt;span class="k"&gt;show&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;binary&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;logs&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="c1"&gt;-- 查看当前所有的binlog；&lt;/span&gt;
+&lt;span class="k"&gt;show&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;binlog&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;events&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="c1"&gt;-- 查看当前binlog with paging&lt;/span&gt;
+&lt;span class="k"&gt;show&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;binlog&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;events&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;in&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;mysql-bin.000002&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;624&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;limit&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="k"&gt;G&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="c1"&gt;-- flush当前binlog文件，rotate到下一个binlog文件&lt;/span&gt;
+&lt;span class="n"&gt;flush&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;logs&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;使用mysqlbinlog工具查看binlog&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# 进入mysql目录需要有su权限&lt;/span&gt;
+sudo&lt;span class="w"&gt; &lt;/span&gt;su
+&lt;span class="nb"&gt;cd&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;/var/log/mysql
+&lt;span class="c1"&gt;# 查看binlog索引文件&lt;/span&gt;
+cat&lt;span class="w"&gt; &lt;/span&gt;bin-mysql.index
+&lt;span class="c1"&gt;# 查看binlog日志文件 - statement&lt;/span&gt;
+mysqlbinlog&lt;span class="w"&gt; &lt;/span&gt;--no-defaults&lt;span class="w"&gt; &lt;/span&gt;bin-mysql.000001
+&lt;span class="c1"&gt;# 查看binlog日志文件 - row&lt;/span&gt;
+mysqlbinlog&lt;span class="w"&gt; &lt;/span&gt;--no-defaults&lt;span class="w"&gt; &lt;/span&gt;--base64-output&lt;span class="o"&gt;=&lt;/span&gt;DECODE-ROWS&lt;span class="w"&gt; &lt;/span&gt;-v&lt;span class="w"&gt; &lt;/span&gt;bin-mysql.000002
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;应用场景&lt;/h2&gt;
+&lt;p&gt;前面讲了，Binlog的核心卖点就是能让发生在一个MySQL实例上的所有数据更新能够完整的在其他MySQL实例上重放。MySQL 5.0引入Binlog以支持主从复制，以实现灾难恢复、水平扩展、统计分析、远程数据分发等功能。&lt;/p&gt;
+&lt;p&gt;这里应该有图片rw-sep&lt;/p&gt;
+&lt;p&gt;MySQL进群的主从复制主要有三步，如上图
+1. Master在每次完成提交事务返回之前，记录本次数据变更事件至Binlog
+2. Slave基于自身维护的binlog offset，从Master拉取相应的binlog更新。并记录到relay log中。
+3. Slave消费relay log去更新自身的数据。&lt;/p&gt;
+&lt;p&gt;下面简述几种实际工作中会应用到的场景，更具体的描述详见[6]。
+- 读写分离：在读多写少的情况下，可使用一个主库接收写流量，准实时地将Binlog同步到多个从库上进行数据同步，以实现读的水平扩展。业务也可以根据需要选择读主库。[9]介绍了我们日常工作中使用的RDS的高可用架构。
+- 数据恢复：需要进行数据恢复的时候，将Binlog进行重放即可恢复数据库的状态。
+- 最终一致性：当需要保证MySQL数据库与其他组件/系统中数据一致时，可以通过订阅Binlog消息的方式进行处理，以避免出现不一致的情况。
+- 异地多活 / 跨DC同步：在异地多活的场景下，存在多主写入，需要互相同步的场景下，需要依赖Binlog进行同步。主要的挑战有数据冲突（主键 / 唯一键）和数据回环问题。我司内部主要使用基础架构提供的DRC组件进行同步[9]。在[8]中，作者介绍了Tiktok和Musically两款产品的跨洋机房数据融合项目的一个工程实践，其中就使用了DRC进行数据同步。&lt;/p&gt;
+&lt;h2&gt;答疑解惑&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;并发更新下，Binlog的有序性如何保证？&lt;/p&gt;
+&lt;p&gt;在老的版本中，通过prepare_commit_mutex锁以串行的方式来保证MySQL数据库上层Binlog和Innodb存储引擎层的事务提交顺序一致。
+MySQL 5.6引入了BLGC（Binary Log Group Commit）引入队列机制保证Innodb commit顺序与binlog落盘顺序一致，并将事务分组，组内的binlog刷盘动作交给一个事务进行，以保证顺序性。
+- Flush Stage: 将每个事务的二进制日志写入内存中。
+- Sync Stage: 将内存中的二进制日志刷新到磁盘，若队列中有多个事务，那么仅一次fsync操作就完成了二进制日志的写入，这就是BLGC。
+- Commit Stage: 顺序调用存储引擎层事务的提交。
+细节参见[11]。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;写Binlog磁盘坏了咋办（单机故障）？&lt;/p&gt;
+&lt;p&gt;对于业务（mysql server - 机器硬件）来说，无需额外关心这种细节，默认当成是可靠的就行了。一些额外的细节都可以在磁盘层面做屏蔽，如raid。对于数据来说，定期扫描巡检可以预防数据损坏带来的损失。&lt;/p&gt;
+&lt;p&gt;以下原因是导致mysql 表毁坏的常见原因： &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;服务器突然断电导致数据文件损坏。 &lt;/li&gt;
+&lt;li&gt;强制关机，没有先关闭mysql 服务。 &lt;/li&gt;
+&lt;li&gt;mysqld 进程在写表时被杀掉。 &lt;/li&gt;
+&lt;li&gt;使用myisamchk 的同时，mysqld 也在操作表。 &lt;/li&gt;
+&lt;li&gt;磁盘故障。 &lt;/li&gt;
+&lt;li&gt;服务器死机。 &lt;/li&gt;
+&lt;li&gt;mysql 本身的bug 。 &lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;参考文献&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;14.9.4 Binlog Event, MySQL Internals Manual 官方内部实现文档&lt;/li&gt;
+&lt;li&gt;C. Bell, M. Kindahl and L. Thalmann, MySQL High Availability: Tools for Building Robust Data Centers 高可用MySQL：构建健壮的数据中心&lt;/li&gt;
+&lt;li&gt;17.2.1.1 Advantages and Disadvantages of Statement-Based and Row-Based Replication, MySQL 8.0 Reference Manual 官方参考手册&lt;/li&gt;
+&lt;li&gt;5.4.4.3 Mixed Binary Logging Format, MySQL 8.0 Reference Manual 官方参考手册&lt;/li&gt;
+&lt;li&gt;17.5.1.1 Replication and AUTO_INCREMENT, MySQL 8.0 Reference Manual 官方参考手册&lt;/li&gt;
+&lt;li&gt;binlog event有序性, 阿里云RDS-数据库内核组&lt;/li&gt;
+&lt;li&gt;MySQL 中Redo与Binlog顺序一致性问题&lt;/li&gt;
+&lt;/ol&gt;
+&lt;script type="module"&gt;
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+        &lt;/script&gt;</content><category term="Middleware"></category><category term="MySQL"></category></entry><entry><title>【Leetcode题解】2584. Split the Array to Make Coprime Products</title><link href="https://mestrace.github.io/posts/2023/Mar/08/2584-split-the-array-to-make-coprime-products/" rel="alternate"></link><published>2023-03-08T00:00:00+08:00</published><updated>2023-03-08T00:00:00+08:00</updated><author><name>Mestrace</name></author><id>tag:mestrace.github.io,2023-03-08:/posts/2023/Mar/08/2584-split-the-array-to-make-coprime-products/</id><summary type="html">&lt;p&gt;又闲的无聊，找点事情做，来写一下&lt;a href="https://leetcode.com/problems/split-the-array-to-make-coprime-products/"&gt;2584. Split the Array to Make Coprime Products&lt;/a&gt;的题解。&lt;/p&gt;
 &lt;h1&gt;题目&lt;/h1&gt;
 &lt;p&gt;You are given a 0-indexed integer array &lt;code&gt;nums&lt;/code&gt; of length &lt;code&gt;n&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;A split at an index i where &lt;code&gt;0 &amp;lt;= i &amp;lt;= n - 2&lt;/code&gt; is …&lt;/p&gt;</summary><content type="html">&lt;p&gt;又闲的无聊，找点事情做，来写一下&lt;a href="https://leetcode.com/problems/split-the-array-to-make-coprime-products/"&gt;2584. Split the Array to Make Coprime Products&lt;/a&gt;的题解。&lt;/p&gt;
