@@ -5,7 +5,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://mestrace.github.io/</loc>
-<lastmod>2023-03-11T17:17:04-00:00</lastmod>
+<lastmod>2023-03-11T17:17:24-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -13,13 +13,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://mestrace.github.io/posts/2023/Mar/11/myblog-seo/</loc>
 <lastmod>2023-03-11T00:00:00+08:00</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>https://mestrace.github.io/posts/2023/Mar/09/mysql-binlog-basics/</loc>
-<lastmod>2023-03-09T00:00:00+08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -75,7 +68,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://mestrace.github.io/category/middleware.html</loc>
-<lastmod>2023-03-09T00:00:00+06:55</lastmod>
+<lastmod>2021-09-11T00:00:00+06:55</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -90,13 +83,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://mestrace.github.io/category/python.html</loc>
 <lastmod>2023-02-05T00:00:00+06:55</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>https://mestrace.github.io/tag/mysql.html</loc>
-<lastmod>2023-03-09T00:00:00+06:55</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
