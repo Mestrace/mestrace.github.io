@@ -86,6 +86,7 @@ PLUGINS = [
     "simple_footnotes",
     # "i18n_subsites"
     "seo",
+    "sitemap",
 ]
 
 # # Enable Jinja2 i18n extension used to parse translations.
@@ -109,9 +110,16 @@ USE_LESS = True
 
 # SEO Settings
 SEO_REPORT = False  # SEO report is enabled by default
-SEO_ENHANCER = False  # SEO enhancer is disabled by default
-SEO_ENHANCER_OPEN_GRAPH = False  # Subfeature of SEO enhancer
+SEO_ENHANCER = True  # SEO enhancer is disabled by default
+SEO_ENHANCER_OPEN_GRAPH = True  # Subfeature of SEO enhancer
 SEO_ENHANCER_TWITTER_CARDS = False  # Subfeature of SEO enhancer
 
 # Google analytics
-GOOGLE_GLOBAL_SITE_TAG = 'G-07WBTMQT81'
+GOOGLE_GLOBAL_SITE_TAG = "G-07WBTMQT81"
+
+# Sitemap
+SITEMAP = {
+    "format": "xml",
+    "priorities": {"articles": 0.5, "indexes": 0.5, "pages": 0.5},
+    "changefreqs": {"articles": "monthly", "indexes": "daily", "pages": "monthly"},
+}
