@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mestrace的个人博客 - MISC</title><link href="https://mestrace.github.io/" rel="alternate"></link><link href="https://mestrace.github.io/feeds/misc.atom.xml" rel="self"></link><id>https://mestrace.github.io/</id><updated>2023-03-11T00:00:00+08:00</updated><subtitle>Software Developer</subtitle><entry><title>我是如何做SEO优化的</title><link href="https://mestrace.github.io/posts/2023/Mar/11/myblog-seo/" rel="alternate"></link><published>2023-03-11T00:00:00+08:00</published><updated>2023-03-11T00:00:00+08:00</updated><author><name>Mestrace</name></author><id>tag:mestrace.github.io,2023-03-11:/posts/2023/Mar/11/myblog-seo/</id><summary type="html">&lt;p&gt;一开始，我的写博客是出于对自己成长的记录，但时间推移后，我希望更多人能够阅读我的文章。虽然与同事和朋友分享文 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;一开始，我的写博客是出于对自己成长的记录，但时间推移后，我希望更多人能够阅读我的文章。虽然与同事和朋友分享文章可以带来满足感，但如果能吸引更多读者并获得他们的认可和反馈，那将会极大地推动我的进步并让我更加热爱写作。因此，让陌生人发现我的博客已成为我的首要问题。&lt;/p&gt;
+&lt;p&gt;众所周知，搜索引擎使用网络爬虫遍历整个互联网。然而，随着互联网站点的急剧增加，即使几十年前，现有的搜索引擎也已经无法完成对所有网站的遍历。因此，如何进行搜索引擎优化（Search Engine Optimization，SEO）已逐渐成为备受关注的研究领域。其目的是解决如何使搜索引擎更好地“阅读”我的网站，从而使我的博客文章在用户输入特定关键词时排在前列。在这篇文章中，我将逐步描述我如何对我的博客网站进行SEO，并提供相应的参考资料，希望能够对写博客的朋友提供帮助。&lt;/p&gt;
+&lt;p&gt;首先，让我简单介绍一下我是如何搭建自己的博客的。如果你使用与我相似的工具链，那么本文将更有助于你。为了减少麻烦的事情，我主要使用GitHub Pages来部署和托管我的博客，这样就省去了很多麻烦。在框架方面，我使用的是&lt;a href="https://getpelican.com"&gt;Pelican&lt;/a&gt;，一个Python的静态文档站框架，并使用&lt;a href="https://github.com/alexandrevicenzi/Flex"&gt;Flex主题&lt;/a&gt;。Pelican支持Markdown写作，并且可以内嵌HTML。使用这套工具链，我几乎不需要担心部署和配置的问题，只需专注于写作即可。&lt;/p&gt;
+&lt;h2&gt;获取访问数据&lt;/h2&gt;
+&lt;p&gt;数据分析是进行优化的重要依据。即使你还没有开始优化，也应该了解如何获取有关你网站访问的数据。在本节中，我将介绍我如何查看访问数据，并提供一些我会用到的工具。&lt;/p&gt;
+&lt;h3&gt;Google Analytics&lt;/h3&gt;
+&lt;p&gt;使用&lt;a href="https://analytics.google.com/analytics/web/#/"&gt;Google Analytics&lt;/a&gt;，可以直观地查看网站的访问数据和高级浏览数据。我使用的Flex框架原生支持Google Analytics 4，只需要配置测量ID，即可在发布网站时自动添加相关的跟踪代码。&lt;/p&gt;
+&lt;p&gt;首先，需要在Google Analytics后台配置网站跟踪，跟着步骤操作即可，可以参考&lt;a href="https://support.google.com/analytics/answer/1008080"&gt;官方指南&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;然后，在你的网站页面中进行配置，才能收集数据，可以跟着这份&lt;a href="https://support.google.com/analytics/answer/9539598"&gt;官方教程&lt;/a&gt;拿到你的gtag。如果你使用Flex框架，可以直接在配置文件&lt;code&gt;pelicanconf.py&lt;/code&gt;中添加以下行：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# pelicanconf.py&lt;/span&gt;
+&lt;span class="c1"&gt;# Google analytics&lt;/span&gt;
+&lt;span class="n"&gt;GOOGLE_GLOBAL_SITE_TAG&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;G-XXXXXXXXXX&amp;#39;&lt;/span&gt; &lt;span class="c1"&gt;# Your Google Analytics 4 Property ID&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;原理也比较简单，就是在需要追踪的每个页面的HTML &lt;code&gt;&amp;lt;head&amp;gt;&lt;/code&gt;里面加上google的信息。即使你没有跟我用一样的技术栈，你也可以用类似的方式处理，具体可以参考官方文档。这里给出一份模版代码：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;head&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="cm"&gt;&amp;lt;!-- Other heads --&amp;gt;&lt;/span&gt;
+
+    {% if GOOGLE_GLOBAL_SITE_TAG %}
+    &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt; &lt;span class="na"&gt;async&lt;/span&gt; &lt;span class="na"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;https://www.googletagmanager.com/gtag/js?id={{ GOOGLE_GLOBAL_SITE_TAG }}&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nb"&gt;window&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;dataLayer&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;window&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;dataLayer&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;[];&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;gtag&lt;/span&gt;&lt;span class="p"&gt;(){&lt;/span&gt;&lt;span class="nx"&gt;dataLayer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;push&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;arguments&lt;/span&gt;&lt;span class="p"&gt;);}&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nx"&gt;gtag&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;js&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ow"&gt;new&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;Date&lt;/span&gt;&lt;span class="p"&gt;());&lt;/span&gt;
+
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nx"&gt;gtag&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;config&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;{{ GOOGLE_GLOBAL_SITE_TAG }}&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+    {% endif %}
+&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;head&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;这样过一阵子就可以看到你的网站放完数据了。&lt;/p&gt;
+&lt;h3&gt;Google Search Console&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;NOTE:&lt;/em&gt;&lt;/strong&gt; 建议生成好sitemap之后再进行这一步&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href="https://search.google.com/search-console/about"&gt;Google Search Console&lt;/a&gt; 是一个进阶的免费工具，可以用来查看网站在Google搜索结果中的排名和可见性，也包括了能指出网站问题的SEO工具等。&lt;/p&gt;
+&lt;p&gt;跟着Google Search Console的配置器走，就会要求你&lt;a href="https://support.google.com/webmasters/answer/9008080?hl=en"&gt;验证你是这个网站的拥有者&lt;/a&gt;。验证的方式有很多种，这里我选择了最简单的一种，在网址根目录下放置提供的文件&lt;code&gt;/googleXXXXXXXXXXXX.html&lt;/code&gt;，里面就只有一行&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;google-site-verification: googleXXXXXXXXXXXX.html
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;在Pelican配置中也比较简单，直接讲这个文件加到配置文件&lt;code&gt;pelicanconf.py&lt;/code&gt;的&lt;code&gt;EXTRA_PATH_METADATA&lt;/code&gt;里面就好，比如这样&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;EXTRA_PATH_METADATA&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;static/google72cb1b82695f07e2.html&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;path&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;google72cb1b82695f07e2.html&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;发布之后就可以继续在Google Search Console里面完成配置。之后过几个小时就可以查看被搜索和点击到的次数了。&lt;/p&gt;
+&lt;p&gt;当然，Google Search Console只针对Google的搜索，如果你想要配置其他搜索引擎，就需要另外配置了。比如&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.bing.com/webmasters"&gt;Bing Webmaster&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://ziyuan.baidu.com/"&gt;百度搜索平台&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;我的优化策略&lt;/h2&gt;
+&lt;h3&gt;Pelican seo插件&lt;/h3&gt;
+&lt;p&gt;顾名思义，&lt;a href="https://github.com/pelican-plugins/seo"&gt;&lt;code&gt;pelican-plugin/seo&lt;/code&gt;&lt;/a&gt;插件就是用来做Pelican框架下的SEO优化的。这个插件主要有两个功能
+- SEO Report: 根据编译后的文章生成一个SEO报告，报告中包含SEO的几个关键点以及如何进行优化。
+- SEO Enhancer：在文章编译时添加一些SEO元素，使得文章能够更好地被解析。&lt;/p&gt;
+&lt;p&gt;安装&lt;code&gt;pelican-plugin/seo&lt;/code&gt;后，需要在&lt;code&gt;pelicanconf.py&lt;/code&gt;中增加相应的配置，包括：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;PLUGINS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+    &lt;span class="c1"&gt;# ...&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;seo&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="c1"&gt;# SEO Settings&lt;/span&gt;
+&lt;span class="n"&gt;SEO_REPORT&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;False&lt;/span&gt;  &lt;span class="c1"&gt;# SEO report is enabled by default&lt;/span&gt;
+&lt;span class="n"&gt;SEO_ENHANCER&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;  &lt;span class="c1"&gt;# SEO enhancer is disabled by default&lt;/span&gt;
+&lt;span class="n"&gt;SEO_ENHANCER_OPEN_GRAPH&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;  &lt;span class="c1"&gt;# Subfeature of SEO enhancer&lt;/span&gt;
+&lt;span class="n"&gt;SEO_ENHANCER_TWITTER_CARDS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;  &lt;span class="c1"&gt;# Subfeature of SEO enhancer&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;简单介绍一下这几个选项：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;SEO_REPORT&lt;/code&gt;：生成上述提到的SEO报告，并以HTML形式输出在项目根目录。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SEO_ENHANCER&lt;/code&gt;：添加一些默认的SEO元素，例如生成robots.txt，增加Canonical标签以及增加页面结构标签等。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SEO_ENHANCER_OPEN_GRAPH&lt;/code&gt;：开启Open Graph协议，能够在社交媒体上分享你的内容时显示额外的信息。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SEO_ENHANCER_TWITTER_CARDS&lt;/code&gt;：开启Twitter卡片，能够在推特上分享你的内容时显示额外的信息。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Pelican sitemap插件&lt;/h3&gt;
+&lt;p&gt;&lt;a href="https://github.com/pelican-plugins/sitemap"&gt;&lt;code&gt;pelican-plugin/sitemap&lt;/code&gt;&lt;/a&gt;能帮助你在生成Pelican静态网站的同时生成站点地图文件。这个文件可以向搜索引擎提供一些提示，帮助爬虫找到页面的路径并规划何时重新访问你的页面。一旦启用该插件，站点地图文件将在 &lt;code&gt;output/sitemap.&amp;lt;format&amp;gt;&lt;/code&gt; 路径下生成。
+0
+当你发布你的站点后，你需要将站点地图提交到搜索引擎后台。下面是一个在 Google Search Console 中添加站点地图的示例：&lt;/p&gt;
+&lt;p align="center"&gt;
+  &lt;img src="https://mestrace.github.io/images/7/search_console_sitemap.png" /&gt;
+&lt;/p&gt;
+
+&lt;h2&gt;参考资料&lt;/h2&gt;
+&lt;p&gt;本文主要参考了&lt;a href="https://blog.kmonsoor.com/pelican-how-to-make-seo-friendly/"&gt;Pelican Static sites - SEO Optimization&lt;/a&gt;中聊的一些思路。&lt;/p&gt;
+&lt;p&gt;如果你想变得更强的话，可以延伸看看&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://gist.github.com/denzildoyle/31fe294065f606b4f612"&gt;SEO - denzildoyle&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://kucw.github.io/blog/2021/1/from-medium-to-github/"&gt;為了 SEO！我離開了 Medium，改在 GitHub 上自架個人網站&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;script type="module"&gt;
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+        &lt;/script&gt;</content><category term="MISC"></category></entry></feed>
