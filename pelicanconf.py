@@ -1,18 +1,18 @@
 from datetime import datetime
-
 import sys
+import os
 
 sys.path.append(".")
 
 import mermaid
 
 AUTHOR = "Mestrace"
-SITENAME = "mestrace.github.io"
-SITEURL = "https://mestrace.github.io."
+SITENAME = "Mestrace的个人博客"
+SITEURL = "https://mestrace.github.io"
 SITETITLE = "Mestrace"
 SITESUBTITLE = "Software Developer"
-SITEDESCRIPTION = "My Thoughts"
-SITELOGO = "https://avatars.githubusercontent.com/u/26028388?v=4"
+SITEDESCRIPTION = "我的个人博客，记录我的成长历程"
+SITELOGO = "http://github.com/Mestrace.png?size=460"
 BROWSER_COLOR = "#333"
 PYGMENTS_STYLE = "monokai"
 
@@ -46,6 +46,11 @@ EXTRA_PATH_METADATA = {
     "extra/custom.css": {"path": "static/custom.css"},
     "static/google72cb1b82695f07e2.html": {"path": "google72cb1b82695f07e2.html"},
 }
+
+favico_path = "content/static/favico"
+for file in os.listdir(os.fsencode(favico_path)):
+    filename = os.fsdecode(file)
+    EXTRA_PATH_METADATA[os.path.join("static/favico", filename)] = {"path" : filename}
 
 # Uncomment following line if you want document-relative URLs when developing
 RELATIVE_URLS = True
