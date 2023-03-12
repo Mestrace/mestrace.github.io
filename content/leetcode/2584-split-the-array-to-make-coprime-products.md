@@ -6,7 +6,7 @@ Tags: Leetcode
 
 又闲的无聊，找点事情做，来写一下[2584. Split the Array to Make Coprime Products](https://leetcode.com/problems/split-the-array-to-make-coprime-products/)的题解。
 
-# 题目
+## 题目
 
 You are given a 0-indexed integer array `nums` of length `n`.
 
@@ -19,7 +19,7 @@ Two values `val1` and `val2` are coprime if `gcd(val1, val2) == 1` where `gcd(va
 
 给一个列表的数字，把这个列表分为两半，使得两边的乘积互质(coprime)。当然啦，要找那个使得左边最小的。
 
-# 分析
+## 分析
 
 这道题是2023.03.05的[周赛](https://leetcode.com/contest/weekly-contest-335/)第三题。刚看到题目的时候我心想：“呵，简单！prefix sum(product)可破。”现在想想自己还是图样图森破了。首先要注意的是那个乘积，一看到n个数需要乘起来就需要立马联想到数字越界的问题。对于Python的盲目相信让我冲昏了头脑，用了各种魔改的prefix sum去试。比如先把数字预处理一遍，去除他们的乘数。当然事实证明我并没有办法解决这个问题。
 
@@ -78,7 +78,7 @@ def prime_factors(n):
 
 那么剩下的就简单了。回到我们的算法，从左到右，每次比较左右两边的质因数的交集就可以解决了。
 
-# 解法
+## 解法
 
 贴上剩余部分的代码。我们维护`left`和`right`两边的prime然后算交集。每次循环我们都给`left`的质数数上，`right`的质数扣掉，再比较他们两个的`key`的交集就可以了。
 
@@ -158,7 +158,7 @@ Explanation:
 
 又及：这个做法其实跟一天前的[双周赛](https://leetcode.com/contest/biweekly-contest-99)的第三题[2580. Count Ways to Group Overlapping Ranges](https://leetcode.com/problems/count-ways-to-group-overlapping-ranges/description/)的思路非常相似了。难怪讨论区里的人都说周赛和双周赛的出题人是同一个呢……
 
-# 拓展
+## 拓展
 
 如果你想变得更强的话，可以延伸看看
 

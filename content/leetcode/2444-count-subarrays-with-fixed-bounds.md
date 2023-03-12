@@ -6,7 +6,7 @@ Tags: Leetcode, Subarray
 
 今天闲的无聊，找点事情做，来写一下[2444. Count Subarrays With Fixed Bound](https://leetcode.com/problems/count-subarrays-with-fixed-bounds/)的题解。
 
-# 题目
+## 题目
 
 You are given an integer array `nums` and two integers `minK` and `maxK`.
 
@@ -20,7 +20,7 @@ A subarray is a contiguous part of an array.
 
 给定一个数字列表和一个最大值和一个最小值，找到所有区间满足最大值和最小值分别等于给定值的子数组的数量。
 
-# 分析
+## 分析
 
 这道题是2022.10.16的[周赛](https://leetcode.com/contest/weekly-contest-315/)题目。当时尝试用暴力dp的方式去解。思路是说用放宽约束条件的方式，去计算一个区间`[i,j]`内是否都是在`[minK, maxK]`内的数字，然后数一遍。果不其然TLE了。但今天不是周赛，我们有充足的时间去思考，别有太大压力。做这类数连续子数组类型的题目，首先看数据量。这道题数据量`10^5`，也就意味着我们要在`O(n)`的方式去解决，否则一定超时。因此，头脑里冒出来的第一个方式一定是双指针。
 
@@ -86,7 +86,7 @@ Starting from [6,4,2]
 
 到这里，我们就把所有需要理解的逻辑都捋顺了。
 
-# 代码
+## 代码
 
 ```python3
 class Solution:
