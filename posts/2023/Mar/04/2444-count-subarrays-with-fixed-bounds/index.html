@@ -92,7 +92,7 @@
 </header>
 <div>
 <p>今天闲的无聊，找点事情做，来写一下<a href="https://leetcode.com/problems/count-subarrays-with-fixed-bounds/">2444. Count Subarrays With Fixed Bound</a>的题解。</p>
-<h1>题目</h1>
+<h2>题目</h2>
 <p>You are given an integer array <code>nums</code> and two integers <code>minK</code> and <code>maxK</code>.</p>
 <p>A <strong>fixed-bound subarray</strong> of <code>nums</code> is a subarray that satisfies the following conditions:</p>
 <ul>
@@ -102,7 +102,7 @@ Return the number of fixed-bound subarrays.</li>
 </ul>
 <p>A subarray is a contiguous part of an array.</p>
 <p>给定一个数字列表和一个最大值和一个最小值，找到所有区间满足最大值和最小值分别等于给定值的子数组的数量。</p>
-<h1>分析</h1>
+<h2>分析</h2>
 <p>这道题是2022.10.16的<a href="https://leetcode.com/contest/weekly-contest-315/">周赛</a>题目。当时尝试用暴力dp的方式去解。思路是说用放宽约束条件的方式，去计算一个区间<code>[i,j]</code>内是否都是在<code>[minK, maxK]</code>内的数字，然后数一遍。果不其然TLE了。但今天不是周赛，我们有充足的时间去思考，别有太大压力。做这类数连续子数组类型的题目，首先看数据量。这道题数据量<code>10^5</code>，也就意味着我们要在<code>O(n)</code>的方式去解决，否则一定超时。因此，头脑里冒出来的第一个方式一定是双指针。</p>
 <p>先解决核心问题。假设我们已经知道怎么移动指针，并找到了满足条件的区间<code>[i,j]</code>。也就是说<code>[i,j]</code>区间的最大值等于<code>maxK</code>，最小值等于<code>minK</code>。那么我们要怎么计算这个区间内的子数组数量呢？这就可以引导我们去找到另外两个变量，我们要知道区间<code>[i,j]</code>内的区间<code>[k,l]</code>，使得<code>nums[k]</code>和<code>nums[l]</code>分别等于最大值和最小值（或反过来）。这样的话我们就找到了我们需要的变量。</p>
 <p>那么如何计算子数组的数量呢？我们先来看几个例子。</p>
@@ -160,7 +160,7 @@ Return the number of fixed-bound subarrays.</li>
 </li>
 </ol>
 <p>到这里，我们就把所有需要理解的逻辑都捋顺了。</p>
-<h1>代码</h1>
+<h2>代码</h2>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">countSubarrays</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">minK</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">maxK</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="n">left</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
@@ -186,10 +186,6 @@ Return the number of fixed-bound subarrays.</li>
         <span class="k">return</span> <span class="n">result</span>
 </code></pre></div>
 <p>这里跟上述逻辑有略微不一样的是，我们每次把不符合条件的地方当作<code>left</code>开始的地方，这样逻辑更加简洁。</p>
-<script type="module">
-        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-        mermaid.initialize({ startOnLoad: true });
-        </script>
 </div>
 <div class="tag-cloud">
 <p>

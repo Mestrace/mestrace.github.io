@@ -1,5 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Mestrace的个人博客</title><link href="https://mestrace.github.io/" rel="alternate"></link><link href="https://mestrace.github.io/feeds/all.atom.xml" rel="self"></link><id>https://mestrace.github.io/</id><updated>2023-03-11T00:00:00+08:00</updated><subtitle>Software Developer</subtitle><entry><title>我是如何做SEO优化的</title><link href="https://mestrace.github.io/posts/2023/Mar/11/myblog-seo/" rel="alternate"></link><published>2023-03-11T00:00:00+08:00</published><updated>2023-03-11T00:00:00+08:00</updated><author><name>Mestrace</name></author><id>tag:mestrace.github.io,2023-03-11:/posts/2023/Mar/11/myblog-seo/</id><summary type="html">&lt;p&gt;一开始，我的写博客是出于对自己成长的记录，但时间推移后，我希望更多人能够阅读我的文章。虽然与同事和朋友分享文 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;一开始，我的写博客是出于对自己成长的记录，但时间推移后，我希望更多人能够阅读我的文章。虽然与同事和朋友分享文章可以带来满足感，但如果能吸引更多读者并获得他们的认可和反馈，那将会极大地推动我的进步并让我更加热爱写作。因此，让陌生人发现我的博客已成为我的首要问题。&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mestrace的个人博客</title><link href="https://mestrace.github.io/" rel="alternate"></link><link href="https://mestrace.github.io/feeds/all.atom.xml" rel="self"></link><id>https://mestrace.github.io/</id><updated>2023-03-12T00:00:00+08:00</updated><subtitle>Software Developer</subtitle><entry><title>【Leetcode题解】2588. Count the Number of Beautiful Subarrays</title><link href="https://mestrace.github.io/posts/2023/Mar/12/2588-count-the-number-of-beautiful-subarrays/" rel="alternate"></link><published>2023-03-12T00:00:00+08:00</published><updated>2023-03-12T00:00:00+08:00</updated><author><name>Mestrace</name></author><id>tag:mestrace.github.io,2023-03-12:/posts/2023/Mar/12/2588-count-the-number-of-beautiful-subarrays/</id><summary type="html">&lt;p&gt;2023-03 Weekly Contest 336 Leetcode 2588 Count the Number of Beautiful Subarrays 我的解题思路&lt;/p&gt;</summary><content type="html">&lt;p&gt;每周都被周赛折磨，真是痛苦。早上刚打完周赛，趁着记忆还热乎，赶紧来写一下这题的题解。&lt;/p&gt;
+&lt;h2&gt;题目&lt;/h2&gt;
+&lt;p&gt;给定一个列表的数字&lt;code&gt;nums&lt;/code&gt;, 要求求出指定符合条件的子数组数量。子数组&lt;code&gt;nums[i:j]&lt;/code&gt;要满足一定条件才可以。首先我们定义一个动作，消去子数组里任意两个数的第&lt;code&gt;k&lt;/code&gt;个bit（当然这两个数的&lt;code&gt;k bit&lt;/code&gt;都要为&lt;code&gt;1&lt;/code&gt;）。将以上动作执行无限次数之后可以子数组全部是&lt;code&gt;0&lt;/code&gt;，那么我们就说子数组&lt;code&gt;nums[i:j]&lt;/code&gt;为满足条件的子数组。&lt;/p&gt;
+&lt;h2&gt;分析&lt;/h2&gt;
+&lt;p&gt;这道题是2023.03.12的&lt;a href="https://leetcode.com/contest/weekly-contest-336/"&gt;周赛Weekly Contest 336&lt;/a&gt;第三题。我一开始想的是否可以用双指针做，但是仔细想想这道题不大对劲。我们用双指针是因为找双指针指向的区域其实是一个子问题，解决了这个子问题就可以通过很简单的方式方式判断下一个问题&lt;code&gt;[left, right + 1]&lt;/code&gt;是否符合&lt;sup id="sf-2588-count-the-number-of-beautiful-subarrays-1-back"&gt;&lt;a href="#sf-2588-count-the-number-of-beautiful-subarrays-1" class="simple-footnote" title="双指针解法的子数组题，可以移步【Leetcode题解】2444. Count Subarrays With Fixed Bound "&gt;1&lt;/a&gt;&lt;/sup&gt;。但这一题并不能用这个方法解。我们先来看个例子&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Input: [4,3,1,2,4]
+Output: 2
+Explanation
+[3] not ok
+[3,1] not ok
+[3,1,2] ok
+[3,1,2,4] not ok
+[4,3,1,2,4] ok
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;上面这个例子中我们可以看到，&lt;code&gt;[3,1,2]&lt;/code&gt;和&lt;code&gt;[3,1,2,4]&lt;/code&gt;并没有直接联系，因此我们不太好用双指针来解决这个问题。&lt;/p&gt;
+&lt;p&gt;那么能不能从问题本身的性质解决呢？先转换一下问题，如果我们要按照题目条件将一个子数组都变为0，意味着这个子数组的bit count每一个都要是偶数。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;[3,1,2]
+3 = 0b11
+2 = 0b10
+1 = 0b01
+=&amp;gt; {0: 2, 1: 2}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;[4,3,1,2,4]
+4 = 0b100 
+4 = 0b100
+=&amp;gt; {0: 2, 1: 2, 2: 2}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;那么，如果我们想要知道一个子数组是否满足条件，我们只需要检查他们每一比特的数量是否都为偶数；如果是的话，就可以消除了；否则的话，这个子数组就不满足条件。再往前推一步，我们并不需要知道他的count，只需要知道是否存在奇数个；如果是偶数个那就直接消掉归0就好了。&lt;em&gt;看到这里，是否觉得有点眼熟？&lt;/em&gt;&lt;/p&gt;
+&lt;p align="center"&gt;
+  &lt;img src="https://mestrace.github.io/images/cong-tian-er-jiang.jpg"&gt;
+&lt;/p&gt;
+
+&lt;p&gt;对了，就是位运算里面的XOR异或操作。先简单回顾一下XOR。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Input  Output
+A  B  A XOR B
+0  0     0
+0  1     1
+1  0     1
+1  1     0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;基于异或操作的真值表，前人总结出来了几个性质&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;交换律（commutative）（这个不用我多解释吧）&lt;/li&gt;
+&lt;li&gt;结合律（associative）：即&lt;code&gt;(A XOR B) XOR C == A XOR (B XOR C)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;单位元（Identity element）: 对于任何数X，都有&lt;code&gt;X XOR X = 0&lt;/code&gt;，&lt;code&gt;X XOR 0 = x&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;自反性（self-inverse）：&lt;code&gt;A XOR B XOR B = A xor 0 = A&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;做过&lt;a href="https://leetcode.com/problems/find-the-duplicate-number/"&gt;287. Find the Duplicate Number&lt;/a&gt;的朋友肯定不会对这陌生。这道题目里面，我们把重复的数据都XOR一遍，剩下的那个数字就是我们要找的答案。&lt;/p&gt;
+&lt;p&gt;回到我们的2588。结合了位运算，我们可以知道：如果&lt;code&gt;XOR(nums[i:j]) == 0&lt;/code&gt;，那么我们就说他是一个符合条件的子数组。想要得到这个结果的话，我们可以每次都循环XOR每一个数；或者，如果我们更聪明一点，根据上面的性质，我们有&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;  XOR(nums[i:j])
+= XOR(nums[i:j]) XOR (XOR(nums[0:i]) XOR XOR(nums[0:i])) (identity element)
+= XOR(nums[0:i]) XOR XOR(nums[0:j]) (associative)
+
+which implies XOR(nums[0:i]) == XOR(nums[0:j]) (identity element)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;根据这以上的性质，我们可以转换为&lt;code&gt;XOR(nums[0:i]) == XOR(nums[0:j])&lt;/code&gt;。&lt;em&gt;看到这里，是否觉得有点眼熟？&lt;/em&gt;&lt;/p&gt;
+&lt;p align="center"&gt;
+  &lt;img src="https://mestrace.github.io/images/cong-tian-er-jiang.jpg"&gt;
+&lt;/p&gt;
+
+&lt;p&gt;对了，就是可恶的prefix sum……哦不对，应该是prefix xor。所以啊，不要小瞧基础题目啊。&lt;/p&gt;
+&lt;p&gt;那么现在我们有一个异或&lt;code&gt;prefix&lt;/code&gt;了。给定一个位置&lt;code&gt;j&lt;/code&gt;，我们怎么找出&lt;code&gt;i &amp;lt; j&lt;/code&gt;且&lt;code&gt;prefix[i] == prefix[j]&lt;/code&gt;（我们要找的子数组）呢？ 把&lt;code&gt;[0:j)&lt;/code&gt;扫过去的话是&lt;code&gt;O(n^2)&lt;/code&gt;的复杂度，未免有点naive。如果我们能够把&lt;code&gt;j&lt;/code&gt;之前所有的值的数都记一下……等一下，&lt;em&gt;看到这里，是否觉得有点眼熟？&lt;/em&gt;&lt;/p&gt;
+&lt;p align="center"&gt;
+  &lt;img src="https://mestrace.github.io/images/cong-tian-er-jiang.jpg"&gt;
+&lt;/p&gt;
+
+&lt;p&gt;这！@#¥不就是&lt;a href="https://leetcode.com/problems/two-sum/"&gt;1. Two Sum&lt;/a&gt;吗？用一个hashmap把之前出现的次数都记一下。假设前面有&lt;code&gt;k&lt;/code&gt;个&lt;code&gt;i&lt;/code&gt;的候选，其中每一个&lt;code&gt;i&lt;/code&gt;都可以和我们当前的&lt;code&gt;j&lt;/code&gt;组成一个符合条件的子数组结果，那么我们就把结果加上&lt;code&gt;k&lt;/code&gt;，问题解决！&lt;/p&gt;
+&lt;h2&gt;解法&lt;/h2&gt;
+&lt;p&gt;这里要注意的是，一开始初始化prefix的时候我放了一个0，因为如果是&lt;code&gt;[0,i)&lt;/code&gt;是空集的话，任意的&lt;code&gt;j&lt;/code&gt;也可以组成一个符合条件的子数组&lt;code&gt;[0,j]&lt;/code&gt;。其他的就跟我们上面说的差不多，直接梭就行。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;collections&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;defaultdict&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Solution&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;beautifulSubarrays&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;prefix&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;prefix&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;prefix&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;^&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# print(prefix)&lt;/span&gt;
+
+        &lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;defaultdict&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;lambda&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;prefix&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+            &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;小结&lt;/h2&gt;
+&lt;p&gt;今天周赛的这一题可谓是结合了几个关键的基础知识所研发出来的新题，我称之为眼熟题。遇到这种眼熟题也没有办法，打铁还需自身硬，各位继续加油。&lt;/p&gt;
+&lt;p&gt;若果你想变得更强的话，可以做做&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/xor-operation-in-an-array/"&gt;1486. XOR Operation in an Array&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/find-xor-beauty-of-array/"&gt;2527. Find Xor-Beauty of Array&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/bitwise-xor-of-all-pairings/"&gt;2425. Bitwise XOR of All Pairings&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/maximum-xor-with-an-element-from-array/"&gt;1707. Maximum XOR With an Element From Array&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;&lt;ol class="simple-footnotes"&gt;&lt;li id="sf-2588-count-the-number-of-beautiful-subarrays-1"&gt;双指针解法的子数组题，可以移步&lt;a href="https://mestrace.github.io/posts/2023/Mar/04/2444-count-subarrays-with-fixed-bounds/"&gt;【Leetcode题解】2444. Count Subarrays With Fixed Bound&lt;/a&gt;  &lt;a href="#sf-2588-count-the-number-of-beautiful-subarrays-1-back" class="simple-footnote-back"&gt;↩&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</content><category term="Leetcode"></category><category term="Subarray"></category></entry><entry><title>我是如何做SEO优化的</title><link href="https://mestrace.github.io/posts/2023/Mar/11/myblog-seo/" rel="alternate"></link><published>2023-03-11T00:00:00+08:00</published><updated>2023-03-11T00:00:00+08:00</updated><author><name>Mestrace</name></author><id>tag:mestrace.github.io,2023-03-11:/posts/2023/Mar/11/myblog-seo/</id><summary type="html">&lt;p&gt;一开始，我的写博客是出于对自己成长的记录，但时间推移后，我希望更多人能够阅读我的文章。虽然与同事和朋友分享文 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;一开始，我的写博客是出于对自己成长的记录，但时间推移后，我希望更多人能够阅读我的文章。虽然与同事和朋友分享文章可以带来满足感，但如果能吸引更多读者并获得他们的认可和反馈，那将会极大地推动我的进步并让我更加热爱写作。因此，让陌生人发现我的博客已成为我的首要问题。&lt;/p&gt;
 &lt;p&gt;众所周知，搜索引擎使用网络爬虫遍历整个互联网。然而，随着互联网站点的急剧增加，即使几十年前，现有的搜索引擎也已经无法完成对所有网站的遍历。因此，如何进行搜索引擎优化（Search Engine Optimization，SEO）已逐渐成为备受关注的研究领域。其目的是解决如何使搜索引擎更好地“阅读”我的网站，从而使我的博客文章在用户输入特定关键词时排在前列。在这篇文章中，我将逐步描述我如何对我的博客网站进行SEO，并提供相应的参考资料，希望能够对写博客的朋友提供帮助。&lt;/p&gt;
 &lt;p&gt;首先，让我简单介绍一下我是如何搭建自己的博客的。如果你使用与我相似的工具链，那么本文将更有助于你。为了减少麻烦的事情，我主要使用GitHub Pages来部署和托管我的博客，这样就省去了很多麻烦。在框架方面，我使用的是&lt;a href="https://getpelican.com"&gt;Pelican&lt;/a&gt;，一个Python的静态文档站框架，并使用&lt;a href="https://github.com/alexandrevicenzi/Flex"&gt;Flex主题&lt;/a&gt;。Pelican支持Markdown写作，并且可以内嵌HTML。使用这套工具链，我几乎不需要担心部署和配置的问题，只需专注于写作即可。&lt;/p&gt;
 &lt;h2&gt;获取访问数据&lt;/h2&gt;
@@ -90,22 +192,18 @@
 &lt;ol&gt;
 &lt;li&gt;&lt;a href="https://gist.github.com/denzildoyle/31fe294065f606b4f612"&gt;SEO - denzildoyle&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://kucw.github.io/blog/2021/1/from-medium-to-github/"&gt;為了 SEO！我離開了 Medium，改在 GitHub 上自架個人網站&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;script type="module"&gt;
-        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-        mermaid.initialize({ startOnLoad: true });
-        &lt;/script&gt;</content><category term="MISC"></category></entry><entry><title>【Leetcode题解】2584. Split the Array to Make Coprime Products</title><link href="https://mestrace.github.io/posts/2023/Mar/08/2584-split-the-array-to-make-coprime-products/" rel="alternate"></link><published>2023-03-08T00:00:00+08:00</published><updated>2023-03-08T00:00:00+08:00</updated><author><name>Mestrace</name></author><id>tag:mestrace.github.io,2023-03-08:/posts/2023/Mar/08/2584-split-the-array-to-make-coprime-products/</id><summary type="html">&lt;p&gt;又闲的无聊，找点事情做，来写一下&lt;a href="https://leetcode.com/problems/split-the-array-to-make-coprime-products/"&gt;2584. Split the Array to Make Coprime Products&lt;/a&gt;的题解。&lt;/p&gt;
-&lt;h1&gt;题目&lt;/h1&gt;
+&lt;/ol&gt;</content><category term="MISC"></category></entry><entry><title>【Leetcode题解】2584. Split the Array to Make Coprime Products</title><link href="https://mestrace.github.io/posts/2023/Mar/08/2584-split-the-array-to-make-coprime-products/" rel="alternate"></link><published>2023-03-08T00:00:00+08:00</published><updated>2023-03-08T00:00:00+08:00</updated><author><name>Mestrace</name></author><id>tag:mestrace.github.io,2023-03-08:/posts/2023/Mar/08/2584-split-the-array-to-make-coprime-products/</id><summary type="html">&lt;p&gt;又闲的无聊，找点事情做，来写一下&lt;a href="https://leetcode.com/problems/split-the-array-to-make-coprime-products/"&gt;2584. Split the Array to Make Coprime Products&lt;/a&gt;的题解。&lt;/p&gt;
+&lt;h2&gt;题目&lt;/h2&gt;
 &lt;p&gt;You are given a 0-indexed integer array &lt;code&gt;nums&lt;/code&gt; of length &lt;code&gt;n&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;A split at an index i where &lt;code&gt;0 &amp;lt;= i &amp;lt;= n - 2&lt;/code&gt; is …&lt;/p&gt;</summary><content type="html">&lt;p&gt;又闲的无聊，找点事情做，来写一下&lt;a href="https://leetcode.com/problems/split-the-array-to-make-coprime-products/"&gt;2584. Split the Array to Make Coprime Products&lt;/a&gt;的题解。&lt;/p&gt;
-&lt;h1&gt;题目&lt;/h1&gt;
+&lt;h2&gt;题目&lt;/h2&gt;
 &lt;p&gt;You are given a 0-indexed integer array &lt;code&gt;nums&lt;/code&gt; of length &lt;code&gt;n&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;A split at an index i where &lt;code&gt;0 &amp;lt;= i &amp;lt;= n - 2&lt;/code&gt; is called valid if the product of the first &lt;code&gt;i + 1&lt;/code&gt; elements and the product of the remaining elements are coprime.&lt;/p&gt;
 &lt;p&gt;For example, if &lt;code&gt;nums = [2, 3, 3]&lt;/code&gt;, then a split at the index &lt;code&gt;i = 0&lt;/code&gt; is valid because &lt;code&gt;2&lt;/code&gt; and &lt;code&gt;9&lt;/code&gt; are coprime, while a split at the index &lt;code&gt;i = 1&lt;/code&gt; is not valid because &lt;code&gt;6&lt;/code&gt; and &lt;code&gt;3&lt;/code&gt; are not coprime. A split at the index &lt;code&gt;i = 2&lt;/code&gt; is not valid because &lt;code&gt;i == n - 1&lt;/code&gt;.
 Return the smallest index &lt;code&gt;i&lt;/code&gt; at which the array can be split validly or &lt;code&gt;-1&lt;/code&gt; if there is no such split.&lt;/p&gt;
 &lt;p&gt;Two values &lt;code&gt;val1&lt;/code&gt; and &lt;code&gt;val2&lt;/code&gt; are coprime if &lt;code&gt;gcd(val1, val2) == 1&lt;/code&gt; where &lt;code&gt;gcd(val1, val2)&lt;/code&gt; is the greatest common divisor of &lt;code&gt;val1&lt;/code&gt; and &lt;code&gt;val2&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;给一个列表的数字，把这个列表分为两半，使得两边的乘积互质(coprime)。当然啦，要找那个使得左边最小的。&lt;/p&gt;
-&lt;h1&gt;分析&lt;/h1&gt;
+&lt;h2&gt;分析&lt;/h2&gt;
 &lt;p&gt;这道题是2023.03.05的&lt;a href="https://leetcode.com/contest/weekly-contest-335/"&gt;周赛&lt;/a&gt;第三题。刚看到题目的时候我心想：“呵，简单！prefix sum(product)可破。”现在想想自己还是图样图森破了。首先要注意的是那个乘积，一看到n个数需要乘起来就需要立马联想到数字越界的问题。对于Python的盲目相信让我冲昏了头脑，用了各种魔改的prefix sum去试。比如先把数字预处理一遍，去除他们的乘数。当然事实证明我并没有办法解决这个问题。&lt;/p&gt;
 &lt;p&gt;我第二个思路是图的思路。因为我们要把这个数组分为两个集合。如果两个数&lt;code&gt;gcd(a,b) != 1&lt;/code&gt;的话那么他们必定在同一个集合里面。那么，我们要先用&lt;code&gt;gcd&lt;/code&gt;构建他们的图…… 诶等一下，如果我要把每两个数字对比一遍找&lt;code&gt;gcd&lt;/code&gt;的话，时间复杂度好像是&lt;code&gt;O(n^2)&lt;/code&gt;…… 当然，你肯定猜到结局了，愚蠢的我用了这个方法且TLE了。&lt;/p&gt;
 &lt;p&gt;最后，我光荣的成为了一名两题选手 ：）&lt;/p&gt;
@@ -155,7 +253,7 @@ Return the smallest index &lt;code&gt;i&lt;/code&gt; at which the array can be s
 
 &lt;p&gt;这里我们直接搞个小于1000的质数表。然后一直尝试整除这些质数就好。这样就把我们的复杂度大大降低了。当然这个算法对于超过1000的质数也是有用的，因为最后如果n还是不为1的话，那么剩下那个数还是他的质因数。因为我们知道取值范围不可能出现超过两个 &amp;gt; 1000的指数，以最接近1000的两个为例，&lt;code&gt;1009 * 1013 = 1,022,117&lt;/code&gt;，而&lt;code&gt;1009 * 991 = 999,919&lt;/code&gt;。这个算法能保证在这个情况下我们是安全的。&lt;/p&gt;
 &lt;p&gt;那么剩下的就简单了。回到我们的算法，从左到右，每次比较左右两边的质因数的交集就可以解决了。&lt;/p&gt;
-&lt;h1&gt;解法&lt;/h1&gt;
+&lt;h2&gt;解法&lt;/h2&gt;
 &lt;p&gt;贴上剩余部分的代码。我们维护&lt;code&gt;left&lt;/code&gt;和&lt;code&gt;right&lt;/code&gt;两边的prime然后算交集。每次循环我们都给&lt;code&gt;left&lt;/code&gt;的质数数上，&lt;code&gt;right&lt;/code&gt;的质数扣掉，再比较他们两个的&lt;code&gt;key&lt;/code&gt;的交集就可以了。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;collections&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;defaultdict&lt;/span&gt;
 
@@ -223,21 +321,17 @@ Return the smallest index &lt;code&gt;i&lt;/code&gt; at which the array can be s
 
 &lt;p&gt;在上面这个例子里面，横线为每个质因数的区间，而竖线就是他的分界线。我们可以追着这个索引找到最左边的分界线，就是我们的结果了。想要参考代码的可以看看&lt;a href="https://leetcode.com/problems/split-the-array-to-make-coprime-products/solutions/3258070/prime-intervals-vs-count-primes/?orderBy=most_votes"&gt;v神的题解&lt;/a&gt;，这里就不多赘述了。&lt;/p&gt;
 &lt;p&gt;又及：这个做法其实跟一天前的&lt;a href="https://leetcode.com/contest/biweekly-contest-99"&gt;双周赛&lt;/a&gt;的第三题&lt;a href="https://leetcode.com/problems/count-ways-to-group-overlapping-ranges/description/"&gt;2580. Count Ways to Group Overlapping Ranges&lt;/a&gt;的思路非常相似了。难怪讨论区里的人都说周赛和双周赛的出题人是同一个呢……&lt;/p&gt;
-&lt;h1&gt;拓展&lt;/h1&gt;
+&lt;h2&gt;拓展&lt;/h2&gt;
 &lt;p&gt;如果你想变得更强的话，可以延伸看看&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;a href="https://www.cs.sfu.ca/~ggbaker/zju/math/primes.html"&gt;Primes and GCD&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://maochong.xin/posts/euler_totient.html"&gt;欧拉函数&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://zhuanlan.zhihu.com/p/47978393"&gt;理解黎曼猜想（二）两个自然数互质的概率是多少？|袁岚峰&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;script type="module"&gt;
-        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-        mermaid.initialize({ startOnLoad: true });
-        &lt;/script&gt;</content><category term="Leetcode"></category><category term="Leetcode"></category></entry><entry><title>【Leetcode题解】2444. Count Subarrays With Fixed Bound</title><link href="https://mestrace.github.io/posts/2023/Mar/04/2444-count-subarrays-with-fixed-bounds/" rel="alternate"></link><published>2023-03-04T00:00:00+08:00</published><updated>2023-03-04T00:00:00+08:00</updated><author><name>Mestrace</name></author><id>tag:mestrace.github.io,2023-03-04:/posts/2023/Mar/04/2444-count-subarrays-with-fixed-bounds/</id><summary type="html">&lt;p&gt;今天闲的无聊，找点事情做，来写一下&lt;a href="https://leetcode.com/problems/count-subarrays-with-fixed-bounds/"&gt;2444. Count Subarrays With Fixed Bound&lt;/a&gt;的题解。&lt;/p&gt;
-&lt;h1&gt;题目&lt;/h1&gt;
+&lt;/ol&gt;</content><category term="Leetcode"></category><category term="Leetcode"></category></entry><entry><title>【Leetcode题解】2444. Count Subarrays With Fixed Bound</title><link href="https://mestrace.github.io/posts/2023/Mar/04/2444-count-subarrays-with-fixed-bounds/" rel="alternate"></link><published>2023-03-04T00:00:00+08:00</published><updated>2023-03-04T00:00:00+08:00</updated><author><name>Mestrace</name></author><id>tag:mestrace.github.io,2023-03-04:/posts/2023/Mar/04/2444-count-subarrays-with-fixed-bounds/</id><summary type="html">&lt;p&gt;今天闲的无聊，找点事情做，来写一下&lt;a href="https://leetcode.com/problems/count-subarrays-with-fixed-bounds/"&gt;2444. Count Subarrays With Fixed Bound&lt;/a&gt;的题解。&lt;/p&gt;
+&lt;h2&gt;题目&lt;/h2&gt;
 &lt;p&gt;You are given an integer array &lt;code&gt;nums&lt;/code&gt; and two integers &lt;code&gt;minK&lt;/code&gt; and &lt;code&gt;maxK&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;A &lt;strong&gt;fixed-bound subarray&lt;/strong&gt; of &lt;code&gt;nums&lt;/code&gt; is a subarray that satisfies the …&lt;/p&gt;</summary><content type="html">&lt;p&gt;今天闲的无聊，找点事情做，来写一下&lt;a href="https://leetcode.com/problems/count-subarrays-with-fixed-bounds/"&gt;2444. Count Subarrays With Fixed Bound&lt;/a&gt;的题解。&lt;/p&gt;
-&lt;h1&gt;题目&lt;/h1&gt;
+&lt;h2&gt;题目&lt;/h2&gt;
 &lt;p&gt;You are given an integer array &lt;code&gt;nums&lt;/code&gt; and two integers &lt;code&gt;minK&lt;/code&gt; and &lt;code&gt;maxK&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;A &lt;strong&gt;fixed-bound subarray&lt;/strong&gt; of &lt;code&gt;nums&lt;/code&gt; is a subarray that satisfies the following conditions:&lt;/p&gt;
 &lt;ul&gt;
@@ -247,7 +341,7 @@ Return the number of fixed-bound subarrays.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;A subarray is a contiguous part of an array.&lt;/p&gt;
 &lt;p&gt;给定一个数字列表和一个最大值和一个最小值，找到所有区间满足最大值和最小值分别等于给定值的子数组的数量。&lt;/p&gt;
-&lt;h1&gt;分析&lt;/h1&gt;
+&lt;h2&gt;分析&lt;/h2&gt;
 &lt;p&gt;这道题是2022.10.16的&lt;a href="https://leetcode.com/contest/weekly-contest-315/"&gt;周赛&lt;/a&gt;题目。当时尝试用暴力dp的方式去解。思路是说用放宽约束条件的方式，去计算一个区间&lt;code&gt;[i,j]&lt;/code&gt;内是否都是在&lt;code&gt;[minK, maxK]&lt;/code&gt;内的数字，然后数一遍。果不其然TLE了。但今天不是周赛，我们有充足的时间去思考，别有太大压力。做这类数连续子数组类型的题目，首先看数据量。这道题数据量&lt;code&gt;10^5&lt;/code&gt;，也就意味着我们要在&lt;code&gt;O(n)&lt;/code&gt;的方式去解决，否则一定超时。因此，头脑里冒出来的第一个方式一定是双指针。&lt;/p&gt;
 &lt;p&gt;先解决核心问题。假设我们已经知道怎么移动指针，并找到了满足条件的区间&lt;code&gt;[i,j]&lt;/code&gt;。也就是说&lt;code&gt;[i,j]&lt;/code&gt;区间的最大值等于&lt;code&gt;maxK&lt;/code&gt;，最小值等于&lt;code&gt;minK&lt;/code&gt;。那么我们要怎么计算这个区间内的子数组数量呢？这就可以引导我们去找到另外两个变量，我们要知道区间&lt;code&gt;[i,j]&lt;/code&gt;内的区间&lt;code&gt;[k,l]&lt;/code&gt;，使得&lt;code&gt;nums[k]&lt;/code&gt;和&lt;code&gt;nums[l]&lt;/code&gt;分别等于最大值和最小值（或反过来）。这样的话我们就找到了我们需要的变量。&lt;/p&gt;
 &lt;p&gt;那么如何计算子数组的数量呢？我们先来看几个例子。&lt;/p&gt;
@@ -309,7 +403,7 @@ Return the number of fixed-bound subarrays.&lt;/li&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;到这里，我们就把所有需要理解的逻辑都捋顺了。&lt;/p&gt;
-&lt;h1&gt;代码&lt;/h1&gt;
+&lt;h2&gt;代码&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Solution&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
     &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;countSubarrays&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;minK&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;maxK&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
         &lt;span class="n"&gt;left&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
@@ -335,11 +429,7 @@ Return the number of fixed-bound subarrays.&lt;/li&gt;
         &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;这里跟上述逻辑有略微不一样的是，我们每次把不符合条件的地方当作&lt;code&gt;left&lt;/code&gt;开始的地方，这样逻辑更加简洁。&lt;/p&gt;
-&lt;script type="module"&gt;
-        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-        mermaid.initialize({ startOnLoad: true });
-        &lt;/script&gt;</content><category term="Leetcode"></category><category term="Leetcode"></category><category term="Subarray"></category></entry><entry><title>[翻译]保卫自由的互联网，拒绝Web3</title><link href="https://mestrace.github.io/posts/2023/Feb/18/translate-no-to-web3/" rel="alternate"></link><published>2023-02-18T00:00:00+08:00</published><updated>2023-02-18T00:00:00+08:00</updated><author><name>Mestrace</name></author><id>tag:mestrace.github.io,2023-02-18:/posts/2023/Feb/18/translate-no-to-web3/</id><summary type="html">&lt;blockquote&gt;
+&lt;p&gt;这里跟上述逻辑有略微不一样的是，我们每次把不符合条件的地方当作&lt;code&gt;left&lt;/code&gt;开始的地方，这样逻辑更加简洁。&lt;/p&gt;</content><category term="Leetcode"></category><category term="Leetcode"></category><category term="Subarray"></category></entry><entry><title>[翻译]保卫自由的互联网，拒绝Web3</title><link href="https://mestrace.github.io/posts/2023/Feb/18/translate-no-to-web3/" rel="alternate"></link><published>2023-02-18T00:00:00+08:00</published><updated>2023-02-18T00:00:00+08:00</updated><author><name>Mestrace</name></author><id>tag:mestrace.github.io,2023-02-18:/posts/2023/Feb/18/translate-no-to-web3/</id><summary type="html">&lt;blockquote&gt;
 &lt;p&gt;原文标题：Keep the web free, say no to Web3&lt;/p&gt;
 &lt;p&gt;原文链接：&lt;a href="https://yesterweb.org/no-to-web3/"&gt;https://yesterweb.org/no-to-web3/&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -403,11 +493,7 @@ Return the number of fixed-bound subarrays.&lt;/li&gt;
 &lt;hr&gt;
 &lt;h2&gt;一些个人的看法&lt;/h2&gt;
 &lt;p&gt;Web3的革新预计不会在未来十年内发生。许多推动者和鼓吹者更加关心的是如何从中获利，而不是实现Free Web。并且，区块链行业的发展已经远离了中本聪的初衷。尽管该行业的口号是去中心化，但对于大多数人而言，最容易接触到的平台仍然是中心化的。比如币安自称是全球最大的加密资产交易平台。如果无法实现去中心化，那么Web3所满足的只会是资本，这将进一步加剧贫富差距。&lt;/p&gt;
-&lt;hr&gt;
-&lt;script type="module"&gt;
-        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-        mermaid.initialize({ startOnLoad: true });
-        &lt;/script&gt;&lt;ol class="simple-footnotes"&gt;&lt;li id="sf-translate-no-to-web3-1"&gt;黑帽SEO是指通过作弊手段，让站点在搜索引擎中得到更好的排名 &lt;a href="#sf-translate-no-to-web3-1-back" class="simple-footnote-back"&gt;↩&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</content><category term="Blockchain"></category><category term="Blockchain"></category></entry><entry><title>用 Python 进行代码覆盖率检测：coverage.py 和diff-cover 的使用方法</title><link href="https://mestrace.github.io/posts/2023/Feb/05/python-coverage-diff-cover/" rel="alternate"></link><published>2023-02-05T00:00:00+08:00</published><updated>2023-02-05T00:00:00+08:00</updated><author><name>Mestrace</name></author><id>tag:mestrace.github.io,2023-02-05:/posts/2023/Feb/05/python-coverage-diff-cover/</id><summary type="html">&lt;p&gt;在重构项目时，我们经常需要确认代码测试的覆盖率。这是为了确保没有任何部分遗漏或者错误，从而使重构变得更安全 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;在重构项目时，我们经常需要确认代码测试的覆盖率。这是为了确保没有任何部分遗漏或者错误，从而使重构变得更安全。为了帮助我们实现这一目标，我们可以使用两个 Python 包来帮助我们 &lt;code&gt;coverage.py&lt;/code&gt; 和 &lt;code&gt;diff-cover&lt;/code&gt;。&lt;/p&gt;
+&lt;hr&gt;&lt;ol class="simple-footnotes"&gt;&lt;li id="sf-translate-no-to-web3-1"&gt;黑帽SEO是指通过作弊手段，让站点在搜索引擎中得到更好的排名 &lt;a href="#sf-translate-no-to-web3-1-back" class="simple-footnote-back"&gt;↩&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</content><category term="Blockchain"></category><category term="Blockchain"></category></entry><entry><title>用 Python 进行代码覆盖率检测：coverage.py 和diff-cover 的使用方法</title><link href="https://mestrace.github.io/posts/2023/Feb/05/python-coverage-diff-cover/" rel="alternate"></link><published>2023-02-05T00:00:00+08:00</published><updated>2023-02-05T00:00:00+08:00</updated><author><name>Mestrace</name></author><id>tag:mestrace.github.io,2023-02-05:/posts/2023/Feb/05/python-coverage-diff-cover/</id><summary type="html">&lt;p&gt;在重构项目时，我们经常需要确认代码测试的覆盖率。这是为了确保没有任何部分遗漏或者错误，从而使重构变得更安全 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;在重构项目时，我们经常需要确认代码测试的覆盖率。这是为了确保没有任何部分遗漏或者错误，从而使重构变得更安全。为了帮助我们实现这一目标，我们可以使用两个 Python 包来帮助我们 &lt;code&gt;coverage.py&lt;/code&gt; 和 &lt;code&gt;diff-cover&lt;/code&gt;。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;coverage.py&lt;/code&gt;是一个代码插桩工具，它能够生成测试覆盖率报告。它的官方仓库是https://github.com/nedbat/coveragepy。&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;diff-cover&lt;/code&gt;则是一个比对xml格式的coverage文件的工具，它能够将当前的覆盖率与origin/main或指定的commit进行比对。更多信息请参考它的官方仓库：https://github.com/Bachmann1234/diff_cover。&lt;/li&gt;
@@ -499,11 +585,7 @@ Coverage: 82%
 &lt;li&gt;&lt;code&gt;diff-cover&lt;/code&gt; 的官方文档 https://diff-cover.readthedocs.io/en/latest/README.html&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;.coveragerc&lt;/code&gt; 文件来自 https://stackoverflow.com/questions/1628996/is-it-possible-exclude-test-directories-from-coverage-py-reports&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;coverage.py&lt;/code&gt; 的 Django 插件 https://pypi.org/project/django-coverage-plugin/&lt;/li&gt;
-&lt;/ol&gt;
-&lt;script type="module"&gt;
-        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-        mermaid.initialize({ startOnLoad: true });
-        &lt;/script&gt;</content><category term="Python"></category><category term="Python"></category></entry><entry><title>RocketMQ是什么</title><link href="https://mestrace.github.io/posts/2021/Sep/11/rocket-mq-history/" rel="alternate"></link><published>2021-09-11T00:00:00+08:00</published><updated>2021-09-11T00:00:00+08:00</updated><author><name>Mestrace</name></author><id>tag:mestrace.github.io,2021-09-11:/posts/2021/Sep/11/rocket-mq-history/</id><summary type="html">&lt;blockquote&gt;
+&lt;/ol&gt;</content><category term="Python"></category><category term="Python"></category></entry><entry><title>RocketMQ是什么</title><link href="https://mestrace.github.io/posts/2021/Sep/11/rocket-mq-history/" rel="alternate"></link><published>2021-09-11T00:00:00+08:00</published><updated>2021-09-11T00:00:00+08:00</updated><author><name>Mestrace</name></author><id>tag:mestrace.github.io,2021-09-11:/posts/2021/Sep/11/rocket-mq-history/</id><summary type="html">&lt;blockquote&gt;
 &lt;p&gt;Apache RocketMQ is a distributed messaging and streaming platform with low latency, high performance and reliability, trillion-level capacity and flexible scalability.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;RocketMQ 是一个分布式消息中间件，其具有低延迟、高性能和可靠性、万亿级容 …&lt;/p&gt;</summary><content type="html">&lt;blockquote&gt;
@@ -553,11 +635,7 @@ Coverage: 82%
 &lt;td&gt;消费者的一种消费模式。消息将对一个Consumer Group下的各个Consumer实例都投递一遍。即即使这些 Consumer 属于同一个Consumer Group，消息也会被Consumer Group 中的每个Consumer都消费一次。 注: 字节RMQ暂不支持广播消费&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
-&lt;/table&gt;
-&lt;script type="module"&gt;
-        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-        mermaid.initialize({ startOnLoad: true });
-        &lt;/script&gt;</content><category term="Middleware"></category><category term="RocketMQ"></category><category term="Kafka"></category></entry><entry><title>简单聊聊MySQL Binlog</title><link href="https://mestrace.github.io/posts/2021/Aug/30/mysql-binlog-basics/" rel="alternate"></link><published>2021-08-30T00:00:00+08:00</published><updated>2021-08-30T00:00:00+08:00</updated><author><name>Mestrace</name></author><id>tag:mestrace.github.io,2021-08-30:/posts/2021/Aug/30/mysql-binlog-basics/</id><summary type="html">&lt;p&gt;Binlog (binary log)是一组日志文件，包含了对MySQL服务器进行的数据修改和变更，并持久化到磁盘中。Binlog以事件的格式存储，包括了所有的DDL和DML语句（例如数据表Schema的创建和变更，以及数据行的变更）。此外，每个Binlog …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Binlog (binary log)是一组日志文件，包含了对MySQL服务器进行的数据修改和变更，并持久化到磁盘中。Binlog以事件的格式存储，包括了所有的DDL和DML语句（例如数据表Schema的创建和变更，以及数据行的变更）。此外，每个Binlog event还囊括了一些额外的信息，包括但不限于&lt;/p&gt;
+&lt;/table&gt;</content><category term="Middleware"></category><category term="RocketMQ"></category><category term="Kafka"></category></entry><entry><title>简单聊聊MySQL Binlog</title><link href="https://mestrace.github.io/posts/2021/Aug/30/mysql-binlog-basics/" rel="alternate"></link><published>2021-08-30T00:00:00+08:00</published><updated>2021-08-30T00:00:00+08:00</updated><author><name>Mestrace</name></author><id>tag:mestrace.github.io,2021-08-30:/posts/2021/Aug/30/mysql-binlog-basics/</id><summary type="html">&lt;p&gt;Binlog (binary log)是一组日志文件，包含了对MySQL服务器进行的数据修改和变更，并持久化到磁盘中。Binlog以事件的格式存储，包括了所有的DDL和DML语句（例如数据表Schema的创建和变更，以及数据行的变更）。此外，每个Binlog …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Binlog (binary log)是一组日志文件，包含了对MySQL服务器进行的数据修改和变更，并持久化到磁盘中。Binlog以事件的格式存储，包括了所有的DDL和DML语句（例如数据表Schema的创建和变更，以及数据行的变更）。此外，每个Binlog event还囊括了一些额外的信息，包括但不限于&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;语句执行时间&lt;/li&gt;
 &lt;li&gt;语句执行时MySQL Server的相关状态&lt;/li&gt;
@@ -744,8 +822,4 @@ MySQL 5.6引入了&lt;code&gt;BLGC（Binary Log Group Commit）&lt;/code&gt;引�
 &lt;li&gt;&lt;a href="https://dev.mysql.com/doc/refman/8.0/en/replication-features-auto-increment.html"&gt;17.5.1.1 Replication and AUTO_INCREMENT, MySQL 8.0 Reference Manual 官方参考手册&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://mysql.taobao.org/monthly/2014/12/05/"&gt;Binlog event有序性 - 阿里云RDS-数据库内核组&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.cnblogs.com/mao3714/p/8734838.html"&gt;MySQL 中Redo与Binlog顺序一致性问题&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;script type="module"&gt;
-        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-        mermaid.initialize({ startOnLoad: true });
-        &lt;/script&gt;</content><category term="Middleware"></category><category term="MySQL"></category></entry></feed>
+&lt;/ol&gt;</content><category term="Middleware"></category><category term="MySQL"></category></entry></feed>

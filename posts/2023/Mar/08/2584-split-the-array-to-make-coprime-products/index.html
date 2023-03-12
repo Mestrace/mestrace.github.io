@@ -91,14 +91,14 @@
 </header>
 <div>
 <p>又闲的无聊，找点事情做，来写一下<a href="https://leetcode.com/problems/split-the-array-to-make-coprime-products/">2584. Split the Array to Make Coprime Products</a>的题解。</p>
-<h1>题目</h1>
+<h2>题目</h2>
 <p>You are given a 0-indexed integer array <code>nums</code> of length <code>n</code>.</p>
 <p>A split at an index i where <code>0 &lt;= i &lt;= n - 2</code> is called valid if the product of the first <code>i + 1</code> elements and the product of the remaining elements are coprime.</p>
 <p>For example, if <code>nums = [2, 3, 3]</code>, then a split at the index <code>i = 0</code> is valid because <code>2</code> and <code>9</code> are coprime, while a split at the index <code>i = 1</code> is not valid because <code>6</code> and <code>3</code> are not coprime. A split at the index <code>i = 2</code> is not valid because <code>i == n - 1</code>.
 Return the smallest index <code>i</code> at which the array can be split validly or <code>-1</code> if there is no such split.</p>
 <p>Two values <code>val1</code> and <code>val2</code> are coprime if <code>gcd(val1, val2) == 1</code> where <code>gcd(val1, val2)</code> is the greatest common divisor of <code>val1</code> and <code>val2</code>.</p>
 <p>给一个列表的数字，把这个列表分为两半，使得两边的乘积互质(coprime)。当然啦，要找那个使得左边最小的。</p>
-<h1>分析</h1>
+<h2>分析</h2>
 <p>这道题是2023.03.05的<a href="https://leetcode.com/contest/weekly-contest-335/">周赛</a>第三题。刚看到题目的时候我心想：“呵，简单！prefix sum(product)可破。”现在想想自己还是图样图森破了。首先要注意的是那个乘积，一看到n个数需要乘起来就需要立马联想到数字越界的问题。对于Python的盲目相信让我冲昏了头脑，用了各种魔改的prefix sum去试。比如先把数字预处理一遍，去除他们的乘数。当然事实证明我并没有办法解决这个问题。</p>
 <p>我第二个思路是图的思路。因为我们要把这个数组分为两个集合。如果两个数<code>gcd(a,b) != 1</code>的话那么他们必定在同一个集合里面。那么，我们要先用<code>gcd</code>构建他们的图…… 诶等一下，如果我要把每两个数字对比一遍找<code>gcd</code>的话，时间复杂度好像是<code>O(n^2)</code>…… 当然，你肯定猜到结局了，愚蠢的我用了这个方法且TLE了。</p>
 <p>最后，我光荣的成为了一名两题选手 ：）</p>
@@ -146,7 +146,7 @@ Return the smallest index <code>i</code> at which the array can be split validly
 </code></pre></div>
 <p>这里我们直接搞个小于1000的质数表。然后一直尝试整除这些质数就好。这样就把我们的复杂度大大降低了。当然这个算法对于超过1000的质数也是有用的，因为最后如果n还是不为1的话，那么剩下那个数还是他的质因数。因为我们知道取值范围不可能出现超过两个 &gt; 1000的指数，以最接近1000的两个为例，<code>1009 * 1013 = 1,022,117</code>，而<code>1009 * 991 = 999,919</code>。这个算法能保证在这个情况下我们是安全的。</p>
 <p>那么剩下的就简单了。回到我们的算法，从左到右，每次比较左右两边的质因数的交集就可以解决了。</p>
-<h1>解法</h1>
+<h2>解法</h2>
 <p>贴上剩余部分的代码。我们维护<code>left</code>和<code>right</code>两边的prime然后算交集。每次循环我们都给<code>left</code>的质数数上，<code>right</code>的质数扣掉，再比较他们两个的<code>key</code>的交集就可以了。</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
 
@@ -209,17 +209,13 @@ Return the smallest index <code>i</code> at which the array can be split validly
 </code></pre></div>
 <p>在上面这个例子里面，横线为每个质因数的区间，而竖线就是他的分界线。我们可以追着这个索引找到最左边的分界线，就是我们的结果了。想要参考代码的可以看看<a href="https://leetcode.com/problems/split-the-array-to-make-coprime-products/solutions/3258070/prime-intervals-vs-count-primes/?orderBy=most_votes">v神的题解</a>，这里就不多赘述了。</p>
 <p>又及：这个做法其实跟一天前的<a href="https://leetcode.com/contest/biweekly-contest-99">双周赛</a>的第三题<a href="https://leetcode.com/problems/count-ways-to-group-overlapping-ranges/description/">2580. Count Ways to Group Overlapping Ranges</a>的思路非常相似了。难怪讨论区里的人都说周赛和双周赛的出题人是同一个呢……</p>
-<h1>拓展</h1>
+<h2>拓展</h2>
 <p>如果你想变得更强的话，可以延伸看看</p>
 <ol>
 <li><a href="https://www.cs.sfu.ca/~ggbaker/zju/math/primes.html">Primes and GCD</a></li>
 <li><a href="https://maochong.xin/posts/euler_totient.html">欧拉函数</a></li>
 <li><a href="https://zhuanlan.zhihu.com/p/47978393">理解黎曼猜想（二）两个自然数互质的概率是多少？|袁岚峰</a></li>
 </ol>
-<script type="module">
-        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-        mermaid.initialize({ startOnLoad: true });
-        </script>
 </div>
 <div class="tag-cloud">
 <p>

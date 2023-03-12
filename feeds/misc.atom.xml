@@ -90,8 +90,4 @@
 &lt;ol&gt;
 &lt;li&gt;&lt;a href="https://gist.github.com/denzildoyle/31fe294065f606b4f612"&gt;SEO - denzildoyle&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://kucw.github.io/blog/2021/1/from-medium-to-github/"&gt;為了 SEO！我離開了 Medium，改在 GitHub 上自架個人網站&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;script type="module"&gt;
-        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-        mermaid.initialize({ startOnLoad: true });
-        &lt;/script&gt;</content><category term="MISC"></category></entry></feed>
+&lt;/ol&gt;</content><category term="MISC"></category></entry></feed>
