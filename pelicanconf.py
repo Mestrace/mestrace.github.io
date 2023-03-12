@@ -2,10 +2,6 @@ from datetime import datetime
 import sys
 import os
 
-sys.path.append(".")
-
-import mermaid
-
 AUTHOR = "Mestrace"
 SITENAME = "Mestrace的个人博客"
 SITEURL = "https://mestrace.github.io"
@@ -102,7 +98,6 @@ MARKDOWN = {
         "markdown.extensions.codehilite": {"css_class": "highlight"},
         "markdown.extensions.extra": {},
         "markdown.extensions.meta": {},
-        mermaid.MermaidExtension(): {},
     },
     "output_format": "html5",
 }
