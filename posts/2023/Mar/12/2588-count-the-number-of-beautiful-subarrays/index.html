@@ -43,7 +43,7 @@
 </script>
 <meta content="Mestrace" name="author">
 <meta content="2023-03 Weekly Contest 336 Leetcode 2588 Count the Number of Beautiful Subarrays 我的解题思路" name="description">
-<meta content="Subarray" name="keywords"/>
+<meta content="Contest, Subarray" name="keywords"/>
 <meta content="Mestrace的个人博客" property="og:site_name">
 <meta content="【Leetcode题解】2588. Count the Number of Beautiful Subarrays" property="og:title">
 <meta content="2023-03 Weekly Contest 336 Leetcode 2588 Count the Number of Beautiful Subarrays 我的解题思路" property="og:description">
@@ -54,6 +54,7 @@
 <meta content="" property="article:modified_time"/>
 <meta content="https://mestrace.github.io/author/mestrace.html" property="article:author"/>
 <meta content="Leetcode" property="article:section">
+<meta content="Contest" property="article:tag"/>
 <meta content="Subarray" property="article:tag"/>
 <meta content="http://github.com/Mestrace.png?size=460" property="og:image"/>
 <title>Mestrace的个人博客 – 【Leetcode题解】2588. Count the Number of Beautiful Subarrays</title>
@@ -94,7 +95,7 @@
 <h2>题目</h2>
 <p>给定一个列表的数字<code>nums</code>, 要求求出指定符合条件的子数组数量。子数组<code>nums[i:j]</code>要满足一定条件才可以。首先我们定义一个动作，消去子数组里任意两个数的第<code>k</code>个bit（当然这两个数的<code>k bit</code>都要为<code>1</code>）。将以上动作执行无限次数之后可以子数组全部是<code>0</code>，那么我们就说子数组<code>nums[i:j]</code>为满足条件的子数组。</p>
 <h2>分析</h2>
-<p>这道题是2023.03.12的<a href="https://leetcode.com/contest/weekly-contest-336/">周赛Weekly Contest 336</a>第三题。我一开始想的是否可以用双指针做，但是仔细想想这道题不大对劲。我们用双指针是因为找双指针指向的区域其实是一个子问题，解决了这个子问题就可以通过很简单的方式方式判断下一个问题<code>[left, right + 1]</code>是否符合<sup id="sf-2588-count-the-number-of-beautiful-subarrays-1-back"><a class="simple-footnote" href="#sf-2588-count-the-number-of-beautiful-subarrays-1" title="双指针解法的子数组题，可以移步【Leetcode题解】2444. Count Subarrays With Fixed Bound ">1</a></sup>。但这一题并不能用这个方法解。我们先来看个例子</p>
+<p>这道题是2023.03.12的<a href="https://leetcode.com/contest/weekly-contest-336/">周赛Weekly Contest 336</a>第三题（<a href="https://leetcode.com/problems/count-the-number-of-beautiful-subarrays/">原题链接</a>）。我一开始想的是否可以用双指针做，但是仔细想想这道题不大对劲。我们用双指针是因为找双指针指向的区域其实是一个子问题，解决了这个子问题就可以通过很简单的方式方式判断下一个问题<code>[left, right + 1]</code>是否符合<sup id="sf-2588-count-the-number-of-beautiful-subarrays-1-back"><a class="simple-footnote" href="#sf-2588-count-the-number-of-beautiful-subarrays-1" title="双指针解法的子数组题，可以移步【Leetcode题解】2444. Count Subarrays With Fixed Bound ">1</a></sup>。但这一题并不能用这个方法解。我们先来看个例子</p>
 <div class="highlight"><pre><span></span><code>Input: [4,3,1,2,4]
 Output: 2
 Explanation
@@ -176,7 +177,13 @@ which implies XOR(nums[0:i]) == XOR(nums[0:j]) (identity element)
 </code></pre></div>
 <h2>小结</h2>
 <p>今天周赛的这一题可谓是结合了几个关键的基础知识所研发出来的新题，我称之为眼熟题。遇到这种眼熟题也没有办法，打铁还需自身硬，各位继续加油。</p>
-<p>若果你想变得更强的话，可以做做</p>
+<p>这次周赛的其他题目</p>
+<ol>
+<li><a href="https://leetcode.com/problems/count-the-number-of-vowel-strings-in-range/">Easy - 2586. Count the Number of Vowel Strings in Range</a> （手速题）</li>
+<li><a href="https://leetcode.com/problems/rearrange-array-to-maximize-prefix-score/">Medium - 2587. Rearrange Array to Maximize Prefix Score</a> （手速题）</li>
+<li><a href="https://leetcode.com/problems/minimum-time-to-complete-all-tasks/">Hard - 2589. Minimum Time to Complete All Tasks</a> （<a href="https://mestrace.github.io/posts/2023/Mar/12/2589-minimum-time-to-complete-all-tasks/">我的题解</a>）</li>
+</ol>
+<p>如果你想变得更强的话，可以做做</p>
 <ol>
 <li><a href="https://leetcode.com/problems/xor-operation-in-an-array/">1486. XOR Operation in an Array</a></li>
 <li><a href="https://leetcode.com/problems/find-xor-beauty-of-array/">2527. Find Xor-Beauty of Array</a></li>
@@ -187,6 +194,7 @@ which implies XOR(nums[0:i]) == XOR(nums[0:j]) (identity element)
 </div>
 <div class="tag-cloud">
 <p>
+<a href="https://mestrace.github.io/tag/contest.html">Contest</a>
 <a href="https://mestrace.github.io/tag/subarray.html">Subarray</a>
 </p>
 </div>
