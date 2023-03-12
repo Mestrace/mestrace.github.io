@@ -41,13 +41,15 @@ CUSTOM_CSS = "static/custom.css"
 EXTRA_PATH_METADATA = {
     "extra/custom.css": {"path": "static/custom.css"},
     "static/google72cb1b82695f07e2.html": {"path": "google72cb1b82695f07e2.html"},
-    "static/808470c28b824e33920b126802a692f6.txt": {"path": "808470c28b824e33920b126802a692f6.txt"}
+    "static/808470c28b824e33920b126802a692f6.txt": {
+        "path": "808470c28b824e33920b126802a692f6.txt"
+    },
 }
 
 favico_path = "content/static/favico"
 for file in os.listdir(os.fsencode(favico_path)):
     filename = os.fsdecode(file)
-    EXTRA_PATH_METADATA[os.path.join("static/favico", filename)] = {"path" : filename}
+    EXTRA_PATH_METADATA[os.path.join("static/favico", filename)] = {"path": filename}
 
 # Uncomment following line if you want document-relative URLs when developing
 RELATIVE_URLS = True
@@ -89,6 +91,7 @@ PLUGINS = [
     # "i18n_subsites"
     "seo",
     "sitemap",
+    "pelican.plugins.precompress",
 ]
 
 # # Enable Jinja2 i18n extension used to parse translations.
