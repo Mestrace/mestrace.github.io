@@ -2,7 +2,7 @@ Title: 【Leetcode题解】2584. Split the Array to Make Coprime Products
 Slug: 2584-split-the-array-to-make-coprime-products
 Date: 2023-03-08
 Category: Leetcode
-Tags: Leetcode
+Tags: Contest, Math 
 
 又闲的无聊，找点事情做，来写一下[2584. Split the Array to Make Coprime Products](https://leetcode.com/problems/split-the-array-to-make-coprime-products/)的题解。
 

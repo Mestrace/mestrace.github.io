@@ -2,7 +2,7 @@ Title: 【Leetcode题解】2588. Count the Number of Beautiful Subarrays
 Slug: 2588-count-the-number-of-beautiful-subarrays
 Date: 2023-03-12
 Category: Leetcode
-Tags: Subarray
+Tags: Contest, Subarray
 Summary: 2023-03 Weekly Contest 336 Leetcode 2588 Count the Number of Beautiful Subarrays 我的解题思路
 
 每周都被周赛折磨，真是痛苦。早上刚打完周赛，趁着记忆还热乎，赶紧来写一下这题的题解。
@@ -14,7 +14,7 @@ Summary: 2023-03 Weekly Contest 336 Leetcode 2588 Count the Number of Beautiful 
 
 ## 分析
 
-这道题是2023.03.12的[周赛Weekly Contest 336](https://leetcode.com/contest/weekly-contest-336/)第三题。我一开始想的是否可以用双指针做，但是仔细想想这道题不大对劲。我们用双指针是因为找双指针指向的区域其实是一个子问题，解决了这个子问题就可以通过很简单的方式方式判断下一个问题`[left, right + 1]`是否符合[ref]双指针解法的子数组题，可以移步[【Leetcode题解】2444. Count Subarrays With Fixed Bound]({filename}/leetcode/2444-count-subarrays-with-fixed-bounds.md) [/ref]。但这一题并不能用这个方法解。我们先来看个例子
+这道题是2023.03.12的[周赛Weekly Contest 336](https://leetcode.com/contest/weekly-contest-336/)第三题（[原题链接](https://leetcode.com/problems/count-the-number-of-beautiful-subarrays/)）。我一开始想的是否可以用双指针做，但是仔细想想这道题不大对劲。我们用双指针是因为找双指针指向的区域其实是一个子问题，解决了这个子问题就可以通过很简单的方式方式判断下一个问题`[left, right + 1]`是否符合[ref]双指针解法的子数组题，可以移步[【Leetcode题解】2444. Count Subarrays With Fixed Bound]({filename}/leetcode/2444-count-subarrays-with-fixed-bounds.md) [/ref]。但这一题并不能用这个方法解。我们先来看个例子
 
 ```text
 Input: [4,3,1,2,4]
@@ -123,7 +123,13 @@ class Solution:
 
 今天周赛的这一题可谓是结合了几个关键的基础知识所研发出来的新题，我称之为眼熟题。遇到这种眼熟题也没有办法，打铁还需自身硬，各位继续加油。
 
-若果你想变得更强的话，可以做做
+这次周赛的其他题目
+
+1. [Easy - 2586. Count the Number of Vowel Strings in Range](https://leetcode.com/problems/count-the-number-of-vowel-strings-in-range/) （手速题）
+1. [Medium - 2587. Rearrange Array to Maximize Prefix Score](https://leetcode.com/problems/rearrange-array-to-maximize-prefix-score/) （手速题）
+1. [Hard - 2589. Minimum Time to Complete All Tasks](https://leetcode.com/problems/minimum-time-to-complete-all-tasks/) （[我的题解]({filename}/leetcode/2589-minimum-time-to-complete-all-tasks.md)）
+
+如果你想变得更强的话，可以做做
 
 1. [1486. XOR Operation in an Array](https://leetcode.com/problems/xor-operation-in-an-array/)
 1. [2527. Find Xor-Beauty of Array](https://leetcode.com/problems/find-xor-beauty-of-array/)

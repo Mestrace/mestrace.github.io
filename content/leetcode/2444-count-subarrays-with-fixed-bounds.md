@@ -2,7 +2,7 @@ Title: 【Leetcode题解】2444. Count Subarrays With Fixed Bound
 Slug: 2444-count-subarrays-with-fixed-bounds
 Date: 2023-03-04
 Category: Leetcode
-Tags: Leetcode, Subarray
+Tags: Contest, Subarray
 
 今天闲的无聊，找点事情做，来写一下[2444. Count Subarrays With Fixed Bound](https://leetcode.com/problems/count-subarrays-with-fixed-bounds/)的题解。
 
