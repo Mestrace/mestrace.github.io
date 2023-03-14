@@ -1,5 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Mestrace的个人博客</title><link href="https://mestrace.github.io/" rel="alternate"></link><link href="https://mestrace.github.io/feeds/all.atom.xml" rel="self"></link><id>https://mestrace.github.io/</id><updated>2023-03-12T00:00:00+08:00</updated><subtitle>Software Developer</subtitle><entry><title>【Leetcode题解】2588. Count the Number of Beautiful Subarrays</title><link href="https://mestrace.github.io/posts/2023/Mar/12/2588-count-the-number-of-beautiful-subarrays/" rel="alternate"></link><published>2023-03-12T00:00:00+08:00</published><updated>2023-03-12T00:00:00+08:00</updated><author><name>Mestrace</name></author><id>tag:mestrace.github.io,2023-03-12:/posts/2023/Mar/12/2588-count-the-number-of-beautiful-subarrays/</id><summary type="html">&lt;p&gt;2023-03 Weekly Contest 336 Leetcode 2588 Count the Number of Beautiful Subarrays 我的解题思路&lt;/p&gt;</summary><content type="html">&lt;p&gt;每周都被周赛折磨，真是痛苦。早上刚打完周赛，趁着记忆还热乎，赶紧来写一下这题的题解。&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mestrace的个人博客</title><link href="https://mestrace.github.io/" rel="alternate"></link><link href="https://mestrace.github.io/feeds/all.atom.xml" rel="self"></link><id>https://mestrace.github.io/</id><updated>2023-03-14T00:00:00+08:00</updated><subtitle>Software Developer</subtitle><entry><title>【Leetcode题解】2580. Count Ways to Group Overlapping Ranges</title><link href="https://mestrace.github.io/posts/2023/Mar/14/2580-count-ways-to-group-overlapping-ranges/" rel="alternate"></link><published>2023-03-14T00:00:00+08:00</published><updated>2023-03-14T00:00:00+08:00</updated><author><name>Mestrace</name></author><id>tag:mestrace.github.io,2023-03-14:/posts/2023/Mar/14/2580-count-ways-to-group-overlapping-ranges/</id><summary type="html">&lt;p&gt;2023-03 - Biweekly Contest 99 - Leetcode 2580 Count Ways to Group Overlapping Ranges - 计算重叠范围的分组方式 - 我的解法，思路和方法&lt;/p&gt;</summary><content type="html">&lt;h2&gt;题目&lt;/h2&gt;
+&lt;p&gt;给定一个列表的&lt;code&gt;ranges&lt;/code&gt;，其中&lt;code&gt;range[i] = [start, end]&lt;/code&gt;包含了一个区间的开始和结束。我们想要把这个区间分为两个部分，且两个部分里面的每一对&lt;code&gt;range[i]&lt;/code&gt;和&lt;code&gt;range[j]&lt;/code&gt;没有相交的部分。&lt;/p&gt;
+&lt;p&gt;题目要求我们找到有多少种分为两个部分的方法，且因为数量非常大，需要模&lt;code&gt;1e9 + 7&lt;/code&gt;。&lt;/p&gt;
+&lt;h2&gt;分析&lt;/h2&gt;
+&lt;p&gt;这道题是2023.03.04的&lt;a href="https://leetcode.com/contest/biweekly-contest-99/"&gt;双周赛 Biweekly Contest 99&lt;/a&gt;第三题（&lt;a href="https://leetcode.com/contest/biweekly-contest-99/problems/count-ways-to-group-overlapping-ranges/"&gt;原题链接&lt;/a&gt;）。这一题的大致思路是这样：找到并合并相交的区间，最终知道不相交的区间后，计算有多少种分组方式。&lt;/p&gt;
+&lt;p&gt;找到相交区间的题目已经很多了，包括这种经典的区间相交，还有经典的会议室系列。这类型题目的一个共性就是需要先对入参的时间进行排序。原理也比较好理解，如果你想要知道某个区间是否相交，最好的方式就是查看他临近的事件，而较远的事件就无需关注。对于这道题来说，我们只是要尽可能的合并相交的区间，没有什么太复杂的性质。所以我们先根据开始时间升序排序即可。排序之后，我们就可以遍历整个区间一个一个看是否相交并进行合并。&lt;/p&gt;
+&lt;p&gt;假设我们已经有了一个列表的不相交的区间，我们怎么算有多少种分组方式呢。在这个时候我选择的是画一些例子来找规律。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Input: [1,2]
+Output: 2
+Explanation:
+[1,2] &amp;amp; empty
+empty &amp;amp; [1,2]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Input: [[1,2], [3,4]]
+Outpu: 4
+Explanation:
+[1,2] [3,4] &amp;amp; empty
+[1,2] &amp;amp; [3,4]
+[3,4] &amp;amp; [1,2]
+empty &amp;amp; [1,2] [3,4]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Input: [[1,2],[3,4],[5,6]]
+Output: 8
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;在这里的时候似乎我们看到了这么一个规律，我们知道有&lt;code&gt;n&lt;/code&gt;组的数量之后，结果永远都是&lt;code&gt;2^n&lt;/code&gt;。此外，我们还可以确定的事，我们只需要知道不相交区间的个数就可以知道，而不需要具体的知道怎么相交。我们用数学方式去验证一下。首先我们只需要管左边有什么元素，因为右边有什么元素可根据左边来确定。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Left elements
+0: empty set = 1
+1: n choose 1 = n
+2: n choose 2
+3: n choose 3
+until
+n : n choose n = 1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;而我们可以观察到，这个正好和数学上的二项式展开的形式非常相似。我们再来看看杨辉三角（或者帕斯卡三角，Pascal's Triangle）。我们会发现其实这个问题的解就是每一横行求和！&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;                                  &lt;span class="mi"&gt;1&lt;/span&gt;                               
+&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;                              &lt;span class="mi"&gt;1&lt;/span&gt;       &lt;span class="mi"&gt;1&lt;/span&gt;                           
+&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;                          &lt;span class="mi"&gt;1&lt;/span&gt;       &lt;span class="mi"&gt;2&lt;/span&gt;       &lt;span class="mi"&gt;1&lt;/span&gt;                       
+&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;                      &lt;span class="mi"&gt;1&lt;/span&gt;       &lt;span class="mi"&gt;3&lt;/span&gt;       &lt;span class="mi"&gt;3&lt;/span&gt;       &lt;span class="mi"&gt;1&lt;/span&gt;                   
+&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;                  &lt;span class="mi"&gt;1&lt;/span&gt;       &lt;span class="mi"&gt;4&lt;/span&gt;       &lt;span class="mi"&gt;6&lt;/span&gt;       &lt;span class="mi"&gt;4&lt;/span&gt;       &lt;span class="mi"&gt;1&lt;/span&gt;               
+&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;              &lt;span class="mi"&gt;1&lt;/span&gt;       &lt;span class="mi"&gt;5&lt;/span&gt;       &lt;span class="mi"&gt;10&lt;/span&gt;      &lt;span class="mi"&gt;10&lt;/span&gt;      &lt;span class="mi"&gt;5&lt;/span&gt;       &lt;span class="mi"&gt;1&lt;/span&gt;           
+&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;          &lt;span class="mi"&gt;1&lt;/span&gt;       &lt;span class="mi"&gt;6&lt;/span&gt;       &lt;span class="mi"&gt;15&lt;/span&gt;      &lt;span class="mi"&gt;20&lt;/span&gt;      &lt;span class="mi"&gt;15&lt;/span&gt;      &lt;span class="mi"&gt;6&lt;/span&gt;       &lt;span class="mi"&gt;1&lt;/span&gt;       
+&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;      &lt;span class="mi"&gt;1&lt;/span&gt;       &lt;span class="mi"&gt;7&lt;/span&gt;       &lt;span class="mi"&gt;21&lt;/span&gt;      &lt;span class="mi"&gt;35&lt;/span&gt;      &lt;span class="mi"&gt;35&lt;/span&gt;      &lt;span class="mi"&gt;21&lt;/span&gt;      &lt;span class="mi"&gt;7&lt;/span&gt;       &lt;span class="mi"&gt;1&lt;/span&gt;   
+&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;  &lt;span class="mi"&gt;1&lt;/span&gt;       &lt;span class="mi"&gt;8&lt;/span&gt;       &lt;span class="mi"&gt;28&lt;/span&gt;      &lt;span class="mi"&gt;56&lt;/span&gt;      &lt;span class="mi"&gt;70&lt;/span&gt;      &lt;span class="mi"&gt;56&lt;/span&gt;      &lt;span class="mi"&gt;28&lt;/span&gt;      &lt;span class="mi"&gt;8&lt;/span&gt;       &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;总而言之，非常巧妙的我们可以通过观察的方式得出二次幂就是这个题目的答案的这个结论。具体的证明和推倒就留给读者了。&lt;/p&gt;
+&lt;h2&gt;解法&lt;/h2&gt;
+&lt;p&gt;不多废话，直接上解法。这道题基本上就跟我们讲的一样，先进行排序，求出相交个数&lt;code&gt;groups&lt;/code&gt;之后，直接用二次幂公式进行计算。&lt;/p&gt;
+&lt;p&gt;这里用二次幂公式的一个小机器。之前的周赛中是二次幂取模之后减去一个数求结果&lt;sup id="sf-2580-count-ways-to-group-overlapping-ranges-1-back"&gt;&lt;a href="#sf-2580-count-ways-to-group-overlapping-ranges-1" class="simple-footnote" title="2550. Count Collisions of Monkeys on a Polygon"&gt;1&lt;/a&gt;&lt;/sup&gt;，但是直接&lt;code&gt;pow&lt;/code&gt;取模会直接导致算出负数的结果，因此这样算可以避免&lt;code&gt;((2^(n-1) % MOD) * 2 - m) % MOD&lt;/code&gt; 。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;MOD&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;1e9&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Solution&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;countWays&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ranges&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;isOverlap&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+        &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;overlap&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;min&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]),&lt;/span&gt; &lt;span class="nb"&gt;max&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])]&lt;/span&gt;
+
+        &lt;span class="n"&gt;ranges&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;sorted&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ranges&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# print(ranges)&lt;/span&gt;
+
+        &lt;span class="n"&gt;curr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ranges&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="n"&gt;groups&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ranges&lt;/span&gt;&lt;span class="p"&gt;)):&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;isOverlap&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;curr&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ranges&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]):&lt;/span&gt;
+                &lt;span class="n"&gt;curr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;overlap&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;curr&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ranges&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+                &lt;span class="k"&gt;continue&lt;/span&gt;
+            &lt;span class="n"&gt;groups&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+            &lt;span class="n"&gt;curr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ranges&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# last group&lt;/span&gt;
+        &lt;span class="n"&gt;groups&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# print("groups", groups)&lt;/span&gt;
+
+
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;pow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;groups&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;MOD&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;MOD&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;而对于是用别的语言的同学来说，则需要自己手动实现带取模的二次幂方法，简单来说就是递归求&lt;code&gt;2^(n - 1)&lt;/code&gt;，在半途中就需要取模。这里简单贴一个我写的版本。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;MOD&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;1e9&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;power&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
+    &lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;power&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;MOD&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;MOD&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;总结&lt;/h2&gt;
+&lt;p&gt;这道题思路比较简单，但是难点在于把二项式分解和取模的部分跟这道题结合起来。大家一起努力吧。&lt;/p&gt;
+&lt;p&gt;如果你想变得更强的话，可以做做&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/meeting-rooms/"&gt;Easy - 252. Meeting Rooms&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/non-overlapping-intervals/"&gt;Medium - 435. Non-overlapping Intervals&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/number-of-sets-of-k-non-overlapping-line-segments/"&gt;Medium - 1621. Number of Sets of K Non-Overlapping Line Segments&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/meeting-scheduler/"&gt;Medium - 1229. Meeting Scheduler&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/meeting-rooms-iii/"&gt;Hard - 2402. Meeting Rooms III&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;还可以延伸看看&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://math.stackexchange.com/questions/519832/proving-by-induction-that-sum-k-0nn-choose-k-2n"&gt;Proof By Induction of the Summation of n choose k&lt;/a&gt; 这个summation的数学证明。&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://en.wikipedia.org/wiki/Binomial_coefficient"&gt;Wikipedia - Binomial Coefficient&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;&lt;ol class="simple-footnotes"&gt;&lt;li id="sf-2580-count-ways-to-group-overlapping-ranges-1"&gt;&lt;a href="https://leetcode.com/problems/count-collisions-of-monkeys-on-a-polygon/description/"&gt;2550. Count Collisions of Monkeys on a Polygon&lt;/a&gt; &lt;a href="#sf-2580-count-ways-to-group-overlapping-ranges-1-back" class="simple-footnote-back"&gt;↩&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</content><category term="Leetcode"></category><category term="Contest"></category><category term="Math"></category></entry><entry><title>【Leetcode题解】2588. Count the Number of Beautiful Subarrays</title><link href="https://mestrace.github.io/posts/2023/Mar/12/2588-count-the-number-of-beautiful-subarrays/" rel="alternate"></link><published>2023-03-12T00:00:00+08:00</published><updated>2023-03-12T00:00:00+08:00</updated><author><name>Mestrace</name></author><id>tag:mestrace.github.io,2023-03-12:/posts/2023/Mar/12/2588-count-the-number-of-beautiful-subarrays/</id><summary type="html">&lt;p&gt;2023-03 Weekly Contest 336 Leetcode 2588 Count the Number of Beautiful Subarrays 我的解题思路&lt;/p&gt;</summary><content type="html">&lt;p&gt;每周都被周赛折磨，真是痛苦。早上刚打完周赛，趁着记忆还热乎，赶紧来写一下这题的题解。&lt;/p&gt;
 &lt;h2&gt;题目&lt;/h2&gt;
 &lt;p&gt;给定一个列表的数字&lt;code&gt;nums&lt;/code&gt;, 要求求出指定符合条件的子数组数量。子数组&lt;code&gt;nums[i:j]&lt;/code&gt;要满足一定条件才可以。首先我们定义一个动作，消去子数组里任意两个数的第&lt;code&gt;k&lt;/code&gt;个bit（当然这两个数的&lt;code&gt;k bit&lt;/code&gt;都要为&lt;code&gt;1&lt;/code&gt;）。将以上动作执行无限次数之后可以子数组全部是&lt;code&gt;0&lt;/code&gt;，那么我们就说子数组&lt;code&gt;nums[i:j]&lt;/code&gt;为满足条件的子数组。&lt;/p&gt;
 &lt;h2&gt;分析&lt;/h2&gt;
@@ -376,7 +489,7 @@ Return the smallest index &lt;code&gt;i&lt;/code&gt; at which the array can be s
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;在上面这个例子里面，横线为每个质因数的区间，而竖线就是他的分界线。我们可以追着这个索引找到最左边的分界线，就是我们的结果了。想要参考代码的可以看看&lt;a href="https://leetcode.com/problems/split-the-array-to-make-coprime-products/solutions/3258070/prime-intervals-vs-count-primes/?orderBy=most_votes"&gt;v神的题解&lt;/a&gt;，这里就不多赘述了。&lt;/p&gt;
-&lt;p&gt;又及：这个做法其实跟一天前的&lt;a href="https://leetcode.com/contest/biweekly-contest-99"&gt;双周赛&lt;/a&gt;的第三题&lt;a href="https://leetcode.com/problems/count-ways-to-group-overlapping-ranges/description/"&gt;2580. Count Ways to Group Overlapping Ranges&lt;/a&gt;的思路非常相似了。难怪讨论区里的人都说周赛和双周赛的出题人是同一个呢……&lt;/p&gt;
+&lt;p&gt;又及：这个做法其实跟一天前的&lt;a href="https://leetcode.com/contest/biweekly-contest-99"&gt;双周赛&lt;/a&gt;的第三题&lt;a href="https://leetcode.com/problems/count-ways-to-group-overlapping-ranges/description/"&gt;2580. Count Ways to Group Overlapping Ranges&lt;/a&gt;的思路非常相似了（&lt;a href="https://mestrace.github.io/posts/2023/Mar/14/2580-count-ways-to-group-overlapping-ranges/"&gt;我的解法&lt;/a&gt;）。难怪讨论区里的人都说周赛和双周赛的出题人是同一个呢……&lt;/p&gt;
 &lt;h2&gt;拓展&lt;/h2&gt;
 &lt;p&gt;如果你想变得更强的话，可以延伸看看&lt;/p&gt;
 &lt;ol&gt;
