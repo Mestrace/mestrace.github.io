@@ -156,7 +156,7 @@ Explanation:
 ```
 在上面这个例子里面，横线为每个质因数的区间，而竖线就是他的分界线。我们可以追着这个索引找到最左边的分界线，就是我们的结果了。想要参考代码的可以看看[v神的题解](https://leetcode.com/problems/split-the-array-to-make-coprime-products/solutions/3258070/prime-intervals-vs-count-primes/?orderBy=most_votes)，这里就不多赘述了。
 
-又及：这个做法其实跟一天前的[双周赛](https://leetcode.com/contest/biweekly-contest-99)的第三题[2580. Count Ways to Group Overlapping Ranges](https://leetcode.com/problems/count-ways-to-group-overlapping-ranges/description/)的思路非常相似了。难怪讨论区里的人都说周赛和双周赛的出题人是同一个呢……
+又及：这个做法其实跟一天前的[双周赛](https://leetcode.com/contest/biweekly-contest-99)的第三题[2580. Count Ways to Group Overlapping Ranges](https://leetcode.com/problems/count-ways-to-group-overlapping-ranges/description/)的思路非常相似了（[我的解法]({filename}/leetcode/2580-count-ways-to-group-overlapping-ranges.md)）。难怪讨论区里的人都说周赛和双周赛的出题人是同一个呢……
 
 ## 拓展
 
