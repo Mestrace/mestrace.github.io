@@ -1,0 +1,276 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="True" name="HandheldFriendly"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="robots"/>
+<link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+<link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+<link href="/favicon.ico" rel="icon" type="image/x-icon"/>
+<link href="/site.webmanifest" rel="manifest"/>
+<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&amp;family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://mestrace.github.io/theme/stylesheet/style.less" rel="stylesheet/less" type="text/css"/>
+<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js" type="text/javascript"></script>
+<link href="https://mestrace.github.io/theme/stylesheet/dark-theme.min.css" id="dark-theme-style" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css"/>
+<link href="https://mestrace.github.io/theme/pygments/monokai.min.css" id="pygments-dark-theme" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css"/>
+<link href="https://mestrace.github.io/theme/pygments/monokai.min.css" id="pygments-light-theme" media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)" rel="stylesheet" type="text/css"/>
+<link href="https://mestrace.github.io/theme/font-awesome/css/fontawesome.css" rel="stylesheet" type="text/css"/>
+<link href="https://mestrace.github.io/theme/font-awesome/css/brands.css" rel="stylesheet" type="text/css"/>
+<link href="https://mestrace.github.io/theme/font-awesome/css/solid.css" rel="stylesheet" type="text/css"/>
+<link href="https://mestrace.github.io/static/custom.css" rel="stylesheet" type="text/css"/>
+<!-- Chrome, Firefox OS and Opera -->
+<meta content="#333" name="theme-color"/>
+<!-- Windows Phone -->
+<meta content="#333" name="msapplication-navbutton-color"/>
+<!-- iOS Safari -->
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+<!-- Microsoft EDGE -->
+<meta content="#333" name="msapplication-TileColor"/>
+<link href="https://mestrace.github.io/feeds/all.atom.xml" rel="alternate" title="Mestrace的个人博客 Atom" type="application/atom+xml"/>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-07WBTMQT81"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-07WBTMQT81');
+</script>
+<meta content="Mestrace" name="author">
+<meta content="本文详细描述了我是如何一步步在树莓派4B上运行LLaMA模型。LLaMA是由Meta AI发布的一个大语言模型。ggerganov/llama.cpp是一个由C++实现的LLaMA移植版本，并使用4-bit量化技术以将模型适配至个人设备上。超大型语料模型从未如此唾手可得。在树莓派上获得你的个人chatgpt。如果你对树莓派、LLaMA模型或大型语言模型感兴趣，那么本文一定会对你有帮助。How I run the LLaMA model step by step on a Raspberry Pi 4B. LLaMA is a large language model released by Meta AI. ggerganov/llama.cpp is a C++ implementation of the LLaMA port, which uses 4-bit quantization techniques to adapt the model to personal devices. A large-scale Machine Learning model has never been so readily available for normal people. If you are interested in Raspberry Pi, LLaMA model, or large-scale language models, this article will provide you with useful information." name="description">
+<meta content="" name="keywords"/>
+<meta content="Mestrace的个人博客" property="og:site_name">
+<meta content="手把手教你在树莓派4B上运行LLaMA 7B模型" property="og:title">
+<meta content="本文详细描述了我是如何一步步在树莓派4B上运行LLaMA模型。LLaMA是由Meta AI发布的一个大语言模型。ggerganov/llama.cpp是一个由C++实现的LLaMA移植版本，并使用4-bit量化技术以将模型适配至个人设备上。超大型语料模型从未如此唾手可得。在树莓派上获得你的个人chatgpt。如果你对树莓派、LLaMA模型或大型语言模型感兴趣，那么本文一定会对你有帮助。How I run the LLaMA model step by step on a Raspberry Pi 4B. LLaMA is a large language model released by Meta AI. ggerganov/llama.cpp is a C++ implementation of the LLaMA port, which uses 4-bit quantization techniques to adapt the model to personal devices. A large-scale Machine Learning model has never been so readily available for normal people. If you are interested in Raspberry Pi, LLaMA model, or large-scale language models, this article will provide you with useful information." property="og:description">
+<meta content="en_US" property="og:locale">
+<meta content="https://mestrace.github.io/posts/2023/Mar/15/llama-rpi/" property="og:url"/>
+<meta content="article" property="og:type"/>
+<meta content="2023-03-15 00:00:00+08:00" property="article:published_time"/>
+<meta content="" property="article:modified_time"/>
+<meta content="https://mestrace.github.io/author/mestrace.html" property="article:author"/>
+<meta content="MISC" property="article:section">
+<meta content="http://github.com/Mestrace.png?size=460" property="og:image"/>
+<title>Mestrace的个人博客 – 手把手教你在树莓派4B上运行LLaMA 7B模型</title>
+</meta></meta></meta></meta></meta></meta></meta><link href="https://mestrace.github.io/posts/2023/Mar/15/llama-rpi/" rel="canonical"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Mestrace的个人博客", "item": "https://mestrace.github.io"}, {"@type": "ListItem", "position": 2, "name": "Posts", "item": "https://mestrace.github.io/posts"}, {"@type": "ListItem", "position": 3, "name": "2023", "item": "https://mestrace.github.io/posts/2023"}, {"@type": "ListItem", "position": 4, "name": "Mar", "item": "https://mestrace.github.io/posts/2023/Mar"}, {"@type": "ListItem", "position": 5, "name": "15", "item": "https://mestrace.github.io/posts/2023/Mar/15"}, {"@type": "ListItem", "position": 6, "name": "Llama rpi", "item": "https://mestrace.github.io/posts/2023/Mar/15/llama-rpi"}, {"@type": "ListItem", "position": 7, "name": "Index", "item": "https://mestrace.github.io/posts/2023/Mar/15/llama-rpi/index.html"}]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "author": {"@type": "Person", "name": "Mestrace"}, "publisher": {"@type": "Organization", "name": "Mestrace的个人博客"}, "headline": "手把手教你在树莓派4B上运行LLaMA 7B模型", "about": "MISC", "datePublished": "2023-03-15 00:00"}</script></head>
+<body>
+<aside>
+<div>
+<a href="https://mestrace.github.io/">
+<img alt="Mestrace" src="http://github.com/Mestrace.png?size=460" title="Mestrace"/>
+</a>
+<h1>
+<a href="https://mestrace.github.io/">Mestrace</a>
+</h1>
+<p>Software Developer</p>
+<ul class="social">
+<li>
+<a class="sc-github" href="http://github.com/Mestrace/" target="_blank">
+<i class="fa-brands fa-github"></i>
+</a>
+</li>
+</ul>
+</div>
+</aside>
+<main>
+<nav>
+<a href="https://mestrace.github.io/">Home</a>
+<a href="https://mestrace.github.io/feeds/all.atom.xml">Atom</a>
+</nav>
+<article class="single">
+<header>
+<h1 id="llama-rpi">手把手教你在树莓派4B上运行LLaMA 7B模型</h1>
+<p>
+      Posted on Wed 15 March 2023 in <a href="https://mestrace.github.io/category/misc.html">MISC</a>
+</p>
+</header>
+<div>
+<h2>引言</h2>
+<p>LLaMA全称是Large Language Model Meta AI，是由Meta AI研究人员发布的一个预训练语言模型。与最近爆火的ChatGPT相比，LLaMA架构更小，但训练过程和单GPU推理速度更快，成本更低。今天在刷推特的时候无意中看到了这样一条消息，<a href="https://github.com/ggerganov">@ggerganov</a>在GitHub上发布了<a href="https://github.com/ggerganov/llama.cpp">llama.cpp</a>，使用了4-bit量化将模型尽可能缩小，并能在多种移动设备上运行。这我就不淡定了，正好手里有个闲置的Raspberry Pi 4B 4GB版本，赶紧搞起。</p>
+<blockquote class="twitter-tweet" data-conversation="none"><p dir="ltr" lang="en">Added a new section to my post highlighting the advances we've already seen in the last two days: LLaMA runs on a 4GB RaspberryPi and a Pixel 6 phone now! <a href="https://t.co/pWOv6PP85b">https://t.co/pWOv6PP85b</a></p>— Simon Willison (@simonw) <a href="https://twitter.com/simonw/status/1635314097318395904?ref_src=twsrc%5Etfw">March 13, 2023</a></blockquote>
+<script async="" charset="utf-8" src="https://platform.twitter.com/widgets.js"></script>
+<h2>配置树莓派</h2>
+<blockquote>
+<p>如果你已经配置好了树莓派，且gcc版本为10以上的就可以跳过这一部分了</p>
+</blockquote>
+<p>以下是我配置树莓派的步骤</p>
+<p>首先通过<a href="">Raspberry Pi Imager</a>刷入系统至SD卡
+- 系统版本为Ubuntu Server 22.10 (64 bit)
+- 注意这里一定要使用64 bit的系统，不然后续可能无法编译</p>
+<p>配置系统</p>
+<p>直接用命令行升级软件包并安装相关依赖，这里给出参考命令</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>su
+apt-get<span class="w"> </span>update
+apt-get<span class="w"> </span>upgrade
+
+<span class="c1"># 一些会用到的工具</span>
+apt-get<span class="w"> </span>install<span class="w"> </span>gcc<span class="w"> </span>g++<span class="w"> </span>python3<span class="w"> </span>python3-pip
+
+<span class="c1"># 安装python依赖</span>
+python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>torch<span class="w"> </span>numpy<span class="w"> </span>sentencepiece
+</code></pre></div>
+<h2><code>llama.cpp</code></h2>
+<p>首先可以先下载LLaMa模型，7B的模型大概是28GB左右，网速不好的同学可以提前开始下载，以免到时候还需要苦等。可以在网上搜索到泄漏的下载磁力链接，用你喜欢的任意P2P / Torrent软件下载即可。</p>
+<p>接下来就可以进入<a href="https://github.com/ggerganov/llama.cpp"><code>llama.cpp</code></a>按照里面的教程进行操作了。虽然看似比较简单，但里面还是有一些小坑的地方的。我在这里简单阐述下我遇到的问题以及我是怎么解决的。</p>
+<h3>构建二进制</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># build this repo</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/ggerganov/llama.cpp
+<span class="nb">cd</span><span class="w"> </span>llama.cpp
+make
+</code></pre></div>
+<p>首先需要克隆仓库到本地，并进行make。我在这一步发现两个问题</p>
+<ol>
+<li>Rasbian Buster自带的gcc版本较老（gcc 8）且无法升级，因此才需要在前面重装系统并安装最新版本的。目前我使用的是gcc 12。</li>
+<li>
+<p><code>make</code>的时候提示不支持的选项。</p>
+<p><code>makefile</code>里面处理一些平台特定的flag的时候是读取系统平台并储存到<code>UNAME_S</code>,<code>UNAME_P</code>和<code>UNAME_M</code>里面，之后通过这三个参数判断编译器相关的选项。如果这里通过不了的话可以考虑看看<code>makefile</code>里相近平台的参数并指定。<code>make UNAME_P=armv7 UNAME_M=armv7</code>就可以指定为<code>armv7</code>的编译选项。</p>
+</li>
+<li>
+<p><code>make</code>的时候提示內联错误<code>‘always_inline’ ‘vdotq_s32’</code></p>
+<p>这个问题比较坑爹。我一开始以为是编译器的问题，换了好几种选项都不行。后来发现是作者在03.14针对Apple Sillicon做的一个优化 <a href="https://github.com/ggerganov/llama.cpp/pull/67">Use vdotq_s32 to improve performance #67 - Merged</a>。目前暂不清楚为什么树莓派无法处理这个，已经向作者反馈了。既然无法针对性的做处理，我尝试了直接revert对应的commit。之后就没有编译错误可以继续了。在我报出这个问题之后两小时，另一位贡献者<a href="https://github.com/Ronsor">@Ronsor</a>已经提出了一个PR去修复这个问题了 <a href="https://github.com/ggerganov/llama.cpp/pull/139">Don't use vdotq_s32 if it's not available #139</a>，点赞。</p>
+</li>
+</ol>
+<h3>预处理模型</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># obtain the original LLaMA model weights and place them in ./models</span>
+ls<span class="w"> </span>./models
+65B<span class="w"> </span>30B<span class="w"> </span>13B<span class="w"> </span>7B<span class="w"> </span>tokenizer_checklist.chk<span class="w"> </span>tokenizer.model
+
+<span class="c1"># install Python dependencies</span>
+python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>torch<span class="w"> </span>numpy<span class="w"> </span>sentencepiece
+
+<span class="c1"># convert the 7B model to ggml FP16 format</span>
+python3<span class="w"> </span>convert-pth-to-ggml.py<span class="w"> </span>models/7B/<span class="w"> </span><span class="m">1</span>
+
+<span class="c1"># quantize the model to 4-bits</span>
+./quantize.sh<span class="w"> </span>7B
+</code></pre></div>
+<p>我们将前面下载下来的模型放到<code>llama.cpp/models</code>文件夹，主要包含<code>7B</code>模型文件夹和<code>tokenizer.model</code>分词器模型。然后使用<code>convert-pth-to-ggml.py</code>进行预处理转换成FP16精度，最后使用<code>./quantize.sh</code>脚本进行4 bit量化以进一步缩小。</p>
+<p>这一步主要遇到的这么两个问题</p>
+<ol>
+<li>使用<code>scp</code>从Mac上传文件到pi上，稍微配置了一会儿，主要是等待时间较长。</li>
+<li>在<code>pi</code>上运行<code>convert-pth-to-ggml.py</code>这一步的时候，消耗内存太大OOM进程直接被系统kill掉了。</li>
+</ol>
+<p>简单看了下<code>convert-pth-to-ggml.py</code>，似乎都是做一些浮点精度的转换，最后生成的也是通用的模型格式<code>ggml</code>。于是我决定尝试先用Mac做<code>ggml</code>转换，然后拷贝到Pi上作进一步的处理<code>ggml-model-f16.bin</code>。实操发现这样是可行的，Pi也可以成功的运行<code>quantize.sh</code>量化脚本。</p>
+<h2>使用<code>llama.cpp</code></h2>
+<p>到这里我们的安装就已经结束了，紧张又兴奋的使用时间开始了。先来跑一个简单的Hello World。</p>
+<div class="highlight"><pre><span></span><code>./main<span class="w"> </span>-m<span class="w"> </span>./models/7B/ggml-model-q4_0.bin<span class="w"> </span>-p<span class="w"> </span><span class="s2">"Hello world!"</span><span class="w"> </span>-t<span class="w"> </span><span class="m">8</span><span class="w"> </span>-n<span class="w"> </span><span class="m">512</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>main: seed = 167882008main: seed = 167882008main: seed = 1678820083
+llama_model_load: loading model from './models/7B/ggml-model-q4_0.bin' - please wait ...
+llama_model_load: n_vocab = 32000
+llama_model_load: n_ctx   = 512
+llama_model_load: n_embd  = 4096
+llama_model_load: n_mult  = 256
+llama_model_load: n_head  = 32
+llama_model_load: n_layer = 32
+llama_model_load: n_rot   = 128
+llama_model_load: f16     = 2
+llama_model_load: n_ff    = 11008
+llama_model_load: n_parts = 1
+llama_model_load: ggml ctx size = 4529.34 MB
+llama_model_load: memory_size =   512.00 MB, n_mem = 16384
+llama_model_load: loading model part 1/1 from './models/7B/ggml-model-q4_0.bin'
+llama_model_load: .................................... done
+llama_model_load: model size =  4017.27 MB / num tensors = 291
+
+system_info: n_threads = 4 / 4 | AVX = 0 | AVX2 = 0 | AVX512 = 0 | FMA = 0 | NEON = 1 | ARM_FMA = 1 | F16C = 0 | FP16_VA = 0 | WASM_SIMD = 0 | BLAS = 0 | SSE3 = 0 | VSX = 0 | 
+
+main: prompt: 'Hello world'
+main: number of tokens in prompt = 3
+     1 -&gt; ''
+ 10994 -&gt; 'Hello'
+  3186 -&gt; ' world'
+
+sampling parameters: temp = 0.800000, top_k = 40, top_p = 0.950000, repeat_last_n = 64, repeat_penalty = 1.300000
+
+
+Hello world! | Welcome to the new site.
+We've been working hard on a few updates around here and it feels really great to finally share this
+
+main: mem per token = 14368644 bytes
+main:     load time = 113492.53 ms
+main:   sample time =   987.31 ms
+main:  predict time = 3881120.50 ms / 121285.02 ms per token
+main:    total time = 4215260.00 ms
+</code></pre></div>
+<p>我们可以看到，生成了这句30词的回复，Pi用了1小时10分钟，生成速度约为<code>121 s/Token</code>。有可能是我编译出了问题，这个后续再修复一下吧。当然由于时间太慢了，我后面的几个用例都直接在Mac上运行了。</p>
+<p>再跑一个官方例子</p>
+<div class="highlight"><pre><span></span><code>./main<span class="w"> </span>-m<span class="w"> </span>./models/7B/ggml-model-q4_0.bin<span class="w"> </span>-p<span class="w"> </span><span class="s2">"Building a website can be done in 10 simple steps:"</span><span class="w"> </span>-t<span class="w"> </span><span class="m">8</span><span class="w"> </span>-n<span class="w"> </span><span class="m">512</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">Building</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">website</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">done</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="n">simple</span><span class="w"> </span><span class="n">steps</span><span class="p">:</span>
+<span class="n">Start</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="n">goal</span><span class="o">.</span><span class="w"> </span><span class="n">Think</span><span class="w"> </span><span class="n">about</span><span class="w"> </span><span class="n">what</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">audience</span><span class="w"> </span><span class="n">wants</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">achieve</span><span class="w"> </span><span class="n">before</span><span class="w"> </span><span class="n">they</span><span class="w"> </span><span class="n">ever</span><span class="w"> </span><span class="n">visit</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">site</span><span class="w"> </span><span class="err">–</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">once</span><span class="w"> </span><span class="n">there</span><span class="p">,</span><span class="w"> </span><span class="n">how</span><span class="w"> </span><span class="n">do</span><span class="w"> </span><span class="n">these</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="n">interact</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">it</span><span class="err">?</span><span class="w"> </span><span class="n">This</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">important</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">help</span><span class="w"> </span><span class="n">formulate</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">those</span><span class="w"> </span><span class="n">great</span><span class="w"> </span><span class="n">ideas</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">something</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">makes</span><span class="w"> </span><span class="n">sense</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">their</span><span class="w"> </span><span class="n">target</span><span class="w"> </span><span class="n">marketplace</span><span class="o">!</span>
+<span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="n">Get</span><span class="w"> </span><span class="n">Inspired</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">Develop</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">Mood</span><span class="w"> </span><span class="n">Board</span><span class="p">:</span><span class="w"> </span><span class="n">It</span><span class="s1">'s always good to have some kinda inspiration board. If you’re thinking about starting from scratch, use Pinterest or other sources (like Behance and Dribbble), as they will give your ideas a direction when it comes time for the visual design phase!</span>
+<span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="n">Strategize</span><span class="w"> </span><span class="n">Your</span><span class="w"> </span><span class="n">Content</span><span class="p">:</span><span class="w"> </span><span class="n">Here</span><span class="s1">'s where things start to get tricky. You need some kinda content strategy in place here – do you have all of that information ready at hand? Now is also a good time as any to think about wireframes and how users will interact with your site once its built!</span>
+<span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="n">Do</span><span class="w"> </span><span class="n">It</span><span class="w"> </span><span class="n">With</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="n">Purpose</span><span class="p">:</span><span class="w"> </span><span class="n">Are</span><span class="w"> </span><span class="n">there</span><span class="w"> </span><span class="n">particular</span><span class="w"> </span><span class="n">goals</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">user</span><span class="err">’</span><span class="n">s</span><span class="w"> </span><span class="n">journey</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">website</span><span class="p">,</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">simply</span><span class="w"> </span><span class="n">trying</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">build</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">online</span><span class="w"> </span><span class="n">presence</span><span class="err">?</span><span class="w"> </span><span class="n">If</span><span class="w"> </span><span class="n">so</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">may</span><span class="w"> </span><span class="n">want</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">consider</span><span class="w"> </span><span class="n">using</span><span class="w"> </span><span class="n">marketing</span><span class="w"> </span><span class="n">automation</span><span class="w"> </span><span class="n">software</span><span class="w"> </span><span class="n">like</span><span class="w"> </span><span class="n">Hubspot</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">allows</span><span class="w"> </span><span class="n">marketers</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">salespeople</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">work</span><span class="w"> </span><span class="n">together</span><span class="w"> </span><span class="n">better</span><span class="o">.</span><span class="w"> </span><span class="n">This</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">help</span><span class="w"> </span><span class="n">them</span><span class="w"> </span><span class="n">organize</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">content</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">more</span><span class="w"> </span><span class="n">logical</span><span class="w"> </span><span class="n">hierarchy</span><span class="w"> </span><span class="err">–</span><span class="w"> </span><span class="n">which</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">one</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">those</span><span class="w"> </span><span class="n">things</span><span class="w"> </span><span class="n">we</span><span class="w"> </span><span class="n">love</span><span class="w"> </span><span class="n">doing</span><span class="o">!</span>
+<span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="n">Visual</span><span class="w"> </span><span class="n">Design</span><span class="p">:</span><span class="w"> </span><span class="n">It</span><span class="s1">'s time for the fun part, where you think about colors (orange!) layout &amp; typography, etcetera - and then start to design it using Illustrator or Photoshop. At this point in your project its important that all parties involved have a clear understanding of what needs to be done!</span>
+<span class="mi">6</span><span class="p">)</span><span class="w"> </span><span class="n">User</span><span class="w"> </span><span class="n">Interface</span><span class="w"> </span><span class="n">Design</span><span class="p">:</span><span class="w"> </span><span class="n">This</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">when</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">UI</span><span class="w"> </span><span class="n">designer</span><span class="w"> </span><span class="n">comes</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">play</span><span class="w"> </span><span class="err">–</span><span class="w"> </span><span class="n">they</span><span class="w"> </span><span class="n">should</span><span class="w"> </span><span class="n">know</span><span class="w"> </span><span class="n">how</span><span class="w"> </span><span class="n">things</span><span class="w"> </span><span class="n">interact</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">one</span><span class="w"> </span><span class="n">another</span><span class="p">,</span><span class="w"> </span><span class="n">understand</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="n">goals</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">experience</span><span class="w"> </span><span class="n">so</span><span class="w"> </span><span class="n">seamless</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">feels</span><span class="w"> </span><span class="n">like</span><span class="w"> </span><span class="n">second</span><span class="w"> </span><span class="n">nature</span><span class="o">.</span><span class="w"> </span><span class="n">The</span><span class="w"> </span><span class="n">better</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="n">goes</span><span class="w"> </span><span class="n">down</span><span class="p">,</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="n">up</span><span class="w"> </span><span class="n">having</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">much</span><span class="w"> </span><span class="n">more</span><span class="w"> </span><span class="n">engaging</span><span class="w"> </span><span class="n">website</span><span class="w"> </span><span class="n">at</span><span class="w"> </span><span class="n">hand</span><span class="o">!</span>
+<span class="mi">7</span><span class="p">)</span><span class="w"> </span><span class="n">Coding</span><span class="w"> </span><span class="n">Starts</span><span class="p">:</span><span class="w"> </span><span class="n">After</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">planning</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">done</span><span class="w"> </span><span class="n">here</span><span class="err">’</span><span class="n">s</span><span class="w"> </span><span class="n">where</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">coding</span><span class="w"> </span><span class="n">process</span><span class="w"> </span><span class="n">begins</span><span class="w"> </span><span class="err">–</span><span class="w"> </span><span class="n">usually</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">HTML</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">CSS</span><span class="w"> </span><span class="n">first</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">then</span><span class="w"> </span><span class="n">followed</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="n">Javascript</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">make</span><span class="w"> </span><span class="n">sure</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">site</span><span class="w"> </span><span class="n">works</span><span class="w"> </span><span class="n">flawlessly</span><span class="w"> </span><span class="n">across</span><span class="w"> </span><span class="n">multiple</span><span class="w"> </span><span class="n">browsers</span><span class="o">.</span>
+<span class="mi">8</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="n">Test</span><span class="p">,</span><span class="w"> </span><span class="n">Test</span><span class="w"> </span><span class="n">Again</span><span class="w"> </span><span class="n">And</span><span class="w"> </span><span class="n">Then</span><span class="w"> </span><span class="n">Test</span><span class="w"> </span><span class="n">Some</span><span class="w"> </span><span class="n">More</span><span class="err">…</span><span class="p">:</span><span class="w"> </span><span class="n">This</span><span class="w"> </span><span class="n">phase</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">go</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">we</span><span class="w"> </span><span class="n">know</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">experience</span>
+
+<span class="n">main</span><span class="p">:</span><span class="w"> </span><span class="n">mem</span><span class="w"> </span><span class="n">per</span><span class="w"> </span><span class="n">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">14434244</span><span class="w"> </span><span class="n">bytes</span>
+<span class="n">main</span><span class="p">:</span><span class="w">     </span><span class="nb">load</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="mf">4570.61</span><span class="w"> </span><span class="n">ms</span>
+<span class="n">main</span><span class="p">:</span><span class="w">   </span><span class="n">sample</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="o">=</span><span class="w">   </span><span class="mf">448.29</span><span class="w"> </span><span class="n">ms</span>
+<span class="n">main</span><span class="p">:</span><span class="w">  </span><span class="n">predict</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">138987.47</span><span class="w"> </span><span class="n">ms</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">271.99</span><span class="w"> </span><span class="n">ms</span><span class="w"> </span><span class="n">per</span><span class="w"> </span><span class="n">token</span>
+<span class="n">main</span><span class="p">:</span><span class="w">    </span><span class="n">total</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">146495.30</span><span class="w"> </span><span class="n">ms</span>
+</code></pre></div>
+<p>在Mac上运行的速度还是非常快的（废话），生成512个词的回复用了2分26秒，平均<code>0.27 s/Token</code>。</p>
+<p>此外，仓库里还包含了一个对于android设备的编译选项和实际运行的视频，有兴趣的读者可以自己研究下。也有人尝试在三星Galaxy S22 Ultra上运行这个模型，速度竟然可以达到<code>1.2s/Token</code>。</p>
+<h2>小结</h2>
+<p>目前整个项目还是处于一个比较初级的形态，在RPi上生成速度相当慢，几乎不可用。此外，作者也在README中提到了一些限制</p>
+<ol>
+<li>目前很难判断量化是否影响了模型生成的质量，需要一些更严谨的基准测试。</li>
+<li>目前模型并没有使用MacOS提供的Accelerate框架，因为对于整个解码器中大部分张量形状来说，使用ARM_NEON的内部实现和使用Accelerate框架并没有什么性能差别。</li>
+</ol>
+<p>除开性能之外，项目的指引还需要更加完善一些才能够更好的帮到大家。</p>
+<p>但无论如何，在训练和运行语言模型逐渐要求海量算力的今天，能有这样一个模型让个人设备也能跑起来一个甚至还挺好用的模型，还是挺让人感动的。不知道是巧合还是什么，第一个跑通的老兄在<a href="https://github.com/ggerganov/llama.cpp/issues/58">Raspberry Pi 4 4GB #58</a>里面展示的例句是：“The first man on the moon was Neil Armstrong..." 总要有人尝试，去发现，去做第一个登上月球的人，不是吗？</p>
+<h2>参考文献</h2>
+<p>如果你想进一步了解相关内容的话，可以阅读下面的文章</p>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/612002642">ChatGPT论文阅读系列-LLaMA: Open and Efficient Foundation Language Models - 知乎</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/613111988">LLaMA快速上手指南: 便捷构建“本地版ChatGPT” - 知乎</a></li>
+</ul>
+</div>
+<div class="tag-cloud">
+<p>
+</p>
+</div>
+</article>
+<footer>
+<p>
+  © 2023  - This work is licensed under a <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.en_US" rel="license" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+  <span class="footer-separator">|</span>
+  Switch to the <a href="javascript:void(0)" onclick="theme.switch(`dark`)">dark</a> | <a href="javascript:void(0)" onclick="theme.switch(`light`)">light</a> | <a href="javascript:void(0)" onclick="theme.switch(`browser`)">browser</a> theme
+  <script data-default-theme="light" data-enable-auto-detect-theme="True" id="dark-theme-script" src="https://mestrace.github.io/theme/dark-theme/dark-theme.min.js" type="text/javascript">
+</script>
+</p><p>
+<a href="http://creativecommons.org/licenses/by-sa/4.0/" rel="license" target="_blank">
+<img alt="Creative Commons License" height="15" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" style="border-width:0" title="Creative Commons License" width="80">
+</img></a>
+</p></footer> </main>
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Mestrace的个人博客 ",
+  "url" : "https://mestrace.github.io",
+  "image": "http://github.com/Mestrace.png?size=460",
+  "description": "我的个人博客，记录我的成长历程"
+}
+</script><a aria-label="View source on Github" class="github-corner" href="http://github.com/Mestrace/" target="_blank">
+<svg aria-hidden="true" height="80" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" viewbox="0 0 250 250" width="80">
+<path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+<path class="octo-arm" d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;">
+</path>
+<path class="octo-body" d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor">
+</path>
+</svg>
+</a>
+</body>
+</html>
