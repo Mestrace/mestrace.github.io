@@ -124,8 +124,8 @@ GOOGLE_GLOBAL_SITE_TAG = "G-07WBTMQT81"
 # Sitemap
 SITEMAP = {
     "format": "xml",
-    "priorities": {"articles": 0.5, "indexes": 0.5, "pages": 0.5},
-    "changefreqs": {"articles": "monthly", "indexes": "daily", "pages": "monthly"},
+    "priorities": {"articles": 0.8, "indexes": 0.3, "pages": 0.5},
+    "changefreqs": {"articles": "weekly", "indexes": "weekly", "pages": "weekly"},
 }
 
 # Remove URL Hash
