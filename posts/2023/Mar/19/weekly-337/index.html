@@ -1,0 +1,297 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="True" name="HandheldFriendly"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="robots"/>
+<link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+<link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+<link href="/favicon.ico" rel="icon" type="image/x-icon"/>
+<link href="/site.webmanifest" rel="manifest"/>
+<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&amp;family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://mestrace.github.io/theme/stylesheet/style.less" rel="stylesheet/less" type="text/css"/>
+<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js" type="text/javascript"></script>
+<link href="https://mestrace.github.io/theme/stylesheet/dark-theme.min.css" id="dark-theme-style" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css"/>
+<link href="https://mestrace.github.io/theme/pygments/monokai.min.css" id="pygments-dark-theme" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css"/>
+<link href="https://mestrace.github.io/theme/pygments/monokai.min.css" id="pygments-light-theme" media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)" rel="stylesheet" type="text/css"/>
+<link href="https://mestrace.github.io/theme/font-awesome/css/fontawesome.css" rel="stylesheet" type="text/css"/>
+<link href="https://mestrace.github.io/theme/font-awesome/css/brands.css" rel="stylesheet" type="text/css"/>
+<link href="https://mestrace.github.io/theme/font-awesome/css/solid.css" rel="stylesheet" type="text/css"/>
+<link href="https://mestrace.github.io/static/custom.css" rel="stylesheet" type="text/css"/>
+<!-- Chrome, Firefox OS and Opera -->
+<meta content="#333" name="theme-color"/>
+<!-- Windows Phone -->
+<meta content="#333" name="msapplication-navbutton-color"/>
+<!-- iOS Safari -->
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+<!-- Microsoft EDGE -->
+<meta content="#333" name="msapplication-TileColor"/>
+<link href="https://mestrace.github.io/feeds/all.atom.xml" rel="alternate" title="Mestrace的个人博客 Atom" type="application/atom+xml"/>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-07WBTMQT81"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-07WBTMQT81');
+</script>
+<meta content="Mestrace" name="author">
+<meta content="2023-03 Leetcode Weekly Contest 337 | 2595. Number of Even and Odd Bits | 2596. Check Knight Tour Configuration | 2597. The Number of Beautiful Subsets | 2598. Smallest Missing Non-negative Integer After Operations | My solution 我的题目解析" name="description">
+<meta content="Contest" name="keywords"/>
+<meta content="Mestrace的个人博客" property="og:site_name">
+<meta content="【Leetcode题解】Weekly Contest 337 周赛题目解析" property="og:title">
+<meta content="2023-03 Leetcode Weekly Contest 337 | 2595. Number of Even and Odd Bits | 2596. Check Knight Tour Configuration | 2597. The Number of Beautiful Subsets | 2598. Smallest Missing Non-negative Integer After Operations | My solution 我的题目解析" property="og:description">
+<meta content="en_US" property="og:locale">
+<meta content="https://mestrace.github.io/posts/2023/Mar/19/weekly-337/" property="og:url"/>
+<meta content="article" property="og:type"/>
+<meta content="2023-03-19 00:00:00+08:00" property="article:published_time"/>
+<meta content="" property="article:modified_time"/>
+<meta content="https://mestrace.github.io/author/mestrace.html" property="article:author"/>
+<meta content="Leetcode" property="article:section">
+<meta content="Contest" property="article:tag"/>
+<meta content="http://github.com/Mestrace.png?size=460" property="og:image"/>
+<title>Mestrace的个人博客 – 【Leetcode题解】Weekly Contest 337 周赛题目解析</title>
+</meta></meta></meta></meta></meta></meta></meta><link href="https://mestrace.github.io/posts/2023/Mar/19/weekly-337/" rel="canonical"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Mestrace的个人博客", "item": "https://mestrace.github.io"}, {"@type": "ListItem", "position": 2, "name": "Posts", "item": "https://mestrace.github.io/posts"}, {"@type": "ListItem", "position": 3, "name": "2023", "item": "https://mestrace.github.io/posts/2023"}, {"@type": "ListItem", "position": 4, "name": "Mar", "item": "https://mestrace.github.io/posts/2023/Mar"}, {"@type": "ListItem", "position": 5, "name": "19", "item": "https://mestrace.github.io/posts/2023/Mar/19"}, {"@type": "ListItem", "position": 6, "name": "Weekly 337", "item": "https://mestrace.github.io/posts/2023/Mar/19/weekly-337"}, {"@type": "ListItem", "position": 7, "name": "Index", "item": "https://mestrace.github.io/posts/2023/Mar/19/weekly-337/index.html"}]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "author": {"@type": "Person", "name": "Mestrace"}, "publisher": {"@type": "Organization", "name": "Mestrace的个人博客"}, "headline": "【Leetcode题解】Weekly Contest 337 周赛题目解析", "about": "Leetcode", "datePublished": "2023-03-19 00:00"}</script></head>
+<body>
+<aside>
+<div>
+<a href="https://mestrace.github.io/">
+<img alt="Mestrace" src="http://github.com/Mestrace.png?size=460" title="Mestrace"/>
+</a>
+<h1>
+<a href="https://mestrace.github.io/">Mestrace</a>
+</h1>
+<p>Software Developer</p>
+<ul class="social">
+<li>
+<a class="sc-github" href="http://github.com/Mestrace/" target="_blank">
+<i class="fa-brands fa-github"></i>
+</a>
+</li>
+</ul>
+</div>
+</aside>
+<main>
+<nav>
+<a href="https://mestrace.github.io/">Home</a>
+<a href="https://mestrace.github.io/feeds/all.atom.xml">Atom</a>
+</nav>
+<article class="single">
+<header>
+<h1 id="weekly-337">【Leetcode题解】Weekly Contest 337 周赛题目解析</h1>
+<p>
+      Posted on Sun 19 March 2023 in <a href="https://mestrace.github.io/category/leetcode.html">Leetcode</a>
+</p>
+</header>
+<div>
+<p>今天的周赛<a href="https://leetcode.com/contest/weekly-contest-337/">Weekly Contest 337</a>难度也比较适中。而且令我没想到的是最后一题竟然是Medium。个人在做的时候感觉第三题比第四题的思考过程要难得多，可能是我个人的错觉。此外，跟之前一天的双周赛<a href="https://leetcode.com/contest/biweekly-contest-100/">Biweekly Contest 100</a>（<a href="https://mestrace.github.io/posts/2023/Mar/18/biweekly-100/">我的题解</a>）一样，题目也做了反GPT处理。出题人花了20买的这个GPT会员可真值，让无数英雄折腰啊。好了，不说废话了，看看今天的题目吧。</p>
+<h2>题目列表</h2>
+<ol>
+<li><a href="https://leetcode.com/problems/number-of-even-and-odd-bits/">Easy - 2595. Number of Even and Odd Bits</a></li>
+<li><a href="https://leetcode.com/problems/check-knight-tour-configuration/">Medium - 2596. Check Knight Tour Configuration</a></li>
+<li><a href="https://leetcode.com/problems/the-number-of-beautiful-subsets/">Medium - 2597. The Number of Beautiful Subsets</a></li>
+<li><a href="https://leetcode.com/problems/smallest-missing-non-negative-integer-after-operations/">Medium - 2598. Smallest Missing Non-negative Integer After Operations</a></li>
+</ol>
+<h2>2595. Number of Even and Odd Bits 奇数和偶数比特位的数量</h2>
+<p>一个正整数n，统计这个正整数里面的even bit和odd bit数量。比如<code>17 = 0b10001</code>，奇数bit为0，偶数bit为第<code>0</code>和<code>4</code> bit。</p>
+<h3>分析</h3>
+<p>无论如何，要把一个数转换为他的比特表示才能做。常规方法肯定是直接位运算用<code>n &amp; 1ek</code> 取第<code>k</code>位的比特值。这里为了手速，直接变成<code>string</code>并倒着遍历。</p>
+<h3>代码</h3>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">evenOddBit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="s2">"</span><span class="si">{0:b}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+        <span class="c1"># print(s)</span>
+        <span class="n">even</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">odd</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)):</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">i</span>
+            <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">'1'</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">even</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">odd</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">even</span><span class="p">,</span> <span class="n">odd</span><span class="p">]</span>
+</code></pre></div>
+<h2>2596. Check Knight Tour Configuration 棋盘设置是否正确</h2>
+<p>给定一个<code>n x n</code>矩阵，矩阵里一定有<code>[0, n*n-1]</code>的每个数字。这里每个数字代表棋子走的顺序。比如<code>[0,0] = 0</code> 和 <code>[1,1] = 1</code>就是说棋子会从<code>[0,0] -&gt; [1,1]</code>。而我们的棋子是个马 (knight)，只能走日字。</p>
+<blockquote>
+<p>国际象棋中的马（Knight）是一种走法比较特殊的棋子，它每次走动可以横跨2格并且向垂直或水平方向移动1格，或者横跨1格并且向垂直或水平方向移动2格。马的行走轨迹形状类似于“日”字。</p>
+<p>如果当前位置为(x, y)，那么它可以移动到以下8个位置中的任意一个：</p>
+<p>(x + 2, y + 1)</p>
+<p>(x + 2, y - 1)</p>
+<p>(x - 2, y + 1)</p>
+<p>(x - 2, y - 1)</p>
+<p>(x + 1, y + 2)</p>
+<p>(x + 1, y - 2)</p>
+<p>(x - 1, y + 2)</p>
+<p>(x - 1, y - 2)</p>
+<p>---- by chatgpt</p>
+</blockquote>
+<p>给定这个棋盘，我们判断从<code>[0,n*n - 1]</code>的每一步是否合法。<u>棋子从[0,0]开始</u>。</p>
+<h3>分析</h3>
+<p>我们可以遍历整个棋盘，并反向把第<code>k</code>步映射到<code>[i,j]</code>上。然后我们遍历<code>[0, n*n-1]</code>去确认<code>k-1</code>到<code>k</code>步是否合法。判断走法也相对简单，<code>[x1,y1] -&gt; [x2,y2]</code>是合法的一步，当且仅当（iff），<code>x1 - x2</code>的绝对值和<code>y1 - y2</code>的绝对值分别为<code>2</code>和<code>1</code> 或者<code>1</code>和<code>2</code>。</p>
+<p>需要注意这题比较坑的点是<u>棋子从[0,0]开始</u>这个条件也是作为一个测试用例的，不是定义给定的棋盘的！如果你想我一样眼神不好，肯定会在这里卡很久。</p>
+<h3>代码</h3>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">checkValidGrid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grid</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+        <span class="n">sz</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="n">n</span>
+
+        <span class="n">mapp</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">grid</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+                <span class="n">mapp</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+
+
+        <span class="n">curr</span> <span class="o">=</span> <span class="n">mapp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># start with zero</span>
+
+        <span class="k">if</span> <span class="n">curr</span> <span class="o">!=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">sz</span><span class="p">):</span>
+            <span class="n">nxt</span> <span class="o">=</span> <span class="n">mapp</span><span class="p">[</span><span class="n">step</span><span class="p">]</span>
+
+            <span class="c1"># print(step, curr, nxt,  ((abs(curr[0] - nxt[0]) == 1 and abs(curr[1] - nxt[1]) == 2)</span>
+            <span class="c1"># or (abs(curr[0] - nxt[0]) == 2 and abs(curr[1] - nxt[1]) == 1)))</span>
+
+            <span class="k">if</span> <span class="p">((</span><span class="nb">abs</span><span class="p">(</span><span class="n">curr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">nxt</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">abs</span><span class="p">(</span><span class="n">curr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">nxt</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="ow">or</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">curr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">nxt</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="nb">abs</span><span class="p">(</span><span class="n">curr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">nxt</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)):</span>
+                <span class="n">curr</span> <span class="o">=</span> <span class="n">nxt</span>
+                <span class="k">continue</span>
+
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="k">return</span> <span class="kc">True</span>
+</code></pre></div>
+<h2>2597. The Number of Beautiful Subsets 美丽非空子集的个数</h2>
+<p>给定一个数组<code>nums</code>和正整数<code>k</code>，我们定义<code>nums</code>的一个子集<code>subs</code>是一个美丽子集，如果<code>subs</code>里所有元素两两配对的差值都不等于<code>k</code>。我们需要求出这种子数组的总数。</p>
+<p>限制条件：</p>
+<ul>
+<li>1 &lt;= nums.length &lt;= 20</li>
+<li>1 &lt;= nums[i], k &lt;= 1000</li>
+</ul>
+<h3>分析</h3>
+<p>首先，我们知道一个数组的非空子集有<code>2^n-1</code>个。如果暴力做的话很快就会命中时间上界，所以这种题目看题要仔细。我们注意到数组长度最多为<code>20</code>，那么<code>2^20</code>的递归次数，还是有暴力的空间的。只是在一些特殊case上处理下。</p>
+<p>这里我们采用bt暴力求解，每次我们包含<code>nums[i:]</code>的时候，我们遍历整个数组并每次都尝试包含其中的数<code>j</code>，同时我们维护一个列表是无法包含的数字去排除掉一些其中的数字。</p>
+<p>一个需要处理的特殊case：数组里如果没有任何等差 = k的序列，那么所有的非空子集就是答案。</p>
+<h3>代码</h3>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">beautifulSubsets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">nums</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+
+        <span class="n">m</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">set</span><span class="p">)</span>
+
+        <span class="n">sz</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sz</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sz</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">k</span><span class="p">:</span>
+                    <span class="n">m</span><span class="p">[</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+                    <span class="n">m</span><span class="p">[</span><span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">sz</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">def</span> <span class="nf">bt</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">cant</span><span class="p">):</span>
+            <span class="k">nonlocal</span> <span class="n">result</span>
+            <span class="n">result</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="ow">in</span> <span class="n">cant</span><span class="p">:</span>
+                    <span class="k">continue</span>
+
+                <span class="n">cant_nums</span> <span class="o">=</span> <span class="n">m</span><span class="p">[</span><span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span>
+
+                <span class="n">cant</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">cant_nums</span><span class="p">)</span>
+                <span class="n">bt</span><span class="p">(</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">cant</span><span class="p">)</span>
+
+                <span class="k">for</span> <span class="n">cn</span> <span class="ow">in</span> <span class="n">cant_nums</span><span class="p">:</span>
+                    <span class="n">cant</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">cn</span><span class="p">)</span>
+        <span class="n">bt</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="k">return</span> <span class="n">result</span> <span class="o">-</span> <span class="mi">1</span>
+</code></pre></div>
+<h2>2598. Smallest Missing Non-negative Integer After Operations 找到数组中最小缺失的整数</h2>
+<p>给定一个数组<code>nums</code>和一个整数<code>value</code>，我们定义变换为：将其中一个数字<code>k</code>加上或者减去<code>value</code>。我们可以对数组中的任意数字做任意次数的变换，形成一个新的数组。对于这个变换后数组来说，我们想要找到他的<code>MEX</code>（minimum excluded）：</p>
+<blockquote>
+<p>一个数组的MEX（最小排除值）是指其中最小的未出现的非负整数。</p>
+<p>---- by chatgpt</p>
+</blockquote>
+<p>用人话讲就是从<code>0</code>开始累加找，找到最小的那个不存在于这个数组里的数。</p>
+<h3>分析</h3>
+<p>一看到加减某个数，我们应该很快联想到取模这个操作。取模的性质为若<code>x + n * value = b</code>，则<code>x % value = b % value</code>。因此，如果我们想确认<code>k</code>是否能被数组里的<code>nums[i]</code>得到，我们应该找<code>k % value == nums[i] % value</code>的数字。这样的话，我们就做贪心的匹配就好了，从<code>k = 0</code>开始，我们一个个确认否能通过变换得到<code>k</code>；如果能通过变换得到，那么就把数组里的对应的数移除；如果不行的话，那个数就是答案。</p>
+<p>与此同时，我们也发现参数定义是<code>1 &lt;= nums.length, value &lt;= 10^5</code>。所以极端情况下，结果就是<code>10^5 + 1</code>。</p>
+<h3>代码</h3>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">findSmallestInteger</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">mapp</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+            <span class="n">mapp</span><span class="p">[</span><span class="n">n</span> <span class="o">%</span> <span class="n">value</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mf">1e5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
+            <span class="n">modi</span> <span class="o">=</span> <span class="n">i</span> <span class="o">%</span> <span class="n">value</span>
+            <span class="k">if</span> <span class="n">mapp</span><span class="p">[</span><span class="n">modi</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">i</span>
+            <span class="n">mapp</span><span class="p">[</span><span class="n">modi</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="mf">1e5</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</code></pre></div>
+<h2>小结</h2>
+<p>如果你想变得更强的话，可以做做</p>
+<ol>
+<li><a href="https://leetcode.com/problems/find-numbers-with-even-number-of-digits/">Easy - 1295. Find Numbers with Even Number of Digits</a></li>
+<li><a href="https://leetcode.com/problems/missing-number/">Easy - 268. Missing Number</a></li>
+<li><a href="https://leetcode.com/problems/minimum-knight-moves/">Medium - 1197. Minimum Knight Moves</a></li>
+<li><a href="https://leetcode.com/problems/knight-probability-in-chessboard/">Medium - 688. Knight Probability in Chessboard</a></li>
+<li><a href="https://leetcode.com/problems/construct-the-lexicographically-largest-valid-sequence/">Medium - 1718. Construct the Lexicographically Largest Valid Sequence</a></li>
+<li><a href="https://leetcode.com/problems/first-missing-positive/">Hard - 41. First Missing Positive</a></li>
+</ol>
+</div>
+<div class="tag-cloud">
+<p>
+<a href="https://mestrace.github.io/tag/contest.html">Contest</a>
+</p>
+</div>
+</article>
+<footer>
+<p>
+  © 2023  - This work is licensed under a <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.en_US" rel="license" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+  <span class="footer-separator">|</span>
+  Switch to the <a href="javascript:void(0)" onclick="theme.switch(`dark`)">dark</a> | <a href="javascript:void(0)" onclick="theme.switch(`light`)">light</a> | <a href="javascript:void(0)" onclick="theme.switch(`browser`)">browser</a> theme
+  <script data-default-theme="light" data-enable-auto-detect-theme="True" id="dark-theme-script" src="https://mestrace.github.io/theme/dark-theme/dark-theme.min.js" type="text/javascript">
+</script>
+</p><p>
+<a href="http://creativecommons.org/licenses/by-sa/4.0/" rel="license" target="_blank">
+<img alt="Creative Commons License" height="15" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" style="border-width:0" title="Creative Commons License" width="80">
+</img></a>
+</p></footer> </main>
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Mestrace的个人博客 ",
+  "url" : "https://mestrace.github.io",
+  "image": "http://github.com/Mestrace.png?size=460",
+  "description": "我的个人博客，记录我的成长历程"
+}
+</script><a aria-label="View source on Github" class="github-corner" href="http://github.com/Mestrace/" target="_blank">
+<svg aria-hidden="true" height="80" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" viewbox="0 0 250 250" width="80">
+<path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+<path class="octo-arm" d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;">
+</path>
+<path class="octo-body" d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor">
+</path>
+</svg>
+</a>
+</body>
+</html>
