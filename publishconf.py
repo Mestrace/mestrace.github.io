@@ -22,3 +22,7 @@ DELETE_OUTPUT_DIRECTORY = True
 
 # Precompress Plugin
 PRECOMPRESS_ZOPFLI = True
+
+# Addthis
+ADD_THIS_ID = "ra-64172c2607a4b50c"
+ADD_THIS_SHARING_PROMPT = "如果你觉得这篇文章很赞，不要忘记分享给你的小伙伴们！"
