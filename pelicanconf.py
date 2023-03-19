@@ -28,16 +28,12 @@ AUTHOR_FEED_RSS = None
 
 THEME = "themes/Flex"
 
-# Blogroll
-# LINKS = (
-#     ("Pelican", "https://getpelican.com/"),
-#     ("Python.org", "https://www.python.org/"),
-#     ("Jinja2", "https://palletsprojects.com/p/jinja/"),
-#     ("You can modify those links in your config file", "#"),
-#     ("Other pages", "{filename}/leetcode/weekly-337.md"),
-# )
+# # Blogroll
+# LINKS = (('Pelican', 'https://getpelican.com/'),
+#          ('Python.org', 'https://www.python.org/'),
+#          ('Jinja2', 'https://palletsprojects.com/p/jinja/'),
+#          ('You can modify those links in your config file', '#'),)
 
-USEFUL_LINKS = (("Mimimi's Blog", "https://blog.mimimi.fun"),)
 
 STATIC_PATHS = ["images", "static"]
 
