@@ -42,23 +42,16 @@
   gtag('config', 'G-07WBTMQT81');
 </script>
 <meta content="Mestrace" name="author">
-<meta content="比特币于2009年诞生，至今已有14年的历史。这段时间里，区块链行业发生了许多变化和发展。尽管如此， 比特币仍然是市值最大的加密货币之 …" name="description">
-<meta content="Blockchain, Raspberry Pi" name="keywords"/>
+<meta content="我的个人博客，记录我的成长历程" name="description">
 <meta content="Mestrace的个人博客" property="og:site_name">
-<meta content="WIP：比特币 &amp; 闪电网络 &amp; 树莓派" property="og:title">
-<meta content="比特币于2009年诞生，至今已有14年的历史。这段时间里，区块链行业发生了许多变化和发展。尽管如此， 比特币仍然是市值最大的加密货币之 …" property="og:description">
-<meta content="en_US" property="og:locale">
-<meta content="https://mestrace.github.io/drafts/bitcoin-lightning-network.html" property="og:url"/>
-<meta content="article" property="og:type"/>
-<meta content="2023-02-18 00:00:00+08:00" property="article:published_time"/>
-<meta content="" property="article:modified_time"/>
-<meta content="https://mestrace.github.io/author/mestrace.html" property="article:author"/>
-<meta content="Blockchain" property="article:section">
-<meta content="Blockchain" property="article:tag"/>
-<meta content="Raspberry Pi" property="article:tag"/>
+<meta content="blog" property="og:type">
+<meta content="Mestrace的个人博客" property="og:title">
+<meta content="我的个人博客，记录我的成长历程" property="og:description"/>
+<meta content="en_US" property="og:locale"/>
+<meta content="https://mestrace.github.io" property="og:url"/>
 <meta content="http://github.com/Mestrace.png?size=460" property="og:image"/>
-<title>Mestrace的个人博客 – WIP：比特币 &amp; 闪电网络 &amp; 树莓派</title>
-</meta></meta></meta></meta></meta></meta></meta><link href="https://mestrace.github.io/drafts/bitcoin-lightning-network.html" rel="canonical"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Mestrace的个人博客", "item": "https://mestrace.github.io"}, {"@type": "ListItem", "position": 2, "name": "Drafts", "item": "https://mestrace.github.io/drafts"}, {"@type": "ListItem", "position": 3, "name": "Bitcoin lightning network", "item": "https://mestrace.github.io/drafts/bitcoin-lightning-network.html"}]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "author": {"@type": "Person", "name": "Mestrace"}, "publisher": {"@type": "Organization", "name": "Mestrace的个人博客"}, "headline": "WIP：比特币 & 闪电网络 & 树莓派", "about": "Blockchain", "datePublished": "2023-02-18 00:00"}</script></head>
+<title>Mestrace的个人博客 – About</title>
+</meta></meta></meta></meta></meta><link href="https://mestrace.github.io/pages/about.html" rel="canonical"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Mestrace的个人博客", "item": "https://mestrace.github.io"}, {"@type": "ListItem", "position": 2, "name": "Pages", "item": "https://mestrace.github.io/pages"}, {"@type": "ListItem", "position": 3, "name": "About", "item": "https://mestrace.github.io/pages/about.html"}]}</script></head>
 <body>
 <aside>
 <div>
@@ -102,54 +95,10 @@
 </nav>
 <article class="single">
 <header>
-<h1 id="bitcoin-lightning-network">WIP：比特币 &amp; 闪电网络 &amp; 树莓派</h1>
-<p>
-      Posted on Sat 18 February 2023 in <a href="https://mestrace.github.io/category/blockchain.html">Blockchain</a>
-</p>
+<h1 id="about">About</h1>
 </header>
 <div>
-<p>比特币于2009年诞生，至今已有14年的历史。这段时间里，区块链行业发生了许多变化和发展。尽管如此，
-比特币仍然是市值最大的加密货币之一，其总市值约为417亿美元。比特币社区中的许多人都希望将比特币
-作为全球货币，用于日常交易，但目前由于潜在的网络拥堵、高交易费用以及需要等待至少十分钟以确保交
-易被确认等问题，这个愿望尚未实现。</p>
-<p>举个例子，如果你想用比特币在咖啡店买一杯5美元的咖啡，你需要创建一笔
-约200字节的交易，包含1个输入UTXO，1个输出UTXO和1个找零UTXO。此外，为了让你的交易在2个区块
-内上链（约20分钟），你需要支付大约1美元（20 Sat/Byte，0.00004 BTC）的交易费用给矿工，这对于小额交易来
-说显然不划算。</p>
-<p>然而，比特币社区正在积极探索解决这些问题的方案。其中最有前途的方案之一就是闪电网络。通过利用
-闪电网络，用户可以在比特币的二层协议上进行快速、低成本、私密的交易，避免了在主链上进行交易所
-面临的瓶颈和高昂的交易费用。</p>
-<p>闪电网络的一个主要优势是能够提高比特币交易的速度和吞吐量，同时降低交易成本。与传统的比特币交易
-相比，闪电网络的交易速度可以达到毫秒级别，而且交易费用只占交易金额的极小部分。这使得闪电网络交
-易成为进行小额支付的理想选择。此外，闪电网络还提供了更高的交易隐私性。传统比特币交易的交易信息
-是公开的，所有人都可以查看交易记录，这可能会泄露用户的隐私信息。而闪电网络交易的信息只存储在交
-易双方之间，无需在主链上公开，从而提高了用户的交易隐私性。因此，闪电网络是比特币生态系统中非常
-重要的一部分，它的出现可以使得比特币更加适合成为全球货币，同时提供了更快、更便宜、更私密的支付
-体验。</p>
-<p>相比之下，使用闪电网络进行交易会更便宜且更快捷。还是以上面买咖啡的场景为例，使用闪电网络只需要
-支付0.0012美元（1 Sat + 0.03%）的手续费，就可以在近实时完成这笔交易。</p>
-<p>闪电网络是一个由多个节点组成的网络。每个节点需要主动和其他节点建立微支付通道，并锁定一定数量的比特币，
-以建立一个支付通道。在支付通道上，交易不需要上链，只需要在双方的通道上记账就可以实现转账，转账的最大
-数额等于锁定的金钱数额。当支付通道关闭的时候，双方将进行结算，并将对应的转账金额上链。</p>
-<p>以咖啡店为例，如果我和闪电网络节点A建立了链接并锁定了100美元的比特币，咖啡店与闪电网络节点B建立了链
-接。那么当我发起这笔支付的时候，节点A会自动寻找与节点B的路径并发起对应的转账。如果节点A和B有直接的支
-付通道，那么这笔钱将通过该支付通道进行转账。如果A和B没有直接的支付通道，或者A和B的支付渠道余额不足以
-支付这笔钱，A将自动寻找其他与B连接的路径进行转账，最终将这笔钱转账到咖啡店的节点上。当咖啡店关闭与B
-的通道时，B将与咖啡店进行结算并上链，我与节点A的通道同理。</p>
-</div>
-<div class="tag-cloud">
-<p>
-<a href="https://mestrace.github.io/tag/blockchain.html">Blockchain</a>
-<a href="https://mestrace.github.io/tag/raspberry-pi.html">Raspberry Pi</a>
-</p>
-</div>
-<div class="center social-share">
-<p>如果你觉得这篇文章很赞，不要忘记分享给你的小伙伴们！</p>
-<div class="addthis_native_toolbox"></div>
-<div class="addthis_sharing_toolbox"></div>
-<div class="addthis_inline_share_toolbox"></div>
-</div>
-<div class="addthis_relatedposts_inline"></div>
+<p>这里暂时什么也没有。</p> </div>
 </article>
 <footer>
 <p>
