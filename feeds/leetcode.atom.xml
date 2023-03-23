@@ -1,5 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Mestrace的个人博客 - Leetcode</title><link href="https://mestrace.github.io/" rel="alternate"></link><link href="https://mestrace.github.io/feeds/leetcode.atom.xml" rel="self"></link><id>https://mestrace.github.io/</id><updated>2023-03-19T00:00:00+08:00</updated><subtitle>Software Developer</subtitle><entry><title>【Leetcode题解】Weekly Contest 337 周赛题目解析</title><link href="https://mestrace.github.io/posts/2023/Mar/19/weekly-337/" rel="alternate"></link><published>2023-03-19T00:00:00+08:00</published><updated>2023-03-19T00:00:00+08:00</updated><author><name>Mestrace</name></author><id>tag:mestrace.github.io,2023-03-19:/posts/2023/Mar/19/weekly-337/</id><summary type="html">&lt;p&gt;2023-03 Leetcode Weekly Contest 337 | 2595. Number of Even and Odd Bits | 2596. Check Knight Tour Configuration | 2597. The Number of Beautiful Subsets | 2598. Smallest Missing Non-negative Integer After Operations | My solution 我的题目解析&lt;/p&gt;</summary><content type="html">&lt;p&gt;今天的周赛&lt;a href="https://leetcode.com/contest/weekly-contest-337/"&gt;Weekly Contest 337&lt;/a&gt;难度也比较适中。而且令我没想到的是最后一题竟然是Medium。个人在做的时候感觉第三题比第四题的思考过程要难得多，可能是我个人的错觉。此外，跟之前一天的双周赛&lt;a href="https://leetcode.com/contest/biweekly-contest-100/"&gt;Biweekly Contest 100&lt;/a&gt;（&lt;a href="https://mestrace.github.io/posts/2023/Mar/18/biweekly-100/"&gt;我的题解&lt;/a&gt;）一样，题目也做了反GPT处理。出题人花了20买的这个GPT会员可真值，让无数英雄折腰啊。好了，不说废话了，看看今天的题目吧。&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mestrace的个人博客 - Leetcode</title><link href="https://mestrace.github.io/" rel="alternate"></link><link href="https://mestrace.github.io/feeds/leetcode.atom.xml" rel="self"></link><id>https://mestrace.github.io/</id><updated>2023-03-23T00:00:00+08:00</updated><subtitle>Software Developer</subtitle><entry><title>【Leetcode题解】2599. Make the Prefix Sum Non-negative</title><link href="https://mestrace.github.io/posts/2023/Mar/23/2599-make-the-prefix-sum-non-negative/" rel="alternate"></link><published>2023-03-23T00:00:00+08:00</published><updated>2023-03-23T00:00:00+08:00</updated><author><name>Mestrace</name></author><id>tag:mestrace.github.io,2023-03-23:/posts/2023/Mar/23/2599-make-the-prefix-sum-non-negative/</id><summary type="html">&lt;p&gt;Leetcode 2599 Make the Prefix Sum Non-negative My Solution 我的解题思路。这道题主要用贪心算法(greedy)和最小堆(min-heap)结合起来去求解。&lt;/p&gt;</summary><content type="html">&lt;h2&gt;题目&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://leetcode.com/problems/make-the-prefix-sum-non-negative/"&gt;题目链接&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;给定数组&lt;code&gt;nums&lt;/code&gt;，允许把这个数组里任意的数字移动到数组最后，我们能够把这个操作进行任意次，使得这个数组的前缀和（prefix sum）都为非负整数。找到最少的操作次数。此外，给定的测试样例一定存在解。&lt;/p&gt;
+&lt;h2&gt;分析&lt;/h2&gt;
+&lt;p&gt;初看到的时候，我也没有什么特别好的思路，所以就从例子入手去看看。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Input: nums = [3, -5, -4, 7]
+Output: 2
+Explanation:
+Prefix sums
+0 - [3, -2, -6, 1]
+1 - [3, -1, 6, 1] (Move -5 to the back)
+2 - [3, 10, 5, 1] (Move -4 to the back)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;上面那个例子我们可以看到，当我们移动第&lt;code&gt;i&lt;/code&gt;个数字到数组末尾的时候，前缀和里面&lt;code&gt;[i, n - 1]&lt;/code&gt;区间都会发生变化。此外，我们还可以观察到，要求最少的移动次数的话，非负整数是不需要移动的，只有负数会影响我们的结果。而且，维护一个前缀和来求解的话时间复杂度有点高，所以这个思路暂时不采纳。&lt;/p&gt;
+&lt;p&gt;那么，另一个思路就来了。我们可以贪心的把数字移动到末尾，仅当我们发现当前前缀加上当前数字小于0的时候。伪代码大概长这样&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;prefix = 0
+for n in range nums:
+    if prefix + n &amp;lt; 0:
+        move n to the back
+        continue
+    prefix += n
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;这样的方法虽然是能求出解的，但并不是最优的。让我们来看一个例子&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;Input&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;Output&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;在这个例子中，我们发现我们的算法会吞掉这个&lt;code&gt;-6&lt;/code&gt;，但是把两个&lt;code&gt;-3&lt;/code&gt;移到末尾去。所以显而易见的，如果能移动的话，我们要尽可能的移动更小的负数，而不是像上面那段伪代码一样，只有当&lt;code&gt;prefix + n&lt;/code&gt;小于0的时候才移动。那么到这里，答案基本就呼之欲出了。&lt;/p&gt;
+&lt;h2&gt;代码&lt;/h2&gt;
+&lt;p&gt;我们用了一个最小堆min-heap来包括当前看到的所有的负数，每当我们发现当前前缀和已经小于0的时候，我们就把最小的那个负数移动到末尾去。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;heapq&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;heappush&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;heappop&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Solution&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;makePrefSumNonNegative&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+        &lt;span class="n"&gt;prefix&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+        &lt;span class="n"&gt;h&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;prefix&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="k"&gt;continue&lt;/span&gt;
+            &lt;span class="n"&gt;heappush&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;h&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;prefix&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+                &lt;span class="n"&gt;neg&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;heappop&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;h&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                &lt;span class="n"&gt;prefix&lt;/span&gt; &lt;span class="o"&gt;-=&lt;/span&gt; &lt;span class="n"&gt;neg&lt;/span&gt;
+
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;总结&lt;/h2&gt;
+&lt;p&gt;这道题整体难度不算很高，但是设计的挺巧妙，还是需要一些推导过程才能做出来。&lt;/p&gt;
+&lt;p&gt;如果你想变得更强的话，可以做做&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/furthest-building-you-can-reach/"&gt;Medium - 1642. Furthest Building You Can Reach&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/reward-top-k-students/"&gt;Medium - 2512. Reward Top K Students&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/total-cost-to-hire-k-workers/"&gt;Medium - 2462. Total Cost to Hire K Workers&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/put-marbles-in-bags/"&gt;Hard - 2551. Put Marbles in Bags&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Leetcode"></category></entry><entry><title>【Leetcode题解】Weekly Contest 337 周赛题目解析</title><link href="https://mestrace.github.io/posts/2023/Mar/19/weekly-337/" rel="alternate"></link><published>2023-03-19T00:00:00+08:00</published><updated>2023-03-19T00:00:00+08:00</updated><author><name>Mestrace</name></author><id>tag:mestrace.github.io,2023-03-19:/posts/2023/Mar/19/weekly-337/</id><summary type="html">&lt;p&gt;2023-03 Leetcode Weekly Contest 337 | 2595. Number of Even and Odd Bits | 2596. Check Knight Tour Configuration | 2597. The Number of Beautiful Subsets | 2598. Smallest Missing Non-negative Integer After Operations | My solution 我的题目解析&lt;/p&gt;</summary><content type="html">&lt;p&gt;今天的周赛&lt;a href="https://leetcode.com/contest/weekly-contest-337/"&gt;Weekly Contest 337&lt;/a&gt;难度也比较适中。而且令我没想到的是最后一题竟然是Medium。个人在做的时候感觉第三题比第四题的思考过程要难得多，可能是我个人的错觉。此外，跟之前一天的双周赛&lt;a href="https://leetcode.com/contest/biweekly-contest-100/"&gt;Biweekly Contest 100&lt;/a&gt;（&lt;a href="https://mestrace.github.io/posts/2023/Mar/18/biweekly-100/"&gt;我的题解&lt;/a&gt;）一样，题目也做了反GPT处理。出题人花了20买的这个GPT会员可真值，让无数英雄折腰啊。好了，不说废话了，看看今天的题目吧。&lt;/p&gt;
 &lt;h2&gt;题目列表&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;a href="https://leetcode.com/problems/number-of-even-and-odd-bits/"&gt;Easy - 2595. Number of Even and Odd Bits&lt;/a&gt;&lt;/li&gt;
