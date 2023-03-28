@@ -44,6 +44,9 @@ EXTRA_PATH_METADATA = {
     "static/808470c28b824e33920b126802a692f6.txt": {
         "path": "808470c28b824e33920b126802a692f6.txt"
     },
+    "static/yandex_be29935b91989956.html" : {
+        "path" : "yandex_be29935b91989956.html"
+    }
 }
 
 favico_path = "content/static/favico"
