@@ -44,9 +44,7 @@ EXTRA_PATH_METADATA = {
     "static/808470c28b824e33920b126802a692f6.txt": {
         "path": "808470c28b824e33920b126802a692f6.txt"
     },
-    "static/yandex_be29935b91989956.html" : {
-        "path" : "yandex_be29935b91989956.html"
-    }
+    "static/yandex_be29935b91989956.html": {"path": "yandex_be29935b91989956.html"},
 }
 
 favico_path = "content/static/favico"
@@ -95,6 +93,7 @@ PLUGINS = [
     "seo",
     "sitemap",
     "pelican.plugins.precompress",
+    "render_math",
 ]
 
 # # Enable Jinja2 i18n extension used to parse translations.
@@ -133,3 +132,6 @@ SITEMAP = {
 
 # Remove URL Hash
 DISABLE_URL_HASH = True
+
+# Math Jax
+MATH_JAX = {"tex_extensions": ["color.js", "mhchem.js"]}
