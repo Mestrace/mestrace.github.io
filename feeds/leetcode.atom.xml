@@ -1,5 +1,478 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Mestrace的个人博客 - Leetcode</title><link href="https://mestrace.github.io/" rel="alternate"></link><link href="https://mestrace.github.io/feeds/leetcode.atom.xml" rel="self"></link><id>https://mestrace.github.io/</id><updated>2023-03-27T00:00:00+08:00</updated><subtitle>Software Developer</subtitle><entry><title>【Leetcode题解】Weekly Contest 338 周赛题目解析</title><link href="https://mestrace.github.io/posts/2023/Mar/27/weekly-338/" rel="alternate"></link><published>2023-03-27T00:00:00+08:00</published><updated>2023-03-27T00:00:00+08:00</updated><author><name>Mestrace</name></author><id>tag:mestrace.github.io,2023-03-27:/posts/2023/Mar/27/weekly-338/</id><summary type="html">&lt;p&gt;2023-03 Leetcode Weekly Contest 338 | 2600. K Items With the Maximum Sum K 件物品的最大和 | 2601. Prime Subtraction Operation 质数减法运算 | 2602. Minimum Operations to Make All Array Elements Equal 使数组元素全部相等的最少操作次数 | 2603. Collect Coins in a Tree 收集树中金币| My solution 我的题目解析&lt;/p&gt;</summary><content type="html">&lt;p&gt;这次的周赛我鸽子了，结果就刚好错过了大闹剧：Leetcode全球站崩了，有的小伙伴们20分钟才能开始做题。估计这次分数会作废吧。这次的题目难度稍微比前几周的题目要难一些，主要是结合了多个知识。如果不熟练的话，就比较容易出错。此外，例如第二题和第三题，也有很多恶心的边缘条件需要一些技巧才能解决。&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mestrace的个人博客 - Leetcode</title><link href="https://mestrace.github.io/" rel="alternate"></link><link href="https://mestrace.github.io/feeds/leetcode.atom.xml" rel="self"></link><id>https://mestrace.github.io/</id><updated>2023-04-02T19:00:00+08:00</updated><subtitle>Software Developer</subtitle><entry><title>【Leetcode题解】Weekly Contest 339 周赛题目解析</title><link href="https://mestrace.github.io/posts/2023/Apr/02/weekly-339/" rel="alternate"></link><published>2023-04-02T19:00:00+08:00</published><updated>2023-04-02T19:00:00+08:00</updated><author><name>Mestrace</name></author><id>tag:mestrace.github.io,2023-04-02:/posts/2023/Apr/02/weekly-339/</id><summary type="html">&lt;p&gt;2023-04 Leetcode Weekly Contest 339 | 2600. K Items With the Maximum Sum K 件物品的最大和 | 2610. Convert an Array Into a 2D Array With Conditions 转换二维数组 | 2611. Mice and Cheese 老鼠和奶酪 | 2612. Minimum Reverse Operations 最少翻转操作数| My solution 我的题目解析&lt;/p&gt;</summary><content type="html">&lt;p&gt;这次周赛第四题难度陡增，但是前三题又较为手速。半个小时做完三题之后，盯着第四题想了一小时也还是毫无办法。最终第四题的AC率为&lt;code&gt;100 / 5803 = 1.7%&lt;/code&gt;，真乃奇景……&lt;/p&gt;
+&lt;h2&gt;题目列表&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/find-the-longest-balanced-substring-of-a-binary-string/"&gt;Easy - 2609. Find the Longest Balanced Substring of a Binary String&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/convert-an-array-into-a-2d-array-with-conditions/"&gt;Medium - 2610. Convert an Array Into a 2D Array With Conditions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/mice-and-cheese/"&gt;Medium - 2611. Mice and Cheese&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/minimum-reverse-operations/"&gt;Hard - 2612. Minimum Reverse Operations&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;2609. Find the Longest Balanced Substring of a Binary String 最长平衡子字符串&lt;/h2&gt;
+&lt;p&gt;给定二元字符串&lt;code&gt;s&lt;/code&gt;，其中只有&lt;code&gt;0&lt;/code&gt;和&lt;code&gt;1&lt;/code&gt;，找到最长的字串符合特定条件：
+- &lt;code&gt;0&lt;/code&gt;和&lt;code&gt;1&lt;/code&gt;的数量相等
+- &lt;code&gt;0&lt;/code&gt;都在&lt;code&gt;1&lt;/code&gt;的前面&lt;/p&gt;
+&lt;p&gt;考虑以下状态机&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;记录&lt;code&gt;0&lt;/code&gt;和&lt;code&gt;1&lt;/code&gt;的个数。&lt;/li&gt;
+&lt;li&gt;存在&lt;code&gt;1&lt;/code&gt;的情况下，新的元素为&lt;code&gt;0&lt;/code&gt;，记录最大的情况，并重设&lt;code&gt;0&lt;/code&gt;和&lt;code&gt;1&lt;/code&gt;的个数。&lt;/li&gt;
+&lt;li&gt;最大的情况为&lt;code&gt;0&lt;/code&gt;和&lt;code&gt;1&lt;/code&gt;的个数其中较小的那个，长度为两倍。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;代码&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Solution&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;findTheLongestBalancedSubstring&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+        &lt;span class="n"&gt;zeros&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+        &lt;span class="n"&gt;ones&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;'0'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="c1"&gt;# reset&lt;/span&gt;
+                &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;ones&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                    &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;max&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;min&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;zeros&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ones&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                    &lt;span class="n"&gt;zeros&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+                    &lt;span class="n"&gt;ones&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+                &lt;span class="n"&gt;zeros&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+            &lt;span class="k"&gt;elif&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;'1'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="n"&gt;ones&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+        &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;max&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;min&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;zeros&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ones&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;2610. Convert an Array Into a 2D Array With Conditions 转换二维数组&lt;/h2&gt;
+&lt;p&gt;给定一个列表的数字&lt;code&gt;nums&lt;/code&gt;，把他排列成一个二维数组，使得每一行都没有重复的元素。&lt;/p&gt;
+&lt;p&gt;标准的&lt;code&gt;map&lt;/code&gt;题目。我们贪心的让前面的数组尽可能的排列更多的数字即可。&lt;/p&gt;
+&lt;h3&gt;代码&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;collections&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Counter&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Solution&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;findMatrix&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;]]:&lt;/span&gt;
+        &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt; &lt;span class="c1"&gt;# 2d array&lt;/span&gt;
+
+        &lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;dict&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Counter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+        &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;sresult&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+            &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;keys&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+                &lt;span class="n"&gt;sresult&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;-=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+            &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;sresult&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                    &lt;span class="k"&gt;del&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+            &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sresult&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;2611. Mice and Cheese 老鼠和奶酪&lt;/h2&gt;
+&lt;p&gt;给定两个数组&lt;code&gt;reward1&lt;/code&gt;和&lt;code&gt;reward2&lt;/code&gt;，和一个正整数&lt;code&gt;k&lt;/code&gt;。&lt;code&gt;reward1[i]&lt;/code&gt;和&lt;code&gt;reward2[i]&lt;/code&gt;分别代表两只老鼠吃&lt;code&gt;i&lt;/code&gt;种奶酪所得的分数。每种奶酪只能给一只老鼠吃并获得对应的分数。如果假设第一只老鼠只能吃&lt;code&gt;k&lt;/code&gt;个奶酪的话，问最多可能得到的分数。注意这里没有限定第二只老鼠吃多少个，所以我们可以假设第二只老鼠把第一只老鼠吃剩的奶酪都吃了，也就是可以获得所有&lt;code&gt;rewards2&lt;/code&gt;剩余的分数。这里有几位同僚可能看成两只老鼠都只能吃&lt;code&gt;k&lt;/code&gt;个了，还是要注意审题啊。此外，&lt;code&gt;rewards1&lt;/code&gt;和&lt;code&gt;rewards2&lt;/code&gt;都是正整数。&lt;/p&gt;
+&lt;p&gt;这道题很明显是有某种最优子问题的解法，所以我们首先考虑&lt;code&gt;dp&lt;/code&gt;。实际上这里可以对问题进行化简一下。假设我们让第二只老鼠吃掉所有的奶酪，那么我们可以获得&lt;code&gt;reward2&lt;/code&gt;全部的分数。第一只老鼠每吃掉第&lt;code&gt;i&lt;/code&gt;个奶酪，我们就要扣掉&lt;code&gt;reward2[i]&lt;/code&gt;并加上&lt;code&gt;reward1[i]&lt;/code&gt;。也就是说，实际上&lt;code&gt;reward[2]&lt;/code&gt;可以看作是对于第一只老鼠的某个惩罚系数。我们期望吃到&lt;code&gt;k&lt;/code&gt;个奶酪，使而惩罚系数尽可能小。这样的话，实际上就是某种线性系统的优化问题。因为只是线性的，局部最优可以是全局最优，因此我们考虑是否可以用贪心的方法来做。&lt;/p&gt;
+&lt;p&gt;实际上，如果我们定义吃第&lt;code&gt;i&lt;/code&gt;个奶酪的效用为&lt;code&gt;utility[i] = reward1[i] - reward2[i]&lt;/code&gt;的话，那么我们让第一只老鼠贪心地吃&lt;code&gt;k&lt;/code&gt;个效用最大的，剩下的给第二个老鼠吃，这就是这道题的最优解。&lt;/p&gt;
+&lt;h3&gt;代码&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Solution&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;miceAndCheese&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;reward1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;reward2&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;total_r2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;reward2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;diff&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;reward1&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;reward2&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;reward1&lt;/span&gt;&lt;span class="p"&gt;))]&lt;/span&gt;
+
+        &lt;span class="n"&gt;diff&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sort&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# print(diff)&lt;/span&gt;
+
+        &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;total_r2&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="n"&gt;idx&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;diff&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+            &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;reward1&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;idx&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;reward2&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;idx&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;2612. Minimum Reverse Operations 最少翻转操作数&lt;/h2&gt;
+&lt;p&gt;给定一个整数&lt;code&gt;n&lt;/code&gt;为一个数组的长度，这个数组&lt;code&gt;arr&lt;/code&gt;是一个只有&lt;code&gt;-1, 0, 1&lt;/code&gt;的数组。整数&lt;code&gt;p&lt;/code&gt;为一个索引，表示&lt;code&gt;arr[p] = 1&lt;/code&gt;。&lt;code&gt;banned&lt;/code&gt;为一个索引列表，表示&lt;code&gt;arr[banned[i]]&lt;/code&gt;不可变化，永远为&lt;code&gt;0&lt;/code&gt;。给定一个数字&lt;code&gt;k&lt;/code&gt;，现在你可以对&lt;code&gt;arr&lt;/code&gt;做任意次数的翻转操作，如&lt;code&gt;arr = [1,0,1,0,1], k = 2&lt;/code&gt;，可以反转&lt;code&gt;arr[1:3]&lt;/code&gt;使得新数组为&lt;code&gt;[1,1,0,0,1]&lt;/code&gt;。除此之外，如果&lt;code&gt;arr&lt;/code&gt;某一个数字是&lt;code&gt;banned&lt;/code&gt;的话，翻转操作无效。如&lt;code&gt;arr = [1,0,1,0,1], k = 4, banned = [3]&lt;/code&gt;，翻转&lt;code&gt;arr[1:5]&lt;/code&gt;使得新数组为&lt;code&gt;[1,1,0,0,0]&lt;/code&gt;。即&lt;code&gt;banned&lt;/code&gt;里面的数组索引所在的数字永远为&lt;code&gt;0&lt;/code&gt;不可改变，但是可以翻转到别的位置上去。最后要求你返回一个数组&lt;code&gt;ans&lt;/code&gt;使得&lt;code&gt;ans[i]&lt;/code&gt;为&lt;code&gt;arr[i]&lt;/code&gt;变为&lt;code&gt;0&lt;/code&gt;最少需要翻转多少次；若&lt;code&gt;i&lt;/code&gt;为&lt;code&gt;banned&lt;/code&gt;或者永远无法到达的话，则&lt;code&gt;ans[i] = -1&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;这道题还是有点难度的，读题理解题目就花费了我不少时间。在限定时间内写出正确答案的话对于正常人来说还是比较难的。首先，我们可以很快发现，对于这道题来说，他其实像一个图的题目。仔细思考一下，通过对于某个子数组进行翻转，我们可以把&lt;code&gt;1&lt;/code&gt;移动到另一个位置上，因此这就是图一条边。但是，如果要构造对应的图来说，比较难一点。我们先来看几个例子，例子里面我们通过翻转操作，找一次翻转可以到的位置。此外，我们先不管&lt;code&gt;banned&lt;/code&gt;这个条件，因为他就是要用这个条件来迷惑你的。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Example 1
+Input: p = 4, arr = [0,0,0,0,1,0,0,0], k = 5
+Output: [0, 2, 4, 6]
+Explanation:
+- flip [0:5], arr = [1,0,0,0,0,0,0,0] =&amp;gt; 0
+- flip [1:6], arr = [0,0,1,0,0,0,0,0] =&amp;gt; 2
+- flip [2:7], arr = [0,0,0,0,1,0,0,0] =&amp;gt; 4
+- flip [3:8], arr = [0,0,0,0,0,0,1,0] =&amp;gt; 6
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;这里我们看到，当&lt;code&gt;p = 4&lt;/code&gt;，&lt;code&gt;k = 5&lt;/code&gt;的时候，我们的索引应该是&lt;code&gt;[0, 2, 4, 6(, 8)]&lt;/code&gt;（如果arr再长一点的话）。再看一个偶数的例子吧。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Example 2
+Input: p = 4, arr = [0,0,0,0,1,0,0,0], k = 4
+Output: [1,3,5,7]
+Explanation: 
+- flip [1:5], arr = [0,1,0,0,0,0,0,0] =&amp;gt; 1
+- flip [2:6], arr = [0,0,0,1,0,0,0,0] =&amp;gt; 3
+- flip [3:7], arr = [0,0,0,0,0,1,0,0] =&amp;gt; 5
+- flip [4:8], arr = [0,0,0,0,0,0,0,1] =&amp;gt; 7
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;那么在边界的时候，我们怎么处理呢？&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Example 3
+Input: p = 1, arr = [0,1,0,0,0,0,0,0], k = 5
+Output: [3, 5]
+Explanation:
+- flip [0:5], arr = [0,0,0,1,0,0,0,0] =&amp;gt; 3
+- flip [1:6], arr = [0,0,0,0,0,1,0,0] =&amp;gt; 5
+
+Example 4
+Input: p = 6, arr = [0,0,0,0,0,0,1,0], k = 5
+Output: [3, 5]
+Explanation:
+- flip [2:7], arr = [0,0,1,0,0,0,0,0] =&amp;gt; 2
+- flip [3:8], arr = [0,0,0,0,1,0,0,0] =&amp;gt; 4
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;这里直接给公式吧。&lt;/p&gt;
+&lt;div class="math"&gt;$$
+lo=\begin{cases}
+i - (k - 1) &amp;amp; i &amp;gt; (k - 1) \\
+(k - 1) - i &amp;amp; \text{otherwise}
+\end{cases}
+$$&lt;/div&gt;
+&lt;p&gt;对于我们的左边界来说比较好理解，就是&lt;code&gt;abs(i - (k - 1))&lt;/code&gt;。&lt;/p&gt;
+&lt;div class="math"&gt;$$
+hi=\begin{cases}
+i + (k - 1) &amp;amp; i + (k - 1) &amp;lt; n \\
+i + 2*(n - i - 1) - (k - 1) &amp;amp; \text{otherwise}
+\end{cases}
+$$&lt;/div&gt;
+&lt;p&gt;对于我们的右边界来说，如果 &lt;code&gt;i + (k - 1)&lt;/code&gt;越界了的话，需要一点点特殊处理。这里可以看下面的草图，我们算出&lt;code&gt;i + (k - 1)&lt;/code&gt;在越界之后的映射（下面的小红点的位置），可以做一个延长线。当然，这个技巧有点超纲了……&lt;/p&gt;
+&lt;p align="center"&gt;
+  &lt;img src="https://mestrace.github.io/images/weekly-339/2612-range.png"&gt;
+&lt;/p&gt;
+
+&lt;p&gt;总之，回到我们的topic。既然我们有了&lt;code&gt;lo&lt;/code&gt;和&lt;code&gt;hi&lt;/code&gt;上下界，我们是不是直接遍历里面间隔一个数的点就好了呢？我们算出来的&lt;code&gt;[lo, hi]&lt;/code&gt;的界限可能会非常大，因此遍历是行不通的。我们这里考虑一个&lt;code&gt;sortedset&lt;/code&gt;能够直接通过上下界查询并遍历里面的元素。此外，&lt;code&gt;lo&lt;/code&gt;的奇偶性决定了我们是选择奇数的点还是偶数的点，所以我们可以用两个&lt;code&gt;set&lt;/code&gt;来分别维护，根据&lt;code&gt;lo&lt;/code&gt;的奇偶性来解决。不要忘记了，我们还有一个被遗忘的&lt;code&gt;banned&lt;/code&gt;列表，在我们构建&lt;code&gt;set&lt;/code&gt;的时候要把他们排除掉。&lt;/p&gt;
+&lt;h3&gt;代码&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sortedcontainers&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;SortedList&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Solution&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;minReverseOperations&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;banned&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;]:&lt;/span&gt;
+        &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;
+        &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+
+        &lt;span class="n"&gt;remaining&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;SortedList&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;SortedList&lt;/span&gt;&lt;span class="p"&gt;()]&lt;/span&gt;
+
+        &lt;span class="n"&gt;banned&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;banned&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;banned&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="k"&gt;continue&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="k"&gt;continue&lt;/span&gt;
+            &lt;span class="n"&gt;remaining&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="n"&gt;queue&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;deque&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+        &lt;span class="n"&gt;queue&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;queue&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;queue&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;popleft&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+            &lt;span class="n"&gt;lo&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;max&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+            &lt;span class="n"&gt;hi&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;min&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+            &lt;span class="c1"&gt;# print(remaining[lo &amp;amp; 1], i, lo, hi, list(remaining[lo &amp;amp; 1].irange(lo, hi)))&lt;/span&gt;
+
+            &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;nei&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;remaining&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;lo&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;irange&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;lo&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;hi&lt;/span&gt;&lt;span class="p"&gt;)):&lt;/span&gt;
+                &lt;span class="n"&gt;queue&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nei&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;nei&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+                &lt;span class="n"&gt;remaining&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;lo&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;remove&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nei&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;小结&lt;/h2&gt;
+&lt;p&gt;这次周赛第四题难度陡增。看别人分析，基本达到了codeforces div2的D题程度&lt;sup id="sf-weekly-339-1-back"&gt;&lt;a href="#sf-weekly-339-1" class="simple-footnote" title="CF的难易度分析见这篇文章"&gt;1&lt;/a&gt;&lt;/sup&gt;，AC的大佬的LC Rating都在2600左右。所以，对于咱们普通人来说，三题AC就已经很好了！面试应该不会出这种题吧（笑）。&lt;/p&gt;
+&lt;p&gt;如果你想变得更强的话，可以做做&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/house-robber/"&gt;Medium - 198. House Robber&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/house-robber-ii/"&gt;Medium - 213. House Robber II&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/paint-house/"&gt;Medium - 256. Paint House&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/non-negative-integers-without-consecutive-ones/"&gt;Hard - 600. Non-negative Integers without Consecutive Ones&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;附录&lt;/h2&gt;
+&lt;details&gt;
+&lt;summary&gt;上面图片的&lt;img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/LaTeX_logo.svg/128px-LaTeX_logo.svg.png" alt="LaTeX icon" width="40"&gt;代码&lt;/summary&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;\documentclass&lt;/span&gt;&lt;span class="nb"&gt;{&lt;/span&gt;article&lt;span class="nb"&gt;}&lt;/span&gt;
+&lt;span class="k"&gt;\usepackage&lt;/span&gt;&lt;span class="nb"&gt;{&lt;/span&gt;graphicx&lt;span class="nb"&gt;}&lt;/span&gt; &lt;span class="c"&gt;% Required for inserting images&lt;/span&gt;
+&lt;span class="k"&gt;\usepackage&lt;/span&gt;&lt;span class="nb"&gt;{&lt;/span&gt;tikz&lt;span class="nb"&gt;}&lt;/span&gt;
+&lt;span class="k"&gt;\usepackage&lt;/span&gt;&lt;span class="nb"&gt;{&lt;/span&gt;xcolor&lt;span class="nb"&gt;}&lt;/span&gt;
+
+&lt;span class="k"&gt;\begin&lt;/span&gt;&lt;span class="nb"&gt;{&lt;/span&gt;document&lt;span class="nb"&gt;}&lt;/span&gt;
+
+&lt;span class="k"&gt;\begin&lt;/span&gt;&lt;span class="nb"&gt;{&lt;/span&gt;tikzpicture&lt;span class="nb"&gt;}&lt;/span&gt;
+&lt;span class="c"&gt;% the array length&lt;/span&gt;
+&lt;span class="k"&gt;\draw&lt;/span&gt;&lt;span class="na"&gt;[fill=blue!10]&lt;/span&gt;(-3,0) node[below] &lt;span class="nb"&gt;{&lt;/span&gt;0&lt;span class="nb"&gt;}&lt;/span&gt; -- (-3,0.5) -- (3, 0.5) -- (3, 0) node[below]&lt;span class="nb"&gt;{&lt;/span&gt;n - 1&lt;span class="nb"&gt;}&lt;/span&gt;;
+
+&lt;span class="c"&gt;% vertical line at i&lt;/span&gt;
+&lt;span class="k"&gt;\draw&lt;/span&gt; (1, 0) node[below]&lt;span class="nb"&gt;{&lt;/span&gt;i&lt;span class="nb"&gt;}&lt;/span&gt; ;
+
+&lt;span class="c"&gt;% original i + (k - 1)&lt;/span&gt;
+&lt;span class="k"&gt;\draw&lt;/span&gt; (1, 0.75) -- (1, 1) -- (3.5, 1) -- (3.5, 0.75);
+&lt;span class="k"&gt;\draw&lt;/span&gt; (2.25, 1) node[above]&lt;span class="nb"&gt;{&lt;/span&gt;(k - 1)&lt;span class="nb"&gt;}&lt;/span&gt;;
+&lt;span class="c"&gt;% offseted i + (k - 1) &lt;/span&gt;
+&lt;span class="k"&gt;\draw&lt;/span&gt; (2.5, 1.5) -- (2.5, 1.75) -- (5, 1.75) -- (5, 1.5);
+&lt;span class="k"&gt;\draw&lt;/span&gt; (3.75, 1.75) node[above]&lt;span class="nb"&gt;{&lt;/span&gt;(k - 1)&lt;span class="nb"&gt;}&lt;/span&gt;;
+
+&lt;span class="c"&gt;% the point we look for&lt;/span&gt;
+&lt;span class="k"&gt;\node&lt;/span&gt; at (2.5, 0) [circle, fill=red!60, inner sep=1.5]&lt;span class="nb"&gt;{}&lt;/span&gt;;
+
+&lt;span class="c"&gt;% n - 1 - i&lt;/span&gt;
+&lt;span class="k"&gt;\draw&lt;/span&gt; (1, -0.5) -- (1, -0.75) -- (3, -0.75) -- (3, -0.5);
+&lt;span class="k"&gt;\draw&lt;/span&gt; (2, -0.75) node[below]&lt;span class="nb"&gt;{&lt;/span&gt;(n - 1) - i&lt;span class="nb"&gt;}&lt;/span&gt;;
+&lt;span class="k"&gt;\draw&lt;/span&gt; (3, -0.5) -- (3, -0.75) -- (5, -0.75) -- (5, -0.5);
+&lt;span class="k"&gt;\draw&lt;/span&gt; (4, -0.75) node[below]&lt;span class="nb"&gt;{&lt;/span&gt;(n - 1) - i&lt;span class="nb"&gt;}&lt;/span&gt;;
+
+&lt;span class="c"&gt;% the axis&lt;/span&gt;
+&lt;span class="k"&gt;\draw&lt;/span&gt;&lt;span class="na"&gt;[-]&lt;/span&gt; (-5,0)--(5,0);
+&lt;span class="k"&gt;\end&lt;/span&gt;&lt;span class="nb"&gt;{&lt;/span&gt;tikzpicture&lt;span class="nb"&gt;}&lt;/span&gt;
+
+&lt;span class="k"&gt;\end&lt;/span&gt;&lt;span class="nb"&gt;{&lt;/span&gt;document&lt;span class="nb"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/details&gt;
+&lt;hr&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js','color.js','mhchem.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;&lt;ol class="simple-footnotes"&gt;&lt;li id="sf-weekly-339-1"&gt;CF的难易度分析见&lt;a href="https://zh.xloypaypa.pub/codeforcesjie-shao-gong-zuo-xiang/"&gt;这篇文章&lt;/a&gt; &lt;a href="#sf-weekly-339-1-back" class="simple-footnote-back"&gt;↩&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</content><category term="Leetcode"></category><category term="Contest"></category></entry><entry><title>【Leetcode题解】Biweekly Contest 101 双周赛题目解析</title><link href="https://mestrace.github.io/posts/2023/Apr/02/biweekly-101/" rel="alternate"></link><published>2023-04-02T00:00:00+08:00</published><updated>2023-04-02T00:00:00+08:00</updated><author><name>Mestrace</name></author><id>tag:mestrace.github.io,2023-04-02:/posts/2023/Apr/02/biweekly-101/</id><summary type="html">&lt;p&gt;2023-04 Leetcode Biweekly Contest 101 | 2605. Form Smallest Number From Two Digit Arrays 从两个数字数组里生成最小数字 | 2606. Find the Substring With Maximum Cost 找到最大开销的子字符串 | 2607. Make K-Subarray Sums Equal 使子数组元素和相等 | 2608. Shortest Cycle in a Graph 图中的最短环 | My solution 我的题目解析&lt;/p&gt;</summary><content type="html">&lt;p&gt;这次双周赛难度不大，侮辱性极强。第三题和第四题完全是对调的难度，尽管一个是&lt;code&gt;Medium&lt;/code&gt;一个是&lt;code&gt;Hard&lt;/code&gt;。真的搞不懂出题人的思路了（&lt;span title="你知道的太多了" class="heimu"&gt;他想让我死&lt;/span&gt;）。&lt;/p&gt;
+&lt;h2&gt;题目列表&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/form-smallest-number-from-two-digit-arrays/"&gt;Easy - 2605. Form Smallest Number From Two Digit Arrays&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/find-the-substring-with-maximum-cost/"&gt;Medium - 2606. Find the Substring With Maximum Cost&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/make-k-subarray-sums-equal/"&gt;Medium - 2607. Make K-Subarray Sums Equal&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/shortest-cycle-in-a-graph/"&gt;Hard - 2608. Shortest Cycle in a Graph&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;2606. Find the Substring With Maximum Cost 从两个数字数组里生成最小数字&lt;/h2&gt;
+&lt;p&gt;第一题的要点：如果同一个数字在两个数组里都出现的话，那么这个数字必定最小；否则的话我们就看两个数组里最小的两个数字是否能组成最小的数。&lt;/p&gt;
+&lt;h3&gt;代码&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Solution&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;minNumber&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;nums1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;nums2&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;nums1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sort&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="n"&gt;nums2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sort&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+        &lt;span class="n"&gt;nums3&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nums1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;intersection&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nums2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;nums3&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;min&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nums3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;min&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nums1&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;nums2&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;nums2&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;nums1&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;2606. Find the Substring With Maximum Cost 找到最大开销的子字符串&lt;/h2&gt;
+&lt;p&gt;输入字符串&lt;code&gt;s&lt;/code&gt;, &lt;code&gt;chars&lt;/code&gt;和数组&lt;code&gt;vals&lt;/code&gt;，其中&lt;code&gt;vals[i]&lt;/code&gt;是&lt;code&gt;chars[i]&lt;/code&gt;字母的分数。如果字母没有包含在&lt;code&gt;chars&lt;/code&gt;里面，那么就按照他的&lt;code&gt;ascii&lt;/code&gt;里的顺序来决定分数，比如&lt;code&gt;a = 1&lt;/code&gt;，&lt;code&gt;b = 2&lt;/code&gt;…… 最终，我们找到一个子字符串的组合使得分数最大。&lt;/p&gt;
+&lt;p&gt;这题其实是&lt;a href="https://leetcode.com/problems/maximum-subarray/"&gt;53. Maximum Subarray&lt;/a&gt;的变种，因为我们可以简单的根据三个入参转换为一个&lt;code&gt;nums&lt;/code&gt;数组，这样我们的问题就是要求找到最大的子数组了。有两个需要注意的点：第一是对于负数的处理，第二是也可以取空集，这样分数就为0。这道题的解法主要是以&lt;a href="https://en.wikipedia.org/wiki/Maximum_subarray_problem#Kadane's_algorithm"&gt;Kadine's Algorithm&lt;/a&gt;来展开。这个解法有一些贪心的意味在里面。我们先来看个例子。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Example 1 
+Input: [-1,-4,-5,4,1,2,-3]
+Output: 7
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;这个例子里面我们很明显药跳过前面三个负数，从&lt;code&gt;4&lt;/code&gt;开始取。那么我们只取正的子数组是不是就可以了呢？&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Example 2
+Input: [-1,1000,-5,4,1,2,-3]
+Output: 1002
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;这个例子里面，我们又可以从&lt;code&gt;1000&lt;/code&gt;，并且包含&lt;code&gt;-5&lt;/code&gt;。当我们有一个绝对大的数字的时候，我们是可以选择性的囊括一些负数以期望获得更大的值的。无论如何，我们期望的是尽可能的囊括正数使得整个最大。&lt;/p&gt;
+&lt;h3&gt;代码&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;string&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Solution&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;maximumCostSubstring&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;chars&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;vals&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;v&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;chars&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;vals&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;chars&lt;/span&gt;&lt;span class="p"&gt;))}&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;string&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ascii_lowercase&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="k"&gt;continue&lt;/span&gt;
+            &lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;ord&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nb"&gt;ord&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# print(v)&lt;/span&gt;
+
+        &lt;span class="n"&gt;nums&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+
+        &lt;span class="n"&gt;curr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="p"&gt;)):&lt;/span&gt;
+            &lt;span class="n"&gt;num&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+            &lt;span class="n"&gt;curr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;max&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;num&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;curr&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;num&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;max&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;curr&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;max&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;2607. Make K-Subarray Sums Equal 使子数组元素和相等&lt;/h2&gt;
+&lt;p&gt;给定一个数字&lt;code&gt;arr&lt;/code&gt;，可以对任意数字进行加减&lt;code&gt;1&lt;/code&gt;的操作。我们期望找到最少次数的操作使得每个连续子数组的和都相等。此外，这个数组是循环的，也就是说我们数子数组的时候，数到末尾边界了的话需要从头开始继续算。&lt;/p&gt;
+&lt;p&gt;这题应该算是本次双周赛最难的题目了。我一开始的思路就是分case处理。有这么几种case&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;若&lt;code&gt;arr&lt;/code&gt;的长度可以整除&lt;code&gt;k&lt;/code&gt;，&lt;code&gt;arr&lt;/code&gt;可以尽可能被调整为以&lt;code&gt;k&lt;/code&gt;为单位循环的数组。&lt;/li&gt;
+&lt;li&gt;否则的话，就需要把所有的数字都变成相同的，而变为相同的最小情况是变为数组的中位数。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;但是这样还是会有一些情况缺失。如下面这个例子&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Example
+Input: arr = [7,3,10,6,7,3,10,6], k = 6
+Output: 12
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;在这个例子里面，有&lt;code&gt;8&lt;/code&gt;个元素，而&lt;code&gt;k = 6&lt;/code&gt;这样子的话。可以看到，第一个和第二子数组，&lt;code&gt;arr[0:6] = [7,...,3]&lt;/code&gt;和&lt;code&gt;arr[1:7] = [3,...10]&lt;/code&gt;，少了一个&lt;code&gt;7&lt;/code&gt;多了一个&lt;code&gt;10&lt;/code&gt;，因此这里&lt;code&gt;arr[0] = 7&lt;/code&gt;和&lt;code&gt;arr[6] = 10&lt;/code&gt;是要对齐的。而再挪动一位，我们需要把&lt;code&gt;arr[1] = 3&lt;/code&gt;和&lt;code&gt;arr[7] = 6&lt;/code&gt;进行对齐，&lt;code&gt;arr[2] = arr[8 % 8 = 0]&lt;/code&gt;进行对齐，&lt;code&gt;arr[3] = arr[9 % 8 = 1]&lt;/code&gt;。这样的话，我们需要变成一致的元素索引为&lt;code&gt;[0, 2, 4, 6]&lt;/code&gt;和&lt;code&gt;[1, 3, 5, 7]&lt;/code&gt;。这两个组里的元素需要变成一致的才可以。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Example
+Input: arr = [7,3,10,6], k = 3
+Output: 8
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;再来看一个例子，在这个例子里面，我们以同样的方法去检查哪些元素需要归成一组。因为&lt;code&gt;arr&lt;/code&gt;长度为&lt;code&gt;4&lt;/code&gt;而我们需要每&lt;code&gt;3&lt;/code&gt;个都相等，因此我们没什么选择，只能把所有元素都归到同一组里面，即把整个组都变成&lt;code&gt;6&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;到这里的话，我们的思路大概就清晰了。我们通过上面这种方式把元素分组，然后每个组里的元素需要相等才可以。当然，你可以通过左右指针去做这件事情，但是这里我分享一个更高效的解法。实际上，我们能分的组数其实就是数组长度和&lt;code&gt;k&lt;/code&gt;的最大公约数&lt;code&gt;gcd(len(arr), k)&lt;/code&gt;。这样我们就可以利用这个循环数组的性质去找到最小的子集，使得我们的结果符合条件。&lt;/p&gt;
+&lt;h3&gt;代码&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;collections&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;defaultdict&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;math&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;gcd&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Solution&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;makeSubKSumEqual&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;arr&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+
+        &lt;span class="n"&gt;k&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;gcd&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;arr&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+        &lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[[]&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+
+
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;v&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;enumerate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;arr&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sort&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+            &lt;span class="n"&gt;mid&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+            &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;v&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="nb"&gt;abs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;v&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;mid&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;2608. Shortest Cycle in a Graph 图中的最短环&lt;/h2&gt;
+&lt;p&gt;给定一个无向图，我们需要找到里面最短的环。当然还有一些其他的条件，如每个点最多只有一条边，不过要解决这个问题的话都用不太上。&lt;/p&gt;
+&lt;p&gt;这道题实际上是相当标准的&lt;code&gt;bfs&lt;/code&gt;做法。我们从任意点&lt;code&gt;i&lt;/code&gt;出发，用一个queue来保存，并用一个列表来存某一个节点到&lt;code&gt;i&lt;/code&gt;的距离。如果我们发现两个点都可以到达&lt;code&gt;i&lt;/code&gt;的话，那么我们就找到了一个最短环。&lt;/p&gt;
+&lt;h3&gt;代码&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;collections&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;deque&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Solution&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;findShortestCycle&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;edges&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;g&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[[]&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;edges&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;g&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="n"&gt;g&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;root&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="n"&gt;dis&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;inf&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;
+
+            &lt;span class="n"&gt;dis&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+
+            &lt;span class="n"&gt;q&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;deque&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+            &lt;span class="n"&gt;q&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+            &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;q&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;q&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;popleft&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+                &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;g&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]:&lt;/span&gt;
+                    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;dis&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;inf&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                        &lt;span class="n"&gt;dis&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;dis&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                        &lt;span class="n"&gt;q&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                    &lt;span class="k"&gt;elif&lt;/span&gt; &lt;span class="n"&gt;dis&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="n"&gt;dis&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]:&lt;/span&gt;
+                        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;dis&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;dis&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;inf&lt;/span&gt;
+
+        &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;inf&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;min&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;inf&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;小结&lt;/h2&gt;
+&lt;p&gt;总体来讲，这次第三题还是需要一点巧妙的思路的，题型也是不常见到的那种。&lt;/p&gt;
+&lt;p&gt;如果你想变得更强的话，可以看看&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.cs.princeton.edu/courses/archive/spr07/cos226/lectures/20DirectedGraphs.pdf"&gt;Directed Graph - Princeton COS 226 Spring 2007&lt;/a&gt;里讨论了一下有向图的循环检测。&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.cs.umd.edu/class/fall2017/cmsc451-0101/Lects/lect05-graph-shortest-path.pdf"&gt;Graph Shortest Paths: Dijkstra and Bellman-Ford - UMD CMSC 451&lt;/a&gt;里探讨了对于加权图的解决方法，如Dijstra和Bellman Ford。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果你想变得更强的话，可以做做&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/maximum-subarray/"&gt;Medium - 53. Maximum Subarray&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/rotate-array/"&gt;Medium - 189. Rotate Array&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/redundant-connection/"&gt;Medium - 684. Redundant Connection&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/longest-cycle-in-a-graph/"&gt;Hard - 2360. Longest Cycle in a Graph&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/divide-nodes-into-the-maximum-number-of-groups/"&gt;Hard - 2493. Divide Nodes Into the Maximum Number of Groups&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><category term="Leetcode"></category><category term="Contest"></category></entry><entry><title>【Leetcode题解】Weekly Contest 338 周赛题目解析</title><link href="https://mestrace.github.io/posts/2023/Mar/27/weekly-338/" rel="alternate"></link><published>2023-03-27T00:00:00+08:00</published><updated>2023-03-27T00:00:00+08:00</updated><author><name>Mestrace</name></author><id>tag:mestrace.github.io,2023-03-27:/posts/2023/Mar/27/weekly-338/</id><summary type="html">&lt;p&gt;2023-03 Leetcode Weekly Contest 338 | 2600. K Items With the Maximum Sum K 件物品的最大和 | 2601. Prime Subtraction Operation 质数减法运算 | 2602. Minimum Operations to Make All Array Elements Equal 使数组元素全部相等的最少操作次数 | 2603. Collect Coins in a Tree 收集树中金币| My solution 我的题目解析&lt;/p&gt;</summary><content type="html">&lt;p&gt;这次的周赛我鸽子了，结果就刚好错过了大闹剧：Leetcode全球站崩了，有的小伙伴们20分钟才能开始做题。估计这次分数会作废吧。这次的题目难度稍微比前几周的题目要难一些，主要是结合了多个知识。如果不熟练的话，就比较容易出错。此外，例如第二题和第三题，也有很多恶心的边缘条件需要一些技巧才能解决。&lt;/p&gt;
 &lt;h2&gt;题目列表&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;a href="https://leetcode.com/problems/k-items-with-the-maximum-sum/"&gt;Easy - 2600. K Items With the Maximum Sum&lt;/a&gt;&lt;/li&gt;
