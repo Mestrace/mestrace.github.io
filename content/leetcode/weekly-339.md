@@ -237,4 +237,50 @@ class Solution:
 - [Medium - 256. Paint House](https://leetcode.com/problems/paint-house/)
 - [Hard - 600. Non-negative Integers without Consecutive Ones](https://leetcode.com/problems/non-negative-integers-without-consecutive-ones/)
 
+
+## 附录
+
+<details markdown="1">
+  <summary>上面图片的<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/LaTeX_logo.svg/128px-LaTeX_logo.svg.png" alt="LaTeX icon" width="40"/>代码</summary>
+
+```latex
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{tikz}
+\usepackage{xcolor}
+
+\begin{document}
+
+\begin{tikzpicture}
+% the array length
+\draw[fill=blue!10](-3,0) node[below] {0} -- (-3,0.5) -- (3, 0.5) -- (3, 0) node[below]{n - 1};
+
+% vertical line at i
+\draw (1, 0) node[below]{i} ;
+
+% original i + (k - 1)
+\draw (1, 0.75) -- (1, 1) -- (3.5, 1) -- (3.5, 0.75);
+\draw (2.25, 1) node[above]{(k - 1)};
+% offseted i + (k - 1) 
+\draw (2.5, 1.5) -- (2.5, 1.75) -- (5, 1.75) -- (5, 1.5);
+\draw (3.75, 1.75) node[above]{(k - 1)};
+
+% the point we look for
+\node at (2.5, 0) [circle, fill=red!60, inner sep=1.5]{};
+
+% n - 1 - i
+\draw (1, -0.5) -- (1, -0.75) -- (3, -0.75) -- (3, -0.5);
+\draw (2, -0.75) node[below]{(n - 1) - i};
+\draw (3, -0.5) -- (3, -0.75) -- (5, -0.75) -- (5, -0.5);
+\draw (4, -0.75) node[below]{(n - 1) - i};
+
+% the axis
+\draw[-] (-5,0)--(5,0);
+\end{tikzpicture}
+
+\end{document}
+```
+</details>
+
+
 -----

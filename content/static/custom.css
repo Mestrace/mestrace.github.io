@@ -15,14 +15,15 @@
 article {
     font-family: "LXGW WenKai", "Roboto" !important;
     line-height: 2em;
-    word-break:break-all;
-    word-wrap:break-word;
+    word-break: break-all;
+    word-wrap: break-word;
 }
 
 /* 实现黑幕效果
 https://ucw.moe/archives/js-with-css-implements-heimu.html */
 
-.heimu:active, .heimu:hover {
+.heimu:active,
+.heimu:hover {
     color: #fff
 }
 
