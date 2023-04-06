@@ -94,6 +94,7 @@ PLUGINS = [
     "sitemap",
     "pelican.plugins.precompress",
     "render_math",
+    "md_include"
 ]
 
 # # Enable Jinja2 i18n extension used to parse translations.
