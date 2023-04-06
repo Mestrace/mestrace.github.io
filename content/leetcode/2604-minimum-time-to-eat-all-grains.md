@@ -64,3 +64,87 @@ hens 1 move 10 -> 7 => 3s
 ```python
 {!content/leetcode/code/2064-minimum-time-to-eat-all-grains.py!}
 ```
+
+
+## 附录
+
+<details markdown="1">
+  <summary>上面图片的<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/LaTeX_logo.svg/128px-LaTeX_logo.svg.png" alt="LaTeX icon" width="40"/>代码</summary>
+
+```latex
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{tikz}
+\usepackage{xcolor}
+\pagenumbering{gobble}
+
+\begin{document}
+
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+% 2 * (h - g)
+\draw (-2, 1) node[above]{(h - g)};
+\draw [stealth-](-1,1) -- (-3,1);
+\draw [-stealth](-1,0.5) -- (-3,0.5);
+% t - 2 * (h - g)
+\draw [-stealth](-1, 1) -- (3, 1);
+\draw (3, 1.5) -- (3, 0);
+% t
+\draw (-3, -0.5) -- (-3, -0.75) -- (3, -0.75) -- (3, -0.5);
+\draw (0, -0.75) node[below]{t};
+% g
+\draw (-3, 1.5) -- (-3, 0) node[below]{g};
+% h
+\draw (-1, 1.5) -- (-1, 0) node[below]{h};
+% the axis
+\draw[-] (-5,0)--(5,0);
+\end{tikzpicture}
+\caption{$g$ to the left of $h$, move left first}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+% (h - g) 
+\draw (-1, 1) node[above]{(h - g)};
+\draw [stealth-](-3,1) -- (1,1);
+% (t - (h - g)) // 2
+\draw [-stealth](1, 0.5) -- (3, 0.5);
+\draw [stealth-](1, 1) -- (3, 1);
+\draw (3, 1.5) -- (3, 0);
+% g
+\draw (-3, 1.5) -- (-3, 0) node[below]{g};
+% h
+\draw (1, 1.5) -- (1, 0) node[below]{h};
+% t
+\draw (-3, -0.5) -- (-3, -0.75) -- (3, -0.75) -- (3, -0.5);
+\draw (0, -0.75) node[below]{t};
+
+% the axis
+\draw[-] (-5,0)--(5,0);
+\end{tikzpicture}
+\caption{$g$ to the left of $h$, move right first}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\draw [-stealth](-3, 0.5) -- (3, 0.5);
+% g
+\draw (3, 1.5) -- (3, 0) node[below]{g};
+% h
+\draw (-3, 1.5) -- (-3, 0) node[below]{h};
+% t
+\draw (-3, -0.5) -- (-3, -0.75) -- (3, -0.75) -- (3, -0.5);
+\draw (0, -0.75) node[below]{t};
+% the axis
+\draw[-] (-5,0)--(5,0);
+\end{tikzpicture}
+\caption{$g$ to the right of $h$, move right}
+\end{figure}
+
+\end{document}
+```
+</details>
