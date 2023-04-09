@@ -114,23 +114,6 @@ THEME_COLOR_ENABLE_USER_OVERRIDE = True
 
 USE_LESS = True
 
-
-# SEO Settings
-SEO_REPORT = False  # SEO report is enabled by default
-SEO_ENHANCER = True  # SEO enhancer is disabled by default
-SEO_ENHANCER_OPEN_GRAPH = True  # Subfeature of SEO enhancer
-SEO_ENHANCER_TWITTER_CARDS = False  # Subfeature of SEO enhancer
-
-# Google analytics
-GOOGLE_GLOBAL_SITE_TAG = "G-07WBTMQT81"
-
-# Sitemap
-SITEMAP = {
-    "format": "xml",
-    "priorities": {"articles": 0.8, "indexes": 0.3, "pages": 0.5},
-    "changefreqs": {"articles": "weekly", "indexes": "weekly", "pages": "weekly"},
-}
-
 # Remove URL Hash
 DISABLE_URL_HASH = True
 
