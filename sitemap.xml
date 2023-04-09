@@ -5,7 +5,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://mestrace.github.io/</loc>
-<lastmod>2023-04-07T00:58:44-00:00</lastmod>
+<lastmod>2023-04-09T22:17:14-00:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.3</priority>
 </url>
@@ -15,6 +15,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <lastmod>2023-04-02T22:00:00+08:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://mestrace.github.io/posts/2023/Apr/09/weekly-340/</loc>
+<lastmod>2023-04-09T22:00:00+08:00</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
 </url>
 
 <url>
@@ -152,7 +159,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://mestrace.github.io/category/leetcode.html</loc>
-<lastmod>2023-04-07T00:00:00+06:55</lastmod>
+<lastmod>2023-04-09T22:00:00+06:55</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.3</priority>
 </url>
@@ -180,7 +187,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://mestrace.github.io/tag/contest.html</loc>
-<lastmod>2023-04-02T19:00:00+06:55</lastmod>
+<lastmod>2023-04-09T22:00:00+06:55</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.3</priority>
 </url>
@@ -243,7 +250,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://mestrace.github.io/author/mestrace.html</loc>
-<lastmod>2023-04-07T00:00:00+06:55</lastmod>
+<lastmod>2023-04-09T22:00:00+06:55</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.3</priority>
 </url>
