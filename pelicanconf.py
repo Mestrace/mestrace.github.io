@@ -119,3 +119,10 @@ DISABLE_URL_HASH = True
 
 # Math Jax
 MATH_JAX = {"tex_extensions": ["color.js", "mhchem.js"]}
+
+# Sitemap
+SITEMAP = {
+    "format": "xml",
+    "priorities": {"articles": 0.8, "indexes": 0.3, "pages": 0.5},
+    "changefreqs": {"articles": "weekly", "indexes": "weekly", "pages": "weekly"},
+}
