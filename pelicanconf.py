@@ -1,6 +1,7 @@
 from datetime import datetime
 import sys
 import os
+import pathlib
 
 AUTHOR = "Mestrace"
 SITENAME = "Mestrace的个人博客"
@@ -50,7 +51,8 @@ EXTRA_PATH_METADATA = {
 favico_path = "content/static/favico"
 for file in os.listdir(os.fsencode(favico_path)):
     filename = os.fsdecode(file)
-    EXTRA_PATH_METADATA[os.path.join("static/favico", filename)] = {"path": filename}
+    path = pathlib.PurePath().joinpath("static", "favico", filename)
+    EXTRA_PATH_METADATA[path.as_posix()] = {"path": filename}
 
 # Uncomment following line if you want document-relative URLs when developing
 RELATIVE_URLS = True
@@ -94,7 +96,7 @@ PLUGINS = [
     "sitemap",
     "pelican.plugins.precompress",
     "render_math",
-    "md_include"
+    "md_include",
 ]
 
 # # Enable Jinja2 i18n extension used to parse translations.
