@@ -8,11 +8,6 @@
 <meta content="True" name="HandheldFriendly"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="" name="robots"/>
-<link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
-<link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
-<link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
-<link href="/favicon.ico" rel="icon" type="image/x-icon"/>
-<link href="/site.webmanifest" rel="manifest"/>
 <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&amp;family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
 <link href="https://mestrace.github.io/theme/stylesheet/style.less" rel="stylesheet/less" type="text/css"/>
 <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js" type="text/javascript"></script>
@@ -58,7 +53,7 @@
 <meta content="Subarray" property="article:tag"/>
 <meta content="http://github.com/Mestrace.png?size=460" property="og:image"/>
 <title>Mestrace的个人博客 – 【Leetcode题解】2588. Count the Number of Beautiful Subarrays</title>
-</meta></meta></meta></meta></meta></meta></meta><link href="https://mestrace.github.io/posts/2023/Mar/12/2588-count-the-number-of-beautiful-subarrays/" rel="canonical"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Mestrace的个人博客", "item": "https://mestrace.github.io"}, {"@type": "ListItem", "position": 2, "name": "Posts", "item": "https://mestrace.github.io/posts"}, {"@type": "ListItem", "position": 3, "name": "2023", "item": "https://mestrace.github.io/posts/2023"}, {"@type": "ListItem", "position": 4, "name": "Mar", "item": "https://mestrace.github.io/posts/2023/Mar"}, {"@type": "ListItem", "position": 5, "name": "12", "item": "https://mestrace.github.io/posts/2023/Mar/12"}, {"@type": "ListItem", "position": 6, "name": "2588 count the number of beautiful subarrays", "item": "https://mestrace.github.io/posts/2023/Mar/12/2588-count-the-number-of-beautiful-subarrays"}, {"@type": "ListItem", "position": 7, "name": "Index", "item": "https://mestrace.github.io/posts/2023/Mar/12/2588-count-the-number-of-beautiful-subarrays/index.html"}]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "author": {"@type": "Person", "name": "Mestrace"}, "publisher": {"@type": "Organization", "name": "Mestrace的个人博客"}, "headline": "【Leetcode题解】2588. Count the Number of Beautiful Subarrays", "about": "Leetcode", "datePublished": "2023-03-12 00:00"}</script></head>
+</meta></meta></meta></meta></meta></meta></meta><link href="https://mestrace.github.io\posts/2023/Mar/12/2588-count-the-number-of-beautiful-subarrays/" rel="canonical"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Mestrace的个人博客", "item": "https://mestrace.github.io"}, {"@type": "ListItem", "position": 2, "name": "Posts", "item": "https://mestrace.github.io\\posts"}, {"@type": "ListItem", "position": 3, "name": "2023", "item": "https://mestrace.github.io\\posts/2023"}, {"@type": "ListItem", "position": 4, "name": "Mar", "item": "https://mestrace.github.io\\posts/2023/Mar"}, {"@type": "ListItem", "position": 5, "name": "12", "item": "https://mestrace.github.io\\posts/2023/Mar/12"}, {"@type": "ListItem", "position": 6, "name": "2588 count the number of beautiful subarrays", "item": "https://mestrace.github.io\\posts/2023/Mar/12/2588-count-the-number-of-beautiful-subarrays"}, {"@type": "ListItem", "position": 7, "name": "Index", "item": "https://mestrace.github.io\\posts/2023/Mar/12/2588-count-the-number-of-beautiful-subarrays/index.html"}]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "author": {"@type": "Person", "name": "Mestrace"}, "publisher": {"@type": "Organization", "name": "Mestrace的个人博客"}, "headline": "【Leetcode题解】2588. Count the Number of Beautiful Subarrays", "about": "Leetcode", "datePublished": "2023-03-12 00:00"}</script></head>
 <body>
 <aside>
 <div>
@@ -148,11 +143,11 @@ A  B  A XOR B
 </ol>
 <p>做过<a href="https://leetcode.com/problems/find-the-duplicate-number/">287. Find the Duplicate Number</a>的朋友肯定不会对这陌生。这道题目里面，我们把重复的数据都XOR一遍，剩下的那个数字就是我们要找的答案。</p>
 <p>回到我们的2588。结合了位运算，我们可以知道：如果<code>XOR(nums[i:j]) == 0</code>，那么我们就说他是一个符合条件的子数组。想要得到这个结果的话，我们可以每次都循环XOR每一个数；或者，如果我们更聪明一点，根据上面的性质，我们有</p>
-<div class="highlight"><pre><span></span><code>  XOR(nums[i:j])
-= XOR(nums[i:j]) XOR (XOR(nums[0:i]) XOR XOR(nums[0:i])) (identity element)
-= XOR(nums[0:i]) XOR XOR(nums[0:j]) (associative)
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="nx">XOR</span><span class="p">(</span><span class="nx">nums</span><span class="p">[</span><span class="nx">i</span><span class="p">:</span><span class="nx">j</span><span class="p">])</span>
+<span class="p">=</span><span class="w"> </span><span class="nx">XOR</span><span class="p">(</span><span class="nx">nums</span><span class="p">[</span><span class="nx">i</span><span class="p">:</span><span class="nx">j</span><span class="p">])</span><span class="w"> </span><span class="nx">XOR</span><span class="w"> </span><span class="p">(</span><span class="nx">XOR</span><span class="p">(</span><span class="nx">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nx">i</span><span class="p">])</span><span class="w"> </span><span class="nx">XOR</span><span class="w"> </span><span class="nx">XOR</span><span class="p">(</span><span class="nx">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nx">i</span><span class="p">]))</span><span class="w"> </span><span class="p">(</span><span class="nx">identity</span><span class="w"> </span><span class="nx">element</span><span class="p">)</span>
+<span class="p">=</span><span class="w"> </span><span class="nx">XOR</span><span class="p">(</span><span class="nx">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nx">i</span><span class="p">])</span><span class="w"> </span><span class="nx">XOR</span><span class="w"> </span><span class="nx">XOR</span><span class="p">(</span><span class="nx">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nx">j</span><span class="p">])</span><span class="w"> </span><span class="p">(</span><span class="nx">associative</span><span class="p">)</span>
 
-which implies XOR(nums[0:i]) == XOR(nums[0:j]) (identity element)
+<span class="nx">which</span><span class="w"> </span><span class="nx">implies</span><span class="w"> </span><span class="nx">XOR</span><span class="p">(</span><span class="nx">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nx">i</span><span class="p">])</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">XOR</span><span class="p">(</span><span class="nx">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nx">j</span><span class="p">])</span><span class="w"> </span><span class="p">(</span><span class="nx">identity</span><span class="w"> </span><span class="nx">element</span><span class="p">)</span>
 </code></pre></div>
 <p>根据这以上的性质，我们可以转换为<code>XOR(nums[0:i]) == XOR(nums[0:j])</code>。<em>看到这里，是否觉得有点眼熟？</em></p>
 <p align="center">
@@ -208,7 +203,7 @@ which implies XOR(nums[0:i]) == XOR(nums[0:j]) (identity element)
 </p>
 </div>
 <div class="center social-share">
-<p>如果你觉得这篇文章很赞，不要忘记分享给你的小伙伴们！</p>
+<p>Like this article? Share it with your friends!</p>
 <div class="addthis_native_toolbox"></div>
 <div class="addthis_sharing_toolbox"></div>
 <div class="addthis_inline_share_toolbox"></div>
