@@ -1,5 +1,246 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Mestrace的个人博客 - MISC</title><link href="https://mestrace.github.io/" rel="alternate"></link><link href="https://mestrace.github.io/feeds/misc.atom.xml" rel="self"></link><id>https://mestrace.github.io/</id><updated>2023-03-15T00:00:00+08:00</updated><subtitle>Software Developer</subtitle><entry><title>手把手教你在树莓派4B上运行LLaMA 7B模型</title><link href="https://mestrace.github.io/posts/2023/Mar/15/llama-rpi/" rel="alternate"></link><published>2023-03-15T00:00:00+08:00</published><updated>2023-03-15T00:00:00+08:00</updated><author><name>Mestrace</name></author><id>tag:mestrace.github.io,2023-03-15:/posts/2023/Mar/15/llama-rpi/</id><summary type="html">&lt;p&gt;本文详细描述了我是如何一步步在树莓派4B上运行LLaMA模型。LLaMA是由Meta AI发布的一个大语言模型。ggerganov/llama.cpp是一个由C++实现的LLaMA移植版本，并使用4-bit量化技术以将模型适配至个人设备上。超大型语料模型从未如此唾手可得。在树莓派上获得你的个人chatgpt。如果你对树莓派、LLaMA模型或大型语言模型感兴趣，那么本文一定会对你有帮助。How I run the LLaMA model step by step on a Raspberry Pi 4B. LLaMA is a large language model released by Meta AI. ggerganov/llama.cpp is a C++ implementation of the LLaMA port, which uses 4-bit quantization techniques to adapt the model to personal devices. A large-scale Machine Learning model has never been so readily available for normal people. If you are interested in Raspberry Pi, LLaMA model, or large-scale language models, this article will provide you with useful information.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;引言&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mestrace的个人博客 - MISC</title><link href="https://mestrace.github.io/" rel="alternate"></link><link href="https://mestrace.github.io/feeds/misc.atom.xml" rel="self"></link><id>https://mestrace.github.io/</id><updated>2023-04-21T15:00:00+08:00</updated><subtitle>Software Developer</subtitle><entry><title>解决Foobar挑战（一）- Level II</title><link href="https://mestrace.github.io/posts/2023/Apr/21/foobar-ii/" rel="alternate"></link><published>2023-04-21T15:00:00+08:00</published><updated>2023-04-21T15:00:00+08:00</updated><author><name>Mestrace</name></author><id>tag:mestrace.github.io,2023-04-21:/posts/2023/Apr/21/foobar-ii/</id><summary type="html">&lt;p&gt;因为机缘巧合，我偶然点开了Google的Foobar Challenge页面，发现自己仍然可以登陆并继续Foobar旅程。这篇文章简单介绍了Foobar挑战的机制，并给出了Foobar Level 2 的两道题 Gearing Up for Destruction 和 Hey, I Already Did That! 两道题的解题思路和python代码。&lt;/p&gt;</summary><content type="html">&lt;p&gt;Google用Foobar挑战来甄选人才已经是一个半公开的秘密了。在搜索框里输入一些特定的程序语言关键词，或者是查看Google产品的开发者文档的时候，你有几率在某个角落里找到一个奇怪的图标。点击这个图标，就进入了Foobar挑战的流程。在这个过程中，你需要在限时内完成一定数量的代码题目，然后Google会视完成情况向你发出面试邀请。不得不说这个行为非常的Geek。数年前，笔者有幸触发了一次Foobar挑战，但是并没有完成。今天在浏览互联网上的信息的时候，突然发现自己还是可以登入Foobar挑战的页面，并且接着上次的进度继续完成挑战，于是便有了这篇博文。&lt;/p&gt;
+&lt;p align="center"&gt;
+  &lt;img src="https://mestrace.github.io/images/foobar/foobar-initial.png" /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Foobar的页面一进去就是一个炫酷的命令行界面。在这里你可以输入一些命令去查看当前挑战进度，请求新的挑战题目，提交答案等等。总共有五层挑战，而且众所周知的，每一层挑战都比上一层难度会提升。每道题的时间都给的非常充裕，你会有7天左右的时间去完成每一道题目。接着上次的进度，我进入了第二题的流程。输入&lt;code&gt;request&lt;/code&gt;便收集到了第二题的题目。让我们一起看看吧。&lt;/p&gt;
+&lt;h2&gt;Gearing Up for Destruction&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;As Commander Lambda's personal assistant, you've been assigned the task of configuring the LAMBCHOP doomsday device's axial orientation gears. It should be pretty simple -- just add gears to create the appropriate rotation ratio. But the problem is, due to the layout of the LAMBCHOP and the complicated system of beams and pipes supporting it, the pegs that will support the gears are fixed in place.&lt;/p&gt;
+&lt;p&gt;The LAMBCHOP's engineers have given you lists identifying the placement of groups of pegs along various support beams. You need to place a gear on each peg (otherwise the gears will collide with unoccupied pegs). The engineers have plenty of gears in all different sizes stocked up, so you can choose gears of any size, from a radius of &lt;code&gt;1&lt;/code&gt; on up. Your goal is to build a system where the last gear rotates at twice the rate (in revolutions per minute, or rpm) of the first gear, no matter the direction. Each gear (except the last) touches and turns the gear on the next peg to the right.&lt;/p&gt;
+&lt;p&gt;Given a list of distinct positive integers named pegs representing the location of each peg along the support beam, write a function solution(pegs) which, if there is a solution, returns a list of two positive integers a and b representing the numerator and denominator of the first gear's radius in its simplest form in order to achieve the goal above, such that &lt;code&gt;radius = a/b&lt;/code&gt;. The ratio a/b should be greater than or equal to 1. Not all support configurations will necessarily be capable of creating the proper rotation ratio, so if the task is impossible, the function &lt;code&gt;solution(pegs)&lt;/code&gt; should return the list &lt;code&gt;[-1, -1]&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;For example, if the pegs are placed at &lt;code&gt;[4, 30, 50]&lt;/code&gt;, then the first gear could have a radius of &lt;code&gt;12&lt;/code&gt;, the second gear could have a radius of &lt;code&gt;14&lt;/code&gt;, and the last one a radius of &lt;code&gt;6&lt;/code&gt;. Thus, the last gear would rotate twice as fast as the first one. In this case, pegs would be &lt;code&gt;[4, 30, 50]&lt;/code&gt; and &lt;code&gt;solution(pegs)&lt;/code&gt; should return &lt;code&gt;[12, 1]&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The list pegs will be given sorted in ascending order and will contain at least &lt;code&gt;2&lt;/code&gt; and no more than &lt;code&gt;20&lt;/code&gt; distinct positive integers, all between &lt;code&gt;1&lt;/code&gt; and &lt;code&gt;10000&lt;/code&gt; inclusive.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;给定一个整数列表&lt;code&gt;pegs&lt;/code&gt;，代表在墙上的销子的位置。你需要在每一个销子上都放置一个齿轮且这些齿轮都互相咬合。每个齿轮的大小可以为任意数字，但是至少要为&lt;code&gt;1&lt;/code&gt;。找到一种排列方式，使得最后一个齿轮的旋转速度是第一个齿轮的两倍，并返回第一个齿轮的大小。由于返回值可能不是一个正整数，你需要返回一个数组列表&lt;code&gt;[m,n]&lt;/code&gt;代表&lt;code&gt;m/n&lt;/code&gt;。如果给定的&lt;code&gt;pegs&lt;/code&gt;无法找到一个符合条件的组合，则应该返回&lt;code&gt;[-1, -1]&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;题目看上去挺唬人的。先是一下子给了两百字的故事类的文字描述，接着引入了齿轮咬合这个大多数人看起来生疏的概念。我们简单进行建模一下。在这里我们暂时不需要考虑一些特别的参数，如齿轮的齿数如何影响咬合。就考虑一个真空中的球形鸡的模型：给定两个齿轮&lt;code&gt;a&lt;/code&gt;和&lt;code&gt;b&lt;/code&gt;，可知两个齿轮的半径和等于这两个齿轮之间的销子长度；若需要齿轮&lt;code&gt;b&lt;/code&gt;的角速度是齿轮&lt;code&gt;a&lt;/code&gt;的两倍，那么齿轮&lt;code&gt;a&lt;/code&gt;的半径应该是齿轮&lt;code&gt;b&lt;/code&gt;的两倍。我们可以拓展我们的模型到三个齿轮。给定三个齿轮&lt;code&gt;a&lt;/code&gt;，&lt;code&gt;b&lt;/code&gt;和&lt;code&gt;c&lt;/code&gt;，他们的位置分别在销子&lt;span class="math"&gt;\(p_a\)&lt;/span&gt;, &lt;span class="math"&gt;\(p_b\)&lt;/span&gt;和&lt;span class="math"&gt;\(p_c\)&lt;/span&gt;上，此外我们还知道销子之间的距离&lt;span class="math"&gt;\(D_x\)&lt;/span&gt;可以表示为&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\begin{aligned}
+p_b - p_a &amp;amp;= D_0\\
+p_c - p_b &amp;amp;= D_1
+\end{aligned}
+$$&lt;/div&gt;
+&lt;p&gt;则可得&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\begin{aligned}
+r_a + r_b &amp;amp;= D_0\\
+r_b + r_c &amp;amp;= D_1
+\end{aligned}
+$$&lt;/div&gt;
+&lt;p&gt;化简可得&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\begin{aligned}
+r_b &amp;amp;= D_0 - r_a\\
+r_c &amp;amp;= D_1 - r_b\\
+    &amp;amp;= D_1 - D_0 + r_a
+\end{aligned}
+$$&lt;/div&gt;
+&lt;p&gt;又因&lt;span class="math"&gt;\(r_a = 2 r_c\)&lt;/span&gt;，因此我们可以把&lt;span class="math"&gt;\(r_a\)&lt;/span&gt;表示为&lt;/p&gt;
+&lt;div class="math"&gt;$$
+r_a = 2 * (D_0 - D_1)
+$$&lt;/div&gt;
+&lt;p&gt;倘若我们有四个齿轮，我们也可以用同样的方式进行化简&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\begin{aligned}
+r_a + r_b &amp;amp;= D_0\\
+r_b + r_c &amp;amp;= D_1\\
+r_d + r_c &amp;amp;= D_2
+\end{aligned}
+$$&lt;/div&gt;
+&lt;p&gt;化简可得&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\begin{aligned}
+r_b &amp;amp;= D_0 - r_a\\
+r_c &amp;amp;= D_1 - r_b\\
+    &amp;amp;= D_1 - D_0 + r_a\\
+r_d &amp;amp;= D_2 - D_1 + D_0 - r_a
+\end{aligned}
+$$&lt;/div&gt;
+&lt;p&gt;同样可知&lt;span class="math"&gt;\(r_a = 2 r_d\)&lt;/span&gt;，因此&lt;/p&gt;
+&lt;div class="math"&gt;$$
+r_a = \frac{2}{3} (D_2 - D_1 + D_0)
+$$&lt;/div&gt;
+&lt;p&gt;到这里我们就找出了这道题的规律。接下来就该设计算法了。我们简单分为三步：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;首先算出&lt;code&gt;distance&lt;/code&gt;，即&lt;code&gt;pegs&lt;/code&gt;之间的差值&lt;/li&gt;
+&lt;li&gt;对于算出&lt;code&gt;distance&lt;/code&gt;偶数索引的和和奇数索引和之间的差值，并根据&lt;code&gt;distance&lt;/code&gt;的奇偶性求得前面的乘数。&lt;/li&gt;
+&lt;li&gt;最后校验所有齿轮是否符合齿轮大小的要求。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p align="center"&gt;
+  &lt;img src="https://mestrace.github.io/images/gei_li.png" /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;且慢，这题还有个要求是要输出一个分数而不是浮点数。若存在&lt;code&gt;2/3&lt;/code&gt;的乘数的话，我们应该把他进行化简。这里使用Python的同学有福了，可以直接用&lt;code&gt;fractions.Fraction&lt;/code&gt;进行计算，&lt;code&gt;f.numerator&lt;/code&gt;可得出分母，&lt;code&gt;f.denominator&lt;/code&gt;为分子。对于其他语言的同学来说呢，既可以使用最大公约数&lt;code&gt;gcd&lt;/code&gt;来化简分子和分母，也可以用浮点数近似到精度来处理。这里就不展开了。&lt;/p&gt;
+&lt;h3&gt;代码&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;fractions&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Fraction&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;solution&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pegs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="c1"&gt;# Calculate the distances between pegs&lt;/span&gt;
+    &lt;span class="n"&gt;distances&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;pegs&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;pegs&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pegs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# print(distances)&lt;/span&gt;
+
+    &lt;span class="n"&gt;radius&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;distances&lt;/span&gt;&lt;span class="p"&gt;[::&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nb"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;distances&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;distances&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;radius&lt;/span&gt; &lt;span class="o"&gt;*=&lt;/span&gt; &lt;span class="n"&gt;Fraction&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;radius&lt;/span&gt; &lt;span class="o"&gt;*=&lt;/span&gt; &lt;span class="n"&gt;Fraction&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;radius&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="c1"&gt;# print(&amp;quot;less&amp;quot;, radius)&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+    &lt;span class="n"&gt;cradius&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;radius&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;distances&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;cradius&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;cradius&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;cradius&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="c1"&gt;# print(&amp;quot;less intermediate&amp;quot;, cradius, radius)&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;radius&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;numerator&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;radius&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;denominator&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;Hey, I Already Did That!&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Commander Lambda uses an automated algorithm to assign minions randomly to tasks, in order to keep minions on their toes. But you've noticed a flaw in the algorithm -- it eventually loops back on itself, so that instead of assigning new minions as it iterates, it gets stuck in a cycle of values so that the same minions end up doing the same tasks over and over again. You think proving this to Commander Lambda will help you make a case for your next promotion. &lt;/p&gt;
+&lt;p&gt;You have worked out that the algorithm has the following process: &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Start with a random minion ID &lt;code&gt;n&lt;/code&gt;, which is a nonnegative integer of length &lt;code&gt;k&lt;/code&gt; in base &lt;code&gt;b&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Define &lt;code&gt;x&lt;/code&gt; and &lt;code&gt;y&lt;/code&gt; as integers of length &lt;code&gt;k&lt;/code&gt;.  &lt;code&gt;x&lt;/code&gt; has the digits of &lt;code&gt;n&lt;/code&gt; in descending order, and &lt;code&gt;y&lt;/code&gt; has the digits of &lt;code&gt;n&lt;/code&gt; in ascending order&lt;/li&gt;
+&lt;li&gt;Define &lt;code&gt;z = x - y&lt;/code&gt;.  Add leading zeros to z to maintain length k if necessary&lt;/li&gt;
+&lt;li&gt;Assign &lt;code&gt;n = z&lt;/code&gt; to get the next minion ID, and go back to step 2&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;For example, given minion ID &lt;code&gt;n = 1211, k = 4, b = 10&lt;/code&gt;, then &lt;code&gt;x = 2111&lt;/code&gt;, &lt;code&gt;y = 1112&lt;/code&gt; and &lt;code&gt;z = 2111 - 1112 = 0999&lt;/code&gt;. Then the next minion ID will be &lt;code&gt;n = 0999&lt;/code&gt; and the algorithm iterates again: &lt;code&gt;x = 9990&lt;/code&gt;, &lt;code&gt;y = 0999&lt;/code&gt; and &lt;code&gt;z = 9990 - 0999 = 8991&lt;/code&gt;, and so on.&lt;/p&gt;
+&lt;p&gt;Depending on the values of n, k (derived from n), and b, at some point the algorithm reaches a cycle, such as by reaching a constant value. For example, starting with &lt;code&gt;n = 210022, k = 6, b = 3&lt;/code&gt;, the algorithm will reach the cycle of values &lt;code&gt;[210111, 122221, 102212]&lt;/code&gt; and it will stay in this cycle no matter how many times it continues iterating. Starting with &lt;code&gt;n = 1211&lt;/code&gt;, the routine will reach the integer &lt;code&gt;6174&lt;/code&gt;, and since &lt;code&gt;7641 - 1467&lt;/code&gt; is &lt;code&gt;6174&lt;/code&gt;, it will stay as that value no matter how many times it iterates.&lt;/p&gt;
+&lt;p&gt;Given a minion ID as a string n representing a nonnegative integer of length &lt;code&gt;k&lt;/code&gt; in base &lt;code&gt;b&lt;/code&gt;, where &lt;code&gt;2 &amp;lt;= k &amp;lt;= 9&lt;/code&gt; and &lt;code&gt;2 &amp;lt;= b &amp;lt;= 10&lt;/code&gt;, write a function &lt;code&gt;solution(n, b)&lt;/code&gt; which returns the length of the ending cycle of the algorithm above starting with &lt;code&gt;n&lt;/code&gt;. For instance, in the example above, &lt;code&gt;solution(210022, 3)&lt;/code&gt; would return &lt;code&gt;3&lt;/code&gt;, since iterating on 102212 would return to &lt;code&gt;210111&lt;/code&gt; when done in base &lt;code&gt;3&lt;/code&gt;. If the algorithm reaches a constant, such as &lt;code&gt;0&lt;/code&gt;, then the length is &lt;code&gt;1&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Your code should pass the following test cases.
+Note that it may also be run against hidden test cases not shown here.&lt;/p&gt;
+&lt;p&gt;Input: solution.solution('1211', 10)
+Output: 1&lt;/p&gt;
+&lt;p&gt;Input: solution.solution('210022', 3)
+Output: 3&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;给定一个&lt;code&gt;b&lt;/code&gt;进制，长度为&lt;code&gt;k&lt;/code&gt;的数字&lt;code&gt;z&lt;/code&gt;，我们需要对其应用一个算法&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;定义&lt;code&gt;x&lt;/code&gt;为这个数字&lt;code&gt;z&lt;/code&gt;所有的位数降序排列。&lt;/li&gt;
+&lt;li&gt;定义&lt;code&gt;y&lt;/code&gt;为这个数字&lt;code&gt;z&lt;/code&gt;的所有位数升序排列。&lt;/li&gt;
+&lt;li&gt;计算&lt;code&gt;z = x - y&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;重复这个过程直到我们遇到所有数字的循环。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;最终我们应该返回这个环的长度。&lt;/p&gt;
+&lt;p&gt;这里我们直接进行模拟去找他的环。首先我们需要转换进制的工具。&lt;code&gt;python&lt;/code&gt;并没有提供任意底数的转换，所以我们自己简单写一下字符串转base的工具，之后就按照题意进行模拟。而对于环的检测，我们直接用一个map记录每一个数字出现的索引。若我们重复遇到之前遇到的&lt;code&gt;z&lt;/code&gt;的话，我们就遇到了一个环，而环的长度为当前索引减去之前遇到的索引。&lt;/p&gt;
+&lt;p align="center"&gt;
+  &lt;img src="https://mestrace.github.io/images/gei_li.png" /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;实际上，数学家D. R. Kaprekar在1955年对这个性质进行研究，发现对于任意十进制四位数，通过上述变换，最多进行7次就会得到&lt;code&gt;6174&lt;/code&gt;，因此这个数字也被称为Karprekar常数。有兴趣的朋友可以看一下&lt;a href="http://lanqi.org/everyday/17172/"&gt;这篇文章&lt;/a&gt;，讨论了对于三位数字进行上述变换会收敛到495的性质。&lt;/p&gt;
+&lt;h3&gt;代码&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;to_base_10&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Converts a string `n` in base `b` to an integer in base 10.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;digit&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;digit&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;from_base_10&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Converts an integer `n` in base 10 to a string in base `b`.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;0&amp;#39;&lt;/span&gt;
+    &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;digit&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;
+        &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;digit&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;
+        &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;//=&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;solution&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;k&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;seen&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
+    &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;seen&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;seen&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;
+        &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;sorted&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;reverse&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rjust&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;0&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;sorted&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rjust&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;0&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;z&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;from_base_10&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;to_base_10&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;to_base_10&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rjust&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;0&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="c1"&gt;# print(n, &amp;quot;-&amp;gt;&amp;quot;, x, &amp;quot;-&amp;quot;, y, &amp;quot;=&amp;quot;, z)&lt;/span&gt;
+        &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;z&lt;/span&gt;
+        &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;seen&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;小结&lt;/h2&gt;
+&lt;p&gt;第二层的题目难度不高，但是总体来讲比较考验出题者对于题目的理解，并将题目进行拆解。两题都是比较偏向模拟的题目。此外，给的时间都很充裕，能让参赛者有充足的时间去学习和研究这道题目，并给出正确的解法，而不单单像是一个限时的OJ。&lt;/p&gt;
+&lt;p&gt;这里是一些参考文献：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://en.wikipedia.org/wiki/6174_(number)"&gt;Wikipedia - 6174 (number)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://patataeater.blogspot.com/2020/08/how-to-get-hired-by-google.html"&gt;Everything You Need to Know About Google Foobar Challenge&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js','color.js','mhchem.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;</content><category term="MISC"></category></entry><entry><title>手把手教你在树莓派4B上运行LLaMA 7B模型</title><link href="https://mestrace.github.io/posts/2023/Mar/15/llama-rpi/" rel="alternate"></link><published>2023-03-15T00:00:00+08:00</published><updated>2023-03-15T00:00:00+08:00</updated><author><name>Mestrace</name></author><id>tag:mestrace.github.io,2023-03-15:/posts/2023/Mar/15/llama-rpi/</id><summary type="html">&lt;p&gt;本文详细描述了我是如何一步步在树莓派4B上运行LLaMA模型。LLaMA是由Meta AI发布的一个大语言模型。ggerganov/llama.cpp是一个由C++实现的LLaMA移植版本，并使用4-bit量化技术以将模型适配至个人设备上。超大型语料模型从未如此唾手可得。在树莓派上获得你的个人chatgpt。如果你对树莓派、LLaMA模型或大型语言模型感兴趣，那么本文一定会对你有帮助。How I run the LLaMA model step by step on a Raspberry Pi 4B. LLaMA is a large language model released by Meta AI. ggerganov/llama.cpp is a C++ implementation of the LLaMA port, which uses 4-bit quantization techniques to adapt the model to personal devices. A large-scale Machine Learning model has never been so readily available for normal people. If you are interested in Raspberry Pi, LLaMA model, or large-scale language models, this article will provide you with useful information.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;引言&lt;/h2&gt;
 &lt;p&gt;LLaMA全称是Large Language Model Meta AI，是由Meta AI研究人员发布的一个预训练语言模型。与最近爆火的ChatGPT相比，LLaMA架构更小，但训练过程和单GPU推理速度更快，成本更低。今天在刷推特的时候无意中看到了这样一条消息，&lt;a href="https://github.com/ggerganov"&gt;@ggerganov&lt;/a&gt;在GitHub上发布了&lt;a href="https://github.com/ggerganov/llama.cpp"&gt;llama.cpp&lt;/a&gt;，使用了4-bit量化将模型尽可能缩小，并能在多种移动设备上运行。这我就不淡定了，正好手里有个闲置的Raspberry Pi 4B 4GB版本，赶紧搞起。&lt;/p&gt;
 &lt;blockquote class="twitter-tweet" data-conversation="none"&gt;&lt;p lang="en" dir="ltr"&gt;Added a new section to my post highlighting the advances we&amp;#39;ve already seen in the last two days: LLaMA runs on a 4GB RaspberryPi and a Pixel 6 phone now! &lt;a href="https://t.co/pWOv6PP85b"&gt;https://t.co/pWOv6PP85b&lt;/a&gt;&lt;/p&gt;&amp;mdash; Simon Willison (@simonw) &lt;a href="https://twitter.com/simonw/status/1635314097318395904?ref_src=twsrc%5Etfw"&gt;March 13, 2023&lt;/a&gt;&lt;/blockquote&gt;
 &lt;script async src="https://platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
