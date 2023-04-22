@@ -1,4 +1,4 @@
-Title: 解决Foobar挑战（一）- Level II
+Title: 解决Foobar挑战（一）
 Slug: foobar-ii
 Category: MISC
 Date: 2023-04-21 15:00:00
