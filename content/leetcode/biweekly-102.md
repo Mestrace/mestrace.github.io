@@ -3,7 +3,7 @@ Slug: biweekly-102
 Date: 2023-04-16 15:00:00
 Category: Leetcode
 Tags: Contest
-Summary: 2023-04 Leetcode Biweekly Contest 101 | 2639. Find the Width of Columns of a Grid 查询网格图中每一列的宽度 | 2640. Find the Score of All Prefixes of an Array 一个数组所有前缀的分数 | 2641. Cousins in Binary Tree II 使子数组元素和相等 | 2642. Design Graph With Shortest Path Calculator 设计可以求最短路径的图类 | Solution to contest problems 赛题讲解 ｜ Prefix Sum 前缀和 | BFS 广度优先搜索 | Dijkstra's Algorithm 狄克斯特拉算法 | Floyd-Warshall's Algorithm 算法 | Bianry Tree Traversal 二叉树的遍历
+Summary: 2023-04 Leetcode Biweekly Contest 102 | 2639. Find the Width of Columns of a Grid 查询网格图中每一列的宽度 | 2640. Find the Score of All Prefixes of an Array 一个数组所有前缀的分数 | 2641. Cousins in Binary Tree II 使子数组元素和相等 | 2642. Design Graph With Shortest Path Calculator 设计可以求最短路径的图类 | Solution to contest problems 赛题讲解 ｜ Prefix Sum 前缀和 | BFS 广度优先搜索 | Dijkstra's Algorithm 狄克斯特拉算法 | Floyd-Warshall's Algorithm 算法 | Bianry Tree Traversal 二叉树的遍历
 
 
 又是两周一次双周赛环节。本次的题目涉及前缀和，二叉树和图。整体知识覆盖面积较广。难度属于手速场中比较均衡的那种。第三题需要一定的代码量，打字速度慢的同学可能会稍微吃一点亏。而最后一题则是标准的模板图题，又是喜闻乐见的狄克斯特拉。接下来让我们一起看看题目的解析。
