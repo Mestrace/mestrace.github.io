@@ -1,0 +1,259 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="True" name="HandheldFriendly"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="robots"/>
+<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&amp;family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://mestrace.github.io/theme/stylesheet/style.less" rel="stylesheet/less" type="text/css"/>
+<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js" type="text/javascript"></script>
+<link href="https://mestrace.github.io/theme/stylesheet/dark-theme.min.css" id="dark-theme-style" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css"/>
+<link href="https://mestrace.github.io/theme/pygments/monokai.min.css" id="pygments-dark-theme" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css"/>
+<link href="https://mestrace.github.io/theme/pygments/monokai.min.css" id="pygments-light-theme" media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)" rel="stylesheet" type="text/css"/>
+<link href="https://mestrace.github.io/theme/font-awesome/css/fontawesome.css" rel="stylesheet" type="text/css"/>
+<link href="https://mestrace.github.io/theme/font-awesome/css/brands.css" rel="stylesheet" type="text/css"/>
+<link href="https://mestrace.github.io/theme/font-awesome/css/solid.css" rel="stylesheet" type="text/css"/>
+<link href="https://mestrace.github.io/static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+<link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+<link href="/site.webmanifest" rel="manifest"/>
+<!-- Chrome, Firefox OS and Opera -->
+<meta content="#333" name="theme-color"/>
+<!-- Windows Phone -->
+<meta content="#333" name="msapplication-navbutton-color"/>
+<!-- iOS Safari -->
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+<!-- Microsoft EDGE -->
+<meta content="#333" name="msapplication-TileColor"/>
+<link href="https://mestrace.github.io/feeds/all.atom.xml" rel="alternate" title="Mestrace的个人博客 Atom" type="application/atom+xml"/>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-07WBTMQT81"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-07WBTMQT81');
+</script>
+<meta content="Mestrace" name="author">
+<meta content="2023-04 Leetcode Weekly Contest 343 第 343 场力扣周赛 | 2660. Determine the Winner of a Bowling Game 保龄球游戏的获胜者 | 2661. First Completely Painted Row or Column 找出叠涂元素 | 2663. Lexicographically Smallest Beautiful String 字典序最小的美丽字符串 | 2663. Lexicographically Smallest Beautiful String 字典序最小的美丽字符串 | Solution to contest problems 赛题讲解 | Dijkstra's Algorithm 狄克斯特拉算法 | Lexicographic order 字典序" name="description">
+<meta content="Contest" name="keywords"/>
+<meta content="Mestrace的个人博客" property="og:site_name">
+<meta content="【Leetcode题解】Weekly Contest 343 周赛题目解析" property="og:title">
+<meta content="2023-04 Leetcode Weekly Contest 343 第 343 场力扣周赛 | 2660. Determine the Winner of a Bowling Game 保龄球游戏的获胜者 | 2661. First Completely Painted Row or Column 找出叠涂元素 | 2663. Lexicographically Smallest Beautiful String 字典序最小的美丽字符串 | 2663. Lexicographically Smallest Beautiful String 字典序最小的美丽字符串 | Solution to contest problems 赛题讲解 | Dijkstra's Algorithm 狄克斯特拉算法 | Lexicographic order 字典序" property="og:description">
+<meta content="en_US" property="og:locale">
+<meta content="https://mestrace.github.io/posts/2023/May/04/weekly-343/" property="og:url"/>
+<meta content="article" property="og:type"/>
+<meta content="2023-05-04 22:00:00+08:00" property="article:published_time"/>
+<meta content="" property="article:modified_time"/>
+<meta content="https://mestrace.github.io/author/mestrace.html" property="article:author"/>
+<meta content="Leetcode" property="article:section">
+<meta content="Contest" property="article:tag"/>
+<meta content="http://github.com/Mestrace.png?size=460" property="og:image"/>
+<title>Mestrace的个人博客 – 【Leetcode题解】Weekly Contest 343 周赛题目解析</title>
+</meta></meta></meta></meta></meta></meta></meta><link href="https://mestrace.github.io\posts/2023/May/04/weekly-343/" rel="canonical"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Mestrace的个人博客", "item": "https://mestrace.github.io"}, {"@type": "ListItem", "position": 2, "name": "Posts", "item": "https://mestrace.github.io\\posts"}, {"@type": "ListItem", "position": 3, "name": "2023", "item": "https://mestrace.github.io\\posts/2023"}, {"@type": "ListItem", "position": 4, "name": "May", "item": "https://mestrace.github.io\\posts/2023/May"}, {"@type": "ListItem", "position": 5, "name": "04", "item": "https://mestrace.github.io\\posts/2023/May/04"}, {"@type": "ListItem", "position": 6, "name": "Weekly 343", "item": "https://mestrace.github.io\\posts/2023/May/04/weekly-343"}, {"@type": "ListItem", "position": 7, "name": "Index", "item": "https://mestrace.github.io\\posts/2023/May/04/weekly-343/index.html"}]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "author": {"@type": "Person", "name": "Mestrace"}, "publisher": {"@type": "Organization", "name": "Mestrace的个人博客"}, "headline": "【Leetcode题解】Weekly Contest 343 周赛题目解析", "about": "Leetcode", "datePublished": "2023-05-04 22:00"}</script></head>
+<body>
+<aside>
+<div>
+<a href="https://mestrace.github.io/">
+<img alt="Mestrace" src="http://github.com/Mestrace.png?size=460" title="Mestrace"/>
+</a>
+<h1>
+<a href="https://mestrace.github.io/">Mestrace</a>
+</h1>
+<p>Software Developer</p>
+<nav>
+<ul class="list">
+<li>
+<a href="https://mestrace.github.io/pages/about.html" target="_self">
+                About
+              </a>
+</li>
+</ul>
+</nav>
+<ul class="social">
+<li>
+<a class="sc-github" href="http://github.com/Mestrace/" target="_blank">
+<i class="fa-brands fa-github"></i>
+</a>
+</li>
+</ul>
+</div>
+</aside>
+<main>
+<nav>
+<a href="https://mestrace.github.io/">Home</a>
+<a href="https://mestrace.github.io/feeds/all.atom.xml">Atom</a>
+</nav>
+<article class="single">
+<header>
+<h1 id="weekly-343">【Leetcode题解】Weekly Contest 343 周赛题目解析</h1>
+<p>
+      Posted on Thu 04 May 2023 in <a href="https://mestrace.github.io/category/leetcode.html">Leetcode</a>
+</p>
+</header>
+<div>
+<p><a href="https://leetcode.com/contest/weekly-contest-343/">Weekly Contest 343</a></p>
+<p><a href="https://leetcode.cn/contest/weekly-contest-343/">第 343 场周赛</a></p>
+<p>这场比赛的题目都是阅读理解型的，一不小心漏掉条件就小甲虫了。就像是本来是防止机器人的验证码把人给梗住了的感觉，很难形容。不吐槽了，接着来看看题目吧。</p>
+<h2>题目列表</h2>
+<ul>
+<li><a href="https://leetcode.com/problems/determine-the-winner-of-a-bowling-game/">Easy - 2660. Determine the Winner of a Bowling Game</a></li>
+<li><a href="https://leetcode.com/problems/first-completely-painted-row-or-column/">Medium - 2661. First Completely Painted Row or Column</a></li>
+<li><a href="https://leetcode.com/problems/minimum-cost-of-a-path-with-special-roads/">Medium - 2662. Minimum Cost of a Path With Special Roads</a></li>
+<li><a href="https://leetcode.com/problems/lexicographically-smallest-beautiful-string/">Hard - 2663. Lexicographically Smallest Beautiful String</a></li>
+</ul>
+<h2>2660. Determine the Winner of a Bowling Game 保龄球游戏的获胜者</h2>
+<p>按照题意模拟即可。隐藏条件有点多，不认真读题的话容易出小甲虫。</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">isWinner</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">player1</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">player2</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">score</span><span class="p">(</span><span class="n">pl</span><span class="p">):</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">pl</span><span class="p">)</span>
+            <span class="n">add</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">pl</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">add</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">s</span> <span class="o">+=</span> <span class="n">v</span>
+                    <span class="n">add</span> <span class="o">-=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">v</span> <span class="o">==</span> <span class="mi">10</span><span class="p">:</span>
+                    <span class="n">add</span> <span class="o">=</span> <span class="mi">2</span> 
+            <span class="k">return</span> <span class="n">s</span>
+        <span class="n">s1</span> <span class="o">=</span> <span class="n">score</span><span class="p">(</span><span class="n">player1</span><span class="p">)</span>
+        <span class="n">s2</span> <span class="o">=</span> <span class="n">score</span><span class="p">(</span><span class="n">player2</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">s1</span> <span class="o">==</span> <span class="n">s2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">elif</span> <span class="n">s1</span> <span class="o">&gt;</span> <span class="n">s2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="mi">2</span>
+</code></pre></div>
+<h2>2661. First Completely Painted Row or Column 找出叠涂元素</h2>
+<p>先考虑朴素的方法，即每涂一个格子检查一下行和列是否完整了。考虑到<code>10^5</code>的约束条件，这样会超时。但我们还是可以联想到通过计数的方法来判断。试想一个<code>m x n</code>的矩阵，第<code>i</code>行总共有<code>n</code>个元素，第<code>j</code>列总共有<code>m</code>个元素。这里我们直接分别用长度为<code>m</code>和<code>n</code>的列表来储存是否被涂满了。</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">firstCompleteIndex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arr</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">mat</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">ridx</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">mat</span><span class="p">)):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">mat</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+                <span class="n">ridx</span><span class="p">[</span><span class="n">mat</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+
+        <span class="n">row_painted</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">mat</span><span class="p">)</span>
+        <span class="n">col_painted</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">mat</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+            <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">ridx</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
+            <span class="n">row_painted</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">col_painted</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">row_painted</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">mat</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="ow">or</span> <span class="n">col_painted</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">mat</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">idx</span>
+
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+</code></pre></div>
+<h2>2662. Minimum Cost of a Path With Special Roads 前往目标的最小代价</h2>
+<p>在一个二维空间内，给定开始点<code>start</code>，和结束点<code>target</code>，和一系列单向的特殊道路<code>specialRoads</code>，要求求出开始点到结束点的最小代价。在这个空间内，任意路径的代价为曼哈顿距离<code>|y2 - y1| + |x2 - x2|</code>，也可以经由特殊路径<code>(x1, y1) -&gt; (x2, y2)</code>，则代价是<code>d</code>。</p>
+<p>这道题题目描述的不太清晰，导致好多人都以为特殊道路是双向的。空间大小也没有限定，但是我们也可以推出，要么直接是开始点到结束点的曼哈顿距离，或者是经由任意条特殊道路到达的。因此我们考虑Dijkstra算法。给定当前点<code>p</code>和<code>start -&gt; p</code>的距离，若我们可以路过特殊道路<code>s1 -&gt; s2</code>到达<code>s2</code>，且总距离小于当前记录的小于<code>start -&gt; s2</code>的距离，那么就可以更新<code>start -&gt; s2</code>的距离了。最后把所有的点进行比对求得最短距离。</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">minimumCost</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">target</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">specialRoads</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">heapq</span> <span class="kn">import</span> <span class="n">heappush</span><span class="p">,</span> <span class="n">heappop</span>
+        <span class="k">def</span> <span class="nf">euclid</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="n">p2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">p1</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="nb">abs</span><span class="p">(</span><span class="n">p2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">p1</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="c1"># filter roads that are not useful</span>
+        <span class="n">specialRoads</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">specialRoads</span> <span class="k">if</span> <span class="n">euclid</span><span class="p">((</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">v</span><span class="p">[</span><span class="mi">3</span><span class="p">]))</span> <span class="o">&gt;</span> <span class="n">v</span><span class="p">[</span><span class="mi">4</span><span class="p">]]</span>
+
+        <span class="n">start</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+
+        <span class="n">dist</span> <span class="o">=</span> <span class="p">{</span><span class="n">start</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+
+        <span class="n">heap</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="n">start</span><span class="p">)]</span>
+
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">heap</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">d</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">heappop</span><span class="p">(</span><span class="n">heap</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">cost</span> <span class="ow">in</span> <span class="n">specialRoads</span><span class="p">:</span>
+                <span class="n">n1</span><span class="p">,</span> <span class="n">n2</span> <span class="o">=</span> <span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">),</span> <span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">dist</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">n2</span><span class="p">,</span> <span class="n">inf</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">d</span> <span class="o">+</span> <span class="n">euclid</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">n1</span><span class="p">)</span> <span class="o">+</span> <span class="n">cost</span><span class="p">:</span>
+                    <span class="n">dist</span><span class="p">[</span><span class="n">n2</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span> <span class="o">+</span> <span class="n">euclid</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">n1</span><span class="p">)</span> <span class="o">+</span> <span class="n">cost</span>
+                    <span class="n">heappush</span><span class="p">(</span><span class="n">heap</span><span class="p">,</span> <span class="p">(</span><span class="n">dist</span><span class="p">[</span><span class="n">n2</span><span class="p">],</span> <span class="n">n2</span><span class="p">))</span>
+            <span class="c1"># print(heap)</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="n">euclid</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">cost</span> <span class="ow">in</span> <span class="n">specialRoads</span><span class="p">:</span>
+            <span class="n">n2</span> <span class="o">=</span> <span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">dist</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">n2</span><span class="p">,</span> <span class="n">inf</span><span class="p">)</span> <span class="o">+</span> <span class="n">euclid</span><span class="p">(</span><span class="n">n2</span><span class="p">,</span> <span class="n">target</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">result</span>
+</code></pre></div>
+<h2>2663. Lexicographically Smallest Beautiful String 字典序最小的美丽字符串</h2>
+<p>如果一个字符串只包含了小写字母中的前<code>k</code>个字母，且其中任意大于2的子字符串不是回文，那么我们说这是一个美丽字符串。给定一个美丽字符串<code>s</code>和参数<code>k</code>，找到以字典序刚好比<code>s</code>大的下一个美丽字符串。若这样的字符串不存在的话，返回空。</p>
+<p>看到题目的时候我的内心是懵逼的。但是其实仔细思考下来其实比较简单的。这里参考了李哥的做法给大家做一个解释。首先，由题目可以推出简化的条件。美丽字符串里面不能有回文，即连续的三个字母里面不能有重复，否则的话一定形成回文。此外要求字典序尽量小，实际上就是<code>a,b,c</code>三个字母循环一定可以拿到最小的。这样的话，我们就可以通过贪心的方式，从末尾往前看，若我们能刚好把一个位置上的字母加一且这个字母与前两个位置的字母不重复的话，我们在用<code>a,b,c</code>填充这个索引后面的所有字符。</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">smallestBeautifulString</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="nb">ord</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">-</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">'a'</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">s</span><span class="p">]</span>
+
+        <span class="n">i</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">k</span><span class="p">:</span>
+                <span class="n">i</span> <span class="o">-=</span> <span class="mi">1</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">a</span><span class="p">[</span><span class="nb">max</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span><span class="n">i</span><span class="p">]:</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)):</span>
+                    <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">({</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">2</span><span class="p">):</span><span class="n">j</span><span class="p">]))</span>
+                <span class="k">return</span> <span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="s1">'a'</span><span class="p">)</span> <span class="o">+</span> <span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">a</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="s1">''</span>
+</code></pre></div>
+</div>
+<div class="tag-cloud">
+<p>
+<a href="https://mestrace.github.io/tag/contest.html">Contest</a>
+</p>
+</div>
+<div class="center social-share">
+<p>如果你觉得这篇文章很赞，不要忘记分享给你的小伙伴们！</p>
+<div class="addthis_native_toolbox"></div>
+<div class="addthis_sharing_toolbox"></div>
+<div class="addthis_inline_share_toolbox"></div>
+</div>
+<div class="addthis_relatedposts_inline"></div>
+</article>
+<footer>
+<p>
+  © 2023  - This work is licensed under a <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.en_US" rel="license" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+  <span class="footer-separator">|</span>
+  Switch to the <a href="javascript:void(0)" onclick="theme.switch(`dark`)">dark</a> | <a href="javascript:void(0)" onclick="theme.switch(`light`)">light</a> | <a href="javascript:void(0)" onclick="theme.switch(`browser`)">browser</a> theme
+  <script data-default-theme="light" data-enable-auto-detect-theme="True" id="dark-theme-script" src="https://mestrace.github.io/theme/dark-theme/dark-theme.min.js" type="text/javascript">
+</script>
+</p><p>
+<a href="http://creativecommons.org/licenses/by-sa/4.0/" rel="license" target="_blank">
+<img alt="Creative Commons License" height="15" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" style="border-width:0" title="Creative Commons License" width="80">
+</img></a>
+</p></footer> </main>
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Mestrace的个人博客 ",
+  "url" : "https://mestrace.github.io",
+  "image": "http://github.com/Mestrace.png?size=460",
+  "description": "我的个人博客，记录我的成长历程"
+}
+</script><script async="async" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-64172c2607a4b50c" type="text/javascript"></script>
+<a aria-label="View source on Github" class="github-corner" href="http://github.com/Mestrace/" target="_blank">
+<svg aria-hidden="true" height="80" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" viewbox="0 0 250 250" width="80">
+<path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+<path class="octo-arm" d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;">
+</path>
+<path class="octo-body" d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor">
+</path>
+</svg>
+</a>
+</body>
+</html>
