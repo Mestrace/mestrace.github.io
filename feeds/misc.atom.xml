@@ -132,10 +132,12 @@ Note that it may also be run against hidden test cases not shown here.&lt;/p&gt;
 &lt;/details&gt;
 &lt;p&gt;给定一个列表&lt;code&gt;banana_list&lt;/code&gt;，代表每一个trainer拥有的香蕉个数。如果你将两个trainer匹配在一起，那么他们就会用香蕉来打赌。若两个trainer分别有&lt;code&gt;A&lt;/code&gt;和&lt;code&gt;B&lt;/code&gt;个香蕉，且&lt;code&gt;A &amp;lt; B&lt;/code&gt;，那么一局游戏之后他们的香蕉个数分别为&lt;code&gt;2A&lt;/code&gt;和&lt;code&gt;B - A&lt;/code&gt;。他们会一直玩这个游戏，直到&lt;code&gt;A = B&lt;/code&gt;才会停下来 ---- 或者永远不会停下来，陷入一个死循环。我们需需要根据他们的香蕉数量尽可能地匹配使得陷入死循环的trainer最多，且每个trainer最多匹配一次。&lt;/p&gt;
 &lt;p&gt;一个立即需要解决的问题就是，什么样的数字对才可以形成题目描述的死循环呢？简单模拟下可知，只有两个数字之和为二次幂才可以形成。此外，&lt;code&gt;A&lt;/code&gt;和&lt;code&gt;B&lt;/code&gt;的数字大小也不重要，把他们通过&lt;code&gt;gcd&lt;/code&gt;最大公因数化简之后的结果仍然等于原来的结果。如&lt;code&gt;1 4&lt;/code&gt;和&lt;code&gt;2 8&lt;/code&gt;都会循环，&lt;code&gt;1 3&lt;/code&gt;和&lt;code&gt;2 6&lt;/code&gt;都会终止。&lt;/p&gt;
-&lt;p&gt;接下来需要解决的是如何进行匹配的问题。最终需要配对的这个性质使得这个题目看起来有点像二分图的最大匹配，即给定一个图，我们要求找到最多的边，且这些边没有共同的节点。到这里这道题的考点才明晰起来。首先我们来介绍两个概念：
-- 交替路 Alternating path：从一个未匹配点出发，依次经过非匹配边、匹配边、非匹配边…形成的路径叫交替路。
-- 增广路 Augmenting path：从一个未匹配点出发，走交替路，如果途径另一个未匹配点（不包含出发点），则这条交替路称为增广路。
-当我们找到一条增广路时，我们只要把增广路中间的匹配边和非匹配边的身份交换即可，这样不会破坏匹配的性质，且会将匹配的边的长度增加&lt;code&gt;1&lt;/code&gt;。而对于我们的情况来说，只要能够判断从某个点开始是否形成增广路，即可知道这个点是否可以被包括进匹配对里。&lt;/p&gt;
+&lt;p&gt;接下来需要解决的是如何进行匹配的问题。最终需要配对的这个性质使得这个题目看起来有点像二分图的最大匹配，即给定一个图，我们要求找到最多的边，且这些边没有共同的节点。到这里这道题的考点才明晰起来。首先我们来介绍两个概念：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;交替路 Alternating path：从一个未匹配点出发，依次经过非匹配边、匹配边、非匹配边…形成的路径叫交替路。&lt;/li&gt;
+&lt;li&gt;增广路 Augmenting path：从一个未匹配点出发，走交替路，如果途径另一个未匹配点（不包含出发点），则这条交替路称为增广路。
+当我们找到一条增广路时，我们只要把增广路中间的匹配边和非匹配边的身份交换即可，这样不会破坏匹配的性质，且会将匹配的边的长度增加&lt;code&gt;1&lt;/code&gt;。而对于我们的情况来说，只要能够判断从某个点开始是否形成增广路，即可知道这个点是否可以被包括进匹配对里。&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;对于这道题来说，若两个trainer能形成死循环，则我们说这两个trainer之间有一条边相连。这样的话可以在&lt;code&gt;O(n^2)&lt;/code&gt;时间生成图。接着我们对于整个图中的每个点开始贪心匹配增广路。从点&lt;code&gt;A&lt;/code&gt;开始，若点&lt;code&gt;A&lt;/code&gt;的邻居&lt;code&gt;B&lt;/code&gt;没有被匹配过，那么&lt;code&gt;A&lt;/code&gt;和&lt;code&gt;B&lt;/code&gt;就可以被匹配；若&lt;code&gt;B&lt;/code&gt;已经匹配了&lt;code&gt;C&lt;/code&gt;，那么就将&lt;code&gt;A&lt;/code&gt;和&lt;code&gt;B&lt;/code&gt;匹配，并递归匹配&lt;code&gt;C&lt;/code&gt;。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;collections&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;defaultdict&lt;/span&gt;
 

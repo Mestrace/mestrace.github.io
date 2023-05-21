@@ -223,10 +223,12 @@ Note that it may also be run against hidden test cases not shown here.</p>
 </details>
 <p>给定一个列表<code>banana_list</code>，代表每一个trainer拥有的香蕉个数。如果你将两个trainer匹配在一起，那么他们就会用香蕉来打赌。若两个trainer分别有<code>A</code>和<code>B</code>个香蕉，且<code>A &lt; B</code>，那么一局游戏之后他们的香蕉个数分别为<code>2A</code>和<code>B - A</code>。他们会一直玩这个游戏，直到<code>A = B</code>才会停下来 ---- 或者永远不会停下来，陷入一个死循环。我们需需要根据他们的香蕉数量尽可能地匹配使得陷入死循环的trainer最多，且每个trainer最多匹配一次。</p>
 <p>一个立即需要解决的问题就是，什么样的数字对才可以形成题目描述的死循环呢？简单模拟下可知，只有两个数字之和为二次幂才可以形成。此外，<code>A</code>和<code>B</code>的数字大小也不重要，把他们通过<code>gcd</code>最大公因数化简之后的结果仍然等于原来的结果。如<code>1 4</code>和<code>2 8</code>都会循环，<code>1 3</code>和<code>2 6</code>都会终止。</p>
-<p>接下来需要解决的是如何进行匹配的问题。最终需要配对的这个性质使得这个题目看起来有点像二分图的最大匹配，即给定一个图，我们要求找到最多的边，且这些边没有共同的节点。到这里这道题的考点才明晰起来。首先我们来介绍两个概念：
-- 交替路 Alternating path：从一个未匹配点出发，依次经过非匹配边、匹配边、非匹配边…形成的路径叫交替路。
-- 增广路 Augmenting path：从一个未匹配点出发，走交替路，如果途径另一个未匹配点（不包含出发点），则这条交替路称为增广路。
-当我们找到一条增广路时，我们只要把增广路中间的匹配边和非匹配边的身份交换即可，这样不会破坏匹配的性质，且会将匹配的边的长度增加<code>1</code>。而对于我们的情况来说，只要能够判断从某个点开始是否形成增广路，即可知道这个点是否可以被包括进匹配对里。</p>
+<p>接下来需要解决的是如何进行匹配的问题。最终需要配对的这个性质使得这个题目看起来有点像二分图的最大匹配，即给定一个图，我们要求找到最多的边，且这些边没有共同的节点。到这里这道题的考点才明晰起来。首先我们来介绍两个概念：</p>
+<ul>
+<li>交替路 Alternating path：从一个未匹配点出发，依次经过非匹配边、匹配边、非匹配边…形成的路径叫交替路。</li>
+<li>增广路 Augmenting path：从一个未匹配点出发，走交替路，如果途径另一个未匹配点（不包含出发点），则这条交替路称为增广路。
+当我们找到一条增广路时，我们只要把增广路中间的匹配边和非匹配边的身份交换即可，这样不会破坏匹配的性质，且会将匹配的边的长度增加<code>1</code>。而对于我们的情况来说，只要能够判断从某个点开始是否形成增广路，即可知道这个点是否可以被包括进匹配对里。</li>
+</ul>
 <p>对于这道题来说，若两个trainer能形成死循环，则我们说这两个trainer之间有一条边相连。这样的话可以在<code>O(n^2)</code>时间生成图。接着我们对于整个图中的每个点开始贪心匹配增广路。从点<code>A</code>开始，若点<code>A</code>的邻居<code>B</code>没有被匹配过，那么<code>A</code>和<code>B</code>就可以被匹配；若<code>B</code>已经匹配了<code>C</code>，那么就将<code>A</code>和<code>B</code>匹配，并递归匹配<code>C</code>。</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
 
