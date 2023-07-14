@@ -8,3 +8,4 @@ Modified: 2023-04-14 13:00
 
 - [mimimi playground](https://blog.mimimi.fun)
 - [Yaoxuann's Blog](http://19971122.xyz/)
+- [DGideas' Blog](https://dgideas.net)
