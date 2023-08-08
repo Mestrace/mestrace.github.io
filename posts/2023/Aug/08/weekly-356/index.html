@@ -1,0 +1,321 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="True" name="HandheldFriendly"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="robots"/>
+<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&amp;family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://mestrace.github.io/theme/stylesheet/style.less" rel="stylesheet/less" type="text/css"/>
+<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js" type="text/javascript"></script>
+<link href="https://mestrace.github.io/theme/stylesheet/dark-theme.min.css" id="dark-theme-style" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css"/>
+<link href="https://mestrace.github.io/theme/pygments/monokai.min.css" id="pygments-dark-theme" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css"/>
+<link href="https://mestrace.github.io/theme/pygments/monokai.min.css" id="pygments-light-theme" media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)" rel="stylesheet" type="text/css"/>
+<link href="https://mestrace.github.io/theme/font-awesome/css/fontawesome.css" rel="stylesheet" type="text/css"/>
+<link href="https://mestrace.github.io/theme/font-awesome/css/brands.css" rel="stylesheet" type="text/css"/>
+<link href="https://mestrace.github.io/theme/font-awesome/css/solid.css" rel="stylesheet" type="text/css"/>
+<link href="https://mestrace.github.io/static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+<link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+<link href="/site.webmanifest" rel="manifest"/>
+<!-- Chrome, Firefox OS and Opera -->
+<meta content="#333" name="theme-color"/>
+<!-- Windows Phone -->
+<meta content="#333" name="msapplication-navbutton-color"/>
+<!-- iOS Safari -->
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+<!-- Microsoft EDGE -->
+<meta content="#333" name="msapplication-TileColor"/>
+<link href="https://mestrace.github.io/feeds/all.atom.xml" rel="alternate" title="Mestrace的个人博客 Atom" type="application/atom+xml"/>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-07WBTMQT81"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-07WBTMQT81');
+</script>
+<meta content="Mestrace" name="author">
+<meta content="2023-07 Leetcode Weekly Contest 356 第 356 场力扣周赛 | 2798. Number of Employees Who Met the Target 满足目标工作时长的员工数目 | 2799. Count Complete Subarrays in an Array 统计完全子数组的数目 | 2800. Shortest String That Contains Three Strings 包含三个字符串的最短字符串 | 2801. Count Stepping Numbers in Range 统计范围内的步进数字数目 | Solution to contest problems 赛题讲解 | Digit DP 数位DP" name="description">
+<meta content="Contest" name="keywords"/>
+<meta content="Mestrace的个人博客" property="og:site_name">
+<meta content="Weekly Contest 356 周赛题目解析" property="og:title">
+<meta content="2023-07 Leetcode Weekly Contest 356 第 356 场力扣周赛 | 2798. Number of Employees Who Met the Target 满足目标工作时长的员工数目 | 2799. Count Complete Subarrays in an Array 统计完全子数组的数目 | 2800. Shortest String That Contains Three Strings 包含三个字符串的最短字符串 | 2801. Count Stepping Numbers in Range 统计范围内的步进数字数目 | Solution to contest problems 赛题讲解 | Digit DP 数位DP" property="og:description">
+<meta content="en_US" property="og:locale">
+<meta content="https://mestrace.github.io/posts/2023/Aug/08/weekly-356/" property="og:url"/>
+<meta content="article" property="og:type"/>
+<meta content="2023-08-08 23:00:00+08:00" property="article:published_time"/>
+<meta content="" property="article:modified_time"/>
+<meta content="https://mestrace.github.io/author/mestrace.html" property="article:author"/>
+<meta content="Leetcode" property="article:section">
+<meta content="Contest" property="article:tag"/>
+<meta content="http://github.com/Mestrace.png?size=460" property="og:image"/>
+<title>Mestrace的个人博客 – Weekly Contest 356 周赛题目解析</title>
+</meta></meta></meta></meta></meta></meta></meta><link href="https://mestrace.github.io/posts/2023/Aug/08/weekly-356/" rel="canonical"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Mestrace的个人博客", "item": "https://mestrace.github.io"}, {"@type": "ListItem", "position": 2, "name": "Posts", "item": "https://mestrace.github.io/posts"}, {"@type": "ListItem", "position": 3, "name": "2023", "item": "https://mestrace.github.io/posts/2023"}, {"@type": "ListItem", "position": 4, "name": "Aug", "item": "https://mestrace.github.io/posts/2023/Aug"}, {"@type": "ListItem", "position": 5, "name": "08", "item": "https://mestrace.github.io/posts/2023/Aug/08"}, {"@type": "ListItem", "position": 6, "name": "Weekly 356", "item": "https://mestrace.github.io/posts/2023/Aug/08/weekly-356"}, {"@type": "ListItem", "position": 7, "name": "Index", "item": "https://mestrace.github.io/posts/2023/Aug/08/weekly-356/index.html"}]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "author": {"@type": "Person", "name": "Mestrace"}, "publisher": {"@type": "Organization", "name": "Mestrace的个人博客"}, "headline": "Weekly Contest 356 周赛题目解析", "about": "Leetcode", "datePublished": "2023-08-08 23:00"}</script></head>
+<body>
+<aside>
+<div>
+<a href="https://mestrace.github.io/">
+<img alt="Mestrace" src="http://github.com/Mestrace.png?size=460" title="Mestrace"/>
+</a>
+<h1>
+<a href="https://mestrace.github.io/">Mestrace</a>
+</h1>
+<p>Software Developer</p>
+<nav>
+<ul class="list">
+<li>
+<a href="https://mestrace.github.io/pages/about.html" target="_self">
+                About
+              </a>
+</li>
+</ul>
+</nav>
+<ul class="social">
+<li>
+<a class="sc-github" href="http://github.com/Mestrace/" target="_blank">
+<i class="fa-brands fa-github"></i>
+</a>
+</li>
+</ul>
+</div>
+</aside>
+<main>
+<nav>
+<a href="https://mestrace.github.io/">Home</a>
+<a href="https://mestrace.github.io/feeds/all.atom.xml">Atom</a>
+</nav>
+<article class="single">
+<header>
+<h1 id="weekly-356">Weekly Contest 356 周赛题目解析</h1>
+<p>
+      Posted on Tue 08 August 2023 in <a href="https://mestrace.github.io/category/leetcode.html">Leetcode</a>
+</p>
+</header>
+<div>
+<p><a href="https://leetcode.com/contest/weekly-contest-356/">Weekly Contest 356</a></p>
+<p><a href="https://leetcode.cn/contest/weekly-contest-356/">第 356 场周赛</a></p>
+<h2>题目列表</h2>
+<ul>
+<li><a href="https://leetcode.com/problems/number-of-employees-who-met-the-target/">2798. Number of Employees Who Met the Target 满足目标工作时长的员工数目</a></li>
+<li><a href="https://leetcode.com/problems/count-complete-subarrays-in-an-array/">2799. Count Complete Subarrays in an Array 统计完全子数组的数目</a></li>
+<li><a href="https://leetcode.com/problems/shortest-string-that-contains-three-strings/">2800. Shortest String That Contains Three Strings 包含三个字符串的最短字符串</a></li>
+<li><a href="https://leetcode.com/problems/count-stepping-numbers-in-range/">2801. Count Stepping Numbers in Range 统计范围内的步进数字数目</a></li>
+</ul>
+<h2>2798. Number of Employees Who Met the Target 满足目标工作时长的员工数目</h2>
+<p>按照题意模拟即可。</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">numberOfEmployeesWhoMetTarget</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hours</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">target</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">hours</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">h</span> <span class="o">&gt;=</span> <span class="n">target</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">result</span>
+</code></pre></div>
+<h2>2799. Count Complete Subarrays in an Array 统计完全子数组的数目</h2>
+<p>给定正整数<code>nums</code>，若<code>nums</code>中的任意连续子数组中唯一元素的数量等于<code>nums</code>中唯一元素的数量，我们称这个子数组为完全子数组。求所有完全子数组的数量。</p>
+<p>题目比较好理解，就是要小心暴力解法吃虫，比如我的第一个解法实际上是<code>O(n^3)</code></p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">countCompleteSubarrays</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">k</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">j</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">k</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="o">==</span> <span class="n">c</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                    <span class="n">result</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">return</span> <span class="n">result</span>
+</code></pre></div>
+<p>真正通过的解法为<code>O(n^2)</code></p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">countCompleteSubarrays</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
+                <span class="n">k</span><span class="p">[</span><span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+                    <span class="n">result</span> <span class="o">+=</span> <span class="mi">1</span>
+
+
+        <span class="k">return</span> <span class="n">result</span>
+</code></pre></div>
+<h2>2800. Shortest String That Contains Three Strings 包含三个字符串的最短字符串</h2>
+<p>给定三个字符串<code>a</code>，<code>b</code>和<code>c</code>，需要找到长度最小且字典序最小的字符串使得这三个字符串都为结果字符串的子串。</p>
+<p>首先我们知道，最长的结果为这三个字符串连续拼接之后最小的那个，总共有6种组合。我们来看一个例子</p>
+<div class="highlight"><pre><span></span><code><span class="n">Input</span><span class="o">:</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"abc"</span><span class="o">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bca"</span><span class="o">,</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"aaa"</span>
+<span class="n">Explanation</span><span class="o">:</span>
+<span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"abcbcaaaa"</span>
+<span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"abcaaabca"</span>
+<span class="n">b</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bcaabcaaa"</span>
+<span class="n">b</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bcaaaaabc"</span>
+<span class="n">c</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"aaaabcbca"</span>
+<span class="n">c</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"aaabcaabc"</span>
+</code></pre></div>
+<p>不难得出，如果我们能够找到前后两个字符相邻的公共子串，我们就可以把这些结果进行简化。如<code>a + b + c = "a(bc)(a)aa"</code>。虽然没有办法严谨的证明，但是这已经是我们能找到的最优的结果了。即，给定这三个字符串，我们尝试把三个字符串拼接在一起，并合并前后两个字符串的子串。因为我们只有六种组合结果，我们可以暴力进行计算。</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">minimumString</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">findOverlap</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">a</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">a</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)),</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                <span class="n">prefix</span> <span class="o">=</span> <span class="n">b</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">a</span><span class="p">[</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">prefix</span><span class="p">):]</span> <span class="o">==</span> <span class="n">prefix</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">:]</span>
+            <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+
+        <span class="k">def</span> <span class="nf">combineStrings</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">findOverlap</span><span class="p">(</span><span class="n">findOverlap</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="n">c</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="nb">min</span><span class="p">(</span>
+            <span class="n">combineStrings</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">),</span>
+            <span class="n">combineStrings</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span>
+            <span class="n">combineStrings</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">c</span><span class="p">),</span>
+            <span class="n">combineStrings</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">a</span><span class="p">),</span>
+            <span class="n">combineStrings</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span>
+            <span class="n">combineStrings</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">),</span>
+            <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+        <span class="p">)</span>
+</code></pre></div>
+<h2>2801. Count Stepping Numbers in Range 统计范围内的步进数字数目</h2>
+<p>给定两个正整数<code>low</code>和<code>high</code>，我们需要找到在<code>[low, high]</code>区间内所有的步进数字的数量。若一个数字所有相邻数位的绝对差值都为<code>1</code>，那么我们称这个数字为步进数字。举个例子，<code>9876</code>就是一个步进数字，而<code>8341</code>则不是。</p>
+<p>先来考虑一种朴素的方法，即我们遍历<code>[0, high]</code>所有的数字，然后筛选出<code>&gt; low</code>的数字。我们的逻辑也比较简单</p>
+<ul>
+<li>若当前数字最后一位大于<code>0</code>，我们可以增加一位数使得新添加的这一位刚好是前一位数字减去<code>1</code>。</li>
+<li>若当前数字最后一位小于<code>9</code>，我们可以增加一位数使得新添加的这一位刚好是前一位数字加上<code>1</code>。</li>
+<li>若当前数字在<code>[low, high]</code>之间，则更新数量。</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">countSteppingNumbers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">low</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">high</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">MOD</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">9</span> <span class="o">+</span> <span class="mi">7</span>
+
+        <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">lru_cache</span>
+        <span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">1000000</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">count_stepping_numbers_util</span><span class="p">(</span><span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">,</span> <span class="n">curr_num</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">curr_num</span> <span class="o">&gt;</span> <span class="nb">int</span><span class="p">(</span><span class="n">high</span><span class="p">):</span>
+                <span class="k">return</span> <span class="mi">0</span>
+
+            <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">if</span> <span class="n">curr_num</span> <span class="o">&gt;=</span> <span class="nb">int</span><span class="p">(</span><span class="n">low</span><span class="p">):</span>
+                <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+            <span class="n">last_digit</span> <span class="o">=</span> <span class="n">curr_num</span> <span class="o">%</span> <span class="mi">10</span>
+
+            <span class="k">if</span> <span class="n">last_digit</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">count</span> <span class="o">+=</span> <span class="n">count_stepping_numbers_util</span><span class="p">(</span><span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">,</span> <span class="n">curr_num</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="n">last_digit</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">last_digit</span> <span class="o">&lt;</span> <span class="mi">9</span><span class="p">:</span>
+                <span class="n">count</span> <span class="o">+=</span> <span class="n">count_stepping_numbers_util</span><span class="p">(</span><span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">,</span> <span class="n">curr_num</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="n">last_digit</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">count</span>
+
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="n">count_stepping_numbers_util</span><span class="p">(</span><span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">count</span> <span class="o">%</span> <span class="n">MOD</span>
+</code></pre></div>
+<p>尝试运行一下，这个解法很快就会在一个较大的输入上TLE。因此我们考虑用其他的方法。既然是使用数字递归的方式不行，我们考虑减少一下我们的状态数量，直接从每一个数位下手，这个技巧也被称之为<strong>数位DP</strong>。</p>
+<p>数位DP着重于解决一类问题：给定区间<code>[low, high]</code>，要求计算每一个数位满足特定条件的数字的数量。给定输入数字<code>n</code>，定义动态规划方程为<code>f(i, tight, last_digit, leading_zero)</code>以求构造第<code>i</code>位的合法方案书，其中每个维度的含义为</p>
+<ul>
+<li><code>i</code> 表示构造第<code>i</code>个数位，取值区间为<code>[0, max_digits]</code>，只会受到输入的最大数位长度的限制。</li>
+<li><code>tight</code> 表示当前是否受到了<code>n</code>的约束，布尔值。因为我们要构造的数据的第<code>i</code>位不能超过输入的数字<code>n</code>的同样位数，所以在构造每一位数字时需要考虑是否受到约束。</li>
+<li><code>last_digit</code> 表示上一位数字的值。</li>
+<li><code>leading_zero</code> 表示当前已经确定的前缀数字是否含有前导零。</li>
+</ul>
+<p>通过这样的动态规划方程，我们可以逐位计算满足条件的数字的数量。具体的状态转移方程根据题目条件的不同而有所调整。</p>
+<p>在数位DP的状态转移过程中，我们需要考虑以下几种情况：</p>
+<ol>
+<li><strong>当<code>i</code>到最大数位长度时</strong>： 如果此时的数字满足特定条件，我们可以将方案数加一。</li>
+<li><strong>当<code>tight = true</code>时</strong>： 这意味着我们的构造受到了输入数字n的限制，因此在当前位上的数字不能大于 n 对应位上的数字。我们可以将当前位的数字从 0 遍历到 n 的对应位的数字，然后根据约束递归计算下一位。举个例子，<code>n = 123</code>，<code>i = 2</code>，<code>tigit = True</code>表明前面两位已经取了<code>12</code>，则第三位只能取<code>[0,3]</code>之间的数字。</li>
+<li><strong>当 tight 为 false 时</strong>： 在这种情况下，我们可以将当前位的数字从 0 遍历到 9，因为没有约束。我们同样根据递归计算下一位。还是同样的例子，<code>n = 123</code>，<code>i = 2</code>，<code>tigit = False</code>表明前两位比<code>12</code>要小，如<code>10</code>等，则第三位可以任意取<code>[0,9]</code>。</li>
+<li><strong>根据题目的条件进行状态转移</strong>： 这一步是数位DP的核心，根据题目中给定的条件，我们需要根据当前位的数字确定下一位数字。题目已经描述的很清楚了，这里就不再赘述了。</li>
+<li><strong>处理前导零</strong>： 若前缀都为<code>0</code>的话，当前位数可以为<code>0</code>，或<code>[1,9]</code>。依旧是同样的例子，<code>n = 123</code>，<code>i = 1</code>，<code>leading_zero = True</code>表明第一位是<code>0</code>，我们只需要构造<code>000 - 099</code>之间的数字。</li>
+</ol>
+<p>到这里，我们的递归关系已经理清了。这里直接给答案吧。</p>
+<div class="highlight"><pre><span></span><code><span class="n">MOD</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">1e9</span> <span class="o">+</span> <span class="mi">7</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">_count</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">cache</span>
+        <span class="nd">@cache</span>
+        <span class="k">def</span> <span class="nf">dp</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">tight</span><span class="p">,</span> <span class="n">lastDigit</span><span class="p">,</span> <span class="n">leadingZero</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+                <span class="k">return</span> <span class="mi">1</span>
+            <span class="n">maxDigit</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">if</span> <span class="n">tight</span> <span class="k">else</span> <span class="mi">9</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxDigit</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">nextTight</span> <span class="o">=</span> <span class="n">tight</span> <span class="ow">and</span> <span class="n">d</span> <span class="o">==</span> <span class="n">maxDigit</span>
+                <span class="n">nextLeadingZero</span> <span class="o">=</span> <span class="n">leadingZero</span> <span class="ow">and</span> <span class="n">d</span> <span class="o">==</span> <span class="mi">0</span>
+                <span class="k">if</span> <span class="n">nextLeadingZero</span><span class="p">:</span>
+                    <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="n">result</span> <span class="o">+</span> <span class="n">dp</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nextTight</span><span class="p">,</span> <span class="n">lastDigit</span><span class="p">,</span> <span class="n">nextLeadingZero</span><span class="p">))</span> <span class="o">%</span> <span class="n">MOD</span>
+                <span class="k">elif</span> <span class="n">lastDigit</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">or</span> <span class="nb">abs</span><span class="p">(</span><span class="n">lastDigit</span> <span class="o">-</span> <span class="n">d</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="n">result</span> <span class="o">+</span> <span class="n">dp</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nextTight</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">nextLeadingZero</span><span class="p">))</span> <span class="o">%</span> <span class="n">MOD</span>
+            <span class="k">return</span> <span class="n">result</span>
+
+        <span class="k">return</span> <span class="n">dp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">countSteppingNumbers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">low</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">high</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_count</span><span class="p">(</span><span class="n">high</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_count</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">low</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">+</span> <span class="n">MOD</span><span class="p">)</span> <span class="o">%</span> <span class="n">MOD</span>
+</code></pre></div>
+<p>以下这两篇文章让我更好的理解了数位DP，感兴趣的同学可以看下。</p>
+<ul>
+<li><a href="https://usaco.guide/gold/digit-dp?lang=cpp">USACO Guide - Digit DP</a></li>
+<li><a href="https://codeforces.com/blog/entry/53960">CodeForces - flash_7's blog - Digit DP</a></li>
+</ul>
+</div>
+<div class="tag-cloud">
+<p>
+<a href="https://mestrace.github.io/tag/contest.html">Contest</a>
+</p>
+</div>
+<div class="center social-share">
+<p>如果你觉得这篇文章很赞，不要忘记分享给你的小伙伴们！</p>
+<div class="addthis_native_toolbox"></div>
+<div class="addthis_sharing_toolbox"></div>
+<div class="addthis_inline_share_toolbox"></div>
+</div>
+<div class="addthis_relatedposts_inline"></div>
+</article>
+<footer>
+<p>
+  © 2023  - This work is licensed under a <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.en_US" rel="license" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+  <span class="footer-separator">|</span>
+  Switch to the <a href="javascript:void(0)" onclick="theme.switch(`dark`)">dark</a> | <a href="javascript:void(0)" onclick="theme.switch(`light`)">light</a> | <a href="javascript:void(0)" onclick="theme.switch(`browser`)">browser</a> theme
+  <script data-default-theme="light" data-enable-auto-detect-theme="True" id="dark-theme-script" src="https://mestrace.github.io/theme/dark-theme/dark-theme.min.js" type="text/javascript">
+</script>
+</p><p>
+<a href="http://creativecommons.org/licenses/by-sa/4.0/" rel="license" target="_blank">
+<img alt="Creative Commons License" height="15" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" style="border-width:0" title="Creative Commons License" width="80">
+</img></a>
+</p></footer> </main>
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Mestrace的个人博客 ",
+  "url" : "https://mestrace.github.io",
+  "image": "http://github.com/Mestrace.png?size=460",
+  "description": "我的个人博客，记录我的成长历程"
+}
+</script><script async="async" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-64172c2607a4b50c" type="text/javascript"></script>
+<a aria-label="View source on Github" class="github-corner" href="http://github.com/Mestrace/" target="_blank">
+<svg aria-hidden="true" height="80" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" viewbox="0 0 250 250" width="80">
+<path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+<path class="octo-arm" d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;">
+</path>
+<path class="octo-body" d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor">
+</path>
+</svg>
+</a>
+</body>
+</html>
