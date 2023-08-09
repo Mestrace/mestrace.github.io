@@ -7,7 +7,7 @@
         url("fonts/LXGWWenKaiMono-Light.ttf") format("truetype"),
         url("fonts/LXGWWenKaiMono-Regular.ttf") format("truetype");
     font-style: normal;
-    font-weight: 900;
+    /* font-weight: 900; */
     font-display: block;
 }
 
@@ -17,6 +17,10 @@ article {
     line-height: 2em;
     word-break: break-all;
     word-wrap: break-word;
+}
+
+article pre {
+    line-height: 1.7em;
 }
 
 /* 实现黑幕效果

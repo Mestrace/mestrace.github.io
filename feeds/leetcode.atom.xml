@@ -1,5 +1,192 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Mestrace的个人博客 - Leetcode</title><link href="https://mestrace.github.io/" rel="alternate"></link><link href="https://mestrace.github.io/feeds/leetcode.atom.xml" rel="self"></link><id>https://mestrace.github.io/</id><updated>2023-08-08T23:00:00+08:00</updated><subtitle>Software Developer</subtitle><entry><title>Weekly Contest 356 周赛题目解析</title><link href="https://mestrace.github.io/posts/2023/Aug/08/weekly-356/" rel="alternate"></link><published>2023-08-08T23:00:00+08:00</published><updated>2023-08-08T23:00:00+08:00</updated><author><name>Mestrace</name></author><id>tag:mestrace.github.io,2023-08-08:/posts/2023/Aug/08/weekly-356/</id><summary type="html">&lt;p&gt;2023-07 Leetcode Weekly Contest 356 第 356 场力扣周赛 | 2798. Number of Employees Who Met the Target 满足目标工作时长的员工数目 | 2799. Count Complete Subarrays in an Array 统计完全子数组的数目 | 2800. Shortest String That Contains Three Strings 包含三个字符串的最短字符串 | 2801. Count Stepping Numbers in Range 统计范围内的步进数字数目 | Solution to contest problems 赛题讲解 | Digit DP 数位DP&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="https://leetcode.com/contest/weekly-contest-356/"&gt;Weekly Contest 356&lt;/a&gt;&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mestrace的个人博客 - Leetcode</title><link href="https://mestrace.github.io/" rel="alternate"></link><link href="https://mestrace.github.io/feeds/leetcode.atom.xml" rel="self"></link><id>https://mestrace.github.io/</id><updated>2023-08-09T20:00:00+08:00</updated><subtitle>Software Developer</subtitle><entry><title>Weekly Contest 357 周赛题目解析</title><link href="https://mestrace.github.io/posts/2023/Aug/09/weekly-357/" rel="alternate"></link><published>2023-08-09T20:00:00+08:00</published><updated>2023-08-09T20:00:00+08:00</updated><author><name>Mestrace</name></author><id>tag:mestrace.github.io,2023-08-09:/posts/2023/Aug/09/weekly-357/</id><summary type="html">&lt;p&gt;2023-07 Leetcode Weekly Contest 357 第 357 场力扣周赛 | 2810. Faulty Keyboard 故障键盘 | 2811. Check if it is Possible to Split Array 判断是否能拆分数组 | 2812. Find the Safest Path in a Grid 找出最安全路径 | 2813. Maximum Elegance of a K-Length Subsequence 子序列最大优雅度 | Solution to contest problems 赛题讲解 ｜ Dijkstra 迪科斯特拉算法 | Greedy 贪心算法&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="https://leetcode.com/contest/weekly-contest-357/"&gt;Weekly Contest 357&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://leetcode.cn/contest/weekly-contest-357/"&gt;第 357 场周赛&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;题目列表&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/faulty-keyboard/"&gt;2810. Faulty Keyboard 故障键盘&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/check-if-it-is-possible-to-split-array/"&gt;2811. Check if it is Possible to Split Array 判断是否能拆分数组&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/find-the-safest-path-in-a-grid/"&gt;2812. Find the Safest Path in a Grid 找出最安全路径&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/maximum-elegance-of-a-k-length-subsequence/"&gt;2813. Maximum Elegance of a K-Length Subsequence 子序列最大优雅度&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;2810. Faulty Keyboard 故障键盘&lt;/h2&gt;
+&lt;p&gt;按照题意模拟即可。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Solution&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;finalString&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;v&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;i&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="n"&gt;v&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="p"&gt;[::&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+            &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="n"&gt;v&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt;
+
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;v&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;2811. Check if it is Possible to Split Array 判断是否能拆分数组&lt;/h2&gt;
+&lt;p&gt;给定一个长度为&lt;code&gt;n&lt;/code&gt;的数组&lt;code&gt;nums&lt;/code&gt;，和一个整数&lt;code&gt;m&lt;/code&gt;，你需要尝试通过一系列的拆分，每次把这个数组（或拆分后的子数组）拆分成两个新的子数组，直到不可再分。最终，你需要判断是否可以完全拆分（即每个子数组只有一个元素）。对于一个子数组进行拆分需要满足一定的条件：若拆分后的两个新子数组满足下列条件中的任一的，称之为合法的拆分&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;子数组长度为&lt;code&gt;1&lt;/code&gt;，或&lt;/li&gt;
+&lt;li&gt;子数组元素总和大于等于&lt;code&gt;m&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;最终需要返回&lt;code&gt;True&lt;/code&gt;/&lt;code&gt;False&lt;/code&gt;表明是否可以通过一系列合法拆分把数组变成单个元素。&lt;/p&gt;
+&lt;p&gt;这道题坑就坑在他的题目描述又长又臭，但是又很误导。比如是否可以把“长度为&lt;code&gt;n&lt;/code&gt;的数组拆分成&lt;code&gt;n&lt;/code&gt;个长度为&lt;code&gt;1&lt;/code&gt;的子数组”。仔细看看，其实我们要关注的其实是是否可以分割的过程，即当中间某一步不可以执行的时候，需要返回&lt;code&gt;False&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;这里我们直接用DP来处理：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;若子数组&lt;code&gt;nums[i:j]&lt;/code&gt;没有元素，返回&lt;code&gt;False&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;若子数组&lt;code&gt;nums[i:j]&lt;/code&gt;有一个元素，返回&lt;code&gt;True&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;若子数组&lt;code&gt;nums[i:j]&lt;/code&gt;的和比&lt;code&gt;m&lt;/code&gt;小，返回&lt;code&gt;False&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;否则，尝试每一种分割方式&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这里因为涉及到子数组求和，我们使用Prefix Sum来进行处理，即&lt;code&gt;sum(nums[i:j]) = prefix[j] - prefix[i]&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;还需要注意一个边界情况，当输入的子数组&lt;code&gt;nums&lt;/code&gt;的长度为&lt;code&gt;1&lt;/code&gt;或者&lt;code&gt;2&lt;/code&gt;时，直接返回&lt;code&gt;True&lt;/code&gt;即可。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Solution&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;canSplitArray&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;bool&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;
+        &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;itertools&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;accumulate&lt;/span&gt;
+        &lt;span class="n"&gt;prefix&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;accumulate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+        &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;functools&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;cache&lt;/span&gt;
+        &lt;span class="nd"&gt;@cache&lt;/span&gt;
+        &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;bt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;False&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;
+            &lt;span class="k"&gt;elif&lt;/span&gt; &lt;span class="n"&gt;prefix&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;prefix&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="c1"&gt;# print(i, j, sum(nums[i:j]), prefix[j] - prefix[i])&lt;/span&gt;
+                &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;False&lt;/span&gt;
+
+            &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;idx&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+                &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;bt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;idx&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="n"&gt;bt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;idx&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+                    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;
+
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;False&lt;/span&gt;
+
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;bt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p align="center"&gt;
+  &lt;img src="https://mestrace.github.io/images/gei_li.png" /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;实际上，一个隐秘的规律是：当数组中存在两个相邻元素的和大于&lt;code&gt;m&lt;/code&gt;时，这样的分割就可以成功。并且这个是充分必要条件，因此我们直接检查即可。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Solution&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;canSplitArray&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;bool&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;nums&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;False&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;2812. Find the Safest Path in a Grid 找出最安全路径&lt;/h2&gt;
+&lt;p&gt;给定一个&lt;code&gt;n x n&lt;/code&gt;的2D矩阵&lt;code&gt;grid&lt;/code&gt;，其中&lt;code&gt;grid[r][c] = 0&lt;/code&gt;代表空格，&lt;code&gt;grid[r][c] = 1&lt;/code&gt;代表敌人。定义格子&lt;code&gt;(r,c)&lt;/code&gt;的安全系数为这个格子离他当前敌人最近的曼哈顿距离，则一条路径的安全系数为路径上所有格子中最小的安全距离。要求出从&lt;code&gt;(0,0)&lt;/code&gt;出发到达&lt;code&gt;(n-1,n-1)&lt;/code&gt;最大安全系数的路径。&lt;/p&gt;
+&lt;p&gt;听上去很简单嘛。我直接正手一个Dijkstra。使用一个heap来维护当前到达的点，并优先走安全系数较大的点…… 我怎么知道每一个点的安全系数呢？有了，就用从每个敌人点出发的BFS吧！等一下，好像时间有点不够……&lt;/p&gt;
+&lt;p&gt;这道题最坑的地方在于，你要连续使用两个（类）BFS的方法去分别处理每个点的安全系数和最大安全系数的路径。如果平时对于BFS不熟练的话，要么就写不完，要么就会在某个地方卡壳出错，浪费掉大量的时间。&lt;/p&gt;
+&lt;p&gt;总之，回到我们的方法，分为两步走&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;先使用BFS，从每一个敌人点出发，求出地图上每个点的安全系数&lt;/li&gt;
+&lt;li&gt;再使用Dijkstra，从&lt;code&gt;(0,0)&lt;/code&gt;出发，经由较大的点路径前往&lt;code&gt;(n-1,n-1)&lt;/code&gt;。最终算的最大的安全系数。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;DIR&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Solution&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;maximumSafenessFactor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;grid&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;grid&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;grid&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+
+        &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;check&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;
+
+        &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;computeSafenessMatrix&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+            &lt;span class="n"&gt;q&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;deque&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+            &lt;span class="n"&gt;mat&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+            &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+                &lt;span class="n"&gt;mat&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+                    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;grid&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                        &lt;span class="n"&gt;mat&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+                        &lt;span class="n"&gt;q&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+            &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;q&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;q&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;popleft&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+                &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+                    &lt;span class="n"&gt;nx&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;DIR&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                    &lt;span class="n"&gt;ny&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;DIR&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+                    &lt;span class="c1"&gt;# invalid&lt;/span&gt;
+                    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;check&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nx&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ny&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+                        &lt;span class="k"&gt;continue&lt;/span&gt;
+                    &lt;span class="c1"&gt;# visited&lt;/span&gt;
+                    &lt;span class="k"&gt;elif&lt;/span&gt; &lt;span class="n"&gt;mat&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;nx&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;ny&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                        &lt;span class="k"&gt;continue&lt;/span&gt;
+                    &lt;span class="n"&gt;mat&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;nx&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;ny&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;        
+                    &lt;span class="n"&gt;q&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;nx&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ny&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;mat&lt;/span&gt;
+
+        &lt;span class="n"&gt;safeness&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;computeSafenessMatrix&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="c1"&gt;# print(safeness)&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# max queue&lt;/span&gt;
+        &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;heapq&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;heappush&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;heappop&lt;/span&gt;
+        &lt;span class="n"&gt;q&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+        &lt;span class="n"&gt;heappush&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;q&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;safeness&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+        &lt;span class="n"&gt;grid&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
+
+        &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;q&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;ms&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;heappop&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;q&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt;
+
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;
+
+            &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+                &lt;span class="n"&gt;nx&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;DIR&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                &lt;span class="n"&gt;ny&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;DIR&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+                &lt;span class="c1"&gt;# invalid&lt;/span&gt;
+                &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;check&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nx&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ny&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+                    &lt;span class="k"&gt;continue&lt;/span&gt;
+                &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;grid&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;nx&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;ny&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                    &lt;span class="k"&gt;continue&lt;/span&gt;
+                &lt;span class="n"&gt;grid&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;nx&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;ny&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
+
+                &lt;span class="n"&gt;heappush&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;q&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;min&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;safeness&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;nx&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;ny&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;nx&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ny&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;2813. Maximum Elegance of a K-Length Subsequence 子序列最大优雅度&lt;/h2&gt;
+&lt;p&gt;给定一个列表的&lt;code&gt;items&lt;/code&gt;和整数&lt;code&gt;k&lt;/code&gt;，其中每个&lt;code&gt;items[i]&lt;/code&gt;包含了两个整数，&lt;code&gt;profit_i&lt;/code&gt;代表了当前物品的价值，&lt;code&gt;category&lt;/code&gt;是当前物品的类别。在&lt;code&gt;items&lt;/code&gt;中选定&lt;code&gt;k&lt;/code&gt;个物品组成的子序列的优雅度定义为&lt;code&gt;total_profit + distict_categories^2&lt;/code&gt;，总价值加上独特类别个数的次方。要求任意长度为&lt;code&gt;k&lt;/code&gt;的子序列所能组成的最大的优雅度。&lt;/p&gt;
+&lt;p&gt;直接看题目限制，&lt;code&gt;1 &amp;lt;= items.length == n &amp;lt;= 10^5&lt;/code&gt;，&lt;code&gt;1 &amp;lt;= profit_i &amp;lt;= 10^9&lt;/code&gt;可以推断出来这道题大概率要&lt;code&gt;O(n^2)&lt;/code&gt;以下才可以，如果用&lt;code&gt;DP&lt;/code&gt;的话大概率超时。又是个优化题，看看可不可以用贪心的方法入手。&lt;/p&gt;
+&lt;p&gt;显而易见，如果我们的优化目标只有&lt;code&gt;total_profit&lt;/code&gt;的话，我们只需要排序后取前&lt;code&gt;k&lt;/code&gt;个就可以了。考虑到&lt;code&gt;distinct_categories^2&lt;/code&gt;大概率对于影响不大，我们排序后，可以优先取&lt;code&gt;total_profit&lt;/code&gt;较高的，然后尝试把接下来的物品逐个替换上去，看看能不能对于独特类别这一项有帮助。&lt;/p&gt;
+&lt;p&gt;要注意的是，题目虽然要求的是子序列，但是没有要求连续的，因此实际上等价于随便取就好。搞不明白这题有什么难的……&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Solution&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;findMaximumElegance&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;items&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;]],&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;items&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;sorted&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;items&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+        &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+        &lt;span class="n"&gt;curr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+        &lt;span class="n"&gt;array&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+        &lt;span class="n"&gt;seen&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;profit&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;category&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;enumerate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;items&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;seen&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                    &lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;profit&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                &lt;span class="n"&gt;curr&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;profit&lt;/span&gt;
+            &lt;span class="k"&gt;elif&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;seen&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                    &lt;span class="k"&gt;break&lt;/span&gt;
+                &lt;span class="n"&gt;curr&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;profit&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pop&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+            &lt;span class="n"&gt;seen&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;max&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;curr&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;seen&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;seen&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="Leetcode"></category><category term="Contest"></category></entry><entry><title>Weekly Contest 356 周赛题目解析</title><link href="https://mestrace.github.io/posts/2023/Aug/08/weekly-356/" rel="alternate"></link><published>2023-08-08T23:00:00+08:00</published><updated>2023-08-08T23:00:00+08:00</updated><author><name>Mestrace</name></author><id>tag:mestrace.github.io,2023-08-08:/posts/2023/Aug/08/weekly-356/</id><summary type="html">&lt;p&gt;2023-07 Leetcode Weekly Contest 356 第 356 场力扣周赛 | 2798. Number of Employees Who Met the Target 满足目标工作时长的员工数目 | 2799. Count Complete Subarrays in an Array 统计完全子数组的数目 | 2800. Shortest String That Contains Three Strings 包含三个字符串的最短字符串 | 2801. Count Stepping Numbers in Range 统计范围内的步进数字数目 | Solution to contest problems 赛题讲解 | Digit DP 数位DP&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="https://leetcode.com/contest/weekly-contest-356/"&gt;Weekly Contest 356&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://leetcode.cn/contest/weekly-contest-356/"&gt;第 356 场周赛&lt;/a&gt;&lt;/p&gt;
 &lt;h2&gt;题目列表&lt;/h2&gt;
 &lt;ul&gt;
