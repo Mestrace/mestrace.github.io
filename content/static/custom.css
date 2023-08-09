@@ -19,6 +19,10 @@ article {
     word-wrap: break-word;
 }
 
+article pre {
+    line-height: 1.7em;
+}
+
 /* 实现黑幕效果
 https://ucw.moe/archives/js-with-css-implements-heimu.html */
 
