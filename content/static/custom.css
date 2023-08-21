@@ -37,3 +37,8 @@ https://ucw.moe/archives/js-with-css-implements-heimu.html */
     text-shadow: none;
     transition: color 0.3s;
 }
+
+figcaption {
+    text-align: center;
+    font-weight: 100;
+}
