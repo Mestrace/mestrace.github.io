@@ -1,0 +1,359 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="True" name="HandheldFriendly"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="robots"/>
+<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&amp;family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://mestrace.github.io/theme/stylesheet/style.less" rel="stylesheet/less" type="text/css"/>
+<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js" type="text/javascript"></script>
+<link href="https://mestrace.github.io/theme/stylesheet/dark-theme.min.css" id="dark-theme-style" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css"/>
+<link href="https://mestrace.github.io/theme/pygments/monokai.min.css" id="pygments-dark-theme" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css"/>
+<link href="https://mestrace.github.io/theme/pygments/monokai.min.css" id="pygments-light-theme" media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)" rel="stylesheet" type="text/css"/>
+<link href="https://mestrace.github.io/theme/font-awesome/css/fontawesome.css" rel="stylesheet" type="text/css"/>
+<link href="https://mestrace.github.io/theme/font-awesome/css/brands.css" rel="stylesheet" type="text/css"/>
+<link href="https://mestrace.github.io/theme/font-awesome/css/solid.css" rel="stylesheet" type="text/css"/>
+<link href="https://mestrace.github.io/static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+<link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+<link href="/site.webmanifest" rel="manifest"/>
+<!-- Chrome, Firefox OS and Opera -->
+<meta content="#333" name="theme-color"/>
+<!-- Windows Phone -->
+<meta content="#333" name="msapplication-navbutton-color"/>
+<!-- iOS Safari -->
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+<!-- Microsoft EDGE -->
+<meta content="#333" name="msapplication-TileColor"/>
+<link href="https://mestrace.github.io/feeds/all.atom.xml" rel="alternate" title="Mestrace的个人博客 Atom" type="application/atom+xml"/>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-07WBTMQT81"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-07WBTMQT81');
+</script>
+<meta content="Mestrace" name="author">
+<meta content="本文探讨了在线航空公司经营游戏Airline Empires中，如何通过最佳座位配置来提升盈利能力。从游戏机制到座位优化，逐步引导读者了解如何运用混合整数二次规划来提升游戏中的航线盈利。This article explores how optimal seating configurations can be used to improve profitability in Airline Empires, an online airline operating game. From game mechanics to seat optimization, the reader is guided step-by-step through how to use Mixed-Integer Quadratic Programming (MIQP) to improve airline profitability in the game." name="description">
+<meta content="" name="keywords"/>
+<meta content="Mestrace的个人博客" property="og:site_name">
+<meta content="Airline Empire之使用二次规划解决航线的最佳座位排布" property="og:title">
+<meta content="本文探讨了在线航空公司经营游戏Airline Empires中，如何通过最佳座位配置来提升盈利能力。从游戏机制到座位优化，逐步引导读者了解如何运用混合整数二次规划来提升游戏中的航线盈利。This article explores how optimal seating configurations can be used to improve profitability in Airline Empires, an online airline operating game. From game mechanics to seat optimization, the reader is guided step-by-step through how to use Mixed-Integer Quadratic Programming (MIQP) to improve airline profitability in the game." property="og:description">
+<meta content="en_US" property="og:locale">
+<meta content="https://mestrace.github.io/posts/2023/Aug/21/ae-best-seat-configuration/" property="og:url"/>
+<meta content="article" property="og:type"/>
+<meta content="2023-08-21 00:00:00+08:00" property="article:published_time"/>
+<meta content="" property="article:modified_time"/>
+<meta content="https://mestrace.github.io/author/mestrace.html" property="article:author"/>
+<meta content="MISC" property="article:section">
+<meta content="http://github.com/Mestrace.png?size=460" property="og:image"/>
+<title>Mestrace的个人博客 – Airline Empire之使用二次规划解决航线的最佳座位排布</title>
+</meta></meta></meta></meta></meta></meta></meta><link href="https://mestrace.github.io/posts/2023/Aug/21/ae-best-seat-configuration/" rel="canonical"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Mestrace的个人博客", "item": "https://mestrace.github.io"}, {"@type": "ListItem", "position": 2, "name": "Posts", "item": "https://mestrace.github.io/posts"}, {"@type": "ListItem", "position": 3, "name": "2023", "item": "https://mestrace.github.io/posts/2023"}, {"@type": "ListItem", "position": 4, "name": "Aug", "item": "https://mestrace.github.io/posts/2023/Aug"}, {"@type": "ListItem", "position": 5, "name": "21", "item": "https://mestrace.github.io/posts/2023/Aug/21"}, {"@type": "ListItem", "position": 6, "name": "Ae best seat configuration", "item": "https://mestrace.github.io/posts/2023/Aug/21/ae-best-seat-configuration"}, {"@type": "ListItem", "position": 7, "name": "Index", "item": "https://mestrace.github.io/posts/2023/Aug/21/ae-best-seat-configuration/index.html"}]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "author": {"@type": "Person", "name": "Mestrace"}, "publisher": {"@type": "Organization", "name": "Mestrace的个人博客"}, "headline": "Airline Empire之使用二次规划解决航线的最佳座位排布", "about": "MISC", "datePublished": "2023-08-21 00:00"}</script></head>
+<body>
+<aside>
+<div>
+<a href="https://mestrace.github.io/">
+<img alt="Mestrace" src="http://github.com/Mestrace.png?size=460" title="Mestrace"/>
+</a>
+<h1>
+<a href="https://mestrace.github.io/">Mestrace</a>
+</h1>
+<p>Software Developer</p>
+<nav>
+<ul class="list">
+<li>
+<a href="https://mestrace.github.io/pages/about.html" target="_self">
+                About
+              </a>
+</li>
+</ul>
+</nav>
+<ul class="social">
+<li>
+<a class="sc-github" href="http://github.com/Mestrace/" target="_blank">
+<i class="fa-brands fa-github"></i>
+</a>
+</li>
+</ul>
+</div>
+</aside>
+<main>
+<nav>
+<a href="https://mestrace.github.io/">Home</a>
+<a href="https://mestrace.github.io/feeds/all.atom.xml">Atom</a>
+</nav>
+<article class="single">
+<header>
+<h1 id="ae-best-seat-configuration">Airline Empire之使用二次规划解决航线的最佳座位排布</h1>
+<p>
+      Posted on Mon 21 August 2023 in <a href="https://mestrace.github.io/category/misc.html">MISC</a>
+</p>
+</header>
+<div>
+<p><a href="http://www.airline-empires.com">Airline Empires</a>（下称AE）是一款在线的航空公司经营类游戏。在游戏中，玩家将以上帝视角运营航线，覆盖各个地区，并与其他玩家展开竞争。游戏的节奏设计较为缓慢，每个游戏内的一天相当于现实时间的5至20分钟，使其成为一款休闲的模拟经营游戏。尽管游戏以纯文字形式呈现，没有任何视觉效果，但AE提供了丰富多样的飞机选择。运营航线需要考虑诸多因素，包括机场距离、飞机航程、跑道长度、座位布局以及不同舱位的定价策略。通过丰富的经营元素和策略考量，AE成功地为玩家提供了一个新奇的航空公司体验。无论是追求利润最大化还是航线网络的扩张，玩家都能在AE中找到乐趣与挑战。</p>
+<figure align="center">
+<img alt="Airline Empire Screenshot of Singapore to Perth Route Configuration" src="https://mestrace.github.io/images/15/sin-per.png">
+<figcaption>游戏截图：新加坡到珀斯的航线配置</figcaption>
+</img></figure>
+<p>游戏由一些爱好者团队进行维护，游玩是免费的，仅通过少量的贴片广告进行变现以支持游戏的运营。然而这也意味着玩家必须忍受小霸王服务器的卡顿。但是话又说回来了，免费又制作精良的游戏，还有专人进行维护，社区氛围也不错的游戏，要什么自行车呢？</p>
+<p>笔者早在2018年就玩了这款游戏，期间也偶尔会回去重温一下。买上几架笔者最喜欢的麦道MD-80 (道格拉斯 DC-9)和道格拉斯DC-10，运营几条长航线，感觉非常满足。但今天这篇文章的目的不是介绍这款游戏本身，而是以AE的参数配置为起点来探索如何通过最佳的座位安排以获取收益。首先我会介绍这个游戏中如何配置航线和盈利，接着我会介绍我是如何通过建模来确定特定航线的最佳座位配置，并提供相应的代码供大家参考。</p>
+<p>以从新加坡飞往珀斯的航线为例，航程全长2428英里（3907公里）。当前我们使用编号为58的麦道MD-83客机执飞，每周执飞26班。MD-83最多可容纳172名乘客，在<code>4F10C146Y</code>共160名乘客的座舱配置下，每周的盈利约为<code>$246,014</code>。但是这个仓位数量是我随手拍的一个值，并没有任何的依据。</p>
+<p>如果我们能够根据航线的情况来定制各个仓位的座位数量，那么我们就能大幅度提高我们的盈利能力了。早在 2018 年，当我第一次玩这个游戏时，我就设想过这种优化，但缺乏相关的知识去真正把这个模型实现出来。但是到了2023年的今天，我已经掌握了足够的知识去实现程式化地计算了，让我们来一起看看我们到底如何建模吧。</p>
+<p>首先我们要明确，我们的目标是预测某条特定航线上使用特定机型执飞的座位数量。此外，我们还要做一些假设</p>
+<ul>
+<li><strong>客流</strong>：因为游戏中上帝视角的存在，我们知道每条线路上各个仓位的每周客流数量。</li>
+<li><strong>机型</strong>：一架飞机每周的飞行时间是固定的，航线耗时和飞机转场时间决定了一条航线上每周最多只能飞多少次。</li>
+<li><strong>价格</strong>：在虽然游戏允许我们自由设定机票价格，但在我们的预测模型中，我们暂时将价格视为已知变量。</li>
+</ul>
+<p>接着我们要明确我们的优化目标。我们有四个优化变量：头等舱、商务舱和经济舱的座位数<code>X = (x, y, z)</code>，以及每周执飞航班数量<code>n</code>。我们的优化目标为各个仓位的收入的总和。此外，我们还会需要有一些额外的条件，这些条件包括</p>
+<ul>
+<li><strong>飞机载荷利用率</strong>：我们至少应当用到<code>90%</code>以上的飞机载荷。</li>
+<li><strong>每周飞行航班量</strong>：我们的每周执飞航班数量不能超过最大执飞航班数量。此外，我们还可以藉由此变量控制多少架飞机飞这条航线 -- 只需将每架飞机的最大飞行次数乘以飞机总数即可。</li>
+<li><strong>仓位客流数量</strong>：每班飞机每周提供的座位数不应超过每周乘客人数，因为超过这一限制将不会产生额外收入。</li>
+</ul>
+<p>有了这些之后，我们就可以开始实现我们的优化模型了。我们采用Gurobi来实现我们的方法。首先我们定义一个模型，按照我们上面描述的目标定义描述四个整数变量。</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Create a Gurobi model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="s2">"SeatOptimization"</span><span class="p">)</span>
+
+<span class="c1"># Decision variables</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">gp</span><span class="o">.</span><span class="n">GRB</span><span class="o">.</span><span class="n">INTEGER</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"x"</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">gp</span><span class="o">.</span><span class="n">GRB</span><span class="o">.</span><span class="n">INTEGER</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"y"</span><span class="p">)</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">gp</span><span class="o">.</span><span class="n">GRB</span><span class="o">.</span><span class="n">INTEGER</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"z"</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">gp</span><span class="o">.</span><span class="n">GRB</span><span class="o">.</span><span class="n">INTEGER</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"n"</span><span class="p">)</span>
+</code></pre></div>
+<p>接着我们加入刚刚所说的<strong>飞机空间利用率</strong>的限制。在游戏中，每个飞机有一个最大旅客载荷，且各个仓位与占载荷比例分别为<code>(2.5, 1.6, 1)</code>。MD-83的旅客载荷为<code>172</code>，这意味着我们可以使用<code>172Y</code>的全经济舱布局，也可以使用<code>4F10C146Y</code>这种两仓布局。我这里选择添加了<strong>当前载荷必须在某个最小载荷和最大载荷之间</strong>的限制条件。</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Space constraint</span>
+<span class="n">model</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="mf">2.5</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="mf">1.6</span> <span class="o">*</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span> <span class="o">&lt;=</span> <span class="n">total_aircraft_space</span><span class="p">,</span> <span class="s2">"space_constraint"</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="mf">2.5</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="mf">1.6</span> <span class="o">*</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span> <span class="o">&gt;=</span> <span class="nb">min</span><span class="p">(</span><span class="n">total_aircraft_space</span> <span class="o">*</span> <span class="mf">0.90</span><span class="p">,</span> <span class="n">total_aircraft_space</span> <span class="o">-</span> <span class="mi">10</span><span class="p">),</span> <span class="s2">"space_constraint"</span><span class="p">)</span>
+</code></pre></div>
+<p>这里我们添加<strong>每周飞行航班量</strong>的限制。</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Total flights constraint</span>
+<span class="n">model</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">n</span> <span class="o">&lt;=</span> <span class="n">max_flights_per_week</span><span class="p">,</span> <span class="s2">"total_flights_constraint"</span><span class="p">)</span>
+</code></pre></div>
+<p>这里我们定义收入字段的限制，即某个仓位的收入为仓位数量 * 每周航班数量 * 仓位座位价格。此外，我们添加<strong>仓位客流数量</strong>的限制。</p>
+<div class="highlight"><pre><span></span><code><span class="n">model</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">x_revenue</span> <span class="o">==</span> <span class="n">x</span> <span class="o">*</span> <span class="n">n</span> <span class="o">*</span> <span class="n">price_first_class</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">y_revenue</span> <span class="o">==</span> <span class="n">y</span> <span class="o">*</span> <span class="n">n</span> <span class="o">*</span> <span class="n">price_business_class</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">z_revenue</span> <span class="o">==</span> <span class="n">z</span> <span class="o">*</span> <span class="n">n</span> <span class="o">*</span> <span class="n">price_economy_class</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">x_revenue</span> <span class="o">&lt;=</span> <span class="n">daily_first_class_passengers</span> <span class="o">*</span> <span class="mi">7</span> <span class="o">*</span> <span class="n">price_first_class</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">y_revenue</span> <span class="o">&lt;=</span> <span class="n">daily_business_class_passengers</span> <span class="o">*</span> <span class="mi">7</span> <span class="o">*</span> <span class="n">price_business_class</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">z_revenue</span> <span class="o">&lt;=</span> <span class="n">daily_economy_class_passengers</span> <span class="o">*</span> <span class="mi">7</span> <span class="o">*</span> <span class="n">price_economy_class</span><span class="p">)</span>
+</code></pre></div>
+<p>最后，我我们将目标优化方程定义为总收入的总和。由于总收入是航班座位数量与每周航班数量的乘积，因此这构成了一个混合整数二次规划问题（Mixed-Integer Quadratic Programming, MIQP）。基于这一点，我们需要设置<a href="https://www.gurobi.com/documentation/current/refman/nonconvex.html">NonConvex</a>为2，否则无法进行求解。</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Objective function using auxiliary variables</span>
+<span class="n">revenue</span> <span class="o">=</span> <span class="n">x_revenue</span> <span class="o">+</span> <span class="n">y_revenue</span> <span class="o">+</span> <span class="n">z_revenue</span>
+<span class="n">model</span><span class="o">.</span><span class="n">setObjective</span><span class="p">(</span><span class="n">revenue</span><span class="p">,</span> <span class="n">sense</span><span class="o">=</span><span class="n">gp</span><span class="o">.</span><span class="n">GRB</span><span class="o">.</span><span class="n">MAXIMIZE</span><span class="p">)</span>  <span class="c1"># Maximize positive revenue</span>
+<span class="c1"># Set NonConvex parameter to 2</span>
+<span class="n">model</span><span class="o">.</span><span class="n">Params</span><span class="o">.</span><span class="n">NonConvex</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="c1"># Optimize the model</span>
+<span class="n">model</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
+</code></pre></div>
+<p>到这里我们就完成了模型的定义，以下是全部代码。</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">gurobipy</span> <span class="k">as</span> <span class="nn">gp</span>
+
+<span class="k">def</span> <span class="nf">compute_best_seat_configuration</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">compute_best_seat_configuration</span><span class="o">.</span><span class="vm">__globals__</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="c1"># Create a Gurobi model</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="s2">"SeatOptimization"</span><span class="p">)</span>
+
+    <span class="c1"># Decision variables</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">gp</span><span class="o">.</span><span class="n">GRB</span><span class="o">.</span><span class="n">INTEGER</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"x"</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">gp</span><span class="o">.</span><span class="n">GRB</span><span class="o">.</span><span class="n">INTEGER</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"y"</span><span class="p">)</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">gp</span><span class="o">.</span><span class="n">GRB</span><span class="o">.</span><span class="n">INTEGER</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"z"</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">gp</span><span class="o">.</span><span class="n">GRB</span><span class="o">.</span><span class="n">INTEGER</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"n"</span><span class="p">)</span>
+
+    <span class="c1"># Space constraint</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="mf">2.5</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="mf">1.6</span> <span class="o">*</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span> <span class="o">&lt;=</span> <span class="n">total_aircraft_space</span><span class="p">,</span> <span class="s2">"space_constraint"</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="mf">2.5</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="mf">1.6</span> <span class="o">*</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span> <span class="o">&gt;=</span> <span class="nb">min</span><span class="p">(</span><span class="n">total_aircraft_space</span> <span class="o">*</span> <span class="mf">0.90</span><span class="p">,</span> <span class="n">total_aircraft_space</span> <span class="o">-</span> <span class="mi">10</span><span class="p">),</span> <span class="s2">"space_constraint"</span><span class="p">)</span>
+
+    <span class="c1"># Total flights constraint</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">n</span> <span class="o">&lt;=</span> <span class="n">max_flights_per_week</span><span class="p">,</span> <span class="s2">"total_flights_constraint"</span><span class="p">)</span>
+
+    <span class="c1"># auxiliary variables for min between seats and passengers</span>
+    <span class="n">x_revenue</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">gp</span><span class="o">.</span><span class="n">GRB</span><span class="o">.</span><span class="n">INTEGER</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"x_revenue"</span><span class="p">)</span>
+    <span class="n">y_revenue</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">gp</span><span class="o">.</span><span class="n">GRB</span><span class="o">.</span><span class="n">INTEGER</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"y_revenue"</span><span class="p">)</span>
+    <span class="n">z_revenue</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">addVar</span><span class="p">(</span><span class="n">vtype</span><span class="o">=</span><span class="n">gp</span><span class="o">.</span><span class="n">GRB</span><span class="o">.</span><span class="n">INTEGER</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"z_revenue"</span><span class="p">)</span>
+
+    <span class="n">model</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">x_revenue</span> <span class="o">==</span> <span class="n">x</span> <span class="o">*</span> <span class="n">n</span> <span class="o">*</span> <span class="n">price_first_class</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">y_revenue</span> <span class="o">==</span> <span class="n">y</span> <span class="o">*</span> <span class="n">n</span> <span class="o">*</span> <span class="n">price_business_class</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">z_revenue</span> <span class="o">==</span> <span class="n">z</span> <span class="o">*</span> <span class="n">n</span> <span class="o">*</span> <span class="n">price_economy_class</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">x_revenue</span> <span class="o">&lt;=</span> <span class="n">daily_first_class_passengers</span> <span class="o">*</span> <span class="mi">7</span> <span class="o">*</span> <span class="n">price_first_class</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">y_revenue</span> <span class="o">&lt;=</span> <span class="n">daily_business_class_passengers</span> <span class="o">*</span> <span class="mi">7</span> <span class="o">*</span> <span class="n">price_business_class</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">addConstr</span><span class="p">(</span><span class="n">z_revenue</span> <span class="o">&lt;=</span> <span class="n">daily_economy_class_passengers</span> <span class="o">*</span> <span class="mi">7</span> <span class="o">*</span> <span class="n">price_economy_class</span><span class="p">)</span>
+
+    <span class="c1"># Objective function using auxiliary variables</span>
+    <span class="n">revenue</span> <span class="o">=</span> <span class="n">x_revenue</span> <span class="o">+</span> <span class="n">y_revenue</span> <span class="o">+</span> <span class="n">z_revenue</span>
+    <span class="k">if</span> <span class="n">ifs_per_pax</span><span class="p">:</span>
+        <span class="n">revenue</span> <span class="o">+=</span> <span class="n">ifs_per_pax</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span><span class="p">)</span> <span class="o">*</span> <span class="n">n</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">setObjective</span><span class="p">(</span><span class="n">revenue</span><span class="p">,</span> <span class="n">sense</span><span class="o">=</span><span class="n">gp</span><span class="o">.</span><span class="n">GRB</span><span class="o">.</span><span class="n">MAXIMIZE</span><span class="p">)</span>  <span class="c1"># Maximize positive revenue</span>
+
+    <span class="c1"># Set NonConvex parameter to 2</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">Params</span><span class="o">.</span><span class="n">NonConvex</span> <span class="o">=</span> <span class="mi">2</span>
+
+    <span class="n">model</span><span class="o">.</span><span class="n">printStats</span><span class="p">()</span>
+
+    <span class="c1"># Optimize the model</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
+
+
+    <span class="c1"># Get the optimal solution</span>
+    <span class="k">if</span> <span class="n">model</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="n">gp</span><span class="o">.</span><span class="n">GRB</span><span class="o">.</span><span class="n">OPTIMAL</span><span class="p">:</span>
+        <span class="n">best_x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">x</span>
+        <span class="n">best_y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">x</span>
+        <span class="n">best_z</span> <span class="o">=</span> <span class="n">z</span><span class="o">.</span><span class="n">x</span>
+        <span class="n">best_n</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">x</span>
+        <span class="n">best_revenue</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">objVal</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Best seat configuration (x, y, z):"</span><span class="p">,</span> <span class="n">best_x</span><span class="p">,</span> <span class="n">best_y</span><span class="p">,</span> <span class="n">best_z</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Best number of flights per week:"</span><span class="p">,</span> <span class="n">best_n</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Maximized revenue:"</span><span class="p">,</span> <span class="n">best_revenue</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"No optimal solution found."</span><span class="p">)</span>
+
+    <span class="c1"># Dispose of the model</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">dispose</span><span class="p">()</span>
+</code></pre></div>
+<p>我们可以试着运行一下这个方法<code>compute_best_seat_configuration</code>来计算新加坡到珀斯的最佳座位排布。</p>
+<div class="highlight"><pre><span></span><code><span class="n">compute_best_seat_configuration</span><span class="p">(</span><span class="s2">"SIN - PER, MD-83"</span><span class="p">,</span> 
+                                <span class="n">price_first_class</span> <span class="o">=</span> <span class="mi">2100</span><span class="p">,</span>
+                                <span class="n">price_business_class</span> <span class="o">=</span> <span class="mi">1100</span><span class="p">,</span>
+                                <span class="n">price_economy_class</span> <span class="o">=</span> <span class="mi">660</span><span class="p">,</span>
+                                <span class="n">total_aircraft_space</span> <span class="o">=</span> <span class="mi">172</span><span class="p">,</span>
+                                <span class="n">max_flights_per_week</span> <span class="o">=</span> <span class="mi">13</span><span class="p">,</span>
+                                <span class="n">daily_first_class_passengers</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
+                                <span class="n">daily_business_class_passengers</span> <span class="o">=</span> <span class="mi">117</span><span class="p">,</span>
+                                <span class="n">daily_economy_class_passengers</span> <span class="o">=</span> <span class="mi">842</span><span class="p">)</span>
+</code></pre></div>
+<p>输出为</p>
+<div class="highlight"><pre><span></span><code>Set parameter NonConvex to value 2
+
+Statistics for modelSeatOptimization:
+  Linear constraint matrix    : 0 Constrs, 0 Vars, 0 NZs
+  Matrix coefficient range    : [ 0, 0 ]
+  Objective coefficient range : [ 0, 0 ]
+  Variable bound range        : [ 0, 0 ]
+  RHS coefficient range       : [ 0, 0 ]
+Gurobi Optimizer version 10.0.2 build v10.0.2rc0 (mac64[x86])
+
+CPU model: Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz
+Thread count: 6 physical cores, 12 logical processors, using up to 12 threads
+
+Optimize a model with 5 rows, 7 columns and 7 nonzeros
+Model fingerprint: 0x76973cf4
+Model has 3 quadratic objective terms
+Model has 3 quadratic constraints
+Variable types: 0 continuous, 7 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 2e+00]
+  QMatrix range    [7e+02, 2e+03]
+  QLMatrix range   [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  QObjective range [1e+02, 1e+02]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e+01, 4e+06]
+Found heuristic solution: objective -0.0000000
+Presolve removed 4 rows and 0 columns
+Presolve time: 0.00s
+Presolved: 13 rows, 7 columns, 27 nonzeros
+Presolved model has 3 bilinear constraint(s)
+Variable types: 0 continuous, 7 integer (0 binary)
+
+Root relaxation: objective 1.651664e+06, 6 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 1651664.11    0    6   -0.00000 1651664.11      -     -    0s
+H    0     0                    1009604.2400 1651664.11  63.6%     -    0s
+     0     0 1647915.46    0    1 1009604.24 1647915.46  63.2%     -    0s
+H    0     0                    1646069.2300 1647915.46  0.11%     -    0s
+     0     0 1647915.46    0    1 1646069.23 1647915.46  0.11%     -    0s
+     0     1 1647915.46    0    1 1646069.23 1647915.46  0.11%     -    0s
+*    6     0               6    1647371.5700 1647371.57 -0.00%   1.0    0s
+
+Cutting planes:
+  Gomory: 1
+  RLT: 1
+
+Explored 7 nodes (18 simplex iterations) in 0.03 seconds (0.00 work units)
+Thread count was 12 (of 12 available processors)
+
+Solution count 4: 1.64737e+06 1.64607e+06 1.0096e+06 -0 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.647371570000e+06, best bound 1.647371570000e+06, gap 0.0000%
+Best seat configuration (x, y, z): 10.0 60.0 51.0
+Best number of flights per week: 13.0
+Maximized revenue: 1647371.5699999998
+</code></pre></div>
+<p>可以看到在每周13班的情况下，使用10F60C51Y的座位排布能获得最高的收益。笔者在多个航线上使用后发现，单架飞机能获得<code>2-10%</code>不等的提升，且可以根据不同的航线演变出2-3种不同的座位排布。还是以之前的新加坡到珀斯的航线为例，在使用了优化过后的<code>10F60C51Y</code>之后，这条航线的收益为<code>$289647</code>，比原来整整提升了<code>17%</code>！</p>
+<p align="center">
+<img src="https://mestrace.github.io/images/gei_li.png"/>
+</p>
+<p>当我们给飞机配备了客舱服务的时候，我们可以从每位旅客身上赚取部分收益，因此可以在计算中加入如下参数。理论上来说，这样会使得我们的模型更倾向于使用旅客人数更多的座位排布，但实际上因为客舱服务收入占总收入太小，所以基本上不会对结果有更多影响。但是在竞争比较激烈的航线上，客舱服务收入至少能给我们带来一定的降价空间，所以还是值得投入的。</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="n">ifs_per_pax</span><span class="p">:</span>
+    <span class="n">revenue</span> <span class="o">+=</span> <span class="n">ifs_per_pax</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span><span class="p">)</span> <span class="o">*</span> <span class="n">n</span>
+</code></pre></div>
+<p align="center">
+<img src="https://mestrace.github.io/images/gei_li.png"/>
+</p>
+<p>当然，我们所呈现的MIQP问题只是一个基础模型，并未解决所有问题。主要集中在两个方面：价格预测和座位数量的弹性条件。接下来，我们将逐一探讨这些方面。</p>
+<p>首先，尽管价格由玩家设定，但模型将其视为输入的常数。然而，在游戏中，旅客对航程的支付意愿是隐藏的变量。在一条航线上，存在一部分愿意高价支付的旅客和另一部分对价格敏感的旅客。另外，航空公司的声誉和竞争对手的影响也会影响座位上座率。这些因素只能通过价格调整来控制。因此，我们最初设定的价格很可能不准确，当我们增加座位后可能会发现上座率下降。笔者一般会使用多次修正价格和调整座位数量去找到最优的座位数量。</p>
+<p>在模型中，我们设置了一个硬性约束，即座位数量不能超过每周旅客需求。然而，在游戏中，有时即使某些仓位有空位，增加航班仍会带来收益。此外，大多数情况下，我们不希望为每个航班定制独特的座位布局。虽然在游戏中操作相对简便，但仍需进行多次点击，稍显繁琐。此外，在现实航空运营中，由于座位调整的复杂性和法规限制，航空公司无法随意调整座位数量。因此，后续的优化可能会引入座位数量松弛条件。即使提供的座位数超过每周旅客数，仍可通过增加航班和座位来实现盈利。此外，引入多种标准化的座位布局也是可行的，若优化目标相差不大，则优先考虑标准化布局。</p>
+<p>综上所述，本文对AE这款经营游戏及其机制进行了简要介绍。从航线数据和座位优化的视角，笔者探讨了如何实现最佳盈利。通过建立混合整数二次优化（MIQP）模型，我们能够综合考虑客流、机型、价格等要素，制定更为优化的座位配置策略。在现实世界中，座位排布在航空公司的运营中扮演着关键角色。通过优化座位布局，航空公司不仅能提升运营效率和收入，还能提升乘客的旅行体验。</p>
+<p>最后，欢迎大家来AE世界里陪我玩耍！我在Realistic World R7等大家！</p>
+</div>
+<div class="tag-cloud">
+<p>
+</p>
+</div>
+<div class="center social-share">
+<p>如果你觉得这篇文章很赞，不要忘记分享给你的小伙伴们！</p>
+<div class="addthis_native_toolbox"></div>
+<div class="addthis_sharing_toolbox"></div>
+<div class="addthis_inline_share_toolbox"></div>
+</div>
+<div class="addthis_relatedposts_inline"></div>
+</article>
+<footer>
+<p>
+  © 2023  - This work is licensed under a <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.en_US" rel="license" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+  <span class="footer-separator">|</span>
+  Switch to the <a href="javascript:void(0)" onclick="theme.switch(`dark`)">dark</a> | <a href="javascript:void(0)" onclick="theme.switch(`light`)">light</a> | <a href="javascript:void(0)" onclick="theme.switch(`browser`)">browser</a> theme
+  <script data-default-theme="light" data-enable-auto-detect-theme="True" id="dark-theme-script" src="https://mestrace.github.io/theme/dark-theme/dark-theme.min.js" type="text/javascript">
+</script>
+</p><p>
+<a href="http://creativecommons.org/licenses/by-sa/4.0/" rel="license" target="_blank">
+<img alt="Creative Commons License" height="15" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" style="border-width:0" title="Creative Commons License" width="80"/>
+</a>
+</p></footer> </main>
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Mestrace的个人博客 ",
+  "url" : "https://mestrace.github.io",
+  "image": "http://github.com/Mestrace.png?size=460",
+  "description": "我的个人博客，记录我的成长历程"
+}
+</script><script async="async" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-64172c2607a4b50c" type="text/javascript"></script>
+<a aria-label="View source on Github" class="github-corner" href="http://github.com/Mestrace/" target="_blank">
+<svg aria-hidden="true" height="80" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" viewbox="0 0 250 250" width="80">
+<path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+<path class="octo-arm" d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;">
+</path>
+<path class="octo-body" d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor">
+</path>
+</svg>
+</a>
+</body>
+</html>
