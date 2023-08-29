@@ -206,14 +206,14 @@ class Solution:
         seen = set()
         for i, (profit, category) in enumerate(items):
             if i < k:
-                if c in seen:
+                if category in seen:
                     array.append(profit)
                 curr += profit
-            elif c not in seen:
-                if not A:
+            elif category not in seen:
+                if not array:
                     break
-                curr += profit - a.pop()
-            seen.add(c)
+                curr += profit - array.pop()
+            seen.add(category)
             result = max(result, curr + len(seen) * len(seen))
         
         return result
