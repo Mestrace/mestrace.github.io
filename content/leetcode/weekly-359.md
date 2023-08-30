@@ -3,7 +3,7 @@ Slug: weekly-359
 Date: 2023-08-31
 Category: Leetcode
 Tags: Contest
-Summary: 2023-08 Leetcode Weekly Contest 359 第 359 场力扣周赛 | 2815. Max Pair Sum in an Array 数组中的最大数对和 | 2816. Double a Number Represented as a Linked List 翻倍以链表形式表示的数字 | 2817. Minimum Absolute Difference Between Elements With Constraint 限制条件下元素之间的最小绝对差 | 2818. Apply Operations to Maximize Score 操作使得分最大 | Solution to contest problems 赛题讲解
+Summary: 2023-08 Leetcode Weekly Contest 359 第 359 场力扣周赛 | 2828. Check if a String Is an Acronym of Words 判别首字母缩略词 | 2829. Determine the Minimum Sum of a k-avoiding Array k-avoiding 数组的最小总和 | 2830. Maximize the Profit as the Salesman 销售利润最大化 | 2831. Find the Longest Equal Subarray 找出最长等值子数组 | Solution to contest problems 赛题讲解
 
 [Weekly Contest 359](https://leetcode.com/contest/weekly-contest-359/)
 
