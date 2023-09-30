@@ -133,7 +133,6 @@ so the function would return "19".</p>
     <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 </code></pre></div>
 <p>那么，接下来有没有什么办法能够让我大幅度减少以上算法的复杂度呢？经过一番搜索，我找到了这个<a href="https://en.wikipedia.org/wiki/Beatty_sequence">Beatty 序列</a>！</p>
-<p>对于给定无理数 <span class="math">\(\alpha\)</span>，我们定义Beatty序列为整数集合 $P = {\lfloor i\alpha \rfloor} \forall i \in \mathbb{Z}^+ $</p>
 <p>Beatty-Rayleigh定理：若 <span class="math">\(\alpha, \beta \in \mathbb{R}^+\)</span>，且 <span class="math">\(\alpha, \beta \notin \mathbb{Q}\)</span>，使得
 <span class="math">\(\frac{1}{\alpha} + \frac{1}{\beta} = 1\)</span>，则有两个集合
 <span class="math">\(P = \left\{ \lfloor \alpha n \rfloor : n \in \mathbb{Z}^+ \right\}\)</span> 和 <span class="math">\( Q = \left\{ \lfloor \beta n \rfloor : n \in \mathbb{Z}^+ \right\}\)</span>，且 <span class="math">\(P\)</span> 和 <span class="math">\(Q\)</span> 完整划分整个自然数集合

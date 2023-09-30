@@ -37,7 +37,6 @@ so the function would return "19".&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;那么，接下来有没有什么办法能够让我大幅度减少以上算法的复杂度呢？经过一番搜索，我找到了这个&lt;a href="https://en.wikipedia.org/wiki/Beatty_sequence"&gt;Beatty 序列&lt;/a&gt;！&lt;/p&gt;
-&lt;p&gt;对于给定无理数 &lt;span class="math"&gt;\(\alpha\)&lt;/span&gt;，我们定义Beatty序列为整数集合 $P = {\lfloor i\alpha \rfloor} \forall i \in \mathbb{Z}^+ $&lt;/p&gt;
 &lt;p&gt;Beatty-Rayleigh定理：若 &lt;span class="math"&gt;\(\alpha, \beta \in \mathbb{R}^+\)&lt;/span&gt;，且 &lt;span class="math"&gt;\(\alpha, \beta \notin \mathbb{Q}\)&lt;/span&gt;，使得
 &lt;span class="math"&gt;\(\frac{1}{\alpha} + \frac{1}{\beta} = 1\)&lt;/span&gt;，则有两个集合
 &lt;span class="math"&gt;\(P = \left\{ \lfloor \alpha n \rfloor : n \in \mathbb{Z}^+ \right\}\)&lt;/span&gt; 和 &lt;span class="math"&gt;\( Q = \left\{ \lfloor \beta n \rfloor : n \in \mathbb{Z}^+ \right\}\)&lt;/span&gt;，且 &lt;span class="math"&gt;\(P\)&lt;/span&gt; 和 &lt;span class="math"&gt;\(Q\)&lt;/span&gt; 完整划分整个自然数集合
