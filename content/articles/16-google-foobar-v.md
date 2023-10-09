@@ -2,9 +2,16 @@ Title: 解决Foobar挑战（四）- 终篇
 Slug: foobar-v
 Category: MISC
 Date: 2023-09-30 21:00
+Modified: 2023-10-09 22:00
+Tags: Google Foobar
 Summary: 接上回书，我们来到了Foobar挑战的第五层，题目越来越困难了。本题主要涉及一些数论和组合数学的知识点。
 
+Foobar系列已经全部完成了，你可以通过以下目录访问！
 
+- [解决Foobar挑战（一）]({filename}/articles/11-foobar-challenge-ii.md)
+- [解决Foobar挑战（二）]({filename}/articles/12-foobar-challenge-iii.md)
+- [解决Foobar挑战（三）]({filename}/articles/13-foobar-challenge-iv.md)
+- 解决Foobar挑战（四）- 终篇
 
 ## Dodge the Lasers!
 ```

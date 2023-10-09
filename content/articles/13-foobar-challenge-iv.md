@@ -2,11 +2,16 @@ Title: 解决Foobar挑战（三）
 Slug: foobar-iv
 Category: MISC
 Date: 2023-05-13 19:00:00
+Modified: 2023-10-09 22:00
+Tags: Google Foobar
 Summary: 接上回书，我们来到了Foobar挑战的第四层，题目越来越困难了。这篇文章给出了Foobar Level 4 的两道题 Running with Bunnies 和 Distract the Trainers 的解题思路和python代码。这一层要求我们掌握图相关的算法，包括Dijkstra，Floyd-Warshall，以及二分图和网络流算法，如匈牙利算法和Hopcroft-Karp算法。
 
-[解决Foobar挑战（一）]({filename}/articles/11-foobar-challenge-ii.md)
+Foobar系列已经全部完成了，你可以通过以下目录访问！
 
-[解决Foobar挑战（二）]({filename}/articles/12-foobar-challenge-iii.md)
+- [解决Foobar挑战（一）]({filename}/articles/11-foobar-challenge-ii.md)
+- [解决Foobar挑战（二）]({filename}/articles/12-foobar-challenge-iii.md)
+- 解决Foobar挑战（三）
+- [解决Foobar挑战（四）- 终篇]({filename}/articles/16-google-foobar-v.md)
 
 接上回书，我们来到了Foobar挑战的第四层。题目越来越困难了。
 

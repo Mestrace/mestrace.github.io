@@ -2,9 +2,16 @@ Title: 解决Foobar挑战（二）
 Slug: foobar-iii
 Category: MISC
 Date: 2023-04-22 22:00:00
+Modified: 2023-10-09 22:00
+Tags: Google Foobar
 Summary: 接上回书，我们来到了Foobar挑战的第三层。每一层都比上一层更加困难。这篇文章给出了Foobar Level 3 的三道题 Queue To Do， Hey, Fuel Injection Perfection 和 Doomsday Fuel 的解题思路和python代码。这一层要求我们掌握一些位运算，贪心算法，线性代数和概率论的知识。
 
-[解决Foobar挑战（一）]({filename}/articles/11-foobar-challenge-ii.md)
+Foobar系列已经全部完成了，你可以通过以下目录访问！
+
+- [解决Foobar挑战（一）]({filename}/articles/11-foobar-challenge-ii.md)
+- 解决Foobar挑战（二）
+- [解决Foobar挑战（三）]({filename}/articles/13-foobar-challenge-iv.md)
+- [解决Foobar挑战（四）- 终篇]({filename}/articles/16-google-foobar-v.md)
 
 接上回书，我们来到了Foobar挑战的第三层。每一层都比上一层更加困难。不多废话了，我们直接来做题。
 

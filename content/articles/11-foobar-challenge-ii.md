@@ -2,7 +2,16 @@ Title: 解决Foobar挑战（一）
 Slug: foobar-ii
 Category: MISC
 Date: 2023-04-21 15:00:00
+Modified: 2023-10-09 22:00
+Tags: Google Foobar
 Summary: 因为机缘巧合，我偶然点开了Google的Foobar Challenge页面，发现自己仍然可以登陆并继续Foobar旅程。这篇文章简单介绍了Foobar挑战的机制，并给出了Foobar Level 2 的两道题 Gearing Up for Destruction 和 Hey, I Already Did That! 两道题的解题思路和python代码。
+
+Foobar系列已经全部完成了，你可以通过以下目录访问！
+
+- 解决Foobar挑战（一）
+- [解决Foobar挑战（二）]({filename}/articles/12-foobar-challenge-iii.md)
+- [解决Foobar挑战（三）]({filename}/articles/13-foobar-challenge-iv.md)
+- [解决Foobar挑战（四）- 终篇]({filename}/articles/16-google-foobar-v.md)
 
 Google用Foobar挑战来甄选人才已经是一个半公开的秘密了。在搜索框里输入一些特定的程序语言关键词，或者是查看Google产品的开发者文档的时候，你有几率在某个角落里找到一个奇怪的图标。点击这个图标，就进入了Foobar挑战的流程。在这个过程中，你需要在限时内完成一定数量的代码题目，然后Google会视完成情况向你发出面试邀请。不得不说这个行为非常的Geek。数年前，笔者有幸触发了一次Foobar挑战，但是并没有完成。今天在浏览互联网上的信息的时候，突然发现自己还是可以登入Foobar挑战的页面，并且接着上次的进度继续完成挑战，于是便有了这篇博文。
 
