@@ -1,0 +1,269 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="True" name="HandheldFriendly"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="robots"/>
+<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&amp;family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://mestrace.github.io/theme/stylesheet/style.less" rel="stylesheet/less" type="text/css"/>
+<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js" type="text/javascript"></script>
+<link href="https://mestrace.github.io/theme/stylesheet/dark-theme.min.css" id="dark-theme-style" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css"/>
+<link href="https://mestrace.github.io/theme/pygments/monokai.min.css" id="pygments-dark-theme" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css"/>
+<link href="https://mestrace.github.io/theme/pygments/monokai.min.css" id="pygments-light-theme" media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)" rel="stylesheet" type="text/css"/>
+<link href="https://mestrace.github.io/theme/font-awesome/css/fontawesome.css" rel="stylesheet" type="text/css"/>
+<link href="https://mestrace.github.io/theme/font-awesome/css/brands.css" rel="stylesheet" type="text/css"/>
+<link href="https://mestrace.github.io/theme/font-awesome/css/solid.css" rel="stylesheet" type="text/css"/>
+<link href="https://mestrace.github.io/static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+<link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+<link href="/site.webmanifest" rel="manifest"/>
+<!-- Chrome, Firefox OS and Opera -->
+<meta content="#333" name="theme-color"/>
+<!-- Windows Phone -->
+<meta content="#333" name="msapplication-navbutton-color"/>
+<!-- iOS Safari -->
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+<!-- Microsoft EDGE -->
+<meta content="#333" name="msapplication-TileColor"/>
+<link href="https://mestrace.github.io/feeds/all.atom.xml" rel="alternate" title="Mestrace的个人博客 Atom" type="application/atom+xml"/>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-07WBTMQT81"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-07WBTMQT81');
+</script>
+<meta content="Mestrace" name="author">
+<meta content="2023-10 Leetcode Weekly Contest 365 第 365 场力扣周赛 | 2873. Maximum Value of an Ordered Triplet I 有序三元组中的最大值 I | 2874. Maximum Value of an Ordered Triplet II 有序三元组中的最大值 II | 2875. Minimum Size Subarray in Infinite Array 无限数组的最短子数组 | 2876. Count Visited Nodes in a Directed Graph 有向图访问计数 | Solution to contest problems 赛题讲解" name="description">
+<meta content="Contest" name="keywords"/>
+<meta content="Mestrace的个人博客" property="og:site_name">
+<meta content="Weekly Contest 365 周赛题目解析" property="og:title">
+<meta content="2023-10 Leetcode Weekly Contest 365 第 365 场力扣周赛 | 2873. Maximum Value of an Ordered Triplet I 有序三元组中的最大值 I | 2874. Maximum Value of an Ordered Triplet II 有序三元组中的最大值 II | 2875. Minimum Size Subarray in Infinite Array 无限数组的最短子数组 | 2876. Count Visited Nodes in a Directed Graph 有向图访问计数 | Solution to contest problems 赛题讲解" property="og:description">
+<meta content="en_US" property="og:locale">
+<meta content="https://mestrace.github.io/posts/2023/Oct/05/weekly-365/" property="og:url"/>
+<meta content="article" property="og:type"/>
+<meta content="2023-10-05 00:00:00+08:00" property="article:published_time"/>
+<meta content="" property="article:modified_time"/>
+<meta content="https://mestrace.github.io/author/mestrace.html" property="article:author"/>
+<meta content="Leetcode" property="article:section">
+<meta content="Contest" property="article:tag"/>
+<meta content="http://github.com/Mestrace.png?size=460" property="og:image"/>
+<title>Mestrace的个人博客 – Weekly Contest 365 周赛题目解析</title>
+</meta></meta></meta></meta></meta></meta></meta><link href="https://mestrace.github.io/posts/2023/Oct/05/weekly-365/" rel="canonical"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Mestrace的个人博客", "item": "https://mestrace.github.io"}, {"@type": "ListItem", "position": 2, "name": "Posts", "item": "https://mestrace.github.io/posts"}, {"@type": "ListItem", "position": 3, "name": "2023", "item": "https://mestrace.github.io/posts/2023"}, {"@type": "ListItem", "position": 4, "name": "Oct", "item": "https://mestrace.github.io/posts/2023/Oct"}, {"@type": "ListItem", "position": 5, "name": "05", "item": "https://mestrace.github.io/posts/2023/Oct/05"}, {"@type": "ListItem", "position": 6, "name": "Weekly 365", "item": "https://mestrace.github.io/posts/2023/Oct/05/weekly-365"}, {"@type": "ListItem", "position": 7, "name": "Index", "item": "https://mestrace.github.io/posts/2023/Oct/05/weekly-365/index.html"}]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "author": {"@type": "Person", "name": "Mestrace"}, "publisher": {"@type": "Organization", "name": "Mestrace的个人博客"}, "headline": "Weekly Contest 365 周赛题目解析", "about": "Leetcode", "datePublished": "2023-10-05 00:00"}</script></head>
+<body>
+<aside>
+<div>
+<a href="https://mestrace.github.io/">
+<img alt="Mestrace" src="http://github.com/Mestrace.png?size=460" title="Mestrace"/>
+</a>
+<h1>
+<a href="https://mestrace.github.io/">Mestrace</a>
+</h1>
+<p>Software Developer</p>
+<nav>
+<ul class="list">
+<li>
+<a href="https://mestrace.github.io/pages/about.html" target="_self">
+                About
+              </a>
+</li>
+</ul>
+</nav>
+<ul class="social">
+<li>
+<a class="sc-github" href="http://github.com/Mestrace/" target="_blank">
+<i class="fa-brands fa-github"></i>
+</a>
+</li>
+</ul>
+</div>
+</aside>
+<main>
+<nav>
+<a href="https://mestrace.github.io/">Home</a>
+<a href="https://mestrace.github.io/feeds/all.atom.xml">Atom</a>
+</nav>
+<article class="single">
+<header>
+<h1 id="weekly-365">Weekly Contest 365 周赛题目解析</h1>
+<p>
+      Posted on Thu 05 October 2023 in <a href="https://mestrace.github.io/category/leetcode.html">Leetcode</a>
+</p>
+</header>
+<div>
+<p><a href="https://leetcode.com/contest/weekly-contest-365/">Weekly Contest 365</a></p>
+<p><a href="https://leetcode.cn/contest/weekly-contest-365/">第 365 场周赛</a></p>
+<h2>题目列表</h2>
+<ul>
+<li><a href="https://leetcode.com/problems/maximum-odd-binary-number/">2873. Maximum Value of an Ordered Triplet I 有序三元组中的最大值 I</a></li>
+<li><a href="https://leetcode.com/problems/maximum-value-of-an-ordered-triplet-ii/">2874. Maximum Value of an Ordered Triplet II 有序三元组中的最大值 II</a></li>
+<li><a href="https://leetcode.com/problems/minimum-size-subarray-in-infinite-array/">2875. Minimum Size Subarray in Infinite Array 无限数组的最短子数组</a></li>
+<li><a href="https://leetcode.com/problems/string-transformation/">2876. Count Visited Nodes in a Directed Graph 有向图访问计数</a></li>
+</ul>
+<h2>2873. Maximum Value of an Ordered Triplet I 有序三元组中的最大值 I</h2>
+<p>按照题意模拟即可。$O(n^3)。</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">maximumTripletValue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
+                <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
+                    <span class="n">result</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">*</span> <span class="n">nums</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">result</span>
+</code></pre></div>
+<h2>2874. Maximum Value of an Ordered Triplet II 有序三元组中的最大值 II</h2>
+<p>这道题跟上一题一样，只不过数据范围变成了<code>3 &lt;= nums.length &lt;= 10^5</code>，因此我们只能考虑一遍过的做法。</p>
+<p>实际上，我们可以观察到，我们要用<code>i &lt; j &lt; k</code>之间最大的<code>nums[i] - nums[j]</code>。因此我们基于<code>k</code>进行循环，并分别保存当前遇到的最大的<code>nums[i]</code>和<code>nums[i] - nums[j]</code>。</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">maximumTripletValue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">maxab</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">maxa</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">maxab</span> <span class="o">*</span> <span class="n">n</span><span class="p">)</span>
+            <span class="n">maxab</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">maxab</span><span class="p">,</span> <span class="n">maxa</span> <span class="o">-</span> <span class="n">n</span><span class="p">)</span>
+            <span class="n">maxa</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">maxa</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result</span>
+</code></pre></div>
+<h2>2875. Minimum Size Subarray in Infinite Array 无限数组的最短子数组</h2>
+<p>数组<code>nums</code>是一个无限循环数组<code>infinite_nums</code>循环的部分，要求找到最短的连续子数组使得子数组的和等于<code>target</code>。若此子数组不存在，则返回<code>-1</code>。</p>
+<p>令数组<code>nums</code>的总和为<code>total = sum(nums)</code>，拼接<code>nums</code>两次之后的数组<code>nums2 = nums + nums</code>，则我们有<code>target = total * k + sum(nums2[i:j])</code>。我们可以很方便的推算<code>k = target // total</code>，则我们要找到<code>[i, j]</code>使得<code>sum(nums2[i:j]) = target % total</code>，同时使得<code>[i, j]</code>长度最小。为了快速计算任意<code>nums2</code>的区间综合，我们可以使用前缀和。定义<code>nums2</code>的前缀和数组为<code>prefix</code>，对于每一个<code>prefix[i]</code>，为了找到<code>prefix[j]</code>，既可以用便利的方式（当然会超时），也可以利用前缀和升序的性质，直接进行二分搜索找<code>prefix[j] = target % total + prefix[i]</code>。最终，我们可以在<code>O(nlog n)</code>的时间内找到结果。</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">bisect</span> <span class="kn">import</span> <span class="n">bisect_left</span>
+
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">minSizeSubarray</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">target</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+        <span class="n">nums</span> <span class="o">=</span> <span class="n">nums</span> <span class="o">+</span> <span class="n">nums</span>
+
+        <span class="n">prefix</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+        <span class="n">prefix</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
+            <span class="n">prefix</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">prefix</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">'inf'</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">times</span> <span class="o">=</span> <span class="n">target</span> <span class="o">//</span> <span class="n">total</span>
+            <span class="n">rest</span> <span class="o">=</span> <span class="n">target</span> <span class="o">%</span> <span class="n">total</span>
+
+            <span class="c1"># Binary search to find smallest j such that prefix[j] - prefix[i] &gt;= rest.</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="n">bisect_left</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="n">rest</span> <span class="o">+</span> <span class="n">prefix</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">i</span><span class="p">)</span>
+
+            <span class="c1"># Check if we found a valid subarray and update our answer.</span>
+            <span class="k">if</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span> <span class="ow">and</span> <span class="n">times</span> <span class="o">*</span> <span class="n">total</span> <span class="o">+</span> <span class="n">prefix</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">prefix</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">j</span> <span class="o">-</span> <span class="n">i</span> <span class="o">+</span> <span class="n">times</span> <span class="o">*</span> <span class="n">n</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result</span> <span class="k">if</span> <span class="n">result</span> <span class="o">!=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">'inf'</span><span class="p">)</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
+</code></pre></div>
+<h2>2876. Count Visited Nodes in a Directed Graph 有向图访问计数</h2>
+<p>给定一个边列表<code>edges</code>定义的有向图，其中每一个<code>edges[i]</code>代表<code>i -&gt; edges[i]</code>的一条边。你需要从每个节点<code>i</code>出发进行遍历直到你遇到一个已经经过的点位置，并数每一个节点<code>i</code>会经过多少个节点。</p>
+<p>由题目可知，这个有向图中至少存在一个环。若存在多个环的话，则两个环是分别的两个图，也可以说是连通分量（Connected Components）。一看到这种题目就想到Cycle detection中的龟兔赛跑算法，但实际上在这里并不能够，因为我们还是要数有多少个的。</p>
+<p>对于这道题，我们还是采用分而治之的手法。首先，对于环节点，我们可以直接沿着环走一圈来确定这个连通分量中的这个环的长度，则环中所有的节点的计数都为这个环的长度。其次，对于非环节点，我们可以把他们放进一个栈里面，直到我们找到一个已经有长度的节点为止。这个有计数和的节点既可能是一个环节点，也可能是一个前面已经计数的非环节点。接着我们就以栈的顺序累加计数即可。这样我们就确保了前面的计数结果可以重复利用，有一种动态规划的思想在里面。</p>
+<p>如何区分环节点和非环节点呢？这里我们可以通过入度（Indegree）的方式来判断。在一个环中，节点的入度<code>indegree &gt;= 1</code>。因此我们总可以从初始入度为<code>0</code>的节点开始，移除这个节点出发的所有边。我们重复这个过程直到没有入度为<code>0</code>的节点位置，通过这样的方式我们就可以区分环节点和非环节点了。进一步延伸，如果我们给每次移除的节点加上序号，我们还可以得到用来拓扑排序的Kahn算法。</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">countVisitedNodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">edges</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span>
+        <span class="c1"># initial indegree</span>
+        <span class="n">degree</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span>
+        <span class="n">kahn</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="n">queue</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+
+        <span class="c1"># initial points in queue</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">degree</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="c1"># Kahn's algorithm by popping outward edges of 0 indegree nodes</span>
+        <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+            <span class="n">kahn</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
+            <span class="n">degree</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">degree</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span>
+
+        <span class="c1"># for cycle nodes: iterate to find cycle length and nodes</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="o">-</span> <span class="n">kahn</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">vals</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">while</span> <span class="ow">not</span> <span class="n">vals</span> <span class="ow">or</span> <span class="n">x</span> <span class="o">!=</span> <span class="n">vals</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="n">vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">vals</span><span class="p">:</span>
+                <span class="n">result</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">vals</span><span class="p">)</span>
+
+        <span class="c1"># for non-cycle nodes: stack and +1 for each node in path</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">kahn</span><span class="p">:</span>
+            <span class="n">stack</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">while</span> <span class="n">result</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">edges</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
+            <span class="k">while</span> <span class="n">stack</span><span class="p">:</span>
+                <span class="n">result</span><span class="p">[</span><span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">result</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">result</span>
+</code></pre></div>
+</div>
+<div class="tag-cloud">
+<p>
+<a href="https://mestrace.github.io/tag/contest.html">Contest</a>
+</p>
+</div>
+<div class="center social-share">
+<p>如果你觉得这篇文章很赞，不要忘记分享给你的小伙伴们！</p>
+<div class="addthis_native_toolbox"></div>
+<div class="addthis_sharing_toolbox"></div>
+<div class="addthis_inline_share_toolbox"></div>
+</div>
+<div class="addthis_relatedposts_inline"></div>
+</article>
+<footer>
+<p>
+  © 2023  - This work is licensed under a <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.en_US" rel="license" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+  <span class="footer-separator">|</span>
+  Switch to the <a href="javascript:void(0)" onclick="theme.switch(`dark`)">dark</a> | <a href="javascript:void(0)" onclick="theme.switch(`light`)">light</a> | <a href="javascript:void(0)" onclick="theme.switch(`browser`)">browser</a> theme
+  <script data-default-theme="light" data-enable-auto-detect-theme="True" id="dark-theme-script" src="https://mestrace.github.io/theme/dark-theme/dark-theme.min.js" type="text/javascript">
+</script>
+</p><p>
+<a href="http://creativecommons.org/licenses/by-sa/4.0/" rel="license" target="_blank">
+<img alt="Creative Commons License" height="15" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" style="border-width:0" title="Creative Commons License" width="80">
+</img></a>
+</p></footer> </main>
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Mestrace的个人博客 ",
+  "url" : "https://mestrace.github.io",
+  "image": "http://github.com/Mestrace.png?size=460",
+  "description": "我的个人博客，记录我的成长历程"
+}
+</script><script async="async" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-64172c2607a4b50c" type="text/javascript"></script>
+<a aria-label="View source on Github" class="github-corner" href="http://github.com/Mestrace/" target="_blank">
+<svg aria-hidden="true" height="80" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" viewbox="0 0 250 250" width="80">
+<path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+<path class="octo-arm" d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;">
+</path>
+<path class="octo-body" d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor">
+</path>
+</svg>
+</a>
+</body>
+</html>

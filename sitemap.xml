@@ -5,7 +5,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://mestrace.github.io/</loc>
-<lastmod>2023-09-30T20:39:27-00:00</lastmod>
+<lastmod>2023-10-09T22:43:59-00:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.3</priority>
 </url>
@@ -18,8 +18,29 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>https://mestrace.github.io/posts/2023/Oct/09/weekly-366/</loc>
+<lastmod>2023-10-09T00:00:00+08:00</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+
+<url>
+<loc>https://mestrace.github.io/posts/2023/Oct/05/weekly-365/</loc>
+<lastmod>2023-10-05T00:00:00+08:00</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+
+<url>
+<loc>https://mestrace.github.io/posts/2023/Oct/01/weekly-364/</loc>
+<lastmod>2023-10-01T00:00:00+08:00</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+
+<url>
 <loc>https://mestrace.github.io/posts/2023/Sep/30/foobar-v/</loc>
-<lastmod>2023-09-30T21:00:00+08:00</lastmod>
+<lastmod>2023-10-09T22:00:00+08:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
@@ -138,7 +159,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://mestrace.github.io/posts/2023/May/13/foobar-iv/</loc>
-<lastmod>2023-05-13T19:00:00+08:00</lastmod>
+<lastmod>2023-10-09T22:00:00+08:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
@@ -173,14 +194,14 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://mestrace.github.io/posts/2023/Apr/22/foobar-iii/</loc>
-<lastmod>2023-04-22T22:00:00+08:00</lastmod>
+<lastmod>2023-10-09T22:00:00+08:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
 
 <url>
 <loc>https://mestrace.github.io/posts/2023/Apr/21/foobar-ii/</loc>
-<lastmod>2023-04-21T15:00:00+08:00</lastmod>
+<lastmod>2023-10-09T22:00:00+08:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
@@ -341,7 +362,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://mestrace.github.io/category/leetcode.html</loc>
-<lastmod>2023-09-23T00:00:00+06:55</lastmod>
+<lastmod>2023-10-09T00:00:00+06:55</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.3</priority>
 </url>
@@ -355,7 +376,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://mestrace.github.io/category/misc.html</loc>
-<lastmod>2023-09-30T21:00:00+06:55</lastmod>
+<lastmod>2023-10-09T22:00:00+06:55</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.3</priority>
 </url>
@@ -369,7 +390,14 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://mestrace.github.io/tag/contest.html</loc>
-<lastmod>2023-09-23T00:00:00+06:55</lastmod>
+<lastmod>2023-10-09T00:00:00+06:55</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.3</priority>
+</url>
+
+<url>
+<loc>https://mestrace.github.io/tag/google-foobar.html</loc>
+<lastmod>2023-10-09T22:00:00+06:55</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.3</priority>
 </url>
@@ -432,7 +460,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://mestrace.github.io/author/mestrace.html</loc>
-<lastmod>2023-09-30T21:00:00+06:55</lastmod>
+<lastmod>2023-10-09T22:00:00+06:55</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.3</priority>
 </url>
