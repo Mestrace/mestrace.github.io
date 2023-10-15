@@ -13,7 +13,7 @@ Summary: 2023-10 Leetcode Weekly Contest 366 第 366 场力扣周赛 | 2894. Div
 ## 题目列表
 
 - [2894. Divisible and Non-divisible Sums Difference 分类求和并作差](https://leetcode.com/problems/divisible-and-non-divisible-sums-difference/)
-- [2895. Minimum Processing Time 最小处理时间](hhttps://leetcode.com/problems/minimum-processing-time/)
+- [2895. Minimum Processing Time 最小处理时间](https://leetcode.com/problems/minimum-processing-time/)
 - [2896. Apply Operations to Make Two Strings Equal 执行操作使两个字符串相等](https://leetcode.com/problems/apply-operations-to-make-two-strings-equal/)
 - [2897. Apply Operations on Array to Maximize Sum of Squares 对数组执行操作使平方和最大](https://leetcode.com/problems/apply-operations-on-array-to-maximize-sum-of-squares/description/)
 
