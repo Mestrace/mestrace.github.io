@@ -3,7 +3,7 @@ Slug: weekly-367
 Date: 2023-10-15
 Category: Leetcode
 Tags: Contest
-Summary: 2023-10 Leetcode Weekly Contest 367 第 367 场力扣周赛 | 2903. Find Indices With Index and Value Difference I 找出满足差值条件的下标 I | 2904. Shortest and Lexicographically Smallest Beautiful String 最短且字典序最小的美丽子字符串 | 05. Find Indices With Index and Value Difference II 找出满足差值条件的下标 II | 2906. Construct Product Matrix 构造乘积矩阵 | Solution to contest problems 赛题讲解
+Summary: 2023-10 Leetcode Weekly Contest 367 第 367 场力扣周赛 | 2903. Find Indices With Index and Value Difference I 找出满足差值条件的下标 I | 2904. Shortest and Lexicographically Smallest Beautiful String 最短且字典序最小的美丽子字符串 | 2905. Find Indices With Index and Value Difference II 找出满足差值条件的下标 II | 2906. Construct Product Matrix 构造乘积矩阵 | Solution to contest problems 赛题讲解
 
 [Weekly Contest 367](https://leetcode.com/contest/weekly-contest-367/)
 
