@@ -5,7 +5,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://mestrace.github.io/</loc>
-<lastmod>2023-11-13T21:40:35-00:00</lastmod>
+<lastmod>2024-01-20T16:34:50-00:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.3</priority>
 </url>
@@ -15,6 +15,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <lastmod>2023-08-21T20:00:00+08:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://mestrace.github.io/posts/2024/Jan/20/sony-a7-minolta-58/</loc>
+<lastmod>2024-01-20T17:00:00+08:00</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
 </url>
 
 <url>
@@ -390,7 +397,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://mestrace.github.io/category/misc.html</loc>
-<lastmod>2023-10-09T22:00:00+06:55</lastmod>
+<lastmod>2024-01-20T17:00:00+06:55</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.3</priority>
 </url>
@@ -474,7 +481,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://mestrace.github.io/author/mestrace.html</loc>
-<lastmod>2023-11-13T22:00:00+06:55</lastmod>
+<lastmod>2024-01-20T17:00:00+06:55</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.3</priority>
 </url>
