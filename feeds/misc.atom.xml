@@ -265,7 +265,7 @@ so the function would return "19".&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;实现完成，现在让我们debug一下，打印出来每次递归的值看看吧！&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt; solution_v2("10")
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;&amp;gt; &lt;/span&gt;&lt;span class="ge"&gt;solution_v2("10")&lt;/span&gt;
 
 10 1.4142135623730951
 4 3.4142135623730945
@@ -310,7 +310,7 @@ so the function would return "19".&lt;/p&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sum_beatty_v3&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;sqrt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt; solution_v3("1000")
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;&amp;gt; &lt;/span&gt;&lt;span class="ge"&gt;solution_v3("1000")&lt;/span&gt;
 
 1000
 414
