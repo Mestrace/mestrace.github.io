@@ -258,7 +258,7 @@ actual_diff = [0,2,2,2,-2]
 ```
 这里`diff`就是我们的差分数组，且我们可以通过差分数组前一个值推出后一个应该减去的值。
 
-差分数组在挤到简单的题目中都有应用，可以看看下面的题目
+差分数组在一些简单的题目中都有应用，可以看看下面的题目
 
 - [Medium - 370. Range Addition](https://leetcode.com/problems/range-addition/)
 - [Easy - 598. Range Addition II](https://leetcode.com/problems/range-addition-ii/)

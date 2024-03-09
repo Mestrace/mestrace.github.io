@@ -1,6 +1,6 @@
-invoke==2.0.0
+invoke==2.2.0
 livereload==2.6.3
-pelican==4.8.0
+pelican==4.9.1
 requests==2.31.0
 ghp-import==2.1.0
 ## plugins
@@ -10,5 +10,5 @@ pelican-sitemap==1.0.2
 pelican_precompress==2.1.1
 zopfli==0.2.2
 pelican-render-math==1.0.3
-git+https://github.com/rlaboiss/pelican_md_include@2c96e89 # pelican-md-include
 markdown-include==0.8.1
+pelican-markdown-include
