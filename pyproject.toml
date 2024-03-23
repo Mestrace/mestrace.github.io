@@ -22,7 +22,6 @@ zopfli = "^0.2.3"
 pelican-render-math = "1.0.3"
 markdown-include = "0.8.1"
 pelican-markdown-include = "1.0.2"
-pelican-photos = "1.6.0"
 
 [build-system]
 requires = ["poetry-core"]
