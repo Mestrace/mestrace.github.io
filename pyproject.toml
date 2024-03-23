@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "mestrace-github-io"
+version = "0.1.0"
+description = "Mestrace's Personal Blog"
+authors = ["Your Name <you@example.com>"]
+license = "WTFPL"
+readme = "README.md"
+packages = [{include = "mestrace"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+invoke = "2.2.0"
+livereload = "2.6.3"
+pelican = "^4.9.1"
+requests = "^2.31.0"
+ghp-import = "2.1.0"
+pelican-seo = "1.2.2"
+pelican-simple-footnotes = "^1.0.2"
+pelican-sitemap = "^1.1.0"
+pelican-precompress = "^2.2.0"
+zopfli = "^0.2.3"
+pelican-render-math = "1.0.3"
+markdown-include = "0.8.1"
+pelican-markdown-include = "1.0.2"
+pelican-photos = "1.6.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
