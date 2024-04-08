@@ -20,7 +20,7 @@ Summary: 2024-03 Leetcode Weekly Contest 387 第 387 场力扣周赛 | 3069. Dis
 
 ## 3069. Distribute Elements Into Two Arrays I 将元素分配到两个数组中 I
 
-按照题义模拟，将数组分为两个数组即可。
+按照题意模拟，将数组分为两个数组即可。
 
 ```python
 class Solution:
@@ -128,7 +128,7 @@ class Solution:
 
 ## 3072. Distribute Elements Into Two Arrays II 将元素分配到两个数组中 II
 
-这道题与第一题有点相似。都是将一个数组基于规则分配到两个不同的数组中。而本题的规则是比较`arr1`和`arr2`中大于当前数字`nums[i]`的个数。因此我们考虑使用一些排序的数据结构，比如AVL树和红黑树。这里可以直接使用科技`sortedcontainers`，直接按照题义模拟即可。
+这道题与第一题有点相似。都是将一个数组基于规则分配到两个不同的数组中。而本题的规则是比较`arr1`和`arr2`中大于当前数字`nums[i]`的个数。因此我们考虑使用一些排序的数据结构，比如AVL树和红黑树。这里可以直接使用科技`sortedcontainers`，直接按照题意模拟即可。
 
 ```python
 class Solution:
