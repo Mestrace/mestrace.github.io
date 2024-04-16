@@ -1,6 +1,6 @@
 Title: 摄影札记：我的数码胶片相机 Sony A7R与美能达 MC Rokkor 58mm F1.2
 Slug: sony-a7-minolta-58
-Category: MISC
+Category: Photography
 Date: 2024-01-20 17:00
 Summary: 在2023年的年末，笔者购买了一台Sony A7R，并搭配了传奇的美能达 MC Rokkor-PG 58mm F1.2镜头。这篇文章讲述了笔者购买一台10年前的数码相机搭配这个50年前的镜头的原因，和对于摄影的一些思考。笔者称这套组合为数码胶片相机。
 
