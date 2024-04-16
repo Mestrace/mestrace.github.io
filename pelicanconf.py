@@ -4,7 +4,7 @@ import pathlib
 
 AUTHOR = "Mestrace"
 SITENAME = "Mestrace的个人博客"
-SITEURL = "https://mestrace.github.io"
+SITEURL = "http://127.0.0.1:8000"
 SITETITLE = "Mestrace"
 SITESUBTITLE = "Software Developer"
 SITEDESCRIPTION = "我的个人博客，记录我的成长历程"
@@ -96,6 +96,7 @@ PLUGINS = [
     "pelican.plugins.precompress",
     "render_math",
     "md_include",
+    "photos",
 ]
 
 # # Enable Jinja2 i18n extension used to parse translations.
@@ -127,3 +128,8 @@ SITEMAP = {
     "priorities": {"articles": 0.8, "indexes": 0.3, "pages": 0.5},
     "changefreqs": {"articles": "weekly", "indexes": "weekly", "pages": "weekly"},
 }
+
+# Pelican Photos
+PHOTO_LIBRARY = "content/images"
+PHOTO_RESIZE_JOBS = 3
+PHOTO_EXIF_REMOVE_GPS = True

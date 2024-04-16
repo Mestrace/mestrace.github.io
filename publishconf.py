@@ -1,10 +1,10 @@
 # This file is only used if you use `make publish` or
 # explicitly specify it as your config file.
 
+from pelicanconf import *
 import os
 import sys
 sys.path.append(os.curdir)
-from pelicanconf import *
 
 # If your site is available via HTTPS, make sure SITEURL begins with https://
 SITEURL = 'https://mestrace.github.io'
@@ -17,8 +17,8 @@ DELETE_OUTPUT_DIRECTORY = True
 
 # Following items are often useful when publishing
 
-#DISQUS_SITENAME = ""
-#GOOGLE_ANALYTICS = ""
+# DISQUS_SITENAME = ""
+# GOOGLE_ANALYTICS = ""
 
 # Precompress Plugin
 PRECOMPRESS_ZOPFLI = True
@@ -36,3 +36,5 @@ SEO_ENHANCER = True  # SEO enhancer is disabled by default
 SEO_ENHANCER_OPEN_GRAPH = True  # Subfeature of SEO enhancer
 SEO_ENHANCER_TWITTER_CARDS = False  # Subfeature of SEO enhancer
 
+
+SITEURL = "https://mestrace.github.io"
