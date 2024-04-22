@@ -18,7 +18,7 @@ Image: {photo}19/amazon-superia-x-tra.png
 
 <blockquote class="reddit-embed-bq" style="height:316px" data-embed-height="316"><a href="https://www.reddit.com/r/AnalogCommunity/comments/18kf5l4/kodak_colorplus_200_vs_kodak_gold_200_vs_fujifilm/">Kodak ColorPlus 200 vs Kodak Gold 200 vs Fujifilm 200</a><br> by<a href="https://www.reddit.com/user/cprash87/">u/cprash87</a> in<a href="https://www.reddit.com/r/AnalogCommunity/">AnalogCommunity</a></blockquote><script async="" src="https://embed.reddit.com/widgets.js" charset="UTF-8"></script>
 
-收到货后，笔者立即联系了亚马逊客服。客服人员在了解情况后，承认了亚马逊在发货过程中存在错误，并表示愿意提供补偿。笔者原本希望亚马逊能够退款或换货，但客服人员表示由于Superia X-TRA 400胶卷已经停产，无法进行退款或换货。最终，亚马逊给予了一小部分无条件代金券作为补偿。
+收到货后，笔者立即联系了亚马逊客服。客服人员在了解情况后，承认了亚马逊在发货过程中存在错误，并表示愿意提供补偿。笔者原本希望亚马逊能够换货，但客服人员表示由于Superia X-TRA 400胶卷已经停产，无法进行换货。最终，亚马逊给予了一小部分无条件代金券作为补偿。
 
 随着数码相机的普及，胶卷相机和胶卷逐渐淡出了人们的视线。许多经典的胶卷已经停产，胶片摄影也变得越来越小众。我们不得不承认胶片时代在一步步的逐渐离我们远去。
 
