@@ -1,7 +1,7 @@
 Title: 手把手教你在树莓派4B上运行LLaMA 7B模型
 Slug: llama-rpi
 Date: 2023-03-15
-Category: MISC
+Category: Computer Science
 Summary: 本文详细描述了我是如何一步步在树莓派4B上运行LLaMA模型。LLaMA是由Meta AI发布的一个大语言模型。ggerganov/llama.cpp是一个由C++实现的LLaMA移植版本，并使用4-bit量化技术以将模型适配至个人设备上。超大型语料模型从未如此唾手可得。在树莓派上获得你的个人chatgpt。如果你对树莓派、LLaMA模型或大型语言模型感兴趣，那么本文一定会对你有帮助。How I run the LLaMA model step by step on a Raspberry Pi 4B. LLaMA is a large language model released by Meta AI. ggerganov/llama.cpp is a C++ implementation of the LLaMA port, which uses 4-bit quantization techniques to adapt the model to personal devices. A large-scale Machine Learning model has never been so readily available for normal people. If you are interested in Raspberry Pi, LLaMA model, or large-scale language models, this article will provide you with useful information.
 
 ## 引言

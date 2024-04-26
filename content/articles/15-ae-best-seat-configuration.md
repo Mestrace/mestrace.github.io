@@ -1,7 +1,7 @@
 Title: Airline Empire之使用二次规划解决航线的最佳座位排布
 Slug: ae-best-seat-configuration
 Date: 2023-08-21
-Category: MISC
+Category: Computer Science
 Summary: 本文探讨了在线航空公司经营游戏Airline Empires中，如何通过最佳座位配置来提升盈利能力。从游戏机制到座位优化，逐步引导读者了解如何运用混合整数二次规划来提升游戏中的航线盈利。This article explores how optimal seating configurations can be used to improve profitability in Airline Empires, an online airline operating game. From game mechanics to seat optimization, the reader is guided step-by-step through how to use Mixed-Integer Quadratic Programming (MIQP) to improve airline profitability in the game.
 
 [Airline Empires](http://www.airline-empires.com)（下称AE）是一款在线的航空公司经营类游戏。在游戏中，玩家将以上帝视角运营航线，覆盖各个地区，并与其他玩家展开竞争。游戏的节奏设计较为缓慢，每个游戏内的一天相当于现实时间的5至20分钟，使其成为一款休闲的模拟经营游戏。尽管游戏以纯文字形式呈现，没有任何视觉效果，但AE提供了丰富多样的飞机选择。运营航线需要考虑诸多因素，包括机场距离、飞机航程、跑道长度、座位布局以及不同舱位的定价策略。通过丰富的经营元素和策略考量，AE成功地为玩家提供了一个新奇的航空公司体验。无论是追求利润最大化还是航线网络的扩张，玩家都能在AE中找到乐趣与挑战。

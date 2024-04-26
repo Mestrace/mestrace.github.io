@@ -1,6 +1,6 @@
 Title: 解决Foobar挑战（三）
 Slug: foobar-iv
-Category: MISC
+Category: Computer Science
 Date: 2023-05-13 19:00:00
 Modified: 2023-10-09 22:00
 Tags: Google Foobar

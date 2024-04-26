@@ -1,7 +1,7 @@
 Title: 简单聊聊MySQL Binlog
 Slug: mysql-binlog-basics
 Date: 2021-08-30
-Category: Middleware
+Category: Computer Science
 Tags: MySQL
 
 Binlog (binary log)是一组日志文件，包含了对MySQL服务器进行的数据修改和变更，并持久化到磁盘中。Binlog以事件的格式存储，包括了所有的DDL和DML语句（例如数据表Schema的创建和变更，以及数据行的变更）。此外，每个Binlog event还囊括了一些额外的信息，包括但不限于

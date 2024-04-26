@@ -1,6 +1,6 @@
 Title: 解决Foobar挑战（四）- 终篇
 Slug: foobar-v
-Category: MISC
+Category: Computer Science
 Date: 2023-09-30 21:00
 Modified: 2023-10-09 22:00
 Tags: Google Foobar

@@ -1,6 +1,6 @@
 Title: 解决Foobar挑战（一）
 Slug: foobar-ii
-Category: MISC
+Category: Computer Science
 Date: 2023-04-21 15:00:00
 Modified: 2023-10-09 22:00
 Tags: Google Foobar

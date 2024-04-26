@@ -1,7 +1,7 @@
 Title: [翻译]保卫自由的互联网，拒绝Web3
 Slug: translate-no-to-web3
 Date: 2023-02-18
-Category: Blockchain
+Category: Computer Science
 Tags: Blockchain
 
 > 原文标题：Keep the web free, say no to Web3

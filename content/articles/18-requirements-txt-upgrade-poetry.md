@@ -1,6 +1,6 @@
 Title: 从requirements.txt升级到Poetry
 Slug: requirements-txt-upgrade-poetry
-Category: MISC
+Category: Computer Science
 Date: 2024-03-23 14:00
 Tags: Python
 Summary: 将包管理方式从requirements.txt升级到Poetry
