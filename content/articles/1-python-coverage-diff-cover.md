@@ -1,7 +1,7 @@
 Title: 用 Python 进行代码覆盖率检测：coverage.py 和diff-cover 的使用方法
 Slug: python-coverage-diff-cover
 Date: 2023-02-05
-Category: Python
+Category: Computer Science
 Tags: Python
 
 在重构项目时，我们经常需要确认代码测试的覆盖率。这是为了确保没有任何部分遗漏或者错误，从而使重构变得更安全。为了帮助我们实现这一目标，我们可以使用两个 Python 包来帮助我们 `coverage.py` 和 `diff-cover`。

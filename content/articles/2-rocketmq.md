@@ -1,8 +1,7 @@
 Title: RocketMQ是什么
 Slug: rocket-mq-history
 Date: 2021-09-11
-Category: Middleware
-Tags: RocketMQ, Kafka
+Category: Computer Science
 
 
 > Apache RocketMQ is a distributed messaging and streaming platform with low latency, high performance and reliability, trillion-level capacity and flexible scalability.
