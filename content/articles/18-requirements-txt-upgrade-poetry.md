@@ -2,6 +2,7 @@ Title: 从requirements.txt升级到Poetry
 Slug: requirements-txt-upgrade-poetry
 Category: Computer Science
 Date: 2024-03-23 14:00
+Modified:  2024-04-27 12:00
 Tags: Python
 Summary: 将包管理方式从requirements.txt升级到Poetry
 
@@ -261,6 +262,63 @@ pillow              10.0.1 10.2.0 Python Imaging Library (Fork)
 ```
 
 官方文档[Poetry Documentation - Managing environments](https://python-poetry.org/docs/managing-environments/)中记录了更多高阶的用法，这里笔者就不展开了。
+
+<p align="center">
+  <img src="{static}/images/gei_li.png" />
+</p>
+
+## 虚拟环境
+
+在poetry中，你可以轻松的管理你项目当中的虚拟环境。你可以用以下命令管理你的虚拟环境。
+
+```bash
+# 基于python文件目录创建
+poetry env use /path/to/python/bin/python3.6
+# 基于命令创建
+poetry env use python3.8
+# 基于版本号创建
+poetry env use 3.10
+# 基于系统python创建
+poetry env use system
+```
+
+那么我们就给当前repo创建一个虚拟环境吧。
+```bash
+➜  stacks-py git:(main) ✗ poetry env use 3.11
+Creating virtualenv stacks-py-cHFsRABB-py3.11 in ~/Library/Caches/pypoetry/virtualenvs
+Using virtualenv: ~/Library/Caches/pypoetry/virtualenvs/stacks-py-cHFsRABB-py3.11
+➜  stacks-py git:(main) ✗ poetry env list
+stacks-py-cHFsRABB-py3.11 (Activated)
+```
+
+可以看到，虚拟环境的默认路径是在 `~/Library/Caches/pypoetry/virtualenvs`下面的。如果你想改变这个行为的话，你也可以将其设定为在当前repo目录下创建虚拟环境。
+
+```bash
+# 设置为在当前目录下创建虚拟环境
+poetry config virtualenvs.in-project true
+# 接着创建虚拟环境的命令
+```
+
+查看当前启用的环境信息
+```bash
+my-repo git:(main) ✗ poetry env info
+
+Virtualenv
+Python:         3.11.7
+Implementation: CPython
+Path:           /path/to/repo/.venv
+Executable:     /path/to/repo/.venv/bin/python
+Valid:          True
+
+Base
+Platform:   darwin
+OS:         posix
+Python:     3.11.7
+Path:       /usr/local/opt/python@3.11/Frameworks/Python.framework/Versions/3.11
+Executable: /usr/local/opt/python@3.11/Frameworks/Python.framework/Versions/3.11/bin/python3.11
+```
+
+结合vscode一起使用的话更佳哦！
 
 ## 小结
 
