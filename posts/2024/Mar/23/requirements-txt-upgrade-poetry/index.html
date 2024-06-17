@@ -50,7 +50,7 @@
 <meta content="https://mestrace.github.io/posts/2024/Mar/23/requirements-txt-upgrade-poetry/" property="og:url"/>
 <meta content="article" property="og:type"/>
 <meta content="2024-03-23 14:00:00+08:00" property="article:published_time"/>
-<meta content="" property="article:modified_time"/>
+<meta content="2024-04-27 12:00:00+08:00" property="article:modified_time"/>
 <meta content="https://mestrace.github.io/author/mestrace.html" property="article:author"/>
 <meta content="Computer Science" property="article:section">
 <meta content="Python" property="article:tag"/>
@@ -309,6 +309,50 @@ pelican 4.9.1 Static site generator supporting Markdown and reStructuredText
 <span class="ss">(</span><span class="k">exit</span><span class="w"> </span><span class="nv">virtual</span><span class="w"> </span><span class="nv">env</span><span class="ss">)</span>
 </code></pre></div>
 <p>官方文档<a href="https://python-poetry.org/docs/managing-environments/">Poetry Documentation - Managing environments</a>中记录了更多高阶的用法，这里笔者就不展开了。</p>
+<p align="center">
+<img src="https://mestrace.github.io/images/gei_li.png">
+</img></p>
+<h2>虚拟环境</h2>
+<p>在poetry中，你可以轻松的管理你项目当中的虚拟环境。你可以用以下命令管理你的虚拟环境。</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 基于python文件目录创建</span>
+poetry<span class="w"> </span>env<span class="w"> </span>use<span class="w"> </span>/path/to/python/bin/python3.6
+<span class="c1"># 基于命令创建</span>
+poetry<span class="w"> </span>env<span class="w"> </span>use<span class="w"> </span>python3.8
+<span class="c1"># 基于版本号创建</span>
+poetry<span class="w"> </span>env<span class="w"> </span>use<span class="w"> </span><span class="m">3</span>.10
+<span class="c1"># 基于系统python创建</span>
+poetry<span class="w"> </span>env<span class="w"> </span>use<span class="w"> </span>system
+</code></pre></div>
+<p>那么我们就给当前repo创建一个虚拟环境吧。</p>
+<div class="highlight"><pre><span></span><code>➜<span class="w">  </span>stacks-py<span class="w"> </span>git:<span class="o">(</span>main<span class="o">)</span><span class="w"> </span>✗<span class="w"> </span>poetry<span class="w"> </span>env<span class="w"> </span>use<span class="w"> </span><span class="m">3</span>.11
+Creating<span class="w"> </span>virtualenv<span class="w"> </span>stacks-py-cHFsRABB-py3.11<span class="w"> </span><span class="k">in</span><span class="w"> </span>~/Library/Caches/pypoetry/virtualenvs
+Using<span class="w"> </span>virtualenv:<span class="w"> </span>~/Library/Caches/pypoetry/virtualenvs/stacks-py-cHFsRABB-py3.11
+➜<span class="w">  </span>stacks-py<span class="w"> </span>git:<span class="o">(</span>main<span class="o">)</span><span class="w"> </span>✗<span class="w"> </span>poetry<span class="w"> </span>env<span class="w"> </span>list
+stacks-py-cHFsRABB-py3.11<span class="w"> </span><span class="o">(</span>Activated<span class="o">)</span>
+</code></pre></div>
+<p>可以看到，虚拟环境的默认路径是在 <code>~/Library/Caches/pypoetry/virtualenvs</code>下面的。如果你想改变这个行为的话，你也可以将其设定为在当前repo目录下创建虚拟环境。</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 设置为在当前目录下创建虚拟环境</span>
+poetry<span class="w"> </span>config<span class="w"> </span>virtualenvs.in-project<span class="w"> </span><span class="nb">true</span>
+<span class="c1"># 接着创建虚拟环境的命令</span>
+</code></pre></div>
+<p>查看当前启用的环境信息</p>
+<div class="highlight"><pre><span></span><code>my-repo<span class="w"> </span>git:<span class="o">(</span>main<span class="o">)</span><span class="w"> </span>✗<span class="w"> </span>poetry<span class="w"> </span>env<span class="w"> </span>info
+
+Virtualenv
+Python:<span class="w">         </span><span class="m">3</span>.11.7
+Implementation:<span class="w"> </span>CPython
+Path:<span class="w">           </span>/path/to/repo/.venv
+Executable:<span class="w">     </span>/path/to/repo/.venv/bin/python
+Valid:<span class="w">          </span>True
+
+Base
+Platform:<span class="w">   </span>darwin
+OS:<span class="w">         </span>posix
+Python:<span class="w">     </span><span class="m">3</span>.11.7
+Path:<span class="w">       </span>/usr/local/opt/python@3.11/Frameworks/Python.framework/Versions/3.11
+Executable:<span class="w"> </span>/usr/local/opt/python@3.11/Frameworks/Python.framework/Versions/3.11/bin/python3.11
+</code></pre></div>
+<p>结合vscode一起使用的话更佳哦！</p>
 <h2>小结</h2>
 <p>管理项目的依赖并不是一件容易的事情，而<code>poetry</code>可以安全的帮助我们解决重复劳作的问题。如果你的Python项目还在使用<code>requirements.txt</code>来管理包依赖的话，不妨花上10分钟升级一下，你会获得更好的体验。</p>
 </div>
@@ -337,8 +381,8 @@ Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a 
 </script>
 </p><p>
 <a href="http://creativecommons.org/licenses/by-sa/4.0/" rel="license" target="_blank">
-<img alt="Creative Commons License" height="15" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" style="border-width:0" title="Creative Commons License" width="80">
-</img></a>
+<img alt="Creative Commons License" height="15" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" style="border-width:0" title="Creative Commons License" width="80"/>
+</a>
 </p></footer> </main>
 <script type="application/ld+json">
 {

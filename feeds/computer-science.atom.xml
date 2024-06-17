@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Mestrace的个人博客 - Computer Science</title><link href="https://mestrace.github.io/" rel="alternate"></link><link href="https://mestrace.github.io/feeds/computer-science.atom.xml" rel="self"></link><id>https://mestrace.github.io/</id><updated>2024-04-22T20:00:00+08:00</updated><subtitle>Software Developer</subtitle><entry><title>一些有趣的HTTPS和TCP面试题</title><link href="https://mestrace.github.io/posts/2024/Apr/22/interesting-interview-questions-about-tcp-and-http/" rel="alternate"></link><published>2024-04-22T20:00:00+08:00</published><updated>2024-04-22T20:00:00+08:00</updated><author><name>Mestrace</name></author><id>tag:mestrace.github.io,2024-04-22:/posts/2024/Apr/22/interesting-interview-questions-about-tcp-and-http/</id><summary type="html">&lt;p&gt;分享一些有趣的TCP和HTTP面试题，并给出一些解答。&lt;/p&gt;</summary><content type="html">&lt;p&gt;今日在闲来无事的时候，刷到了这条推特，其中涉及了一些常见但又容易让人犯迷糊的问题。笔者想着如果自己在面试中遇到相关的问题，可能也不一定能够答上来，因此本篇文章将结合笔者之前做的一些面试准备，来回答一下这些问题。学艺不精，望各位读者斧正。&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Mestrace的个人博客 - Computer Science</title><link href="https://mestrace.github.io/" rel="alternate"></link><link href="https://mestrace.github.io/feeds/computer-science.atom.xml" rel="self"></link><id>https://mestrace.github.io/</id><updated>2024-04-27T12:00:00+08:00</updated><subtitle>Software Developer</subtitle><entry><title>一些有趣的HTTPS和TCP面试题</title><link href="https://mestrace.github.io/posts/2024/Apr/22/interesting-interview-questions-about-tcp-and-http/" rel="alternate"></link><published>2024-04-22T20:00:00+08:00</published><updated>2024-04-22T20:00:00+08:00</updated><author><name>Mestrace</name></author><id>tag:mestrace.github.io,2024-04-22:/posts/2024/Apr/22/interesting-interview-questions-about-tcp-and-http/</id><summary type="html">&lt;p&gt;分享一些有趣的TCP和HTTP面试题，并给出一些解答。&lt;/p&gt;</summary><content type="html">&lt;p&gt;今日在闲来无事的时候，刷到了这条推特，其中涉及了一些常见但又容易让人犯迷糊的问题。笔者想着如果自己在面试中遇到相关的问题，可能也不一定能够答上来，因此本篇文章将结合笔者之前做的一些面试准备，来回答一下这些问题。学艺不精，望各位读者斧正。&lt;/p&gt;
 &lt;blockquote class="twitter-tweet" data-lang="en" data-theme="light"&gt;&lt;p lang="zh" dir="ltr"&gt;分享一下我遇到的网络面试题：&lt;br&gt;1、Https 如何保证数据的安全&lt;br&gt;2、TCP 建立连接需要3 次握手？为什么不是 2和4 &lt;br&gt;3、UDP 需要握手吗&lt;br&gt;4、TIME_WAIT 的作用&lt;br&gt;5、TCP拆包粘包这种说法对吗&lt;br&gt;6、TCP是可靠传输吗？如果是还需要在业务层保证幂等吗&lt;br&gt;7、QQ 使用的是 TCP 还是 UDP &lt;br&gt;8、Linux…&lt;/p&gt;&amp;mdash; Nextify (@nextify2024) &lt;a href="https://twitter.com/nextify2024/status/1782218309213315146?ref_src=twsrc%5Etfw"&gt;April 22, 2024&lt;/a&gt;&lt;/blockquote&gt;
 &lt;script async src="https://platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
 
@@ -154,7 +154,7 @@ Source: Esri&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://support.esri.com/en-us/knowledge-base/change-the-operating-system-s-keepalive-settings-146247-000006285"&gt;Esri - Change the operating system's 'keepalive' settings&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://hengyun.tech/why-we-need-heartbeat/"&gt;横云断岭/hengyunabc - 为什么基于TCP的应用需要心跳包（TCP keep-alive原理分析）&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><category term="Computer Science"></category></entry><entry><title>从requirements.txt升级到Poetry</title><link href="https://mestrace.github.io/posts/2024/Mar/23/requirements-txt-upgrade-poetry/" rel="alternate"></link><published>2024-03-23T14:00:00+08:00</published><updated>2024-03-23T14:00:00+08:00</updated><author><name>Mestrace</name></author><id>tag:mestrace.github.io,2024-03-23:/posts/2024/Mar/23/requirements-txt-upgrade-poetry/</id><summary type="html">&lt;p&gt;将包管理方式从requirements.txt升级到Poetry&lt;/p&gt;</summary><content type="html">&lt;p&gt;在Python软件开发中，笔者通常使用 &lt;code&gt;requirements.txt&lt;/code&gt; 文件来管理项目的依赖。这个习惯源自于 &lt;code&gt;pip freeze&lt;/code&gt; 命令，它能够简单地列出当前 Python 环境下的所有包及其版本号。无论项目规模大小，这都是一种简单而有效的方法，能够确保所有开发人员以及部署环境中运行的包版本保持一致。在 &lt;code&gt;requirements.txt&lt;/code&gt; 中，开发者可以轻松地为每个包定义一个版本号，例如 &lt;code&gt;abc-def &amp;gt;= 0.8.3&lt;/code&gt;。然而，在今天，随着Python使用者越来越多，项目也越来越庞大的情况下，这个早在08年就开始使用的包管理方法显得愈发过时（&lt;a href="https://github.com/pypa/pip/commit/368a064ae4ca77ac540ef4aea3bf61dd3c2bccb1"&gt;pypa/pip@368a064&lt;/a&gt;）。&lt;/p&gt;
+&lt;/ul&gt;</content><category term="Computer Science"></category></entry><entry><title>从requirements.txt升级到Poetry</title><link href="https://mestrace.github.io/posts/2024/Mar/23/requirements-txt-upgrade-poetry/" rel="alternate"></link><published>2024-03-23T14:00:00+08:00</published><updated>2024-04-27T12:00:00+08:00</updated><author><name>Mestrace</name></author><id>tag:mestrace.github.io,2024-03-23:/posts/2024/Mar/23/requirements-txt-upgrade-poetry/</id><summary type="html">&lt;p&gt;将包管理方式从requirements.txt升级到Poetry&lt;/p&gt;</summary><content type="html">&lt;p&gt;在Python软件开发中，笔者通常使用 &lt;code&gt;requirements.txt&lt;/code&gt; 文件来管理项目的依赖。这个习惯源自于 &lt;code&gt;pip freeze&lt;/code&gt; 命令，它能够简单地列出当前 Python 环境下的所有包及其版本号。无论项目规模大小，这都是一种简单而有效的方法，能够确保所有开发人员以及部署环境中运行的包版本保持一致。在 &lt;code&gt;requirements.txt&lt;/code&gt; 中，开发者可以轻松地为每个包定义一个版本号，例如 &lt;code&gt;abc-def &amp;gt;= 0.8.3&lt;/code&gt;。然而，在今天，随着Python使用者越来越多，项目也越来越庞大的情况下，这个早在08年就开始使用的包管理方法显得愈发过时（&lt;a href="https://github.com/pypa/pip/commit/368a064ae4ca77ac540ef4aea3bf61dd3c2bccb1"&gt;pypa/pip@368a064&lt;/a&gt;）。&lt;/p&gt;
 &lt;p&gt;在手动管理依赖的情况下，开发者往往无法穷尽所有的依赖关系。因此，通常的做法是只列出顶层依赖包及其版本号。这样一来，当依赖关系变得复杂时，pip 工具的解析能力就显得不足，无法自动解决依赖传递的问题。一个常见的情况是，不同的顶层包可能指定了同一个底层包的不同版本，并且这些版本可能相互不兼容。此外，当项目的依赖关系发生变化时，就需要大量手动操作来编辑 &lt;code&gt;requirements.txt&lt;/code&gt; 文件。另外，不同的环境可能需要不同的依赖。作者通常会使用类似 &lt;code&gt;requirements-*.txt&lt;/code&gt; 的命名方式来区分不同环境下的依赖。例如，在测试环境中，可能需要安装额外的跟踪相关库或测试库，如 &lt;code&gt;pytest&lt;/code&gt;。但是，&lt;code&gt;requirements.txt&lt;/code&gt; 无法完全锁定包的版本，因此在不同的环境中可能会安装不同的版本，甚至在极端情况下会引入安全风险。如果连接的不是受信任的仓库源，黑客可能会利用供应链攻击，将包版本替换为恶意软件版本，而&lt;code&gt;requirements.txt&lt;/code&gt;无法解决这种问题。&lt;/p&gt;
 &lt;p&gt;在诸多选项中，笔者最终选择了&lt;code&gt;poetry&lt;/code&gt;作为本博客的包管理工具。除了使用基于&lt;a href="https://peps.python.org/pep-0621/"&gt;PEP-621&lt;/a&gt;带来的&lt;code&gt;pyproject.toml&lt;/code&gt;的项目与包管理办法之外，&lt;code&gt;poetry&lt;/code&gt;还带来了包版本锁定&lt;code&gt;poetry.lock&lt;/code&gt;，增强的自动依赖解析器，配置工具，自动虚拟环境管理等多项功能。而接下来的内容则是一些简单的&lt;code&gt;poetry&lt;/code&gt;命令介绍。&lt;/p&gt;
 &lt;h2&gt;poetry new&lt;/h2&gt;
@@ -377,6 +377,55 @@ pelican 4.9.1 Static site generator supporting Markdown and reStructuredText
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;官方文档&lt;a href="https://python-poetry.org/docs/managing-environments/"&gt;Poetry Documentation - Managing environments&lt;/a&gt;中记录了更多高阶的用法，这里笔者就不展开了。&lt;/p&gt;
+&lt;p align="center"&gt;
+  &lt;img src="https://mestrace.github.io/images/gei_li.png" /&gt;
+&lt;/p&gt;
+
+&lt;h2&gt;虚拟环境&lt;/h2&gt;
+&lt;p&gt;在poetry中，你可以轻松的管理你项目当中的虚拟环境。你可以用以下命令管理你的虚拟环境。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# 基于python文件目录创建&lt;/span&gt;
+poetry&lt;span class="w"&gt; &lt;/span&gt;env&lt;span class="w"&gt; &lt;/span&gt;use&lt;span class="w"&gt; &lt;/span&gt;/path/to/python/bin/python3.6
+&lt;span class="c1"&gt;# 基于命令创建&lt;/span&gt;
+poetry&lt;span class="w"&gt; &lt;/span&gt;env&lt;span class="w"&gt; &lt;/span&gt;use&lt;span class="w"&gt; &lt;/span&gt;python3.8
+&lt;span class="c1"&gt;# 基于版本号创建&lt;/span&gt;
+poetry&lt;span class="w"&gt; &lt;/span&gt;env&lt;span class="w"&gt; &lt;/span&gt;use&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;.10
+&lt;span class="c1"&gt;# 基于系统python创建&lt;/span&gt;
+poetry&lt;span class="w"&gt; &lt;/span&gt;env&lt;span class="w"&gt; &lt;/span&gt;use&lt;span class="w"&gt; &lt;/span&gt;system
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;那么我们就给当前repo创建一个虚拟环境吧。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;➜&lt;span class="w"&gt;  &lt;/span&gt;stacks-py&lt;span class="w"&gt; &lt;/span&gt;git:&lt;span class="o"&gt;(&lt;/span&gt;main&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;✗&lt;span class="w"&gt; &lt;/span&gt;poetry&lt;span class="w"&gt; &lt;/span&gt;env&lt;span class="w"&gt; &lt;/span&gt;use&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;.11
+Creating&lt;span class="w"&gt; &lt;/span&gt;virtualenv&lt;span class="w"&gt; &lt;/span&gt;stacks-py-cHFsRABB-py3.11&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;in&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;~/Library/Caches/pypoetry/virtualenvs
+Using&lt;span class="w"&gt; &lt;/span&gt;virtualenv:&lt;span class="w"&gt; &lt;/span&gt;~/Library/Caches/pypoetry/virtualenvs/stacks-py-cHFsRABB-py3.11
+➜&lt;span class="w"&gt;  &lt;/span&gt;stacks-py&lt;span class="w"&gt; &lt;/span&gt;git:&lt;span class="o"&gt;(&lt;/span&gt;main&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;✗&lt;span class="w"&gt; &lt;/span&gt;poetry&lt;span class="w"&gt; &lt;/span&gt;env&lt;span class="w"&gt; &lt;/span&gt;list
+stacks-py-cHFsRABB-py3.11&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;Activated&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;可以看到，虚拟环境的默认路径是在 &lt;code&gt;~/Library/Caches/pypoetry/virtualenvs&lt;/code&gt;下面的。如果你想改变这个行为的话，你也可以将其设定为在当前repo目录下创建虚拟环境。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# 设置为在当前目录下创建虚拟环境&lt;/span&gt;
+poetry&lt;span class="w"&gt; &lt;/span&gt;config&lt;span class="w"&gt; &lt;/span&gt;virtualenvs.in-project&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;
+&lt;span class="c1"&gt;# 接着创建虚拟环境的命令&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;查看当前启用的环境信息&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;my-repo&lt;span class="w"&gt; &lt;/span&gt;git:&lt;span class="o"&gt;(&lt;/span&gt;main&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;✗&lt;span class="w"&gt; &lt;/span&gt;poetry&lt;span class="w"&gt; &lt;/span&gt;env&lt;span class="w"&gt; &lt;/span&gt;info
+
+Virtualenv
+Python:&lt;span class="w"&gt;         &lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;.11.7
+Implementation:&lt;span class="w"&gt; &lt;/span&gt;CPython
+Path:&lt;span class="w"&gt;           &lt;/span&gt;/path/to/repo/.venv
+Executable:&lt;span class="w"&gt;     &lt;/span&gt;/path/to/repo/.venv/bin/python
+Valid:&lt;span class="w"&gt;          &lt;/span&gt;True
+
+Base
+Platform:&lt;span class="w"&gt;   &lt;/span&gt;darwin
+OS:&lt;span class="w"&gt;         &lt;/span&gt;posix
+Python:&lt;span class="w"&gt;     &lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;.11.7
+Path:&lt;span class="w"&gt;       &lt;/span&gt;/usr/local/opt/python@3.11/Frameworks/Python.framework/Versions/3.11
+Executable:&lt;span class="w"&gt; &lt;/span&gt;/usr/local/opt/python@3.11/Frameworks/Python.framework/Versions/3.11/bin/python3.11
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;结合vscode一起使用的话更佳哦！&lt;/p&gt;
 &lt;h2&gt;小结&lt;/h2&gt;
 &lt;p&gt;管理项目的依赖并不是一件容易的事情，而&lt;code&gt;poetry&lt;/code&gt;可以安全的帮助我们解决重复劳作的问题。如果你的Python项目还在使用&lt;code&gt;requirements.txt&lt;/code&gt;来管理包依赖的话，不妨花上10分钟升级一下，你会获得更好的体验。&lt;/p&gt;</content><category term="Computer Science"></category><category term="Python"></category></entry><entry><title>解决Foobar挑战（四）- 终篇</title><link href="https://mestrace.github.io/posts/2023/Sep/30/foobar-v/" rel="alternate"></link><published>2023-09-30T21:00:00+08:00</published><updated>2023-10-09T22:00:00+08:00</updated><author><name>Mestrace</name></author><id>tag:mestrace.github.io,2023-09-30:/posts/2023/Sep/30/foobar-v/</id><summary type="html">&lt;p&gt;接上回书，我们来到了Foobar挑战的第五层，题目越来越困难了。本题主要涉及一些数论和组合数学的知识点。&lt;/p&gt;</summary><content type="html">&lt;p&gt;Foobar系列已经全部完成了，你可以通过以下目录访问！&lt;/p&gt;
 &lt;ul&gt;
