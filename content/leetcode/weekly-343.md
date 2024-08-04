@@ -78,7 +78,7 @@ class Solution:
 这道题题目描述的不太清晰，导致好多人都以为特殊道路是双向的。空间大小也没有限定，但是我们也可以推出，要么直接是开始点到结束点的曼哈顿距离，或者是经由任意条特殊道路到达的。因此我们考虑Dijkstra算法。给定当前点`p`和`start -> p`的距离，若我们可以路过特殊道路`s1 -> s2`到达`s2`，且总距离小于当前记录的小于`start -> s2`的距离，那么就可以更新`start -> s2`的距离了。最后把所有的点进行比对求得最短距离。
 
 
-```python3
+```python
 class Solution:
     def minimumCost(self, start: List[int], target: List[int], specialRoads: List[List[int]]) -> int:
         from heapq import heappush, heappop
