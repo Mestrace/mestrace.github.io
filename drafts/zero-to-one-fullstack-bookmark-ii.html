@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="True" name="HandheldFriendly"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="" name="robots"/>
+<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&amp;family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://mestrace.github.io/theme/stylesheet/style.less" rel="stylesheet/less" type="text/css"/>
+<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js" type="text/javascript"></script>
+<link href="https://mestrace.github.io/theme/stylesheet/dark-theme.min.css" id="dark-theme-style" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css"/>
+<link href="https://mestrace.github.io/theme/pygments/monokai.min.css" id="pygments-dark-theme" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css"/>
+<link href="https://mestrace.github.io/theme/pygments/monokai.min.css" id="pygments-light-theme" media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)" rel="stylesheet" type="text/css"/>
+<link href="https://mestrace.github.io/theme/font-awesome/css/fontawesome.css" rel="stylesheet" type="text/css"/>
+<link href="https://mestrace.github.io/theme/font-awesome/css/brands.css" rel="stylesheet" type="text/css"/>
+<link href="https://mestrace.github.io/theme/font-awesome/css/solid.css" rel="stylesheet" type="text/css"/>
+<link href="https://mestrace.github.io/static/custom.css" rel="stylesheet" type="text/css"/>
+<link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+<link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+<link href="/site.webmanifest" rel="manifest"/>
+<!-- Chrome, Firefox OS and Opera -->
+<meta content="#333" name="theme-color"/>
+<!-- Windows Phone -->
+<meta content="#333" name="msapplication-navbutton-color"/>
+<!-- iOS Safari -->
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+<!-- Microsoft EDGE -->
+<meta content="#333" name="msapplication-TileColor"/>
+<link href="https://mestrace.github.io/feeds/all.atom.xml" rel="alternate" title="Mestrace的个人博客 Atom" type="application/atom+xml"/>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-07WBTMQT81"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-07WBTMQT81');
+</script>
+<meta content="Mestrace" name="author">
+<meta content="本文将带你从零开始，一步步构建一个全栈书签应用。无论你是经验丰富的后端开发者，还是对 javascript 生态系统知之甚少的小白，都能从这个教程中获益。我们将学习 javascript 语言，使用 Express.js 和 React 等常见框架搭建前后端，并通过 MongoDB 实现数据存储。最终目标是部署一个简单易用的在线书签管理器。这篇教程将侧重于实践操作，帮助你快速掌握全栈开发的核心概念和流程。" name="description">
+<meta content="Fullstack" name="keywords"/>
+<meta content="Mestrace的个人博客" property="og:site_name">
+<meta content="从无到有做全栈，实现一个书签应用（二）" property="og:title">
+<meta content="本文将带你从零开始，一步步构建一个全栈书签应用。无论你是经验丰富的后端开发者，还是对 javascript 生态系统知之甚少的小白，都能从这个教程中获益。我们将学习 javascript 语言，使用 Express.js 和 React 等常见框架搭建前后端，并通过 MongoDB 实现数据存储。最终目标是部署一个简单易用的在线书签管理器。这篇教程将侧重于实践操作，帮助你快速掌握全栈开发的核心概念和流程。" property="og:description">
+<meta content="en_US" property="og:locale">
+<meta content="https://mestrace.github.io/drafts/zero-to-one-fullstack-bookmark-ii.html" property="og:url"/>
+<meta content="article" property="og:type"/>
+<meta content="2025-05-09 00:00:00+08:00" property="article:published_time"/>
+<meta content="" property="article:modified_time"/>
+<meta content="https://mestrace.github.io/author/mestrace.html" property="article:author"/>
+<meta content="Computer Science" property="article:section">
+<meta content="Fullstack" property="article:tag"/>
+<meta content="http://github.com/Mestrace.png?size=460" property="og:image"/>
+<title>Mestrace的个人博客 – 从无到有做全栈，实现一个书签应用（二）</title>
+</meta></meta></meta></meta></meta></meta></meta><link href="https://mestrace.github.io/drafts/zero-to-one-fullstack-bookmark-ii.html" rel="canonical"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Mestrace的个人博客", "item": "https://mestrace.github.io"}, {"@type": "ListItem", "position": 2, "name": "Drafts", "item": "https://mestrace.github.io/drafts"}, {"@type": "ListItem", "position": 3, "name": "Zero to one fullstack bookmark ii", "item": "https://mestrace.github.io/drafts/zero-to-one-fullstack-bookmark-ii.html"}]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "author": {"@type": "Person", "name": "Mestrace"}, "publisher": {"@type": "Organization", "name": "Mestrace的个人博客"}, "headline": "从无到有做全栈，实现一个书签应用（二）", "about": "Computer Science", "datePublished": "2025-05-09 00:00"}</script></head>
+<body>
+<aside>
+<div>
+<a href="https://mestrace.github.io/">
+<img alt="Mestrace" src="http://github.com/Mestrace.png?size=460" title="Mestrace"/>
+</a>
+<h1>
+<a href="https://mestrace.github.io/">Mestrace</a>
+</h1>
+<p>Software Developer</p>
+<nav>
+<ul class="list">
+<li>
+<a href="https://mestrace.github.io/pages/about.html" target="_self">
+                About
+              </a>
+</li>
+</ul>
+</nav>
+<ul class="social">
+<li>
+<a class="sc-github" href="http://github.com/Mestrace/" target="_blank">
+<i class="fa-brands fa-github"></i>
+</a>
+</li>
+</ul>
+</div>
+</aside>
+<main>
+<nav>
+<a href="https://mestrace.github.io/">Home</a>
+<a href="https://mestrace.github.io/feeds/all.atom.xml">Atom</a>
+</nav>
+<article class="single">
+<header>
+<h1 id="zero-to-one-fullstack-bookmark-ii">从无到有做全栈，实现一个书签应用（二）</h1>
+<p>
+      Posted on Fri 09 May 2025 in <a href="https://mestrace.github.io/category/computer-science.html">Computer Science</a>
+</p>
+</header>
+<div>
+<ol>
+<li>Missing Input Validation: The URL field is not validated for proper URL format; No length limits on title, description, or tags; No sanitization of user input before storing in the database</li>
+<li>CORS Configuration: The CORS middleware is enabled without any specific configuration (app.use(cors())); This allows requests from any origin, which could be a security risk</li>
+<li>Error Handling: Detailed error messages are being sent to the client; Stack traces might be exposed in production; Missing Rate Limiting: No rate limiting on API endpoints</li>
+<li>Could be vulnerable to DoS attacks: Missing Authentication/Authorization, No authentication system in place Anyone can create, read, update, and delete bookmarks; No user-specific data isolation</li>
+<li>
+<p>Missing Security Headers: No security headers like Helmet.js are implemented
+Missing headers like X-Content-Type-Options, X-Frame-Options, etc.</p>
+</li>
+<li>
+<p>Hardcoded API Endpoints: The application has hardcoded API endpoints to http://localhost:3000</p>
+</li>
+<li>Error Handling Improvements, The error handling is basic and might not cover all edge cases:</li>
+<li>Missing Loading States: Some operations like delete and edit don't show loading states to users. Solution: Add loading indicators for all async operations to improve user experience.</li>
+<li>Missing Backend Validation The client performs minimal validation:</li>
+<li>Missing Authentication/Authorization: There's no visible authentication or user management in the current code: Solution: If this is a multi-user application, implement authentication and ensure bookmarks are associated with specific users.</li>
+<li>Responsive Design Issues: The CSS uses fixed widths in some places:</li>
+<li>Missing Types Definition: I don't see the complete IBookmark interface definition: Solution: Ensure all TypeScript interfaces are properly defined and used consistently.</li>
+<li>Missing Pagination: The application fetches all bookmarks at once:</li>
+</ol>
+<h2>我应该使用哪个东西部署？</h2>
+<p>Since this is a hobby project, we should get to things that are as cheap as we can get. </p>
+<p>Express.js Web Backend服务
+* Google App Engine: seems includes free tier, instance type F1 and 850 hour / mo free, further investigation; https://cloud.google.com/appengine/docs/standard/nodejs/building-app
+* Railway: 30天免费$5 credit，之后hobby tier $5
+* Render: Hobby tier 免费；Free backend instances sleep after 15 minutes of inactivity, causing cold starts
+* Fly.io: pay by usage, 比如shared-cpu-1x, $0.0027/hour, $1.94/mo</p>
+<p>Google App Engine</p>
+<p>https://cloud.google.com/appengine/docs/standard/nodejs/building-app/creating-project
+Create GCloud Project or Use an existing one
+Enable Cloud Build API: 点点鼠标就行
+安装gcloud cli： https://cloud.google.com/sdk/docs/install
+create app engine application: nothing particular, just choose a location -- I chose us-west2 just because it is geogrpahically closer</p>
+<p>https://cloud.google.com/appengine/docs/standard/nodejs/building-app/writing-web-service</p>
+<p>改动服务端的点主要是配置。首先我们从服务端配置了一个cors，防止跨域请求 --&gt; 只有指定的服务端可以请求。由于我们之前在本地配置的，我们强行写了<code>ALLOWED_ORIGINS = http://localhost:5173</code>。</p>
+<p>开始配置GCP所需要的项目信息
+创建一个 app.yaml，这里是文档：https://cloud.google.com/appengine/docs/standard/reference/app-yaml?tab=node.js#runtime_and_app_elements</p>
+<div class="highlight"><pre><span></span><code><span class="nt">runtime</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nodejs22</span>
+
+<span class="c1"># Free tier F1, 28hr/day</span>
+<span class="nt">instance_class</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">F1</span>
+<span class="nt">automatic_scaling</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">max_instances</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+
+<span class="nt">includes</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># secret enviroment variables that are included </span>
+<span class="w">  </span><span class="c1"># but should not be commmited to the repo</span>
+<span class="w">  </span><span class="c1"># - env_variables.template.yaml</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">env_variables.yaml</span>
+</code></pre></div>
+<p>值得一提的事</p>
+</div>
+<div class="tag-cloud">
+<p>
+<a href="https://mestrace.github.io/tag/fullstack.html">Fullstack</a>
+</p>
+</div>
+<div class="center social-share">
+<p>如果你觉得这篇文章很赞，不要忘记分享给你的小伙伴们！</p>
+<div class="addthis_native_toolbox"></div>
+<div class="addthis_sharing_toolbox"></div>
+<div class="addthis_inline_share_toolbox"></div>
+</div>
+<div class="addthis_relatedposts_inline"></div>
+</article>
+<footer>
+<p>
+  © 2026  - This work is licensed under a <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.en_US" rel="license" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+  <span class="footer-separator">|</span>
+  Switch to the <a href="javascript:void(0)" onclick="theme.switch(`dark`)">dark</a> | <a href="javascript:void(0)" onclick="theme.switch(`light`)">light</a> | <a href="javascript:void(0)" onclick="theme.switch(`browser`)">browser</a> theme
+  <script data-default-theme="light" data-enable-auto-detect-theme="True" id="dark-theme-script" src="https://mestrace.github.io/theme/dark-theme/dark-theme.min.js" type="text/javascript">
+</script>
+</p><p>
+<a href="http://creativecommons.org/licenses/by-sa/4.0/" rel="license" target="_blank">
+<img alt="Creative Commons License" height="15" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" style="border-width:0" title="Creative Commons License" width="80">
+</img></a>
+</p></footer> </main>
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Mestrace的个人博客 ",
+  "url" : "https://mestrace.github.io",
+  "image": "http://github.com/Mestrace.png?size=460",
+  "description": "我的个人博客，记录我的成长历程"
+}
+</script><script async="async" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-64172c2607a4b50c" type="text/javascript"></script>
+<a aria-label="View source on Github" class="github-corner" href="http://github.com/Mestrace/" target="_blank">
+<svg aria-hidden="true" height="80" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" viewbox="0 0 250 250" width="80">
+<path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+<path class="octo-arm" d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;">
+</path>
+<path class="octo-body" d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor">
+</path>
+</svg>
+</a>
+</body>
+</html>
