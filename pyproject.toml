@@ -10,7 +10,7 @@ packages = [{include = "mestrace"}]
 [tool.poetry.dependencies]
 python = "^3.13"
 invoke = "2.2.0"
-livereload = "2.6.3"
+livereload = "^2.7.1"
 pelican = "^4.12.0"
 requests = "^2.34.2"
 ghp-import = "2.1.0"
@@ -22,7 +22,7 @@ zopfli = "^0.2.3"
 pelican-render-math = "1.0.3"
 markdown-include = "0.8.1"
 pelican-markdown-include = "1.0.2"
-pelican-photos = "^1.6.0"
+pelican-photos = "^1.6.2"
 
 [build-system]
 requires = ["poetry-core"]
